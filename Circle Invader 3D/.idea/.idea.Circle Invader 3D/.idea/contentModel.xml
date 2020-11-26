@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\mc_me\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\mc_me\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_Circle Invader 3D.271238262.00" t="ExcludeRecursive" />
+    <e p="D:\HKU\Jaar 1\Blok 2\ISA\Game Gem\hku-game-gem\Circle Invader 3D" t="IncludeRecursive">
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="Scripts" t="Include">
+          <e p="Entities" t="Include">
+            <e p="Barrier.cs" t="Include" />
+            <e p="CIObject.cs" t="Include" />
+            <e p="Enemy" t="Include">
+              <e p="EnemyAction.cs" t="Include" />
+              <e p="MechaTotem.cs" t="Include" />
+            </e>
+            <e p="Player.cs" t="Include" />
+          </e>
+          <e p="Meta" t="Include">
+            <e p="Managers" t="Include">
+              <e p="BarrierManager.cs" t="Include" />
+              <e p="GameManager.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Circle Invader 3D.sln" t="IncludeFlat" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="Packages" t="ExcludeRecursive" />
+      <e p="Temp\bin" t="ExcludeRecursive" />
+    </e>
+  </component>
+</project>
