@@ -23,6 +23,7 @@
               <e p="FiniteStateMachine.cs" t="Include" />
               <e p="State.cs" t="Include" />
               <e p="States" t="Include">
+                <e p="GameOverState.cs" t="Include" />
                 <e p="InvokeEnemyAction.cs" t="Include" />
                 <e p="PlayerMoving.cs" t="Include" />
                 <e p="WaitingForPlayerAction.cs" t="Include" />

@@ -12,6 +12,13 @@ public class BarrierManager : MonoBehaviour
     private Barrier[] _barriers;
     public float distanceFromCenter = 2.5f;
 
+    private GameManager _gm;
+
+    private void Awake()
+    {
+        _gm = GetComponentInParent<GameManager>();
+    }
+
     protected void Start()
     {
         InitialiseBarriers();
@@ -39,12 +46,26 @@ public class BarrierManager : MonoBehaviour
 
     public void DamageBarrier(int damageDealt, int positionIndex)
     {
-        foreach (Barrier bar in _barriers)
+        foreach (var bar in _barriers)
         {
             if (bar.PositionIndex % 20 == positionIndex)
             {
                 bar.TakeDamage(damageDealt);
             }
         }
+    }
+
+    public bool IsBarrierDormant(int posIndex)
+    {
+        foreach (var bar in _barriers)
+        {
+            if (bar.PositionIndex % 20 == posIndex)
+            {
+                return bar.IsDormant();
+            }
+        }
+        
+        Debug.LogError("No barrier was found with posIndex ["+posIndex+"]");
+        return false;
     }
 }
