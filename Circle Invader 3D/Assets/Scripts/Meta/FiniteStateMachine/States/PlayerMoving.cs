@@ -22,7 +22,7 @@ public class PlayerMoving : State
         }
         else
         {
-            FSM.SwitchState(typeof(InvokeEnemyAction));
+            Fsm.SwitchState(typeof(InvokeEnemyAction));
         }
     }
 

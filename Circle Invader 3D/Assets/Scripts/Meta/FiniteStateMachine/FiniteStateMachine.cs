@@ -5,23 +5,23 @@ using UnityEngine;
 
 public class FiniteStateMachine
 {
-    private Dictionary<Type, State> stateDictionary = new Dictionary<Type,State>();
-    public State currentState;
+    private readonly Dictionary<Type, State> _stateDictionary = new Dictionary<Type,State>();
+    public State CurrentState;
 
     public FiniteStateMachine(GameManager gm, Type startState, State[] states)
     {
         foreach (State state in states)
         {
             state.Init(gm, this);
-            stateDictionary.Add(state.GetType(), state);
+            _stateDictionary.Add(state.GetType(), state);
         }
         SwitchState(startState);
     }
 
     public void SwitchState(Type newStateType)
     {
-        currentState?.OnExit();
-        currentState = stateDictionary[newStateType];
-        currentState?.OnEnter();
+        CurrentState?.OnExit();
+        CurrentState = _stateDictionary[newStateType];
+        CurrentState?.OnEnter();
     }
 }

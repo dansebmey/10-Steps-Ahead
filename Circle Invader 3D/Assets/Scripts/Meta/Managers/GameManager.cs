@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public BarrierManager BarrierManager { get; private set; }
 
     private FiniteStateMachine _fsm;
+    private HeadsUpDisplay _hud;
     
     [SerializeField] private State[] statePrefabs;
 
@@ -20,7 +21,7 @@ public class GameManager : MonoBehaviour
         _fsm.SwitchState(newStateType);
     }
 
-    private State CurrentState => _fsm.currentState;
+    public State CurrentState => _fsm.CurrentState;
 
     private int _currentPosIndex;
     public int CurrentPosIndex
@@ -41,9 +42,21 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private int _playerScore;
+    public int PlayerScore
+    {
+        get => _playerScore;
+        private set
+        {
+            _playerScore = value;
+            _hud.UpdateScore(value);
+        }
+    }
+
     private void Awake()
     {
         BarrierManager = GetComponentInChildren<BarrierManager>();
+        _hud = FindObjectOfType<HeadsUpDisplay>();
     }
 
     private void Start()
@@ -67,7 +80,10 @@ public class GameManager : MonoBehaviour
 
     public void OnPlayerCommandPerformed()
     {
-        
+        if(!(CurrentState is GameOverState))
+        {
+            PlayerScore++;
+        }
     }
 
     public void ApplyDamage(int damageDealt, int currentPosIndex = -1)
@@ -76,10 +92,20 @@ public class GameManager : MonoBehaviour
         {
             currentPosIndex = _currentPosIndex;
         }
-        
+
         if (BarrierManager.IsBarrierDormant(currentPosIndex))
+        {
             SwitchState(typeof(GameOverState));
+        }
         else
+        {
             BarrierManager.DamageBarrier(damageDealt, currentPosIndex);
+            SwitchState(typeof(WaitingForPlayerAction));
+        }
+    }
+
+    public bool IsScoreHigherThan(int value)
+    {
+        return value >= PlayerScore;
     }
 }

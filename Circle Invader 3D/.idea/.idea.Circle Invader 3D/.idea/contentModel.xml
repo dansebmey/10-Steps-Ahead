@@ -36,6 +36,10 @@
               <e p="BarrierManager.cs" t="Include" />
               <e p="GameManager.cs" t="Include" />
             </e>
+            <e p="Screens" t="Include">
+              <e p="GameOverInterface.cs" t="Include" />
+              <e p="HeadsUpDisplay.cs" t="Include" />
+            </e>
           </e>
         </e>
       </e>

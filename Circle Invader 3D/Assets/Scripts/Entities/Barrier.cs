@@ -45,7 +45,7 @@ public class Barrier : CIObject, IDamageable
 
     private Material _material;
     [SerializeField] private Color[] healthColours;
-    public BarrierManager barrierManager;
+    [HideInInspector] public BarrierManager barrierManager;
 
     protected override void Awake()
     {

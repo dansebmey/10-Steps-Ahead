@@ -37,7 +37,7 @@ public class BarrierManager : MonoBehaviour
 
             var bar = Instantiate(barrierPrefab, pos, rot);
             bar.PositionIndex = i;
-            bar.name = "Barrier (i" + i + ")";
+            bar.name = "Barrier (index " + i + ")";
             bar.transform.parent = transform;
             bar.barrierManager = this;
             _barriers[i] = bar;

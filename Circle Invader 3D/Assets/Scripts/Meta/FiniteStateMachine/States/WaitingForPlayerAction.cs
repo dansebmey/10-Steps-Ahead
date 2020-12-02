@@ -9,13 +9,13 @@ public class WaitingForPlayerAction : State
 
     public override void OnUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(KeyCode.A))
         {
             Gm.CurrentPosIndex--;
             Gm.player.SetTargetPos();
             Gm.OnPlayerCommandPerformed();
         }
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        else if (Input.GetKeyDown(KeyCode.D))
         {
             Gm.CurrentPosIndex++;
             Gm.player.SetTargetPos();

@@ -6,13 +6,12 @@ using Debug = UnityEngine.Debug;
 public abstract class State : MonoBehaviour
 {
     protected GameManager Gm;
-    protected FiniteStateMachine FSM;
+    protected FiniteStateMachine Fsm;
     
     public void Init(GameManager gm, FiniteStateMachine fsm)
     {
         Gm = gm;
-        Debug.Log("State's GM = " + Gm.GetInstanceID());
-        FSM = fsm;
+        Fsm = fsm;
     }
 
     public abstract void OnEnter();

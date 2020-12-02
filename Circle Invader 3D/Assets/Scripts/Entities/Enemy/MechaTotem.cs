@@ -53,7 +53,7 @@ public class MechaTotem : CIObject
 
     void Idle()
     {
-        // nothing happens
+        Gm.SwitchState(typeof(WaitingForPlayerAction));
     }
 
     void BasicAttack()
@@ -95,7 +95,5 @@ public class MechaTotem : CIObject
         }
 
         QueueNewAction(newAction);
-
-        Gm.SwitchState(typeof(WaitingForPlayerAction));
     }
 }

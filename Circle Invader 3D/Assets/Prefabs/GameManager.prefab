@@ -44,11 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 814138e46fde4e4da5b6ec79d86e3def, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentPositionIndex: 0
   statePrefabs:
   - {fileID: 8559853544901086876, guid: e39d61d1327b9b644b5c73a6c8e134d7, type: 3}
   - {fileID: 1312919286899584523, guid: 9f6cd59cfbe3b6741a68beab52ce181f, type: 3}
   - {fileID: 1602165150439167995, guid: 37a6e7504a6ca7f4c855955b5f3fbc45, type: 3}
+  - {fileID: 2657346195828011424, guid: 9a585a2f340e50b4ca346b0009d8db7d, type: 3}
   player: {fileID: -2975206654629493194, guid: 2973229c82c90ce4aa2c744f08d4999e, type: 3}
   enemy: {fileID: 7892750245613857349, guid: 71a85d7d60526de4bba317a9180f042c, type: 3}
 --- !u!1001 &6390830231864288593

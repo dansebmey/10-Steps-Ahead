@@ -9,22 +9,23 @@ public class Player : CIObject
     {
         base.Start();
         Gm.player = this;
-        Debug.Log("Player's id @ Start(): "+GetInstanceID());
-
-        // _distanceFromCenter = transform.position.z;
+        
+        targetPos = new Vector3(
+            _distanceFromCenter * Mathf.Cos((Mathf.PI * 2 / Gm.BarrierManager.amountOfBarriers) * Gm.CurrentPosIndex),
+            0,
+            _distanceFromCenter * Mathf.Sin((Mathf.PI * 2 / Gm.BarrierManager.amountOfBarriers) * Gm.CurrentPosIndex));
+        transform.position = targetPos;
+        transform.LookAt(Vector3.zero);
     }
 
     public void SetTargetPos()
     {
-        Debug.Log("Player's id @ SetTargetPos(): "+GetInstanceID());
-        var gm = FindObjectOfType<GameManager>();
         targetPos = new Vector3(
-            4 * Mathf.Cos((Mathf.PI * 2 / gm.BarrierManager.amountOfBarriers) * gm.CurrentPosIndex),
+            _distanceFromCenter * Mathf.Cos((Mathf.PI * 2 / Gm.BarrierManager.amountOfBarriers) * Gm.CurrentPosIndex),
             0,
-            4 * Mathf.Sin((Mathf.PI * 2 / gm.BarrierManager.amountOfBarriers) * gm.CurrentPosIndex));
+            _distanceFromCenter * Mathf.Sin((Mathf.PI * 2 / Gm.BarrierManager.amountOfBarriers) * Gm.CurrentPosIndex));
         
-        // gm.SwitchState(typeof(PlayerMoving));
-        gm.SwitchState(typeof(InvokeEnemyAction));
+        Gm.SwitchState(typeof(InvokeEnemyAction));
     }
 
     protected override void AngleTowardsSomething()
