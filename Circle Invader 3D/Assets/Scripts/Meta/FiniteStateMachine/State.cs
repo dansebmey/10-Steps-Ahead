@@ -5,12 +5,13 @@ using Debug = UnityEngine.Debug;
 
 public abstract class State : MonoBehaviour
 {
-    protected GameManager GM => GameManager.Instance;
+    protected GameManager Gm;
     protected FiniteStateMachine FSM;
     
-    public void Init(FiniteStateMachine fsm)
+    public void Init(GameManager gm, FiniteStateMachine fsm)
     {
-        Debug.Log("State's GM = " + GM.GetInstanceID());
+        Gm = gm;
+        Debug.Log("State's GM = " + Gm.GetInstanceID());
         FSM = fsm;
     }
 

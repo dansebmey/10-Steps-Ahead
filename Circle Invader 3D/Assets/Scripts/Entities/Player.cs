@@ -9,30 +9,26 @@ public class Player : CIObject
     {
         base.Start();
         Gm.player = this;
+        Debug.Log("Player's id @ Start(): "+GetInstanceID());
 
         // _distanceFromCenter = transform.position.z;
-        // 
-        // foreach (Transform tf in GetComponentInChildren<Transform>())
-        // {
-        //     if (tf.CompareTag("PosMarker"))
-        //     {
-        //         targetPos = tf;
-        //         targetPos.position = Vector3.left;
-        //         Debug.Log("TargetPos = " + targetPos.position);
-        //         break;
-        //     }   
-        // }
     }
 
     public void SetTargetPos()
     {
+        Debug.Log("Player's id @ SetTargetPos(): "+GetInstanceID());
+        var gm = FindObjectOfType<GameManager>();
         targetPos = new Vector3(
-            4 * Mathf.Cos((Mathf.PI * 2 / Gm.BarrierManager.amountOfBarriers) * Gm.currentPositionIndex),
+            4 * Mathf.Cos((Mathf.PI * 2 / gm.BarrierManager.amountOfBarriers) * gm.CurrentPosIndex),
             0,
-            4 * Mathf.Sin((Mathf.PI * 2 / Gm.BarrierManager.amountOfBarriers) * Gm.currentPositionIndex));
-        Debug.Log(GetInstanceID() + ": targetPos set to " + targetPos);
+            4 * Mathf.Sin((Mathf.PI * 2 / gm.BarrierManager.amountOfBarriers) * gm.CurrentPosIndex));
         
-        Gm.SwitchState(typeof(PlayerMoving));
-        // GM.SwitchState(typeof(InvokeEnemyAction));
+        // gm.SwitchState(typeof(PlayerMoving));
+        gm.SwitchState(typeof(InvokeEnemyAction));
+    }
+
+    protected override void AngleTowardsSomething()
+    {
+        transform.LookAt(Vector3.zero);
     }
 }

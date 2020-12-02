@@ -4,7 +4,7 @@ public class InvokeEnemyAction : State
 {
     public override void OnEnter()
     {
-        GM.enemy.InvokeNextAction();
+        Gm.enemy.InvokeNextAction();
     }
 
     public override void OnUpdate()

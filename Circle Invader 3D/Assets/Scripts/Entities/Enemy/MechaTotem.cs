@@ -7,7 +7,7 @@ public class MechaTotem : CIObject
 {
     public LinkedList<EnemyAction> queuedActions;
     private LinkedList<TotemLayer> _totemLayers;
-    
+
     public int amtOfVisibleActions = 10;
 
     [SerializeField] private List<EnemyAction> actionPrefabs;
@@ -33,6 +33,10 @@ public class MechaTotem : CIObject
         QueueNewAction(actionPrefabs[1]);
         QueueNewAction(actionPrefabs[0]);
         QueueNewAction(actionPrefabs[1]);
+        for (var i = 0; i < amtOfVisibleActions - 10; i++)
+        {
+            QueueNewAction(actionPrefabs[0]);
+        }
     }
 
     private void QueueNewAction(EnemyAction action)
@@ -54,15 +58,15 @@ public class MechaTotem : CIObject
 
     void BasicAttack()
     {
-        Gm.BarrierManager.DamageBarrier(1, Gm.currentPositionIndex);
+        Gm.ApplyDamage(1);
     }
 
     public void InvokeNextAction()
     {
         queuedActions.First.Value.action.Invoke();
         
+        Destroy(_totemLayers.First.Value.gameObject);
         _totemLayers.RemoveFirst();
-        Destroy(_totemLayers.First.Value);
 
         queuedActions.RemoveFirst();
         QueueRandomAction();
@@ -85,7 +89,7 @@ public class MechaTotem : CIObject
         EnemyAction newAction = actionPrefabs[0];
 
         int rn = UnityEngine.Random.Range(0, 30);
-        if (rn > 15)
+        if (rn > 20)
         {
             newAction = actionPrefabs[1];
         }

@@ -2,8 +2,6 @@
 
 public class WaitingForPlayerAction : State
 {
-    public Player player;
-
     public override void OnEnter()
     {
         
@@ -13,25 +11,15 @@ public class WaitingForPlayerAction : State
     {
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            GM.currentPositionIndex--;
-            if (GM.currentPositionIndex < 0)
-            {
-                GM.currentPositionIndex += 20;
-            }
-
-            player.SetTargetPos();
-            GM.OnPlayerCommandPerformed();
+            Gm.CurrentPosIndex--;
+            Gm.player.SetTargetPos();
+            Gm.OnPlayerCommandPerformed();
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            GM.currentPositionIndex++;
-            if (GM.currentPositionIndex > 20)
-            {
-                GM.currentPositionIndex -= 20;
-            }
-
-            player.SetTargetPos();
-            GM.OnPlayerCommandPerformed();
+            Gm.CurrentPosIndex++;
+            Gm.player.SetTargetPos();
+            Gm.OnPlayerCommandPerformed();
         }
     }
 

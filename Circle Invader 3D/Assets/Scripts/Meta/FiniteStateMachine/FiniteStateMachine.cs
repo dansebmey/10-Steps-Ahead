@@ -8,11 +8,11 @@ public class FiniteStateMachine
     private Dictionary<Type, State> stateDictionary = new Dictionary<Type,State>();
     public State currentState;
 
-    public FiniteStateMachine(Type startState, State[] states)
+    public FiniteStateMachine(GameManager gm, Type startState, State[] states)
     {
         foreach (State state in states)
         {
-            state.Init(this);
+            state.Init(gm, this);
             stateDictionary.Add(state.GetType(), state);
         }
         SwitchState(startState);

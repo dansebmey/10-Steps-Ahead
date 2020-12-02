@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Barrier : CIObject
+public class Barrier : CIObject, IDamageable
 {
     private int _health;
     [SerializeField] private int initHealth = 3;
@@ -11,7 +11,7 @@ public class Barrier : CIObject
 
     public int PositionIndex { get; set; }
 
-    private int Health
+    public int Health
     {
         get => _health;
         set
@@ -23,7 +23,7 @@ public class Barrier : CIObject
             }
             else
             {
-                if (_remainingDormantTurns == 0)
+                if (_remainingDormantTurns <= 0)
                 {
                     MakeDormant();
                 }
@@ -38,12 +38,18 @@ public class Barrier : CIObject
         targetPos = new Vector3(transform.position.x, -0.8f, transform.position.z);
     }
 
+    public bool IsDormant()
+    {
+        return _remainingDormantTurns > 0;
+    }
+
     private Material _material;
     [SerializeField] private Color[] healthColours;
     public BarrierManager barrierManager;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         _material = GetComponentInChildren<MeshRenderer>().material;
     }
 
