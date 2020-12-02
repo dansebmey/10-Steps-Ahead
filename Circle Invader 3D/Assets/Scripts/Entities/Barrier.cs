@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Barrier : MonoBehaviour
+public class Barrier : CIObject
 {
     private int _health;
     [SerializeField] private int initHealth = 3;
@@ -11,32 +11,59 @@ public class Barrier : MonoBehaviour
 
     public int PositionIndex { get; set; }
 
-    public int Health
+    private int Health
     {
         get => _health;
         set
         {
             _health = Mathf.Clamp(value, 0, maxHealth);
+            if (value > 0)
+            {
+                _material.color = healthColours[Health-1];
+            }
+            else
+            {
+                if (_remainingDormantTurns == 0)
+                {
+                    MakeDormant();
+                }
+            }
         }
+    }
+
+    private int _remainingDormantTurns;
+    private void MakeDormant()
+    {
+        _remainingDormantTurns = barrierManager.dormantTurnCount;
+        targetPos = new Vector3(transform.position.x, -0.8f, transform.position.z);
     }
 
     private Material _material;
     [SerializeField] private Color[] healthColours;
+    public BarrierManager barrierManager;
 
     private void Awake()
     {
         _material = GetComponentInChildren<MeshRenderer>().material;
     }
 
-    void Start()
+    protected override void Start()
     {
-        _health = initHealth;
+        base.Start();
+        Health = initHealth;
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+        if (transform.position != targetPos)
+        {
+            transform.position = Vector3.Lerp(transform.position, targetPos, 0.25f);
+        }
     }
 
     public void TakeDamage(int amount)
     {
-        _health -= amount;
-        
-        _material.color = healthColours[_health-1];
+        Health -= amount;
     }
 }

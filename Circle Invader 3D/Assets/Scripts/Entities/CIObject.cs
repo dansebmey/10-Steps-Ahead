@@ -1,11 +1,20 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CIObject : MonoBehaviour
 {
-    protected GameManager gameManager;
-    protected virtual void Awake()
+    protected static GameManager Gm => GameManager.Instance;
+    [HideInInspector] public Vector3 targetPos;
+
+    protected virtual void Start()
     {
-        gameManager = FindObjectOfType<GameManager>();
+        targetPos = transform.position;
+    }
+
+    protected virtual void Update()
+    {
+        if (transform.position != targetPos)
+        {
+            transform.position = Vector3.Lerp(transform.position, targetPos, 0.25f);
+        }
     }
 }

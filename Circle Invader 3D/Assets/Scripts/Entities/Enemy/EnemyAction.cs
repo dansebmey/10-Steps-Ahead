@@ -5,6 +5,6 @@ using UnityEngine;
 public class EnemyAction
 {
     public string name;
-    public Transform layerPrefab;
+    public TotemLayer layerPrefab;
     public Action action;
 }

@@ -7,16 +7,12 @@ public class BarrierManager : MonoBehaviour
 {
     [SerializeField] private Barrier barrierPrefab;
     [Range(2,32)] public int amountOfBarriers;
+    [Range(10, 100)] public int dormantTurnCount = 30;
 
-    private GameManager _gameManager;
     private Barrier[] _barriers;
+    public float distanceFromCenter = 2.5f;
 
-    private void Awake()
-    {
-        _gameManager = GetComponentInParent<GameManager>();
-    }
-
-    private void Start()
+    protected void Start()
     {
         InitialiseBarriers();
     }
@@ -27,29 +23,27 @@ public class BarrierManager : MonoBehaviour
         for (int i = 0; i < amountOfBarriers; i++)
         {
             Vector3 pos = new Vector3(
-                3 * Mathf.Cos((Mathf.PI * 2 / amountOfBarriers) * i),
+                distanceFromCenter * Mathf.Cos((Mathf.PI * 2 / amountOfBarriers) * i),
                 0, 
-                3 * Mathf.Sin((Mathf.PI * 2 / amountOfBarriers) * i));
+                distanceFromCenter * Mathf.Sin((Mathf.PI * 2 / amountOfBarriers) * i));
             Quaternion rot = Quaternion.LookRotation(transform.position - pos);
 
             var bar = Instantiate(barrierPrefab, pos, rot);
             bar.PositionIndex = i;
+            bar.name = "Barrier (i" + i + ")";
             bar.transform.parent = transform;
+            bar.barrierManager = this;
             _barriers[i] = bar;
         }
     }
 
-    public void DamageBarrier(int damageDealt, int positionIndex = -1)
+    public void DamageBarrier(int damageDealt, int positionIndex)
     {
-        if (positionIndex == -1)
-        {
-            positionIndex = _gameManager.currentPositionIndex;
-        }
         foreach (Barrier bar in _barriers)
         {
-            if (barrierPrefab.PositionIndex % 20 == positionIndex)
+            if (bar.PositionIndex % 20 == positionIndex)
             {
-                
+                bar.TakeDamage(damageDealt);
             }
         }
     }
