@@ -7,6 +7,7 @@ public class Barrier : OrbitingObject, IDamageable
 {
     private BarrierManager _bm => Gm.BarrierManager;
     private Material _material;
+    private ParticleSystem _particleSystem;
 
     private int _health;
     private int _remainingDormantTurns;
@@ -67,6 +68,7 @@ public class Barrier : OrbitingObject, IDamageable
     {
         base.Awake();
         _material = GetComponentInChildren<MeshRenderer>().material;
+        _particleSystem = GetComponentInChildren<ParticleSystem>();
     }
 
     protected override void Start()
@@ -87,5 +89,11 @@ public class Barrier : OrbitingObject, IDamageable
     public void TakeDamage(int amount)
     {
         Health -= amount;
+    }
+
+    public void RestoreHealth(int amount)
+    {
+        Health += amount;
+        _particleSystem.Play();
     }
 }

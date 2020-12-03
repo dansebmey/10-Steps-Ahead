@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
             PowerupManager
         };
 
-        AudioManager.FadeVolume("Soundtrack", 0, 0.5f, 2);
+        AudioManager.FadeVolume("Soundtrack", 0, AudioManager.FindSound("Soundtrack").initVolume, 2);
         AudioManager.Play("Soundtrack");
     }
 

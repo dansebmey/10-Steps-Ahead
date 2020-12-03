@@ -1,18 +1,25 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class PowerupManager : GmAwareObject, IPlayerCommandListener
 {
-    [SerializeField] private List<Powerup> powerupPrefabs;
-    private List<Powerup> powerupsInGame;
+    [SerializeField] private List<FieldItem> powerupPrefabs;
+    
+    private ConcurrentBag<FieldItem> _powerupsInGame;
+    private object _powerupListLock = new object();
 
     protected override void Awake()
     {
         base.Awake();
-        powerupsInGame = new List<Powerup>();
+
+        lock (_powerupListLock)
+        {
+            _powerupsInGame = new ConcurrentBag<FieldItem>();
+        }
     }
 
     public void OnPlayerCommandPerformed()
@@ -22,27 +29,44 @@ public class PowerupManager : GmAwareObject, IPlayerCommandListener
 
     private void DeterminePowerupSpawn()
     {
-        if (powerupsInGame.Count == 0)
+        lock (_powerupListLock)
         {
-            Powerup powerup = Instantiate(powerupPrefabs[0], Vector3.zero, Quaternion.identity);
-            powerup.CurrentPosIndex = Random.Range(0, Gm.BarrierManager.amountOfBarriers-1);
-            powerup.transform.position = powerup.targetPos;
+            if (_powerupsInGame.Count == 0)
+            {
+                FieldItem fieldItem = Instantiate(powerupPrefabs[0], Vector3.zero, Quaternion.identity);
+                fieldItem.CurrentPosIndex = Random.Range(0, Gm.BarrierManager.amountOfBarriers-1);
+                fieldItem.transform.position = fieldItem.targetPos;
+            }
         }
     }
 
     public void HandlePowerupCheck()
     {
-        foreach (Powerup powerup in powerupsInGame)
+        lock (_powerupListLock)
         {
-            if (powerup.CurrentPosIndex % Gm.BarrierManager.amountOfBarriers == Gm.CurrentPosIndex)
+            foreach (FieldItem powerup in _powerupsInGame)
             {
-                powerup.OnPickup();
+                if (powerup.CurrentPosIndex % Gm.BarrierManager.amountOfBarriers == Gm.CurrentPosIndex)
+                {
+                    powerup.OnPickup();
+                }
             }
         }
     }
 
-    public void RegisterPowerup(Powerup powerup)
+    public void RegisterPowerup(FieldItem item)
     {
-        powerupsInGame.Add(powerup);
+        lock (_powerupListLock)
+        {
+            _powerupsInGame.Add(item);
+        }
+    }
+
+    public void DeletePowerup(FieldItem item)
+    {
+        lock (_powerupListLock)
+        {
+            _powerupsInGame.TryTake(out item);
+        }
     }
 }

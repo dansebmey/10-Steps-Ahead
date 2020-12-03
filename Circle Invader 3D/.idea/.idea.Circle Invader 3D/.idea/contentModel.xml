@@ -18,8 +18,7 @@
             <e p="OrbitingObject.cs" t="Include" />
             <e p="Player.cs" t="Include" />
             <e p="Powerups" t="Include">
-              <e p="Hammer.cs" t="Include" />
-              <e p="Powerup.cs" t="Include" />
+              <e p="FieldItem.cs" t="Include" />
             </e>
           </e>
           <e p="Meta" t="Include">
@@ -46,12 +45,19 @@
               </e>
               <e p="BarrierManager.cs" t="Include" />
               <e p="GameManager.cs" t="Include" />
+              <e p="InputManager.cs" t="Include" />
               <e p="PowerupManager.cs" t="Include" />
             </e>
             <e p="Screens" t="Include">
               <e p="GameOverInterface.cs" t="Include" />
               <e p="HeadsUpDisplay.cs" t="Include" />
+              <e p="Inventory.cs" t="Include" />
+              <e p="InventoryInterface.cs" t="Include" />
             </e>
+          </e>
+          <e p="Powerups" t="Include">
+            <e p="Hammer.cs" t="Include" />
+            <e p="Powerup.cs" t="Include" />
           </e>
         </e>
       </e>

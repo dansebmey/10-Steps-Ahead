@@ -7,6 +7,8 @@ public class AudioManager : MonoBehaviour
     static AudioManager _instance;
     public Sound[] sounds;
 
+    private float _masterVolume;
+
     private void Awake()
     {
         if (_instance != null)
@@ -95,12 +97,12 @@ public class AudioManager : MonoBehaviour
         s.source.Play();
     }
 
-    internal static AudioManager GetInstance()
+    public static AudioManager GetInstance()
     {
         return _instance;
     }
 
-    private Sound FindSound(string soundName)
+    public Sound FindSound(string soundName)
     {
         return Array.Find(sounds, sound => sound.name == soundName);
     }
@@ -108,9 +110,18 @@ public class AudioManager : MonoBehaviour
     public void TogglePause(string soundName, bool doPause)
     {
         Sound s = FindSound(soundName);
-        s.source.volume = doPause ? 0.1f : s.initVolume;
+        s.source.volume = _masterVolume * (doPause ? 0.1f : s.initVolume);
         // StartCoroutine(doPause
         //     ? AdjustVolume(s, s.source.volume, 0.1f, 0.5f, s.source.Pause)
         //     : AdjustVolume(s, 0.1f, s.initVolume, 0.5f, s.source.UnPause));
+    }
+
+    public void SetMasterVolume(float value)
+    {
+        _masterVolume = value;
+        foreach (Sound s in sounds)
+        {
+            s.source.volume = s.initVolume * _masterVolume;
+        }
     }
 }

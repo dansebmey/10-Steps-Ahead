@@ -80,4 +80,17 @@ public class BarrierManager : MonoBehaviour, IPlayerCommandListener
             bar.RemainingDormantTurns--;
         }
     }
+
+    public void RepairBarriers(int range, int healValue)
+    {
+        foreach (Barrier bar in _barriers)
+        {
+            if (bar.CurrentPosIndex % amountOfBarriers >= _gm.CurrentPosIndex - range % amountOfBarriers
+            && bar.CurrentPosIndex % amountOfBarriers <= _gm.CurrentPosIndex + range % amountOfBarriers
+            && !bar.IsDormant())
+            {
+                bar.RestoreHealth(healValue);
+            }
+        }
+    }
 }
