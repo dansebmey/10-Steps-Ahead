@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MechaTotem : CIObject
+public class MechaTotem : MovableObject
 {
     private const int ACTION_IDLE = 0;
     private const int ACTION_ATTACK = 1;

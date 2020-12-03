@@ -140,5 +140,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPos: {x: 0, y: 0, z: 0}
-  distanceFromCenter: 2.5
+  distanceFromCenter: 3.25
   bm: {fileID: 0}

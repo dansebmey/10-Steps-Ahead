@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour
         CurrentState.OnUpdate();
     }
 
-    public void RegisterObject(CIObject obj)
+    public void RegisterObject(MovableObject obj)
     {
         if (obj is IDamageable dam)
         {
@@ -98,6 +98,7 @@ public class GameManager : MonoBehaviour
         {
             AudioManager.Play("Slide", 0.1f);
             PlayerScore++;
+            PowerupManager.HandlePowerupCheck();
             
             foreach (IPlayerCommandListener pcl in _playerCommandListeners)
             {

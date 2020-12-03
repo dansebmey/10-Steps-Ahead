@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Barrier : OrbitingObject, IDamageable
 {
-    [HideInInspector] public BarrierManager bm;
+    private BarrierManager _bm => Gm.BarrierManager;
     private Material _material;
 
     private int _health;
@@ -16,10 +16,10 @@ public class Barrier : OrbitingObject, IDamageable
         get => _health;
         set
         {
-            _health = Mathf.Clamp(value, 0, bm.maxBarrierHealth);
+            _health = Mathf.Clamp(value, 0, _bm.maxBarrierHealth);
             if (value > 0)
             {
-                _material.color = bm.healthColours[Health-1];
+                _material.color = _bm.healthColours[Health-1];
             }
             else
             {
@@ -48,7 +48,7 @@ public class Barrier : OrbitingObject, IDamageable
     {
         if (isDormant)
         {
-            RemainingDormantTurns = bm.dormantTurnCount;
+            RemainingDormantTurns = _bm.dormantTurnCount;
             targetPos = new Vector3(transform.position.x, -0.8f, transform.position.z);
         }
         else
@@ -72,7 +72,7 @@ public class Barrier : OrbitingObject, IDamageable
     protected override void Start()
     {
         base.Start();
-        Health = bm.initBarrierHealth;
+        Health = _bm.initBarrierHealth;
     }
 
     protected override void Update()

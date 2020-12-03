@@ -11,5 +11,14 @@ public abstract class Powerup : OrbitingObject
     [HideInInspector] public int remainingDuration;
     [HideInInspector] public bool isUpgraded;
 
-    protected abstract void OnPickup();
+    protected override void Start()
+    {
+        base.Start();
+        Gm.PowerupManager.RegisterPowerup(this);
+    }
+
+    public virtual void OnPickup()
+    {
+        Debug.Log(name + " was picked up!");
+    }
 }

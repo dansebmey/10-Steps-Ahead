@@ -9,12 +9,12 @@
         <e p="Scripts" t="Include">
           <e p="Entities" t="Include">
             <e p="Barrier.cs" t="Include" />
-            <e p="CIObject.cs" t="Include" />
             <e p="Enemy" t="Include">
               <e p="EnemyAction.cs" t="Include" />
               <e p="MechaTotem.cs" t="Include" />
               <e p="TotemLayer.cs" t="Include" />
             </e>
+            <e p="MovableObject.cs" t="Include" />
             <e p="OrbitingObject.cs" t="Include" />
             <e p="Player.cs" t="Include" />
             <e p="Powerups" t="Include">
@@ -34,6 +34,7 @@
                 <e p="WaitingForPlayerAction.cs" t="Include" />
               </e>
             </e>
+            <e p="GmAwareObject.cs" t="Include" />
             <e p="Interfaces" t="Include">
               <e p="IDamageable.cs" t="Include" />
               <e p="IPlayerCommandListener.cs" t="Include" />

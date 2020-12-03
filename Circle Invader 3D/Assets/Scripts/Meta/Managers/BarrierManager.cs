@@ -44,7 +44,6 @@ public class BarrierManager : MonoBehaviour, IPlayerCommandListener
             bar.CurrentPosIndex = i;
             bar.name = "Barrier (index " + i + ")";
             bar.transform.parent = transform;
-            bar.bm = this;
             _barriers[i] = bar;
         }
     }

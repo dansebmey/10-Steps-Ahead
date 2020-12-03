@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class TotemLayer : CIObject
+public class TotemLayer : MovableObject
 {
     
 }

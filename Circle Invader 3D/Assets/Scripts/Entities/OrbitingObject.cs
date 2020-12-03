@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public abstract class OrbitingObject : CIObject
+public abstract class OrbitingObject : MovableObject
 {
     private int _currentPosIndex;
     public float distanceFromCenter;
@@ -21,10 +21,9 @@ public abstract class OrbitingObject : CIObject
             
             _currentPosIndex = value;
             targetPos = new Vector3(
-                distanceFromCenter * Mathf.Cos((Mathf.PI * 2 / Gm.BarrierManager.amountOfBarriers) * Gm.CurrentPosIndex),
+                distanceFromCenter * Mathf.Cos((Mathf.PI * 2 / Gm.BarrierManager.amountOfBarriers) * _currentPosIndex),
                 0,
-                distanceFromCenter * Mathf.Sin((Mathf.PI * 2 / Gm.BarrierManager.amountOfBarriers) * Gm.CurrentPosIndex));
+                distanceFromCenter * Mathf.Sin((Mathf.PI * 2 / Gm.BarrierManager.amountOfBarriers) * _currentPosIndex));
         }
     }
-    
 }

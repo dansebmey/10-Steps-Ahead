@@ -1,15 +1,9 @@
 ﻿using System;
 using UnityEngine;
 
-public abstract class CIObject : MonoBehaviour
+public abstract class MovableObject : GmAwareObject
 {
-    protected GameManager Gm;
     [HideInInspector] public Vector3 targetPos;
-
-    protected virtual void Awake()
-    {
-        Gm = FindObjectOfType<GameManager>();
-    }
 
     protected virtual void Start()
     {
