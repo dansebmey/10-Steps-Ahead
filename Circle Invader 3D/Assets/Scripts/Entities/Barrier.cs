@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Barrier : CIObject, IDamageable
+public class Barrier : OrbitingObject, IDamageable
 {
     [HideInInspector] public BarrierManager bm;
     private Material _material;
@@ -30,8 +30,6 @@ public class Barrier : CIObject, IDamageable
             }
         }
     }
-
-    public int PositionIndex { get; set; }
 
     public int RemainingDormantTurns
     {

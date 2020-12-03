@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BarrierManager : MonoBehaviour
+public class BarrierManager : MonoBehaviour, IPlayerCommandListener
 {
     [Range(2,32)] public int amountOfBarriers;
     public float barrierDistanceFromCenter = 2.5f;
@@ -41,7 +41,7 @@ public class BarrierManager : MonoBehaviour
             Quaternion rot = Quaternion.LookRotation(transform.position - pos);
 
             var bar = Instantiate(barrierPrefab, pos, rot);
-            bar.PositionIndex = i;
+            bar.CurrentPosIndex = i;
             bar.name = "Barrier (index " + i + ")";
             bar.transform.parent = transform;
             bar.bm = this;
@@ -53,7 +53,7 @@ public class BarrierManager : MonoBehaviour
     {
         foreach (var bar in _barriers)
         {
-            if (bar.PositionIndex % amountOfBarriers == positionIndex)
+            if (bar.CurrentPosIndex % amountOfBarriers == positionIndex)
             {
                 bar.TakeDamage(damageDealt);
             }
@@ -64,7 +64,7 @@ public class BarrierManager : MonoBehaviour
     {
         foreach (var bar in _barriers)
         {
-            if (bar.PositionIndex % amountOfBarriers == posIndex)
+            if (bar.CurrentPosIndex % amountOfBarriers == posIndex)
             {
                 return bar.IsDormant();
             }

@@ -5,7 +5,9 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public BarrierManager BarrierManager { get; private set; }
+    public PowerupManager PowerupManager { get; private set; }
 
+    private List<IPlayerCommandListener> _playerCommandListeners;
     private FiniteStateMachine _fsm;
     private HeadsUpDisplay _hud;
     public AudioManager AudioManager => AudioManager.GetInstance();
@@ -40,6 +42,7 @@ public class GameManager : MonoBehaviour
             }
 
             _currentPosIndex = value;
+            player.CurrentPosIndex = CurrentPosIndex;
         }
     }
 
@@ -57,6 +60,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         BarrierManager = GetComponentInChildren<BarrierManager>();
+        PowerupManager = GetComponentInChildren<PowerupManager>();
         _hud = FindObjectOfType<HeadsUpDisplay>();
     }
 
@@ -64,6 +68,12 @@ public class GameManager : MonoBehaviour
     {
         _fsm = new FiniteStateMachine(this, typeof(WaitingForPlayerAction), statePrefabs);
         damageables = new List<IDamageable>();
+
+        _playerCommandListeners = new List<IPlayerCommandListener>
+        {
+            BarrierManager,
+            PowerupManager
+        };
 
         AudioManager.FadeVolume("Soundtrack", 0, 0.5f, 2);
         AudioManager.Play("Soundtrack");
@@ -86,9 +96,15 @@ public class GameManager : MonoBehaviour
     {
         if(!(CurrentState is GameOverState))
         {
-            PlayerScore++;
-            BarrierManager.OnPlayerCommandPerformed();
             AudioManager.Play("Slide", 0.1f);
+            PlayerScore++;
+            
+            foreach (IPlayerCommandListener pcl in _playerCommandListeners)
+            {
+                pcl.OnPlayerCommandPerformed();
+            }
+            
+            SwitchState(typeof(InvokeEnemyAction));
         }
     }
 

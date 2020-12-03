@@ -12,13 +12,11 @@ public class WaitingForPlayerAction : State
         if (Input.GetKeyDown(KeyCode.A))
         {
             Gm.CurrentPosIndex--;
-            Gm.player.SetTargetPos();
             Gm.OnPlayerCommandPerformed();
         }
         else if (Input.GetKeyDown(KeyCode.D))
         {
             Gm.CurrentPosIndex++;
-            Gm.player.SetTargetPos();
             Gm.OnPlayerCommandPerformed();
         }
     }

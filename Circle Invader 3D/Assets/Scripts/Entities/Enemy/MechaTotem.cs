@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class MechaTotem : CIObject
 {
+    private const int ACTION_IDLE = 0;
+    private const int ACTION_ATTACK = 1;
+    private const int ACTION_SPLIT_ATTACK = 2;
+    
     public LinkedList<EnemyAction> queuedActions;
     private LinkedList<TotemLayer> _totemLayers;
 
@@ -23,24 +27,26 @@ public class MechaTotem : CIObject
         actionPrefabs[0].action = Idle;
         actionPrefabs[1].action = BasicAttack;
         
-        QueueNewAction(actionPrefabs[0]);
-        QueueNewAction(actionPrefabs[0]);
-        QueueNewAction(actionPrefabs[0]);
-        QueueNewAction(actionPrefabs[1]);
-        QueueNewAction(actionPrefabs[0]);
-        QueueNewAction(actionPrefabs[0]);
-        QueueNewAction(actionPrefabs[0]);
-        QueueNewAction(actionPrefabs[1]);
-        QueueNewAction(actionPrefabs[0]);
-        QueueNewAction(actionPrefabs[1]);
+        QueueNewAction(ACTION_IDLE);
+        QueueNewAction(ACTION_IDLE);
+        QueueNewAction(ACTION_IDLE);
+        QueueNewAction(ACTION_ATTACK);
+        QueueNewAction(ACTION_IDLE);
+        QueueNewAction(ACTION_IDLE);
+        QueueNewAction(ACTION_IDLE);
+        QueueNewAction(ACTION_ATTACK);
+        QueueNewAction(ACTION_IDLE);
+        QueueNewAction(ACTION_ATTACK);
         for (var i = 0; i < amtOfVisibleActions - 10; i++)
         {
-            QueueNewAction(actionPrefabs[0]);
+            QueueNewAction(ACTION_IDLE);
         }
     }
 
-    private void QueueNewAction(EnemyAction action)
+    private void QueueNewAction(int actionIndex)
     {
+        EnemyAction action = actionPrefabs[actionIndex];
+        
         TotemLayer layer = Instantiate(
             action.layerPrefab,
             new Vector3(0, 1.025f * queuedActions.Count, 0),
@@ -86,14 +92,14 @@ public class MechaTotem : CIObject
     private void QueueRandomAction()
     {
         
-        EnemyAction newAction = actionPrefabs[0];
+        int newActionIndex = ACTION_IDLE;
 
         int rn = UnityEngine.Random.Range(0, 30);
         if (rn > 20)
         {
-            newAction = actionPrefabs[1];
+            newActionIndex = ACTION_ATTACK;
         }
 
-        QueueNewAction(newAction);
+        QueueNewAction(newActionIndex);
     }
 }

@@ -15,13 +15,14 @@
               <e p="MechaTotem.cs" t="Include" />
               <e p="TotemLayer.cs" t="Include" />
             </e>
+            <e p="OrbitingObject.cs" t="Include" />
             <e p="Player.cs" t="Include" />
+            <e p="Powerups" t="Include">
+              <e p="Hammer.cs" t="Include" />
+              <e p="Powerup.cs" t="Include" />
+            </e>
           </e>
           <e p="Meta" t="Include">
-            <e p="AudioManager" t="Include">
-              <e p="AudioManager.cs" t="Include" />
-              <e p="Sound.cs" t="Include" />
-            </e>
             <e p="CameraController.cs" t="Include" />
             <e p="FiniteStateMachine" t="Include">
               <e p="FiniteStateMachine.cs" t="Include" />
@@ -35,10 +36,16 @@
             </e>
             <e p="Interfaces" t="Include">
               <e p="IDamageable.cs" t="Include" />
+              <e p="IPlayerCommandListener.cs" t="Include" />
             </e>
             <e p="Managers" t="Include">
+              <e p="AudioManager" t="Include">
+                <e p="AudioManager.cs" t="Include" />
+                <e p="Sound.cs" t="Include" />
+              </e>
               <e p="BarrierManager.cs" t="Include" />
               <e p="GameManager.cs" t="Include" />
+              <e p="PowerupManager.cs" t="Include" />
             </e>
             <e p="Screens" t="Include">
               <e p="GameOverInterface.cs" t="Include" />

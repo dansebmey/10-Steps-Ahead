@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class Player : CIObject
+public class Player : OrbitingObject
 {
     private float _distanceFromCenter = 4;
 

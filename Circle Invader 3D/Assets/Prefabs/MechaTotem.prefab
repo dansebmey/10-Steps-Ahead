@@ -49,6 +49,12 @@ MonoBehaviour:
   - name: Idle
     layerPrefab: {fileID: 519660893281381382, guid: 46bd88b0e37a88f449853bb4c016460a,
       type: 3}
+    chance: -1
   - name: BasicAttack
     layerPrefab: {fileID: -5037835261173758856, guid: de086547df964c9479b5716ede0b9393,
       type: 3}
+    chance: -1
+  - name: SplitAttack
+    layerPrefab: {fileID: -5037835261173758856, guid: de086547df964c9479b5716ede0b9393,
+      type: 3}
+    chance: -1

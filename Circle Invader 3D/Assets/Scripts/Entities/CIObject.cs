@@ -21,7 +21,7 @@ public abstract class CIObject : MonoBehaviour
     {
         if (transform.position != targetPos)
         {
-            transform.position = Vector3.Lerp(transform.position, targetPos, 0.1f);
+            transform.position = Vector3.Lerp(transform.position, targetPos, 0.05f);
             AngleTowardsSomething();
         }
     }
