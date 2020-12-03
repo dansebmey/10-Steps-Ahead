@@ -375,6 +375,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 433284337}
   m_CullTransparentMesh: 0
+--- !u!1 &507461071 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2740902529028869549, guid: 5b6afb87446206c4287e6f471f2bf083,
+    type: 3}
+  m_PrefabInstance: {fileID: 2740902528956263238}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &516606365
 GameObject:
   m_ObjectHideFlags: 0
@@ -964,6 +970,87 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7892750245613857349, guid: 71a85d7d60526de4bba317a9180f042c,
+        type: 3}
+      propertyPath: actionPrefabs.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7892750245613857349, guid: 71a85d7d60526de4bba317a9180f042c,
+        type: 3}
+      propertyPath: actionPrefabs.Array.data[2].name
+      value: SlowAttack
+      objectReference: {fileID: 0}
+    - target: {fileID: 7892750245613857349, guid: 71a85d7d60526de4bba317a9180f042c,
+        type: 3}
+      propertyPath: actionPrefabs.Array.data[0].chance
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7892750245613857349, guid: 71a85d7d60526de4bba317a9180f042c,
+        type: 3}
+      propertyPath: actionPrefabs.Array.data[1].chance
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7892750245613857349, guid: 71a85d7d60526de4bba317a9180f042c,
+        type: 3}
+      propertyPath: actionPrefabs.Array.data[2].chance
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7892750245613857349, guid: 71a85d7d60526de4bba317a9180f042c,
+        type: 3}
+      propertyPath: actionPrefabs.Array.data[2].layerPrefab
+      value: 
+      objectReference: {fileID: -5037835261173758856, guid: de086547df964c9479b5716ede0b9393,
+        type: 3}
+    - target: {fileID: 7892750245613857349, guid: 71a85d7d60526de4bba317a9180f042c,
+        type: 3}
+      propertyPath: actionPrefabs.Array.data[0].condition.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7892750245613857349, guid: 71a85d7d60526de4bba317a9180f042c,
+        type: 3}
+      propertyPath: actionPrefabs.Array.data[1].condition.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7892750245613857349, guid: 71a85d7d60526de4bba317a9180f042c,
+        type: 3}
+      propertyPath: actionPrefabs.Array.data[2].condition.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7892750245613857349, guid: 71a85d7d60526de4bba317a9180f042c,
+        type: 3}
+      propertyPath: actionPrefabs.Array.data[1].condition.Array.data[0].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7892750245613857349, guid: 71a85d7d60526de4bba317a9180f042c,
+        type: 3}
+      propertyPath: actionPrefabs.Array.data[2].condition.Array.data[0].m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7892750245613857349, guid: 71a85d7d60526de4bba317a9180f042c,
+        type: 3}
+      propertyPath: actionPrefabs.Array.data[1].condition.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7892750245613857349, guid: 71a85d7d60526de4bba317a9180f042c,
+        type: 3}
+      propertyPath: actionPrefabs.Array.data[2].condition.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7892750245613857349, guid: 71a85d7d60526de4bba317a9180f042c,
+        type: 3}
+      propertyPath: actionPrefabs.Array.data[2].condition.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 507461071}
+    - target: {fileID: 7892750245613857349, guid: 71a85d7d60526de4bba317a9180f042c,
+        type: 3}
+      propertyPath: actionPrefabs.Array.data[1].condition.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7892750245613857349, guid: 71a85d7d60526de4bba317a9180f042c,
+        type: 3}
+      propertyPath: actionPrefabs.Array.data[2].condition.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7892750245613857355, guid: 71a85d7d60526de4bba317a9180f042c,
         type: 3}

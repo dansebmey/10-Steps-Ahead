@@ -5,47 +5,65 @@ using UnityEngine;
 
 public class Barrier : CIObject, IDamageable
 {
-    private int _health;
-    [SerializeField] private int initHealth = 3;
-    [SerializeField] private int maxHealth = 4;
+    [HideInInspector] public BarrierManager bm;
+    private Material _material;
 
-    public int PositionIndex { get; set; }
+    private int _health;
+    private int _remainingDormantTurns;
 
     public int Health
     {
         get => _health;
         set
         {
-            _health = Mathf.Clamp(value, 0, maxHealth);
+            _health = Mathf.Clamp(value, 0, bm.maxBarrierHealth);
             if (value > 0)
             {
-                _material.color = healthColours[Health-1];
+                _material.color = bm.healthColours[Health-1];
             }
             else
             {
-                if (_remainingDormantTurns <= 0)
+                if (RemainingDormantTurns <= 0)
                 {
-                    MakeDormant();
+                    ToggleDormantState(true);
                 }
             }
         }
     }
 
-    private int _remainingDormantTurns;
-    private void MakeDormant()
+    public int PositionIndex { get; set; }
+
+    public int RemainingDormantTurns
     {
-        _remainingDormantTurns = barrierManager.dormantTurnCount;
-        targetPos = new Vector3(transform.position.x, -0.8f, transform.position.z);
+        get => _remainingDormantTurns;
+        set
+        {
+            _remainingDormantTurns = value;
+            if (value == 0)
+            {
+                ToggleDormantState(false);
+            }
+        }
+    }
+
+    private void ToggleDormantState(bool isDormant)
+    {
+        if (isDormant)
+        {
+            RemainingDormantTurns = bm.dormantTurnCount;
+            targetPos = new Vector3(transform.position.x, -0.8f, transform.position.z);
+        }
+        else
+        {
+            Health = 1;
+            targetPos = new Vector3(transform.position.x, 0, transform.position.z);
+        }
     }
 
     public bool IsDormant()
     {
-        return _remainingDormantTurns > 0;
+        return RemainingDormantTurns > 0;
     }
-
-    private Material _material;
-    [SerializeField] private Color[] healthColours;
-    [HideInInspector] public BarrierManager barrierManager;
 
     protected override void Awake()
     {
@@ -56,7 +74,7 @@ public class Barrier : CIObject, IDamageable
     protected override void Start()
     {
         base.Start();
-        Health = initHealth;
+        Health = bm.initBarrierHealth;
     }
 
     protected override void Update()

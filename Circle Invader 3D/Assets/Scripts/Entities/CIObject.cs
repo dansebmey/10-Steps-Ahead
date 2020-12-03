@@ -8,18 +8,7 @@ public abstract class CIObject : MonoBehaviour
 
     protected virtual void Awake()
     {
-        if (Gm == null)
-        {
-            Gm = FindObjectOfType<GameManager>();
-            if (Gm == null)
-            {
-                Debug.Log("Object ["+name+"] initialised with Gm [null]!");
-            }
-            else
-            {
-                Debug.Log("Object ["+name+"] found game manager with id ["+Gm.GetInstanceID()+"]");
-            }
-        }
+        Gm = FindObjectOfType<GameManager>();
     }
 
     protected virtual void Start()
@@ -32,13 +21,13 @@ public abstract class CIObject : MonoBehaviour
     {
         if (transform.position != targetPos)
         {
-            transform.position = Vector3.Lerp(transform.position, targetPos, 0.25f);
+            transform.position = Vector3.Lerp(transform.position, targetPos, 0.1f);
             AngleTowardsSomething();
         }
     }
 
     protected virtual void AngleTowardsSomething()
     {
-        // do nothing
+        // by default, do nothing
     }
 }

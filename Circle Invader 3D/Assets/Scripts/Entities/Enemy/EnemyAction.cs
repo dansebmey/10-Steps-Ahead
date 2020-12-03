@@ -10,6 +10,5 @@ public class EnemyAction
     public TotemLayer layerPrefab;
     public Action action;
     
-    [Range(-1, 100)] public float chance = -1;
-    public List<UnityEvent<int>> condition;
+    [Range(-1, 100)] public float chance = 100;
 }

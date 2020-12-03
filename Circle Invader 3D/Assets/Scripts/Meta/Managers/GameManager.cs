@@ -8,7 +8,8 @@ public class GameManager : MonoBehaviour
 
     private FiniteStateMachine _fsm;
     private HeadsUpDisplay _hud;
-    
+    public AudioManager AudioManager => AudioManager.GetInstance();
+
     [SerializeField] private State[] statePrefabs;
 
     public Player player;
@@ -31,11 +32,11 @@ public class GameManager : MonoBehaviour
         {
             if (value < 0)
             {
-                value += 20;
+                value += BarrierManager.amountOfBarriers;
             }
-            else if (value >= 20)
+            else if (value >= BarrierManager.amountOfBarriers)
             {
-                value -= 20;
+                value -= BarrierManager.amountOfBarriers;
             }
 
             _currentPosIndex = value;
@@ -63,6 +64,9 @@ public class GameManager : MonoBehaviour
     {
         _fsm = new FiniteStateMachine(this, typeof(WaitingForPlayerAction), statePrefabs);
         damageables = new List<IDamageable>();
+
+        AudioManager.FadeVolume("Soundtrack", 0, 0.5f, 2);
+        AudioManager.Play("Soundtrack");
     }
 
     private void Update()
@@ -83,6 +87,8 @@ public class GameManager : MonoBehaviour
         if(!(CurrentState is GameOverState))
         {
             PlayerScore++;
+            BarrierManager.OnPlayerCommandPerformed();
+            AudioManager.Play("Slide", 0.1f);
         }
     }
 

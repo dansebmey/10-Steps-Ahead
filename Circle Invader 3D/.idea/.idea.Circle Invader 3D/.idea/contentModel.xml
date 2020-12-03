@@ -18,6 +18,10 @@
             <e p="Player.cs" t="Include" />
           </e>
           <e p="Meta" t="Include">
+            <e p="AudioManager" t="Include">
+              <e p="AudioManager.cs" t="Include" />
+              <e p="Sound.cs" t="Include" />
+            </e>
             <e p="CameraController.cs" t="Include" />
             <e p="FiniteStateMachine" t="Include">
               <e p="FiniteStateMachine.cs" t="Include" />

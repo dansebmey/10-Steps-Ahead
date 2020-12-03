@@ -5,12 +5,17 @@ using UnityEngine;
 
 public class BarrierManager : MonoBehaviour
 {
-    [SerializeField] private Barrier barrierPrefab;
     [Range(2,32)] public int amountOfBarriers;
+    public float barrierDistanceFromCenter = 2.5f;
+    
+    [Header("Barrier variables")]
+    [SerializeField] private Barrier barrierPrefab;
+    [Range(1,10)][SerializeField] public int initBarrierHealth = 3;
+    [Range(1,10)][SerializeField] public int maxBarrierHealth = 4;
+    [SerializeField] public Color[] healthColours;
     [Range(10, 100)] public int dormantTurnCount = 30;
 
     private Barrier[] _barriers;
-    public float distanceFromCenter = 2.5f;
 
     private GameManager _gm;
 
@@ -30,16 +35,16 @@ public class BarrierManager : MonoBehaviour
         for (int i = 0; i < amountOfBarriers; i++)
         {
             Vector3 pos = new Vector3(
-                distanceFromCenter * Mathf.Cos((Mathf.PI * 2 / amountOfBarriers) * i),
+                barrierDistanceFromCenter * Mathf.Cos((Mathf.PI * 2 / amountOfBarriers) * i),
                 0, 
-                distanceFromCenter * Mathf.Sin((Mathf.PI * 2 / amountOfBarriers) * i));
+                barrierDistanceFromCenter * Mathf.Sin((Mathf.PI * 2 / amountOfBarriers) * i));
             Quaternion rot = Quaternion.LookRotation(transform.position - pos);
 
             var bar = Instantiate(barrierPrefab, pos, rot);
             bar.PositionIndex = i;
             bar.name = "Barrier (index " + i + ")";
             bar.transform.parent = transform;
-            bar.barrierManager = this;
+            bar.bm = this;
             _barriers[i] = bar;
         }
     }
@@ -48,7 +53,7 @@ public class BarrierManager : MonoBehaviour
     {
         foreach (var bar in _barriers)
         {
-            if (bar.PositionIndex % 20 == positionIndex)
+            if (bar.PositionIndex % amountOfBarriers == positionIndex)
             {
                 bar.TakeDamage(damageDealt);
             }
@@ -59,7 +64,7 @@ public class BarrierManager : MonoBehaviour
     {
         foreach (var bar in _barriers)
         {
-            if (bar.PositionIndex % 20 == posIndex)
+            if (bar.PositionIndex % amountOfBarriers == posIndex)
             {
                 return bar.IsDormant();
             }
@@ -67,5 +72,13 @@ public class BarrierManager : MonoBehaviour
         
         Debug.LogError("No barrier was found with posIndex ["+posIndex+"]");
         return false;
+    }
+
+    public void OnPlayerCommandPerformed()
+    {
+        foreach (var bar in _barriers)
+        {
+            bar.RemainingDormantTurns--;
+        }
     }
 }
