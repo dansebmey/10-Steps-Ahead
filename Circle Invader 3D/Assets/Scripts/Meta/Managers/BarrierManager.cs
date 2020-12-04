@@ -85,9 +85,9 @@ public class BarrierManager : MonoBehaviour, IPlayerCommandListener
     {
         foreach (Barrier bar in _barriers)
         {
-            if (bar.CurrentPosIndex % amountOfBarriers >= _gm.CurrentPosIndex - range % amountOfBarriers
-            && bar.CurrentPosIndex % amountOfBarriers <= _gm.CurrentPosIndex + range % amountOfBarriers
-            && !bar.IsDormant())
+            if ((_gm.CurrentPosIndex + range) % amountOfBarriers >= bar.CurrentPosIndex 
+                || (_gm.CurrentPosIndex - range + amountOfBarriers) % amountOfBarriers <= bar.CurrentPosIndex
+                && !bar.IsDormant())
             {
                 bar.RestoreHealth(healValue);
             }

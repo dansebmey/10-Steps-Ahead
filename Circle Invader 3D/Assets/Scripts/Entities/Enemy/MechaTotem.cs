@@ -86,6 +86,7 @@ public class MechaTotem : MovableObject
         for (int i = 0; i < layers.Count; i++)
         { 
             layers[i].targetPos = new Vector3(0, 1.025f * i, 0);
+            layers[i].targetRot = Quaternion.LookRotation(Gm.player.targetPos - layers[i].transform.position);
         }
     }
 
