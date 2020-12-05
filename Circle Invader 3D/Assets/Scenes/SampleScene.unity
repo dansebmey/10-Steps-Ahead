@@ -131,10 +131,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 16530269, guid: 2973229c82c90ce4aa2c744f08d4999e, type: 3}
-      propertyPath: maxCapacity
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 537195005, guid: 2973229c82c90ce4aa2c744f08d4999e, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -145,10 +141,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1038749349, guid: 2973229c82c90ce4aa2c744f08d4999e, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1158875528, guid: 2973229c82c90ce4aa2c744f08d4999e, type: 3}
-      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1657414910, guid: 2973229c82c90ce4aa2c744f08d4999e, type: 3}
@@ -560,8 +552,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2740902530117390212, guid: 5b6afb87446206c4287e6f471f2bf083,
         type: 3}
-      propertyPath: amountOfBarriers
-      value: 20
+      propertyPath: initiallyDestroyedBarriers
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b6afb87446206c4287e6f471f2bf083, type: 3}

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(menuName = "Hammer")]
+[CreateAssetMenu(menuName = "Powerup.Hammer")]
 public class Hammer : Powerup
 {
     public int range;

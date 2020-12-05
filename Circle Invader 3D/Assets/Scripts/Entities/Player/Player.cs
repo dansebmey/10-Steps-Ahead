@@ -5,15 +5,13 @@ using UnityEngine;
 public class Player : OrbitingObject
 {
     private float _distanceFromCenter = 4;
-    
-    private Inventory _inventory;
 
-    public Inventory Inventory => _inventory;
+    public Inventory Inventory { get; private set; }
 
     protected override void Awake()
     {
         base.Awake();
-        _inventory = FindObjectOfType<Inventory>();
+        Inventory = FindObjectOfType<Inventory>();
     }
 
     protected override void Start()
@@ -46,6 +44,6 @@ public class Player : OrbitingObject
 
     public bool AddToInventory(Powerup powerup)
     {
-        return _inventory.AddPowerup(powerup);
+        return Inventory.AddPowerup(powerup);
     }
 }

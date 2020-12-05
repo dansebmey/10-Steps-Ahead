@@ -49,12 +49,13 @@ public class MechaTotem : MovableObject
         
         TotemLayer layer = Instantiate(
             action.layerPrefab,
-            new Vector3(0, 1.025f * queuedActions.Count, 0),
+            new Vector3(0, (action.layerPrefab.transform.localScale.y + 0.025f) * (queuedActions.Count + 2), 0),
             transform.rotation);
         layer.transform.parent = transform;
         
         _totemLayers.AddLast(layer);
         queuedActions.AddLast(action);
+        MoveTotemLayersDown();
     }
 
     void Idle()
@@ -76,8 +77,6 @@ public class MechaTotem : MovableObject
 
         queuedActions.RemoveFirst();
         QueueRandomAction();
-        
-        MoveTotemLayersDown();
     }
 
     private void MoveTotemLayersDown()
@@ -85,14 +84,17 @@ public class MechaTotem : MovableObject
         List<TotemLayer> layers = new List<TotemLayer>(_totemLayers);
         for (int i = 0; i < layers.Count; i++)
         { 
-            layers[i].targetPos = new Vector3(0, 1.025f * i, 0);
-            layers[i].targetRot = Quaternion.LookRotation(Gm.player.targetPos - layers[i].transform.position);
+            layers[i].targetPos = new Vector3(0, (layers[i].transform.localScale.y + 0.025f) * i, 0);
+            if (i >= 0)
+            {
+                Quaternion targetRot = Quaternion.LookRotation(Gm.player.targetPos - layers[i].transform.position);
+                layers[i].targetRot = new Quaternion(0, targetRot.y, 0, 0);
+            }
         }
     }
 
     private void QueueRandomAction()
     {
-        
         int newActionIndex = ACTION_IDLE;
 
         int rn = UnityEngine.Random.Range(0, 30);

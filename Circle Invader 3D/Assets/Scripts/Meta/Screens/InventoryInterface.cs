@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class InventoryInterface : GmAwareObject
 {
     [SerializeField] private Image itemSlotPanelPrefab;
+    [SerializeField] private Image itemSlotBackgroundPanelPrefab;
     
     private Image _backgroundPanel;
     private List<Image> _itemSlotPanels;
@@ -28,24 +30,30 @@ public class InventoryInterface : GmAwareObject
         _itemSlotPanels = new List<Image>();
         for (int i = 0; i < _inventory.maxCapacity; i++)
         {
-            Image itemSlotPanel = Instantiate(itemSlotPanelPrefab, new Vector3(0, 72 + i * 132, 0), Quaternion.identity);
-            itemSlotPanel.transform.SetParent(_backgroundPanel.transform, false);
-            itemSlotPanel.name = "ItemSlot (index "+i+")";
-            _itemSlotPanels.Add(itemSlotPanel);
+            Image isbp = Instantiate(itemSlotBackgroundPanelPrefab, new Vector3(0, 72 + i * 132, 0), Quaternion.identity);
+            isbp.transform.SetParent(_backgroundPanel.transform, false);
+            
+            Image isp = Instantiate(itemSlotPanelPrefab, new Vector3(0, 72 + i * 132, 0), Quaternion.identity);
+            isp.transform.SetParent(_backgroundPanel.transform, false);
+            isp.name = "ItemSlot (index "+i+")";
+            _itemSlotPanels.Add(isp);
         }
+        UpdateItemSlots();
     }
 
     public void UpdateItemSlots()
     {
         for (int i = 0; i < _inventory.maxCapacity; i++)
         {
-            if (_inventory.carriedPowerups.Count < i+1)
+            if (_inventory.carriedPowerups.Count < i + 1)
             {
                 _itemSlotPanels[i].sprite = null;
+                _itemSlotPanels[i].color = Color.clear;
             }
             else
             {
                 _itemSlotPanels[i].sprite = _inventory.carriedPowerups[i].inventoryIcon;
+                _itemSlotPanels[i].color = Color.white;
             }
         }
 
@@ -57,7 +65,6 @@ public class InventoryInterface : GmAwareObject
 
     public void HighlightItem(int itemIndex)
     {
-        Debug.Log("Highlighted item " + itemIndex + " ("+_itemSlotPanels[itemIndex].name+")");
         _itemSlotPanels[itemIndex].GetComponentsInChildren<Image>()[1].color = Color.white;
         for (int i = 0; i < _itemSlotPanels.Count; i++)
         {

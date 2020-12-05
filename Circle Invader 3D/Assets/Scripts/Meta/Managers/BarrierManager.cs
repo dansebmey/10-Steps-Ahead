@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class BarrierManager : MonoBehaviour, IPlayerCommandListener
 {
@@ -14,6 +15,8 @@ public class BarrierManager : MonoBehaviour, IPlayerCommandListener
     [Range(1,10)][SerializeField] public int maxBarrierHealth = 4;
     [SerializeField] public Color[] healthColours;
     [Range(10, 100)] public int dormantTurnCount = 30;
+
+    [SerializeField] private int initiallyDestroyedBarriers = 0;
 
     private Barrier[] _barriers;
 
@@ -46,6 +49,30 @@ public class BarrierManager : MonoBehaviour, IPlayerCommandListener
             bar.transform.parent = transform;
             _barriers[i] = bar;
         }
+
+        if (initiallyDestroyedBarriers > 0)
+        {
+            // CollapseBarriers(initiallyDestroyedBarriers);
+        }
+    }
+
+    private void CollapseBarriers(int amount)
+    {
+        HashSet<int> rns = new HashSet<int>();
+        
+        for (int i = 0; i < amount; i++)
+        {
+            int rn;
+            rns.Add(rn = GenerateRandomUniqueInt(rns));
+            _barriers[rn].Health -= initBarrierHealth;
+            Debug.Log(_barriers[rn].name + " collapsed!");
+        }
+    }
+
+    private int GenerateRandomUniqueInt(HashSet<int> rns)
+    {
+        int rn = Random.Range(0, amountOfBarriers-1);
+        return rns.Contains(rn) ? GenerateRandomUniqueInt(rns) : rn;
     }
 
     public void DamageBarrier(int damageDealt, int positionIndex)
@@ -91,6 +118,15 @@ public class BarrierManager : MonoBehaviour, IPlayerCommandListener
             {
                 bar.RestoreHealth(healValue);
             }
+        }
+    }
+
+    public void RepairAllBarriers(int healValue)
+    {
+        foreach (Barrier bar in _barriers)
+        {
+            bar.RestoreHealth(healValue);
+            bar.RemainingDormantTurns = 0;
         }
     }
 }

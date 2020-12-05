@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public BarrierManager BarrierManager { get; private set; }
-    public PowerupManager PowerupManager { get; private set; }
+    public FieldItemManager FieldItemManager { get; private set; }
 
     private List<IPlayerCommandListener> _playerCommandListeners;
     private FiniteStateMachine _fsm;
@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         BarrierManager = GetComponentInChildren<BarrierManager>();
-        PowerupManager = GetComponentInChildren<PowerupManager>();
+        FieldItemManager = GetComponentInChildren<FieldItemManager>();
         _hud = FindObjectOfType<HeadsUpDisplay>();
     }
 
@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
         _playerCommandListeners = new List<IPlayerCommandListener>
         {
             BarrierManager,
-            PowerupManager
+            FieldItemManager
         };
 
         AudioManager.FadeVolume("Soundtrack", 0, AudioManager.FindSound("Soundtrack").initVolume, 2);
@@ -98,7 +98,7 @@ public class GameManager : MonoBehaviour
         {
             AudioManager.Play("Slide", 0.1f);
             PlayerScore++;
-            PowerupManager.HandlePowerupCheck();
+            FieldItemManager.HandlePowerupCheck();
             
             foreach (IPlayerCommandListener pcl in _playerCommandListeners)
             {

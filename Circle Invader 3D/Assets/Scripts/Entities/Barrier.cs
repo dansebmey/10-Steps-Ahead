@@ -18,7 +18,7 @@ public class Barrier : OrbitingObject, IDamageable
         set
         {
             _health = Mathf.Clamp(value, 0, _bm.maxBarrierHealth);
-            if (value > 0)
+            if (_health > 0)
             {
                 _material.color = _bm.healthColours[Health-1];
             }
@@ -38,7 +38,7 @@ public class Barrier : OrbitingObject, IDamageable
         set
         {
             _remainingDormantTurns = value;
-            if (value == 0)
+            if (value <= 0)
             {
                 ToggleDormantState(false);
             }
@@ -54,7 +54,6 @@ public class Barrier : OrbitingObject, IDamageable
         }
         else
         {
-            Health = 1;
             targetPos = new Vector3(transform.position.x, 0, transform.position.z);
         }
     }

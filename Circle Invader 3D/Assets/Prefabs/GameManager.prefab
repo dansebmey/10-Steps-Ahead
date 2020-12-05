@@ -43,8 +43,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6baeaa546e0a1d04ab11c9441ef7ef2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerupPrefabs:
+  itemLifespanInSteps: 10
+  itemPrefabs:
+  - {fileID: 1229671337826644509, guid: 0cbfb170c7a0ce343a3e85c3bbf4ad39, type: 3}
   - {fileID: 460679705857873582, guid: 6751caf728235104c8b0616825021169, type: 3}
+  - {fileID: 62550880154124805, guid: 8d0cdd7b81c4f7d47a624e726ca029e4, type: 3}
+  stepsUntilGuaranteedSpawn: 16
+  coinsForBigHammer: 8
 --- !u!1 &990979558
 GameObject:
   m_ObjectHideFlags: 0
@@ -163,12 +168,12 @@ PrefabInstance:
     - target: {fileID: 9131451112854186709, guid: da249ac50d021db4597866d813eb96f5,
         type: 3}
       propertyPath: amountOfBarriers
-      value: 16
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 9131451112854186709, guid: da249ac50d021db4597866d813eb96f5,
         type: 3}
       propertyPath: dormantTurnCount
-      value: 30
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 9131451112854186709, guid: da249ac50d021db4597866d813eb96f5,
         type: 3}
