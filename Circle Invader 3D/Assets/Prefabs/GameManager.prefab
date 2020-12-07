@@ -49,7 +49,9 @@ MonoBehaviour:
   - {fileID: 460679705857873582, guid: 6751caf728235104c8b0616825021169, type: 3}
   - {fileID: 62550880154124805, guid: 8d0cdd7b81c4f7d47a624e726ca029e4, type: 3}
   stepsUntilGuaranteedSpawn: 16
-  coinsForBigHammer: 8
+  coinsForBigHammer: 4
+  bigHammerPrefab: {fileID: 8012687269195291974, guid: cf57807ecf523404c8d2aea3eeadfc81,
+    type: 3}
 --- !u!1 &990979558
 GameObject:
   m_ObjectHideFlags: 0
@@ -189,6 +191,11 @@ PrefabInstance:
         type: 3}
       propertyPath: barrierDistanceFromCenter
       value: 3.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 9131451112854186709, guid: da249ac50d021db4597866d813eb96f5,
+        type: 3}
+      propertyPath: initiallyDestroyedBarriers
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 9131451112854186709, guid: da249ac50d021db4597866d813eb96f5,
         type: 3}

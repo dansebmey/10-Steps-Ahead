@@ -32,14 +32,7 @@ public class GameManager : MonoBehaviour
         get => _currentPosIndex;
         set
         {
-            if (value < 0)
-            {
-                value += BarrierManager.amountOfBarriers;
-            }
-            else if (value >= BarrierManager.amountOfBarriers)
-            {
-                value -= BarrierManager.amountOfBarriers;
-            }
+            value = WrapPosIndex(value);
 
             _currentPosIndex = value;
             player.CurrentPosIndex = CurrentPosIndex;
@@ -109,20 +102,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void ApplyDamage(int damageDealt, int currentPosIndex = -1)
+    public void ApplyDamage(int damageDealt, int rawPosIndex = -1)
     {
-        if (currentPosIndex == -1)
-        {
-            currentPosIndex = _currentPosIndex;
-        }
+        int posIndex = rawPosIndex == -1 ? CurrentPosIndex : WrapPosIndex(rawPosIndex);
 
-        if (BarrierManager.IsBarrierDormant(currentPosIndex))
+        if (BarrierManager.IsBarrierDormant(posIndex) && player.CurrentPosIndex == posIndex)
         {
             SwitchState(typeof(GameOverState));
         }
         else
         {
-            BarrierManager.DamageBarrier(damageDealt, currentPosIndex);
+            BarrierManager.DamageBarrier(damageDealt, posIndex);
             SwitchState(typeof(WaitingForPlayerAction));
         }
     }
@@ -130,5 +120,19 @@ public class GameManager : MonoBehaviour
     public bool IsScoreHigherThan(int value)
     {
         return value >= PlayerScore;
+    }
+
+    public int WrapPosIndex(int posIndex)
+    {
+        if (posIndex < 0)
+        {
+            posIndex += BarrierManager.amountOfBarriers;
+        }
+        else if (posIndex >= BarrierManager.amountOfBarriers)
+        {
+            posIndex -= BarrierManager.amountOfBarriers;
+        }
+
+        return posIndex;
     }
 }

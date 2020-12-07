@@ -58,7 +58,7 @@ public class BarrierManager : MonoBehaviour, IPlayerCommandListener
 
     private void CollapseBarriers(int amount)
     {
-        HashSet<int> rns = new HashSet<int>();
+        List<int> rns = new List<int>();
         
         for (int i = 0; i < amount; i++)
         {
@@ -69,17 +69,17 @@ public class BarrierManager : MonoBehaviour, IPlayerCommandListener
         }
     }
 
-    private int GenerateRandomUniqueInt(HashSet<int> rns)
+    private int GenerateRandomUniqueInt(List<int> rns)
     {
         int rn = Random.Range(0, amountOfBarriers-1);
         return rns.Contains(rn) ? GenerateRandomUniqueInt(rns) : rn;
     }
 
-    public void DamageBarrier(int damageDealt, int positionIndex)
+    public void DamageBarrier(int damageDealt, int posIndex)
     {
         foreach (var bar in _barriers)
         {
-            if (bar.CurrentPosIndex % amountOfBarriers == positionIndex)
+            if (bar.CurrentPosIndex % amountOfBarriers == posIndex)
             {
                 bar.TakeDamage(damageDealt);
             }

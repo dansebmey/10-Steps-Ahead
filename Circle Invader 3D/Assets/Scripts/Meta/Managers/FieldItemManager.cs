@@ -18,7 +18,9 @@ public class FieldItemManager : GmAwareObject, IPlayerCommandListener
     [SerializeField] private int stepsUntilGuaranteedSpawn = 16;
     private int _stepsSinceLastItemSpawn;
 
-    [SerializeField][Range(3,10)] private int coinsForBigHammer = 8;
+    [Header("Big Hammer")]
+    [SerializeField][Range(3,10)] private int coinsForBigHammer;
+    [SerializeField] private FieldItem bigHammerPrefab;
     private int _coinsCollected;
 
     public int CoinsCollected
@@ -29,8 +31,8 @@ public class FieldItemManager : GmAwareObject, IPlayerCommandListener
             _coinsCollected = value;
             if (_coinsCollected >= coinsForBigHammer)
             {
-                Gm.BarrierManager.RepairAllBarriers(1);
                 _coinsCollected = 0;
+                SpawnItem(bigHammerPrefab);
             }
         }
     }
@@ -58,14 +60,18 @@ public class FieldItemManager : GmAwareObject, IPlayerCommandListener
         {
             if (_powerupsInGame.Count == 0 && EligibleForPowerupSpawn())
             {
-                _stepsSinceLastItemSpawn = 0;
-                
-                int randomItemIndex = Random.Range(0, itemPrefabs.Count);
-                FieldItem fieldItem = Instantiate(itemPrefabs[randomItemIndex], Vector3.zero, Quaternion.identity);
-                fieldItem.CurrentPosIndex = Random.Range(0, Gm.BarrierManager.amountOfBarriers-1);
-                fieldItem.transform.position = fieldItem.targetPos;
+                SpawnItem(itemPrefabs[Random.Range(0, itemPrefabs.Count)]);
             }
         }
+    }
+
+    private void SpawnItem(FieldItem itemPrefab)
+    {
+        _stepsSinceLastItemSpawn = 0;
+        
+        FieldItem fieldItem = Instantiate(itemPrefab, Vector3.zero, Quaternion.identity);
+        fieldItem.CurrentPosIndex = Random.Range(0, Gm.BarrierManager.amountOfBarriers-1);
+        fieldItem.transform.position = fieldItem.targetPos;
     }
 
     private bool EligibleForPowerupSpawn()
@@ -73,7 +79,6 @@ public class FieldItemManager : GmAwareObject, IPlayerCommandListener
         float chance = -((1.0f / stepsUntilGuaranteedSpawn) * (stepsUntilGuaranteedSpawn * 0.5f))
                        + ((1.0f / stepsUntilGuaranteedSpawn) * _stepsSinceLastItemSpawn);
         float rn = Random.Range(0.0f, 1.0f);
-        // Debug.Log(rn + " <= " + chance + " = " + (rn <= chance));
         return rn <= chance;
     }
 
@@ -115,7 +120,8 @@ public class FieldItemManager : GmAwareObject, IPlayerCommandListener
         lock (_itemListLock)
         {
             _powerupsInGame.TryTake(out item);
-            // TODO: This bit of code hinders multiple items from being in the game simultaneously 
+            // TODO: This bit of code (and the fact that I'm using a ConcurrentBag) hinders multiple items from being
+            // TODO: in the game simultaneously 
         }
         _stepsSinceLastItemSpawn = 0;
     }

@@ -550,11 +550,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
-    - target: {fileID: 2740902530117390212, guid: 5b6afb87446206c4287e6f471f2bf083,
-        type: 3}
-      propertyPath: initiallyDestroyedBarriers
-      value: 5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b6afb87446206c4287e6f471f2bf083, type: 3}
 --- !u!1001 &4885461633886273571

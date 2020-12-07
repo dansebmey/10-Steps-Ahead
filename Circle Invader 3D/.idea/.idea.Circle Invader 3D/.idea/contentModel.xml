@@ -12,6 +12,7 @@
             <e p="Enemy" t="Include">
               <e p="EnemyAction.cs" t="Include" />
               <e p="MechaTotem.cs" t="Include" />
+              <e p="SplitAttackLayer.cs" t="Include" />
               <e p="TotemLayer.cs" t="Include" />
             </e>
             <e p="FieldItem.cs" t="Include" />
@@ -56,6 +57,7 @@
             </e>
           </e>
           <e p="Powerups" t="Include">
+            <e p="BigHammer.cs" t="Include" />
             <e p="Coin.cs" t="Include" />
             <e p="Hammer.cs" t="Include" />
             <e p="Item.cs" t="Include" />

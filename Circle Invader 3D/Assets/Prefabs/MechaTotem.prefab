@@ -55,6 +55,6 @@ MonoBehaviour:
       type: 3}
     chance: -1
   - name: SplitAttack
-    layerPrefab: {fileID: -5037835261173758856, guid: de086547df964c9479b5716ede0b9393,
+    layerPrefab: {fileID: 9385513819884428, guid: f112fbb95465bb64294aae0de9afea0c,
       type: 3}
     chance: -1
