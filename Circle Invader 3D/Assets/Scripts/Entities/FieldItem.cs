@@ -3,6 +3,7 @@
 public class FieldItem : OrbitingObject
 {
     public Item item;
+    public int scoreReq;
     public bool consumeOnPickup;
     
     public Color colour;

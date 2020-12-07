@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 693667430}
   - component: {fileID: 693667431}
   m_Layer: 0
-  m_Name: PowerupManager
+  m_Name: FieldItemManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6baeaa546e0a1d04ab11c9441ef7ef2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemLifespanInSteps: 10
+  itemLifespanInSteps: 12
   itemPrefabs:
   - {fileID: 1229671337826644509, guid: 0cbfb170c7a0ce343a3e85c3bbf4ad39, type: 3}
   - {fileID: 460679705857873582, guid: 6751caf728235104c8b0616825021169, type: 3}

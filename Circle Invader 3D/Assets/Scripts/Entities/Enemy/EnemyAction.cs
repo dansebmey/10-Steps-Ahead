@@ -7,6 +7,7 @@ using UnityEngine.Events;
 public class EnemyAction
 {
     public string name;
+    public int scoreReq;
     public TotemLayer layerPrefab;
     public Action action;
     

@@ -14,7 +14,7 @@ public class BarrierManager : MonoBehaviour, IPlayerCommandListener
     [Range(1,10)][SerializeField] public int initBarrierHealth = 3;
     [Range(1,10)][SerializeField] public int maxBarrierHealth = 4;
     [SerializeField] public Color[] healthColours;
-    [Range(10, 100)] public int dormantTurnCount = 30;
+    [Range(10, 100)] public int collapsedTurnCount = 30;
 
     [SerializeField] private int initiallyDestroyedBarriers = 0;
 
@@ -86,13 +86,13 @@ public class BarrierManager : MonoBehaviour, IPlayerCommandListener
         }
     }
 
-    public bool IsBarrierDormant(int posIndex)
+    public bool IsBarrierCollapsed(int posIndex)
     {
         foreach (var bar in _barriers)
         {
             if (bar.CurrentPosIndex % amountOfBarriers == posIndex)
             {
-                return bar.IsDormant();
+                return bar.IsCollapsed();
             }
         }
         
@@ -102,19 +102,18 @@ public class BarrierManager : MonoBehaviour, IPlayerCommandListener
 
     public void OnPlayerCommandPerformed()
     {
-        foreach (var bar in _barriers)
+        foreach (Barrier bar in _barriers)
         {
-            bar.RemainingDormantTurns--;
+            bar.RemainingCollapsedTurns--;
         }
     }
 
     public void RepairBarriers(int range, int healValue)
     {
-        foreach (Barrier bar in _barriers)
+        for (int i = _gm.CurrentPosIndex - range; i <= _gm.CurrentPosIndex + range; i++)
         {
-            if ((_gm.CurrentPosIndex + range) % amountOfBarriers >= bar.CurrentPosIndex 
-                || (_gm.CurrentPosIndex - range + amountOfBarriers) % amountOfBarriers <= bar.CurrentPosIndex
-                && !bar.IsDormant())
+            Barrier bar = _barriers[(_barriers.Length+i) % _barriers.Length];
+            if (!bar.IsCollapsed())
             {
                 bar.RestoreHealth(healValue);
             }
@@ -126,7 +125,7 @@ public class BarrierManager : MonoBehaviour, IPlayerCommandListener
         foreach (Barrier bar in _barriers)
         {
             bar.RestoreHealth(healValue);
-            bar.RemainingDormantTurns = 0;
+            bar.RemainingCollapsedTurns = 0;
         }
     }
 }

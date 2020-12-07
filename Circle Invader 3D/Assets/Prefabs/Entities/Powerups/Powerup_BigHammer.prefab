@@ -4919,6 +4919,7 @@ MonoBehaviour:
   targetPos: {x: 0, y: 0, z: 0}
   distanceFromCenter: 4
   item: {fileID: 11400000, guid: ad54a8aa47d6caf42b2ff681274fba1b, type: 2}
+  scoreReq: 0
   consumeOnPickup: 0
   colour: {r: 0.63720775, g: 1, b: 0, a: 1}
   upgradedColour: {r: 1, g: 0.808019, b: 0.3433962, a: 1}

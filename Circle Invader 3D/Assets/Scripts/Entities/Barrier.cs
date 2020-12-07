@@ -11,7 +11,7 @@ public class Barrier : OrbitingObject, IDamageable
     private ParticleSystem _damageParticles;
 
     private int _health;
-    private int _remainingDormantTurns;
+    private int _remainingCollapsedTurns;
 
     public int Health
     {
@@ -25,32 +25,32 @@ public class Barrier : OrbitingObject, IDamageable
             }
             else
             {
-                if (RemainingDormantTurns <= 0)
+                if (RemainingCollapsedTurns <= 0)
                 {
-                    ToggleDormantState(true);
+                    ToggleCollapsedState(true);
                 }
             }
         }
     }
 
-    public int RemainingDormantTurns
+    public int RemainingCollapsedTurns
     {
-        get => _remainingDormantTurns;
+        get => _remainingCollapsedTurns;
         set
         {
-            _remainingDormantTurns = value;
+            _remainingCollapsedTurns = value;
             if (value <= 0)
             {
-                ToggleDormantState(false);
+                ToggleCollapsedState(false);
             }
         }
     }
 
-    private void ToggleDormantState(bool isDormant)
+    private void ToggleCollapsedState(bool doCollapse)
     {
-        if (isDormant)
+        if (doCollapse)
         {
-            RemainingDormantTurns = _bm.dormantTurnCount;
+            RemainingCollapsedTurns = _bm.collapsedTurnCount;
             targetPos = new Vector3(transform.position.x, -0.8f, transform.position.z);
         }
         else
@@ -59,9 +59,9 @@ public class Barrier : OrbitingObject, IDamageable
         }
     }
 
-    public bool IsDormant()
+    public bool IsCollapsed()
     {
-        return RemainingDormantTurns > 0;
+        return RemainingCollapsedTurns > 0;
     }
 
     protected override void Awake()

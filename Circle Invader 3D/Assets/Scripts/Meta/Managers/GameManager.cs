@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour
     {
         int posIndex = rawPosIndex == -1 ? CurrentPosIndex : WrapPosIndex(rawPosIndex);
 
-        if (BarrierManager.IsBarrierDormant(posIndex) && player.CurrentPosIndex == posIndex)
+        if (BarrierManager.IsBarrierCollapsed(posIndex) && player.CurrentPosIndex == posIndex)
         {
             SwitchState(typeof(GameOverState));
         }
@@ -122,17 +122,8 @@ public class GameManager : MonoBehaviour
         return value >= PlayerScore;
     }
 
-    public int WrapPosIndex(int posIndex)
+    private int WrapPosIndex(int posIndex)
     {
-        if (posIndex < 0)
-        {
-            posIndex += BarrierManager.amountOfBarriers;
-        }
-        else if (posIndex >= BarrierManager.amountOfBarriers)
-        {
-            posIndex -= BarrierManager.amountOfBarriers;
-        }
-
-        return posIndex;
+        return (BarrierManager.amountOfBarriers + posIndex) % BarrierManager.amountOfBarriers;
     }
 }

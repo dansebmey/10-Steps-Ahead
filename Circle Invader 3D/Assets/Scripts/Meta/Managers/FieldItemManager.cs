@@ -60,9 +60,17 @@ public class FieldItemManager : GmAwareObject, IPlayerCommandListener
         {
             if (_powerupsInGame.Count == 0 && EligibleForPowerupSpawn())
             {
-                SpawnItem(itemPrefabs[Random.Range(0, itemPrefabs.Count)]);
+                SpawnItem(SelectRandomItemToSpawn(Random.Range(0, itemPrefabs.Count-1)));
             }
         }
+    }
+
+    private FieldItem SelectRandomItemToSpawn(int rn)
+    {
+        FieldItem item = itemPrefabs[rn];
+        return Gm.IsScoreHigherThan(item.scoreReq)
+            ? SelectRandomItemToSpawn(rn + 1 % itemPrefabs.Count)
+            : item;
     }
 
     private void SpawnItem(FieldItem itemPrefab)
