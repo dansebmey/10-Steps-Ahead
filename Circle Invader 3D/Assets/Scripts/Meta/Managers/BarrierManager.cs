@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -127,5 +128,10 @@ public class BarrierManager : MonoBehaviour, IPlayerCommandListener
             bar.RestoreHealth(healValue);
             bar.RemainingCollapsedTurns = 0;
         }
+    }
+
+    public int DetermineRemainingBarrierHealth()
+    {
+        return _barriers.Sum(bar => bar.Health);
     }
 }

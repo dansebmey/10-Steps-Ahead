@@ -31,6 +31,6 @@ public class HeadsUpDisplay : MonoBehaviour
 
     private void Update()
     {
-        // _labelForTesting.text = _gmForTesting.CurrentState.ToString();
+        _labelForTesting.text = _gmForTesting.CurrentState.ToString();
     }
 }

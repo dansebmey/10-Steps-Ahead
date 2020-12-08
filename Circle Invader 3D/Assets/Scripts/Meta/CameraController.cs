@@ -5,9 +5,19 @@ public class CameraController : MovableObject
 {
     private Quaternion _targetRot;
 
+    private Transform defaultCamTransform;
+    public AudioLowPassFilter LowPassFilter { get; private set; }
+
+    protected override void Awake()
+    {
+        base.Awake();
+        LowPassFilter = GetComponent<AudioLowPassFilter>();
+    }
+
     protected override void Start()
     {
         base.Start();
+        defaultCamTransform = transform;
         ResetZoom();
     }
 
@@ -19,12 +29,14 @@ public class CameraController : MovableObject
 
     public void ResetZoom()
     {
-        targetPos = new Vector3(0, 2, -2.13f);
+        targetPos = defaultCamTransform.position;
         // _targetRot = new Quaternion(15, 0, 0, 0);
     }
 
     protected override void Update()
     {
+        return;
+        
         if (transform.localPosition != targetPos)
         {
             transform.localPosition = Vector3.Lerp(transform.localPosition, targetPos, 0.05f);

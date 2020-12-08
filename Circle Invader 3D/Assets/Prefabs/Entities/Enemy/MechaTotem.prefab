@@ -47,14 +47,25 @@ MonoBehaviour:
   amtOfVisibleActions: 10
   actionPrefabs:
   - name: Idle
+    scoreReq: 0
     layerPrefab: {fileID: 519660893281381382, guid: 46bd88b0e37a88f449853bb4c016460a,
       type: 3}
-    chance: -1
+    chance: 100
   - name: BasicAttack
+    scoreReq: 0
     layerPrefab: {fileID: -5037835261173758856, guid: de086547df964c9479b5716ede0b9393,
       type: 3}
-    chance: -1
+    chance: 30
   - name: SplitAttack
+    scoreReq: 25
     layerPrefab: {fileID: 9385513819884428, guid: f112fbb95465bb64294aae0de9afea0c,
       type: 3}
-    chance: -1
+    chance: 10
+  - name: DelayedAttack
+    scoreReq: 50
+    layerPrefab: {fileID: 5980321227106648739, guid: ec4357a557fb0244ebfe9303cf581aaf,
+      type: 3}
+    chance: 15
+  delayedProjPrefab: {fileID: 1774929410537623454, guid: 448ebb43eadf1b44e8a509033605b8f5,
+    type: 3}
+  layerHeight: 0.5

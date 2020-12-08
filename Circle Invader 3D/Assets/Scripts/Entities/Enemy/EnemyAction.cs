@@ -11,5 +11,5 @@ public class EnemyAction
     public TotemLayer layerPrefab;
     public Action action;
     
-    [Range(-1, 100)] public float chance = 100;
+    [Range(-1, 100)] public int chance = 100;
 }

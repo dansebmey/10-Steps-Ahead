@@ -12,8 +12,7 @@ public class FieldItemManager : GmAwareObject, IPlayerCommandListener
     public int itemLifespanInSteps = 10;
     [SerializeField] private List<FieldItem> itemPrefabs;
     
-    private ConcurrentBag<FieldItem> _powerupsInGame;
-    private object _itemListLock = new object();
+    private ConcurrentQueue<FieldItem> _powerupsInGame;
 
     [SerializeField] private int stepsUntilGuaranteedSpawn = 16;
     private int _stepsSinceLastItemSpawn;
@@ -41,10 +40,7 @@ public class FieldItemManager : GmAwareObject, IPlayerCommandListener
     {
         base.Awake();
 
-        lock (_itemListLock)
-        {
-            _powerupsInGame = new ConcurrentBag<FieldItem>();
-        }
+        _powerupsInGame = new ConcurrentQueue<FieldItem>();
     }
 
     public void OnPlayerCommandPerformed()
@@ -56,21 +52,22 @@ public class FieldItemManager : GmAwareObject, IPlayerCommandListener
 
     private void DeterminePowerupSpawn()
     {
-        lock (_itemListLock)
+        if (_powerupsInGame.Count == 0 && EligibleForPowerupSpawn())
         {
-            if (_powerupsInGame.Count == 0 && EligibleForPowerupSpawn())
-            {
-                SpawnItem(SelectRandomItemToSpawn(Random.Range(0, itemPrefabs.Count-1)));
-            }
+            SpawnItem(SelectRandomItemToSpawn(Random.Range(0, itemPrefabs.Count)));
         }
     }
 
     private FieldItem SelectRandomItemToSpawn(int rn)
     {
         FieldItem item = itemPrefabs[rn];
-        return Gm.IsScoreHigherThan(item.scoreReq)
-            ? SelectRandomItemToSpawn(rn + 1 % itemPrefabs.Count)
-            : item;
+        if (Gm.IsScoreHigherThan(item.scoreReq))
+        {
+            Debug.Log("Spawning item ["+item+"] with score req ["+item.scoreReq+"]");
+            return item;
+        }
+
+        return SelectRandomItemToSpawn((rn + 1) % (itemPrefabs.Count - 1));
     }
 
     private void SpawnItem(FieldItem itemPrefab)
@@ -80,6 +77,8 @@ public class FieldItemManager : GmAwareObject, IPlayerCommandListener
         FieldItem fieldItem = Instantiate(itemPrefab, Vector3.zero, Quaternion.identity);
         fieldItem.CurrentPosIndex = Random.Range(0, Gm.BarrierManager.amountOfBarriers-1);
         fieldItem.transform.position = fieldItem.targetPos;
+        
+        Gm.AudioManager.Play("ItemSpawn", 0.05f);
     }
 
     private bool EligibleForPowerupSpawn()
@@ -92,45 +91,34 @@ public class FieldItemManager : GmAwareObject, IPlayerCommandListener
 
     private void ReducePowerupTimers()
     {
-        lock (_itemListLock)
+        foreach (FieldItem powerup in _powerupsInGame)
         {
-            foreach (FieldItem powerup in _powerupsInGame)
-            {
-                powerup.ReduceTimer();
-            }
+            powerup.ReduceTimer();
         }
     }
 
     public void HandlePowerupCheck()
     {
-        lock (_itemListLock)
+        foreach (FieldItem item in _powerupsInGame)
         {
-            foreach (FieldItem item in _powerupsInGame)
+            if (item.CurrentPosIndex % Gm.BarrierManager.amountOfBarriers == Gm.CurrentPosIndex)
             {
-                if (item.CurrentPosIndex % Gm.BarrierManager.amountOfBarriers == Gm.CurrentPosIndex)
-                {
-                    item.OnPickup();
-                }
+                Gm.AudioManager.Play("Collect", 0.05f);
+                item.OnPickup();
             }
         }
     }
 
     public void RegisterPowerup(FieldItem item)
     {
-        lock (_itemListLock)
-        {
-            _powerupsInGame.Add(item);
-        }
+        _powerupsInGame.Enqueue(item);
     }
 
     public void DeleteItem(FieldItem item)
     {
-        lock (_itemListLock)
-        {
-            _powerupsInGame.TryTake(out item);
-            // TODO: This bit of code (and the fact that I'm using a ConcurrentBag) hinders multiple items from being
-            // TODO: in the game simultaneously 
-        }
+        _powerupsInGame.TryDequeue(out item);
+        // TODO: This bit of code (and the fact that I'm using a ConcurrentBag) hinders multiple items from being
+        // TODO: in the game simultaneously
         _stepsSinceLastItemSpawn = 0;
     }
 }

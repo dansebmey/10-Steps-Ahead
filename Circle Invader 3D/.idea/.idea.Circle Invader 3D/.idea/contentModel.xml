@@ -9,6 +9,7 @@
         <e p="Scripts" t="Include">
           <e p="Entities" t="Include">
             <e p="Barrier.cs" t="Include" />
+            <e p="DelayedProjectile.cs" t="Include" />
             <e p="Enemy" t="Include">
               <e p="EnemyAction.cs" t="Include" />
               <e p="MechaTotem.cs" t="Include" />
@@ -43,6 +44,7 @@
             <e p="Managers" t="Include">
               <e p="AudioManager" t="Include">
                 <e p="AudioManager.cs" t="Include" />
+                <e p="LowPassFilterManager.cs" t="Include" />
                 <e p="Sound.cs" t="Include" />
               </e>
               <e p="BarrierManager.cs" t="Include" />

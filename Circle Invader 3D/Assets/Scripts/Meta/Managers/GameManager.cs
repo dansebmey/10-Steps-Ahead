@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,10 +8,12 @@ public class GameManager : MonoBehaviour
     public BarrierManager BarrierManager { get; private set; }
     public FieldItemManager FieldItemManager { get; private set; }
 
-    private List<IPlayerCommandListener> _playerCommandListeners;
+    private ConcurrentStack<IPlayerCommandListener> _playerCommandListeners;
+    
     private FiniteStateMachine _fsm;
     private HeadsUpDisplay _hud;
     public AudioManager AudioManager => AudioManager.GetInstance();
+    private LowPassFilterManager _lowPassFilterManager;
 
     [SerializeField] private State[] statePrefabs;
 
@@ -55,6 +58,7 @@ public class GameManager : MonoBehaviour
         BarrierManager = GetComponentInChildren<BarrierManager>();
         FieldItemManager = GetComponentInChildren<FieldItemManager>();
         _hud = FindObjectOfType<HeadsUpDisplay>();
+        _lowPassFilterManager = FindObjectOfType<CameraController>().GetComponent<LowPassFilterManager>();
     }
 
     private void Start()
@@ -62,14 +66,25 @@ public class GameManager : MonoBehaviour
         _fsm = new FiniteStateMachine(this, typeof(WaitingForPlayerAction), statePrefabs);
         damageables = new List<IDamageable>();
 
-        _playerCommandListeners = new List<IPlayerCommandListener>
-        {
-            BarrierManager,
-            FieldItemManager
-        };
+        _playerCommandListeners = new ConcurrentStack<IPlayerCommandListener>();
+        _playerCommandListeners.Push(BarrierManager);
+        _playerCommandListeners.Push(FieldItemManager);
+        _playerCommandListeners.Push(_lowPassFilterManager);
+        _playerCommandListeners.Push(enemy);
 
         AudioManager.FadeVolume("Soundtrack", 0, AudioManager.FindSound("Soundtrack").initVolume, 2);
         AudioManager.Play("Soundtrack");
+    }
+
+    public void RegisterPlayerCommandListener(IPlayerCommandListener listener)
+    {
+        _playerCommandListeners.Push(listener);
+    }
+
+    public void DeletePlayerCommandListener(IPlayerCommandListener listener)
+    {
+        _playerCommandListeners.TryPop(out listener);
+        Debug.Log("Removed listener ["+listener+"]");
     }
 
     private void Update()
@@ -90,14 +105,15 @@ public class GameManager : MonoBehaviour
         if(!(CurrentState is GameOverState))
         {
             AudioManager.Play("Slide", 0.1f);
+            
             PlayerScore++;
             FieldItemManager.HandlePowerupCheck();
-            
+
             foreach (IPlayerCommandListener pcl in _playerCommandListeners)
             {
                 pcl.OnPlayerCommandPerformed();
             }
-            
+
             SwitchState(typeof(InvokeEnemyAction));
         }
     }
@@ -108,7 +124,8 @@ public class GameManager : MonoBehaviour
 
         if (BarrierManager.IsBarrierCollapsed(posIndex) && player.CurrentPosIndex == posIndex)
         {
-            SwitchState(typeof(GameOverState));
+            SwitchState(typeof(WaitingForPlayerAction));
+            // SwitchState(typeof(GameOverState));
         }
         else
         {
@@ -117,9 +134,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public bool IsScoreHigherThan(int value)
+    public bool IsScoreHigherThan(int req)
     {
-        return value >= PlayerScore;
+        return PlayerScore >= req;
     }
 
     private int WrapPosIndex(int posIndex)
