@@ -48,11 +48,13 @@
                 <e p="Sound.cs" t="Include" />
               </e>
               <e p="BarrierManager.cs" t="Include" />
+              <e p="DataManager.cs" t="Include" />
               <e p="FieldItemManager.cs" t="Include" />
               <e p="GameManager.cs" t="Include" />
               <e p="InputManager.cs" t="Include" />
             </e>
             <e p="Screens" t="Include">
+              <e p="BigHammerInterface.cs" t="Include" />
               <e p="GameOverInterface.cs" t="Include" />
               <e p="HeadsUpDisplay.cs" t="Include" />
               <e p="InventoryInterface.cs" t="Include" />

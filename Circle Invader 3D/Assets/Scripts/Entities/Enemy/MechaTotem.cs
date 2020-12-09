@@ -94,7 +94,8 @@ public class MechaTotem : MovableObject, IPlayerCommandListener
         DelayedProjectile proj = Instantiate(delayedProjPrefab, transform);
         proj.CurrentPosIndex = Gm.CurrentPosIndex;
         _delayedProjectilesInGame.Enqueue(proj);
-        
+
+        Gm.AudioManager.Play("DelayedAttackFired", 0.05f);
         Gm.SwitchState(typeof(WaitingForPlayerAction));
         // TODO: State switching should be done somewhere more central
     }

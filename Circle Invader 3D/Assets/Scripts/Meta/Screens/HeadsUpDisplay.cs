@@ -14,6 +14,8 @@ public class HeadsUpDisplay : MonoBehaviour
 
     private GameManager _gmForTesting;
 
+    private BigHammerInterface _bigHammerInterface;
+
     private void Awake()
     {
         _scoreShadowLabel = GetComponentsInChildren<Text>()[0];
@@ -21,12 +23,19 @@ public class HeadsUpDisplay : MonoBehaviour
         _labelForTesting = GetComponentsInChildren<Text>()[2];
 
         _gmForTesting = FindObjectOfType<GameManager>();
+
+        _bigHammerInterface = GetComponentInChildren<BigHammerInterface>();
     }
 
     public void UpdateScore(int score)
     {
         _scoreShadowLabel.text = score.ToString();
         _scoreLabel.text = score.ToString();
+    }
+
+    public void UpdateBigHammerInterface()
+    {
+        _bigHammerInterface.UpdateMeter();
     }
 
     private void Update()

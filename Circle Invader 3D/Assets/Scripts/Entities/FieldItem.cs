@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
 public class FieldItem : OrbitingObject
 {
@@ -55,6 +56,8 @@ public class FieldItem : OrbitingObject
 
     private void Destroy()
     {
+        OnDespawn?.Invoke();
+        
         Gm.FieldItemManager.DeleteItem(this);
         Destroy(gameObject);
     }
@@ -63,4 +66,6 @@ public class FieldItem : OrbitingObject
     {
         RemainingDuration--;
     }
+
+    public UnityEvent OnDespawn;
 }

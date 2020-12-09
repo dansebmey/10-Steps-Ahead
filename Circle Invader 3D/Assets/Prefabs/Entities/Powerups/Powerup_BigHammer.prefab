@@ -4923,6 +4923,22 @@ MonoBehaviour:
   consumeOnPickup: 0
   colour: {r: 0.63720775, g: 1, b: 0, a: 1}
   upgradedColour: {r: 1, g: 0.808019, b: 0.3433962, a: 1}
+  OnDespawn:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7220955650458854295, guid: f9d94416008c9b548848b464d9ac3ec0,
+          type: 3}
+        m_TargetAssemblyTypeName: BigHammerInterface, Assembly-CSharp
+        m_MethodName: UpdateMeter
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &7472130910514923936
 PrefabInstance:
   m_ObjectHideFlags: 0

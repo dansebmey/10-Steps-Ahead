@@ -5,6 +5,9 @@ public class Coin : Item
 {
     public override void OnConsume()
     {
-        FindObjectOfType<GameManager>().FieldItemManager.CoinsCollected++;
+        GameManager gm = FindObjectOfType<GameManager>();
+        gm.FieldItemManager.CoinsCollected++;
+        gm.Hud.UpdateBigHammerInterface();
+        gm.AudioManager.Play("CoinCollected", 0.05f);
     }
 }

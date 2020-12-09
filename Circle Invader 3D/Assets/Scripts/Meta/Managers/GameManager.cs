@@ -11,7 +11,9 @@ public class GameManager : MonoBehaviour
     private ConcurrentStack<IPlayerCommandListener> _playerCommandListeners;
     
     private FiniteStateMachine _fsm;
-    private HeadsUpDisplay _hud;
+    private DataManager _dataManager;
+    public HeadsUpDisplay Hud { get; private set; }
+    
     public AudioManager AudioManager => AudioManager.GetInstance();
     private LowPassFilterManager _lowPassFilterManager;
 
@@ -49,7 +51,7 @@ public class GameManager : MonoBehaviour
         private set
         {
             _playerScore = value;
-            _hud.UpdateScore(value);
+            Hud.UpdateScore(value);
         }
     }
 
@@ -57,8 +59,9 @@ public class GameManager : MonoBehaviour
     {
         BarrierManager = GetComponentInChildren<BarrierManager>();
         FieldItemManager = GetComponentInChildren<FieldItemManager>();
-        _hud = FindObjectOfType<HeadsUpDisplay>();
+        Hud = FindObjectOfType<HeadsUpDisplay>();
         _lowPassFilterManager = FindObjectOfType<CameraController>().GetComponent<LowPassFilterManager>();
+        _dataManager = GetComponent<DataManager>();
     }
 
     private void Start()
@@ -124,8 +127,7 @@ public class GameManager : MonoBehaviour
 
         if (BarrierManager.IsBarrierCollapsed(posIndex) && player.CurrentPosIndex == posIndex)
         {
-            SwitchState(typeof(WaitingForPlayerAction));
-            // SwitchState(typeof(GameOverState));
+            SwitchState(typeof(GameOverState));
         }
         else
         {
@@ -142,5 +144,15 @@ public class GameManager : MonoBehaviour
     private int WrapPosIndex(int posIndex)
     {
         return (BarrierManager.amountOfBarriers + posIndex) % BarrierManager.amountOfBarriers;
+    }
+
+    public void SaveGame()
+    {
+        _dataManager.Save();
+    }
+
+    public void LoadGame()
+    {
+        _dataManager.Load();
     }
 }

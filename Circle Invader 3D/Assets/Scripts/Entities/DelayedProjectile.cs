@@ -16,6 +16,7 @@ public class DelayedProjectile : OrbitingObject
         distanceFromCenter = 0.5f + _stepsTaken * 0.8f;
         if (_stepsTaken == 4)
         {
+            Gm.AudioManager.Play("BasicAttack", 0.05f);
             Gm.ApplyDamage(1, CurrentPosIndex);
             Destroy(gameObject);
             return false;
