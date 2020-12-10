@@ -20,8 +20,8 @@ public class MechaTotem : MovableObject, IPlayerCommandListener
     [SerializeField] private List<EnemyAction> actionPrefabs;
     
     [Header("Delayed projectiles")]
-    [SerializeField] public DelayedProjectile delayedProjPrefab;
-    private ConcurrentQueue<DelayedProjectile> _delayedProjectilesInGame;
+    [SerializeField] public Missile delayedProjPrefab;
+    public ConcurrentQueue<Missile> MissilesInField { get; private set; }
     
     public float layerHeight = 0.5f;
 
@@ -53,7 +53,7 @@ public class MechaTotem : MovableObject, IPlayerCommandListener
             QueueNewAction(ACTION_IDLE);
         }
         
-        _delayedProjectilesInGame = new ConcurrentQueue<DelayedProjectile>();
+        MissilesInField = new ConcurrentQueue<Missile>();
     }
 
     private void QueueNewAction(int actionIndex)
@@ -91,9 +91,9 @@ public class MechaTotem : MovableObject, IPlayerCommandListener
 
     private void DelayedAttack()
     {
-        DelayedProjectile proj = Instantiate(delayedProjPrefab, transform);
+        Missile proj = Instantiate(delayedProjPrefab, transform);
         proj.CurrentPosIndex = Gm.CurrentPosIndex;
-        _delayedProjectilesInGame.Enqueue(proj);
+        MissilesInField.Enqueue(proj);
 
         Gm.AudioManager.Play("DelayedAttackFired", 0.05f);
         Gm.SwitchState(typeof(WaitingForPlayerAction));
@@ -178,12 +178,12 @@ public class MechaTotem : MovableObject, IPlayerCommandListener
 
     public void OnPlayerCommandPerformed()
     {
-        foreach (DelayedProjectile proj in _delayedProjectilesInGame)
+        foreach (Missile proj in MissilesInField)
         {
-            DelayedProjectile thisProj = proj;
+            Missile thisProj = proj;
             if (!thisProj.MoveForward())
             {
-                _delayedProjectilesInGame.TryDequeue(out thisProj);
+                MissilesInField.TryDequeue(out thisProj);
             }
         }
     }

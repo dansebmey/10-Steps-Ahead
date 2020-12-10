@@ -9,7 +9,6 @@
         <e p="Scripts" t="Include">
           <e p="Entities" t="Include">
             <e p="Barrier.cs" t="Include" />
-            <e p="DelayedProjectile.cs" t="Include" />
             <e p="Enemy" t="Include">
               <e p="EnemyAction.cs" t="Include" />
               <e p="MechaTotem.cs" t="Include" />
@@ -17,6 +16,7 @@
               <e p="TotemLayer.cs" t="Include" />
             </e>
             <e p="FieldItem.cs" t="Include" />
+            <e p="Missile.cs" t="Include" />
             <e p="MovableObject.cs" t="Include" />
             <e p="OrbitingObject.cs" t="Include" />
             <e p="Player" t="Include">
@@ -31,7 +31,9 @@
               <e p="State.cs" t="Include" />
               <e p="States" t="Include">
                 <e p="GameOverState.cs" t="Include" />
+                <e p="HighscoreState.cs" t="Include" />
                 <e p="InvokeEnemyAction.cs" t="Include" />
+                <e p="MainMenuState.cs" t="Include" />
                 <e p="PlayerMoving.cs" t="Include" />
                 <e p="WaitingForPlayerAction.cs" t="Include" />
               </e>
@@ -48,16 +50,39 @@
                 <e p="Sound.cs" t="Include" />
               </e>
               <e p="BarrierManager.cs" t="Include" />
-              <e p="DataManager.cs" t="Include" />
+              <e p="DataManager" t="Include">
+                <e p="BarrierManagerData.cs" t="Include" />
+                <e p="DataManager.cs" t="Include" />
+                <e p="EnemyData.cs" t="Include" />
+                <e p="FieldItemManagerData.cs" t="Include" />
+                <e p="GameData.cs" t="Include" />
+                <e p="MiscData.cs" t="Include" />
+                <e p="PlayerDAta.cs" t="Include" />
+                <e p="SaveAndLoadSystem.cs" t="Include" />
+              </e>
               <e p="FieldItemManager.cs" t="Include" />
               <e p="GameManager.cs" t="Include" />
+              <e p="HighScoreManager" t="Include">
+                <e p="HighscoreData.cs" t="Include" />
+                <e p="HighscoreManager.cs" t="Include" />
+              </e>
               <e p="InputManager.cs" t="Include" />
             </e>
-            <e p="Screens" t="Include">
-              <e p="BigHammerInterface.cs" t="Include" />
-              <e p="GameOverInterface.cs" t="Include" />
-              <e p="HeadsUpDisplay.cs" t="Include" />
-              <e p="InventoryInterface.cs" t="Include" />
+            <e p="Overlays" t="Include">
+              <e p="GameOverOverlay.cs" t="Include" />
+              <e p="HighscoreOverlay.cs" t="Include" />
+              <e p="HUD" t="Include">
+                <e p="BigHammerInterface.cs" t="Include" />
+                <e p="HudOverlay.cs" t="Include" />
+                <e p="InventoryInterface.cs" t="Include" />
+              </e>
+              <e p="MainMenuOverlay.cs" t="Include" />
+              <e p="Overlay.cs" t="Include" />
+              <e p="OverlayManager.cs" t="Include" />
+              <e p="UIElements" t="Include">
+                <e p="CustomTextField.cs" t="Include" />
+                <e p="FlashyTextController.cs" t="Include" />
+              </e>
             </e>
           </e>
           <e p="Powerups" t="Include">

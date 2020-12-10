@@ -7,7 +7,7 @@ public class Coin : Item
     {
         GameManager gm = FindObjectOfType<GameManager>();
         gm.FieldItemManager.CoinsCollected++;
-        gm.Hud.UpdateBigHammerInterface();
+        gm.OverlayManager.Hud.UpdateBigHammerInterface();
         gm.AudioManager.Play("CoinCollected", 0.05f);
     }
 }

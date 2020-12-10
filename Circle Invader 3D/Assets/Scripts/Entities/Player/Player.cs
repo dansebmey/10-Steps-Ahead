@@ -11,7 +11,7 @@ public class Player : OrbitingObject
     protected override void Awake()
     {
         base.Awake();
-        Inventory = FindObjectOfType<Inventory>();
+        Inventory = FindObjectOfType<Inventory>(true);
     }
 
     protected override void Start()

@@ -12,7 +12,9 @@ public class GameManager : MonoBehaviour
     
     private FiniteStateMachine _fsm;
     private DataManager _dataManager;
-    public HeadsUpDisplay Hud { get; private set; }
+    private CameraController _cameraController;
+    public OverlayManager OverlayManager { get; private set; }
+    public HighscoreManager HighscoreManager { get; private set; }
     
     public AudioManager AudioManager => AudioManager.GetInstance();
     private LowPassFilterManager _lowPassFilterManager;
@@ -23,7 +25,16 @@ public class GameManager : MonoBehaviour
     public MechaTotem enemy;
 
     [HideInInspector] public List<IDamageable> damageables;
-    
+
+    public void StartGame()
+    {
+        OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.HUD);
+        SwitchState(typeof(WaitingForPlayerAction));
+        
+        // targetPos = new Vector3(0, 11.33f, -5);
+        _cameraController.FocusOn(player.transform, new Vector3(0, 5, -5), new Vector3(25, 0, 0), 2);
+    }
+
     public void SwitchState(Type newStateType)
     {
         _fsm.SwitchState(newStateType);
@@ -51,7 +62,7 @@ public class GameManager : MonoBehaviour
         private set
         {
             _playerScore = value;
-            Hud.UpdateScore(value);
+            OverlayManager.Hud.UpdateScore(value);
         }
     }
 
@@ -59,14 +70,17 @@ public class GameManager : MonoBehaviour
     {
         BarrierManager = GetComponentInChildren<BarrierManager>();
         FieldItemManager = GetComponentInChildren<FieldItemManager>();
-        Hud = FindObjectOfType<HeadsUpDisplay>();
+        OverlayManager = FindObjectOfType<OverlayManager>();
+        
         _lowPassFilterManager = FindObjectOfType<CameraController>().GetComponent<LowPassFilterManager>();
         _dataManager = GetComponent<DataManager>();
+        _cameraController = FindObjectOfType<CameraController>();
+        HighscoreManager = GetComponent<HighscoreManager>();
     }
 
     private void Start()
     {
-        _fsm = new FiniteStateMachine(this, typeof(WaitingForPlayerAction), statePrefabs);
+        _fsm = new FiniteStateMachine(this, typeof(MainMenuState), statePrefabs);
         damageables = new List<IDamageable>();
 
         _playerCommandListeners = new ConcurrentStack<IPlayerCommandListener>();
@@ -127,7 +141,7 @@ public class GameManager : MonoBehaviour
 
         if (BarrierManager.IsBarrierCollapsed(posIndex) && player.CurrentPosIndex == posIndex)
         {
-            SwitchState(typeof(GameOverState));
+            EndGame();
         }
         else
         {
@@ -146,13 +160,8 @@ public class GameManager : MonoBehaviour
         return (BarrierManager.amountOfBarriers + posIndex) % BarrierManager.amountOfBarriers;
     }
 
-    public void SaveGame()
+    private void EndGame()
     {
-        _dataManager.Save();
-    }
-
-    public void LoadGame()
-    {
-        _dataManager.Load();
+        SwitchState(typeof(GameOverState));
     }
 }

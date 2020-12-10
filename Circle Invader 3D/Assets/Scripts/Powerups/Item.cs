@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
 public abstract class Item : ScriptableObject
- {
-     public abstract void OnConsume();
+{
+    public abstract void OnConsume();
  }

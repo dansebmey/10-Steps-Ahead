@@ -16,10 +16,10 @@ public class BarrierManager : MonoBehaviour, IPlayerCommandListener
     [Range(1,10)][SerializeField] public int maxBarrierHealth = 4;
     [SerializeField] public Color[] healthColours;
     [Range(10, 100)] public int collapsedTurnCount = 30;
-
+    
     [SerializeField] private int initiallyDestroyedBarriers = 0;
 
-    private Barrier[] _barriers;
+    public Barrier[] Barriers { get; private set; }
 
     private GameManager _gm;
 
@@ -35,7 +35,7 @@ public class BarrierManager : MonoBehaviour, IPlayerCommandListener
 
     private void InitialiseBarriers()
     {
-        _barriers = new Barrier[amountOfBarriers];
+        Barriers = new Barrier[amountOfBarriers];
         for (int i = 0; i < amountOfBarriers; i++)
         {
             Vector3 pos = new Vector3(
@@ -48,7 +48,7 @@ public class BarrierManager : MonoBehaviour, IPlayerCommandListener
             bar.CurrentPosIndex = i;
             bar.name = "Barrier (index " + i + ")";
             bar.transform.parent = transform;
-            _barriers[i] = bar;
+            Barriers[i] = bar;
         }
 
         if (initiallyDestroyedBarriers > 0)
@@ -65,8 +65,8 @@ public class BarrierManager : MonoBehaviour, IPlayerCommandListener
         {
             int rn;
             rns.Add(rn = GenerateRandomUniqueInt(rns));
-            _barriers[rn].Health -= initBarrierHealth;
-            Debug.Log(_barriers[rn].name + " collapsed!");
+            Barriers[rn].Health -= initBarrierHealth;
+            Debug.Log(Barriers[rn].name + " collapsed!");
         }
     }
 
@@ -78,7 +78,7 @@ public class BarrierManager : MonoBehaviour, IPlayerCommandListener
 
     public void DamageBarrier(int damageDealt, int posIndex)
     {
-        foreach (var bar in _barriers)
+        foreach (var bar in Barriers)
         {
             if (bar.CurrentPosIndex % amountOfBarriers == posIndex)
             {
@@ -89,7 +89,7 @@ public class BarrierManager : MonoBehaviour, IPlayerCommandListener
 
     public bool IsBarrierCollapsed(int posIndex)
     {
-        foreach (var bar in _barriers)
+        foreach (var bar in Barriers)
         {
             if (bar.CurrentPosIndex % amountOfBarriers == posIndex)
             {
@@ -103,17 +103,17 @@ public class BarrierManager : MonoBehaviour, IPlayerCommandListener
 
     public void OnPlayerCommandPerformed()
     {
-        foreach (Barrier bar in _barriers)
-        {
-            bar.RemainingCollapsedTurns--;
-        }
+        // foreach (Barrier bar in _barriers)
+        // {
+        //     bar.RemainingCollapsedTurns--;
+        // }
     }
 
     public void RepairBarriers(int range, int healValue)
     {
         for (int i = _gm.CurrentPosIndex - range; i <= _gm.CurrentPosIndex + range; i++)
         {
-            Barrier bar = _barriers[(_barriers.Length+i) % _barriers.Length];
+            Barrier bar = Barriers[(Barriers.Length+i) % Barriers.Length];
             if (!bar.IsCollapsed())
             {
                 bar.RestoreHealth(healValue);
@@ -123,7 +123,7 @@ public class BarrierManager : MonoBehaviour, IPlayerCommandListener
 
     public void RepairAllBarriers(int healValue)
     {
-        foreach (Barrier bar in _barriers)
+        foreach (Barrier bar in Barriers)
         {
             bar.RestoreHealth(healValue);
             bar.RemainingCollapsedTurns = 0;
@@ -132,6 +132,6 @@ public class BarrierManager : MonoBehaviour, IPlayerCommandListener
 
     public int DetermineRemainingBarrierHealth()
     {
-        return _barriers.Sum(bar => bar.Health);
+        return Barriers.Sum(bar => bar.Health);
     }
 }

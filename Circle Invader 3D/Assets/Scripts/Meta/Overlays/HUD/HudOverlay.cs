@@ -4,25 +4,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HeadsUpDisplay : MonoBehaviour
+public class HudOverlay : Overlay
 {
-    
-    private Text
-        _scoreShadowLabel,
-        _scoreLabel,
-        _labelForTesting;
-
-    private GameManager _gmForTesting;
+    private Text _scoreShadowLabel, _scoreLabel, _labelForTesting;
 
     private BigHammerInterface _bigHammerInterface;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+        
         _scoreShadowLabel = GetComponentsInChildren<Text>()[0];
         _scoreLabel = GetComponentsInChildren<Text>()[1];
         _labelForTesting = GetComponentsInChildren<Text>()[2];
-
-        _gmForTesting = FindObjectOfType<GameManager>();
+        _labelForTesting.gameObject.SetActive(false);
 
         _bigHammerInterface = GetComponentInChildren<BigHammerInterface>();
     }
@@ -40,6 +35,16 @@ public class HeadsUpDisplay : MonoBehaviour
 
     private void Update()
     {
-        _labelForTesting.text = _gmForTesting.CurrentState.ToString();
+        // _labelForTesting.text = _gmForTesting.CurrentState.ToString();
+    }
+
+    public override void OnHide()
+    {
+        
+    }
+
+    public override void OnShow()
+    {
+        
     }
 }

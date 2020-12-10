@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c8fa561e935457ebb9e7d2d36071b30, type: 3}
   m_Name: Warp
   m_EditorClassIdentifier: 
+  powerupName: Warp
   inventoryIcon: {fileID: 21300000, guid: 472192f2aeacd09438e1f657ba498339, type: 3}

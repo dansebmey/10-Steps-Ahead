@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-public class DelayedProjectile : OrbitingObject
+public class Missile : OrbitingObject
 {
-    private int _stepsTaken;
+    public int StepsTaken { get; private set; }
 
     protected override void Start()
     {
@@ -12,9 +12,9 @@ public class DelayedProjectile : OrbitingObject
 
     public bool MoveForward()
     {
-        _stepsTaken++;
-        distanceFromCenter = 0.5f + _stepsTaken * 0.8f;
-        if (_stepsTaken == 4)
+        StepsTaken++;
+        distanceFromCenter = 0.5f + StepsTaken * 0.8f;
+        if (StepsTaken == 4)
         {
             Gm.AudioManager.Play("BasicAttack", 0.05f);
             Gm.ApplyDamage(1, CurrentPosIndex);

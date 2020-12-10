@@ -105,7 +105,12 @@ public class AudioManager : MonoBehaviour
 
     public Sound FindSound(string soundName)
     {
-        return Array.Find(sounds, sound => sound.name == soundName);
+        Sound foundSound = Array.Find(sounds, sound => sound.name == soundName);
+        if (foundSound == null)
+        {
+            Debug.LogError("Sound ["+soundName+"] was not found");
+        }
+        return foundSound;
     }
 
     public void TogglePause(string soundName, bool doPause)

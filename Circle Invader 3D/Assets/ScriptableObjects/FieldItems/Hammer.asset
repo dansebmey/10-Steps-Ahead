@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d2c387b94774119becf5ea1213ce58e, type: 3}
   m_Name: Hammer
   m_EditorClassIdentifier: 
+  powerupName: Hammer
   inventoryIcon: {fileID: 21300000, guid: 2b5544ddd75c1754eb42e38ed1de8edc, type: 3}
   range: 1
   healValue: 3

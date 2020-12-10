@@ -11,10 +11,11 @@ public class FieldItem : OrbitingObject
     public Color upgradedColour;
 
     private int _remainingDuration;
-    private int RemainingDuration
+
+    public int RemainingDuration
     {
         get => _remainingDuration;
-        set
+        private set
         {
             _remainingDuration = value;
             if (value <= 3)

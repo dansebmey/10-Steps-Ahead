@@ -23,13 +23,5 @@ public class InputManager : GmAwareObject
         {
             _cameraController.ResetZoom();
         }
-        else if (Input.GetKeyUp(KeyCode.O))
-        {
-            Gm.SaveGame();
-        }
-        else if (Input.GetKeyUp(KeyCode.P))
-        {
-            Gm.LoadGame();
-        }
     }
 }

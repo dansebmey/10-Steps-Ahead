@@ -15,7 +15,7 @@ public class Inventory : GmAwareObject
     protected override void Awake()
     {
         base.Awake();
-        _invInterface = FindObjectOfType<InventoryInterface>();
+        _invInterface = FindObjectOfType<InventoryInterface>(true);
     }
 
     private void Start()
@@ -72,5 +72,10 @@ public class Inventory : GmAwareObject
         carriedPowerups.Remove(carriedPowerups[_highlightedItemIndex]);
         _invInterface.UpdateItemSlots();
         return true;
+    }
+
+    public int GetIndexOf(Powerup powerup)
+    {
+        throw new NotImplementedException();
     }
 }
