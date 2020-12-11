@@ -4,7 +4,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MechaTotem : MovableObject, IPlayerCommandListener
+public class MechaTotem : MovableObject, IPlayerCommandListener, IResetOnGameStart
 {
     private const int ACTION_IDLE = 0;
     private const int ACTION_ATTACK = 1;
@@ -29,15 +29,22 @@ public class MechaTotem : MovableObject, IPlayerCommandListener
     protected override void Start()
     {
         Gm.enemy = this;
-        
-        queuedActions = new LinkedList<EnemyAction>();
-        _totemLayers = new LinkedList<TotemLayer>();
 
         actionPrefabs[0].action = Idle;
         actionPrefabs[1].action = BasicAttack;
         actionPrefabs[2].action = SplitAttack;
         actionPrefabs[3].action = DelayedAttack;
         
+        InitActionQueue();
+        
+        MissilesInField = new ConcurrentQueue<Missile>();
+    }
+
+    private void InitActionQueue()
+    {
+        queuedActions = new LinkedList<EnemyAction>();
+        _totemLayers = new LinkedList<TotemLayer>();
+        
         QueueNewAction(ACTION_IDLE);
         QueueNewAction(ACTION_IDLE);
         QueueNewAction(ACTION_IDLE);
@@ -47,13 +54,26 @@ public class MechaTotem : MovableObject, IPlayerCommandListener
         QueueNewAction(ACTION_IDLE);
         QueueNewAction(ACTION_ATTACK);
         QueueNewAction(ACTION_IDLE);
-        QueueNewAction(ACTION_DELAYED_ATTACK);
+        QueueNewAction(ACTION_ATTACK);
         for (var i = 0; i < amtOfVisibleActions - 10; i++)
         {
             QueueNewAction(ACTION_IDLE);
         }
-        
+    }
+
+    public void OnGameReset()
+    {
+        foreach (Missile missile in MissilesInField)
+        {
+            Destroy(missile.gameObject);
+        }
         MissilesInField = new ConcurrentQueue<Missile>();
+
+        foreach (TotemLayer layer in _totemLayers)
+        {
+            Destroy(layer.gameObject);
+        }
+        InitActionQueue();
     }
 
     private void QueueNewAction(int actionIndex)

@@ -7,8 +7,7 @@ public class GameOverState : State
     
     public override void OnEnter()
     {
-        Gm.OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.GAME_OVER);
-        _isEligibleForHighscore = Gm.HighscoreManager.IsEligibleForHighscore(Gm.PlayerScore);
+        Debug.LogError("SHOULD NOT ENTER THIS STATE - REMOVAL PENDING");
     }
 
     public override void OnUpdate()
@@ -17,18 +16,19 @@ public class GameOverState : State
         {
             if (Input.GetKeyUp(KeyCode.R))
             {
-                Gm.SwitchState(typeof(HighscoreState));
+                Gm.SwitchState(typeof(RegistryState));
             }
             else if (Input.GetKeyUp(KeyCode.Escape))
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                Gm.SwitchState(typeof(MenuState));
+                Gm.ToMainMenuPressed();
             }
         }
         else
         {
             if (Input.GetKeyUp(KeyCode.R))
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                Gm.SwitchState(typeof(MenuState));
             }
         }
     }

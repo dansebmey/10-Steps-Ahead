@@ -48,53 +48,11 @@ MonoBehaviour:
   - {fileID: 1229671337826644509, guid: 0cbfb170c7a0ce343a3e85c3bbf4ad39, type: 3}
   - {fileID: 460679705857873582, guid: 6751caf728235104c8b0616825021169, type: 3}
   - {fileID: 62550880154124805, guid: 8d0cdd7b81c4f7d47a624e726ca029e4, type: 3}
-  stepsUntilGuaranteedSpawn: 16
+  minStepsUntilSpawn: 8
+  maxStepsUntilSpawn: 16
   coinsForBigHammer: 4
   bigHammerPrefab: {fileID: 8012687269195291974, guid: cf57807ecf523404c8d2aea3eeadfc81,
     type: 3}
---- !u!1 &990979558
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 990979559}
-  - component: {fileID: 990979560}
-  m_Layer: 0
-  m_Name: InputManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &990979559
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 990979558}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2740902529028869546}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &990979560
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 990979558}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee5836901d56b494591e7b7ddf2c8747, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2740902529028869549
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,7 +86,6 @@ Transform:
   - {fileID: 2740902530117390215}
   - {fileID: 1634043939}
   - {fileID: 693667430}
-  - {fileID: 990979559}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -148,7 +105,6 @@ MonoBehaviour:
   - {fileID: 8559853544901086876, guid: e39d61d1327b9b644b5c73a6c8e134d7, type: 3}
   - {fileID: 1312919286899584523, guid: 9f6cd59cfbe3b6741a68beab52ce181f, type: 3}
   - {fileID: 1602165150439167995, guid: 37a6e7504a6ca7f4c855955b5f3fbc45, type: 3}
-  - {fileID: 2657346195828011424, guid: 9a585a2f340e50b4ca346b0009d8db7d, type: 3}
   - {fileID: 3793364787767798841, guid: c35df8b41f5b99545815e7c89a03c7a2, type: 3}
   - {fileID: 342256846022310197, guid: be1c17fe235b20c4a97cad7031f1bbd6, type: 3}
   player: {fileID: -2975206654629493194, guid: 2973229c82c90ce4aa2c744f08d4999e, type: 3}
@@ -177,7 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5629c9340aa349dca4ce5f704ec805c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAmtOfEntries: 20
+  maxAmtOfEntries: 10
 --- !u!1001 &6390830231864288593
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -515,11 +471,11 @@ PrefabInstance:
         type: 3}
       propertyPath: sounds.Array.data[10].clip
       value: 
-      objectReference: {fileID: 8300000, guid: 4d6de655b9fafc3409bfc9d08a802058, type: 3}
+      objectReference: {fileID: 8300000, guid: 2c0bb2da19ed98e41b3c4a865069777b, type: 3}
     - target: {fileID: 8907736461482179030, guid: 3fdde7b0a921c44409bbc8d475a156fb,
         type: 3}
       propertyPath: sounds.Array.data[10].name
-      value: ButtonHover2
+      value: HammerFix
       objectReference: {fileID: 0}
     - target: {fileID: 8907736461482179030, guid: 3fdde7b0a921c44409bbc8d475a156fb,
         type: 3}
@@ -559,7 +515,7 @@ PrefabInstance:
     - target: {fileID: 8907736461482179030, guid: 3fdde7b0a921c44409bbc8d475a156fb,
         type: 3}
       propertyPath: sounds.Array.data[9].initPitch
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 8907736461482179030, guid: 3fdde7b0a921c44409bbc8d475a156fb,
         type: 3}
@@ -604,7 +560,7 @@ PrefabInstance:
     - target: {fileID: 8907736461482179030, guid: 3fdde7b0a921c44409bbc8d475a156fb,
         type: 3}
       propertyPath: sounds.Array.data[8].initVolume
-      value: 0.15
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 8907736461482179030, guid: 3fdde7b0a921c44409bbc8d475a156fb,
         type: 3}

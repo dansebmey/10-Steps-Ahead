@@ -1,4 +1,6 @@
-﻿public class MainMenuState : State
+﻿using UnityEngine;
+
+public class MenuState : State
 {
     public override void OnEnter()
     {

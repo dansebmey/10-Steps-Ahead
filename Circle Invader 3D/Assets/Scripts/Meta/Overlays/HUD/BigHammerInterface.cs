@@ -18,7 +18,13 @@ public class BigHammerInterface : GmAwareObject
 
     public void UpdateMeter()
     {
-        _targetFillAmount = Gm.FieldItemManager.CoinsCollected / 4f;
+        if (Gm == null)
+        {
+            Gm = FindObjectOfType<GameManager>();
+            // Eww, dirty fix
+        }
+        
+        _targetFillAmount = (float)Gm.FieldItemManager.CoinsCollected / Gm.FieldItemManager.CoinsForBigHammer;
     }
 
     private void Update()

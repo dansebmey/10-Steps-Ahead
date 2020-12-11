@@ -8,6 +8,8 @@ public class Hammer : Powerup
     
     public override void OnConsume()
     {
-        FindObjectOfType<GameManager>().BarrierManager.RepairBarriers(range, healValue);
+        GameManager gm = FindObjectOfType<GameManager>();
+        gm.AudioManager.Play("HammerFix", 0.05f);
+        gm.BarrierManager.RepairBarriers(range, healValue);
     }
 }

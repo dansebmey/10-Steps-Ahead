@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using Debug = UnityEngine.Debug;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,10 +12,11 @@ public class GameManager : MonoBehaviour
     public FieldItemManager FieldItemManager { get; private set; }
 
     private ConcurrentStack<IPlayerCommandListener> _playerCommandListeners;
+    private List<IResetOnGameStart> _onGameStartResetters;
     
     private FiniteStateMachine _fsm;
     private DataManager _dataManager;
-    private CameraController _cameraController;
+    public CameraController CameraController { get; private set; }
     public OverlayManager OverlayManager { get; private set; }
     public HighscoreManager HighscoreManager { get; private set; }
     
@@ -31,8 +35,21 @@ public class GameManager : MonoBehaviour
         OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.HUD);
         SwitchState(typeof(WaitingForPlayerAction));
         
-        // targetPos = new Vector3(0, 11.33f, -5);
-        _cameraController.FocusOn(player.transform, new Vector3(0, 5, -5), new Vector3(25, 0, 0), 2);
+        CameraController.FocusOn(player.transform, new Vector3(0, 5, -5), new Vector3(25, 0, 0));
+
+        if (PlayerScore > 0)
+        {
+            PlayerScore = 0;
+            foreach (IResetOnGameStart resetter in _onGameStartResetters)
+            {
+                resetter.OnGameReset();
+            }
+        }
+    }
+
+    public void ShowHighscores()
+    {
+        OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.HIGHSCORE);
     }
 
     public void SwitchState(Type newStateType)
@@ -71,16 +88,15 @@ public class GameManager : MonoBehaviour
         BarrierManager = GetComponentInChildren<BarrierManager>();
         FieldItemManager = GetComponentInChildren<FieldItemManager>();
         OverlayManager = FindObjectOfType<OverlayManager>();
-        
+        _fsm = new FiniteStateMachine(this, typeof(MenuState), statePrefabs);
         _lowPassFilterManager = FindObjectOfType<CameraController>().GetComponent<LowPassFilterManager>();
         _dataManager = GetComponent<DataManager>();
-        _cameraController = FindObjectOfType<CameraController>();
+        CameraController = FindObjectOfType<CameraController>();
         HighscoreManager = GetComponent<HighscoreManager>();
     }
 
     private void Start()
     {
-        _fsm = new FiniteStateMachine(this, typeof(MainMenuState), statePrefabs);
         damageables = new List<IDamageable>();
 
         _playerCommandListeners = new ConcurrentStack<IPlayerCommandListener>();
@@ -88,20 +104,15 @@ public class GameManager : MonoBehaviour
         _playerCommandListeners.Push(FieldItemManager);
         _playerCommandListeners.Push(_lowPassFilterManager);
         _playerCommandListeners.Push(enemy);
+        
+        _onGameStartResetters = new List<IResetOnGameStart>();
+        _onGameStartResetters.Add(player);
+        _onGameStartResetters.Add(enemy);
+        _onGameStartResetters.Add(BarrierManager);
+        _onGameStartResetters.Add(FieldItemManager);
 
         AudioManager.FadeVolume("Soundtrack", 0, AudioManager.FindSound("Soundtrack").initVolume, 2);
         AudioManager.Play("Soundtrack");
-    }
-
-    public void RegisterPlayerCommandListener(IPlayerCommandListener listener)
-    {
-        _playerCommandListeners.Push(listener);
-    }
-
-    public void DeletePlayerCommandListener(IPlayerCommandListener listener)
-    {
-        _playerCommandListeners.TryPop(out listener);
-        Debug.Log("Removed listener ["+listener+"]");
     }
 
     private void Update()
@@ -162,6 +173,26 @@ public class GameManager : MonoBehaviour
 
     private void EndGame()
     {
-        SwitchState(typeof(GameOverState));
+        OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.GAME_OVER);
+    }
+
+    public void RestartApplication()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void ToMainMenuPressed()
+    {
+        OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.MAIN_MENU);
+    }
+
+    public void RegisterScorePressed()
+    {
+        OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.REGISTRY);
+    }
+
+    public void ShowCreditOverlay()
+    {
+        OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.CREDITS);
     }
 }

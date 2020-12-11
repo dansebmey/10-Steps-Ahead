@@ -7,18 +7,21 @@ using UnityEngine;
 using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 
-public class FieldItemManager : GmAwareObject, IPlayerCommandListener
+public class FieldItemManager : GmAwareObject, IPlayerCommandListener, IResetOnGameStart
 {
     public int itemLifespanInSteps = 10;
     [SerializeField] private List<FieldItem> itemPrefabs;
     
     public ConcurrentQueue<FieldItem> ItemsInField { get; private set; }
 
-    [SerializeField] private int stepsUntilGuaranteedSpawn = 16;
+    [SerializeField] private int minStepsUntilSpawn = 8;
+    [SerializeField] private int maxStepsUntilSpawn = 16;
     public int StepsSinceLastItemSpawn { get; private set; }
 
     [Header("Big Hammer")]
-    [SerializeField][Range(3,10)] private int coinsForBigHammer;
+    [SerializeField][Range(1,10)] private int coinsForBigHammer;
+
+    public int CoinsForBigHammer => coinsForBigHammer;
     [SerializeField] private FieldItem bigHammerPrefab;
     private int _coinsCollected;
 
@@ -28,6 +31,7 @@ public class FieldItemManager : GmAwareObject, IPlayerCommandListener
         set
         {
             _coinsCollected = value;
+            Gm.OverlayManager.Hud.UpdateBigHammerInterface();
             if (_coinsCollected >= coinsForBigHammer)
             {
                 _coinsCollected = 0;
@@ -41,6 +45,17 @@ public class FieldItemManager : GmAwareObject, IPlayerCommandListener
         base.Awake();
 
         ItemsInField = new ConcurrentQueue<FieldItem>();
+    }
+
+    public void OnGameReset()
+    {
+        foreach (FieldItem item in ItemsInField)
+        {
+            Destroy(item.gameObject);
+        }
+        ItemsInField = new ConcurrentQueue<FieldItem>();
+        CoinsCollected = 0;
+        StepsSinceLastItemSpawn = 0;
     }
 
     public void OnPlayerCommandPerformed()
@@ -83,8 +98,12 @@ public class FieldItemManager : GmAwareObject, IPlayerCommandListener
 
     private bool EligibleForPowerupSpawn()
     {
-        float chance = -((1.0f / stepsUntilGuaranteedSpawn) * (stepsUntilGuaranteedSpawn * 0.5f))
-                       + ((1.0f / stepsUntilGuaranteedSpawn) * StepsSinceLastItemSpawn);
+        float healthMissingPercentage = 
+            1 - (1.0f / Gm.BarrierManager.InitBarrierHealth) * Gm.BarrierManager.CurrentBarrierHealth;
+
+        float chance = Mathf.Clamp(1 -((1.0f / minStepsUntilSpawn) * (minStepsUntilSpawn))
+                       + ((1.0f / (maxStepsUntilSpawn - minStepsUntilSpawn)) * (StepsSinceLastItemSpawn - minStepsUntilSpawn) * (1.0f + (healthMissingPercentage * 0.5f))), 0, 1);
+
         float rn = Random.Range(0.0f, 1.0f);
         return rn <= chance;
     }

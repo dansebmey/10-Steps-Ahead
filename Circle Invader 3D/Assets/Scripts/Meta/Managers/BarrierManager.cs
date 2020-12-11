@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class BarrierManager : MonoBehaviour, IPlayerCommandListener
+public class BarrierManager : MonoBehaviour, IPlayerCommandListener, IResetOnGameStart
 {
     [Range(2,32)] public int amountOfBarriers;
     public float barrierDistanceFromCenter = 2.5f;
@@ -20,6 +20,21 @@ public class BarrierManager : MonoBehaviour, IPlayerCommandListener
     [SerializeField] private int initiallyDestroyedBarriers = 0;
 
     public Barrier[] Barriers { get; private set; }
+    public int InitBarrierHealth => amountOfBarriers * initBarrierHealth;
+
+    public int CurrentBarrierHealth
+    {
+        get
+        {
+            int total = 0;
+            foreach (Barrier bar in Barriers)
+            {
+                total += bar.Health;
+            }
+
+            return total;
+        } 
+    }
 
     private GameManager _gm;
 
@@ -31,6 +46,15 @@ public class BarrierManager : MonoBehaviour, IPlayerCommandListener
     protected void Start()
     {
         InitialiseBarriers();
+    }
+
+    public void OnGameReset()
+    {
+        foreach (Barrier bar in Barriers)
+        {
+            bar.RemainingCollapsedTurns = 0;
+            bar.Health = initBarrierHealth;
+        }
     }
 
     private void InitialiseBarriers()
@@ -123,10 +147,38 @@ public class BarrierManager : MonoBehaviour, IPlayerCommandListener
 
     public void RepairAllBarriers(int healValue)
     {
-        foreach (Barrier bar in Barriers)
+        _gm.OverlayManager.Hud.UpdateBigHammerInterface();
+        StartCoroutine(_RepairAllBarriers(healValue));
+        // foreach (Barrier bar in Barriers)
+        // {
+        //     bar.RestoreHealth(healValue);
+        //     bar.RemainingCollapsedTurns = 0;
+        // }
+    }
+
+    private IEnumerator _RepairAllBarriers(int healValue)
+    {
+        int range = 0;
+        while (true)
         {
-            bar.RestoreHealth(healValue);
-            bar.RemainingCollapsedTurns = 0;
+            _gm.AudioManager.PlayPitched("HammerFix", 1 + range * 0.1f, 0.05f);
+            Barrier left = Barriers[(amountOfBarriers + _gm.CurrentPosIndex-range) % amountOfBarriers];
+            Barrier right = Barriers[(amountOfBarriers + _gm.CurrentPosIndex + range) % amountOfBarriers];
+
+            left.RemainingCollapsedTurns = 0;
+            left.RestoreHealth(healValue);
+            if (left != right)
+            {
+                left.RemainingCollapsedTurns = 0;
+                right.RestoreHealth(healValue);
+            }
+            else if (range > 0)
+            {
+                break;
+            }
+
+            range++;
+            yield return new WaitForSeconds(0.075f);
         }
     }
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 public class OverlayManager : GmAwareObject
 {
@@ -6,7 +7,7 @@ public class OverlayManager : GmAwareObject
     
     private Dictionary<OverlayEnum, Overlay> _overlays;
     private Overlay _activeOverlay;
-    public enum OverlayEnum { MAIN_MENU, HUD, GAME_OVER, HIGHSCORE }
+    public enum OverlayEnum { MAIN_MENU, HUD, GAME_OVER, REGISTRY, HIGHSCORE, CREDITS }
     public void SetActiveOverlay(OverlayEnum overlayEnumEnum)
     {
         _activeOverlay?.OnHide();
@@ -32,9 +33,14 @@ public class OverlayManager : GmAwareObject
             {OverlayEnum.MAIN_MENU, GetComponentInChildren<MainMenuOverlay>(true)},
             {OverlayEnum.HUD, Hud = GetComponentInChildren<HudOverlay>(true)},
             {OverlayEnum.GAME_OVER, GetComponentInChildren<GameOverOverlay>(true)},
-            {OverlayEnum.HIGHSCORE, GetComponentInChildren<HighscoreOverlay>(true)}
+            {OverlayEnum.REGISTRY, GetComponentInChildren<RegistryOverlay>(true)},
+            {OverlayEnum.HIGHSCORE, GetComponentInChildren<HighscoreOverlay>(true)},
+            {OverlayEnum.CREDITS, GetComponentInChildren<CreditsOverlay>(true)}
         };
-        
+    }
+
+    private void Start()
+    {
         foreach (Overlay overlay in _overlays.Values)
         {
             overlay.gameObject.SetActive(false);

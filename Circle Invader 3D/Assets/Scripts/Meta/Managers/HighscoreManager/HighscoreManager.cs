@@ -9,7 +9,7 @@ public class HighscoreManager : GmAwareObject
     private const string FILENAME = "highscores.tsa";
 
     private HighscoreData _highscoreData;
-    [SerializeField] private int maxAmtOfEntries;
+    public int maxAmtOfEntries;
 
     private void Start()
     {
@@ -26,9 +26,14 @@ public class HighscoreManager : GmAwareObject
         formatter.Serialize(stream, highscoreData);
         stream.Close();
     }
-    
-    private HighscoreData Load()
+
+    public HighscoreData Load()
     {
+        if (_highscoreData != null)
+        {
+            return _highscoreData;
+        }
+        
         string path = Application.persistentDataPath + "/" + FILENAME;
         if (File.Exists(path))
         {
@@ -40,7 +45,7 @@ public class HighscoreManager : GmAwareObject
 
             return highscoreData;
         }
-        
+    
         Debug.LogWarning("Highscore file not found in [" + path + "]");
         return null;
     }
@@ -73,5 +78,10 @@ public class HighscoreManager : GmAwareObject
             }
             return b.score < a.score ? 1 : 0;
         }
-    } 
+    }
+
+    public bool HighscoresExist()
+    {
+        return _highscoreData != null;
+    }
 }

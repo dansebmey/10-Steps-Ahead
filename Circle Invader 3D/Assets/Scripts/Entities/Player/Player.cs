@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : OrbitingObject
+public class Player : OrbitingObject, IResetOnGameStart
 {
     private float _distanceFromCenter = 4;
 
@@ -45,5 +45,10 @@ public class Player : OrbitingObject
     public bool AddToInventory(Powerup powerup)
     {
         return Inventory.AddPowerup(powerup);
+    }
+
+    public void OnGameReset()
+    {
+        Inventory.Flush();
     }
 }

@@ -33,8 +33,9 @@
                 <e p="GameOverState.cs" t="Include" />
                 <e p="HighscoreState.cs" t="Include" />
                 <e p="InvokeEnemyAction.cs" t="Include" />
-                <e p="MainMenuState.cs" t="Include" />
+                <e p="MenuState.cs" t="Include" />
                 <e p="PlayerMoving.cs" t="Include" />
+                <e p="RegistryState.cs" t="Include" />
                 <e p="WaitingForPlayerAction.cs" t="Include" />
               </e>
             </e>
@@ -42,6 +43,7 @@
             <e p="Interfaces" t="Include">
               <e p="IDamageable.cs" t="Include" />
               <e p="IPlayerCommandListener.cs" t="Include" />
+              <e p="IResetOnGameStart.cs" t="Include" />
             </e>
             <e p="Managers" t="Include">
               <e p="AudioManager" t="Include">
@@ -64,11 +66,12 @@
               <e p="GameManager.cs" t="Include" />
               <e p="HighScoreManager" t="Include">
                 <e p="HighscoreData.cs" t="Include" />
+                <e p="HighscoreEntryController.cs" t="Include" />
                 <e p="HighscoreManager.cs" t="Include" />
               </e>
-              <e p="InputManager.cs" t="Include" />
             </e>
             <e p="Overlays" t="Include">
+              <e p="CreditsOverlay.cs" t="Include" />
               <e p="GameOverOverlay.cs" t="Include" />
               <e p="HighscoreOverlay.cs" t="Include" />
               <e p="HUD" t="Include">
@@ -77,11 +80,13 @@
                 <e p="InventoryInterface.cs" t="Include" />
               </e>
               <e p="MainMenuOverlay.cs" t="Include" />
+              <e p="MenuOverlay.cs" t="Include" />
               <e p="Overlay.cs" t="Include" />
               <e p="OverlayManager.cs" t="Include" />
+              <e p="RegistryOverlay.cs" t="Include" />
               <e p="UIElements" t="Include">
                 <e p="CustomTextField.cs" t="Include" />
-                <e p="FlashyTextController.cs" t="Include" />
+                <e p="FlashyButtonController.cs" t="Include" />
               </e>
             </e>
           </e>

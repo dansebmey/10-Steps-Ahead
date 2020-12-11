@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class CustomTextField : MonoBehaviour
 {
-    private Text _text, _textShadow;
+    private Text _text, _textShadow, _arrows;
     private int charIndex = 0;
 
     private char[] chars;
@@ -13,6 +13,7 @@ public class CustomTextField : MonoBehaviour
     {
         _text = GetComponentsInChildren<Text>()[0];
         _textShadow = GetComponentsInChildren<Text>()[1];
+        _arrows = GetComponentsInChildren<Text>()[2];
     }
 
     private void Start()
@@ -24,7 +25,7 @@ public class CustomTextField : MonoBehaviour
             'O', 'P', 'Q', 'R', 'S', 'T', 'U',
             'V', 'W', 'X', 'Y', 'Z', '0', '1',
             '2', '3', '4', '5', '6', '7', '8',
-            '9'
+            '9', ' '
         };
         
         _text.text = chars[charIndex].ToString();
@@ -47,5 +48,15 @@ public class CustomTextField : MonoBehaviour
         
         _text.text = chars[charIndex].ToString();
         _textShadow.text = chars[charIndex].ToString();
+    }
+
+    public void ShowArrows(bool doShow)
+    {
+        _arrows.gameObject.SetActive(doShow);
+    }
+
+    public string GetCharacter()
+    {
+        return chars[charIndex].ToString();
     }
 }

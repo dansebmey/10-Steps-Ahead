@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Barrier : OrbitingObject, IDamageable
 {
-    private BarrierManager _bm => Gm.BarrierManager;
+    private BarrierManager Bm => Gm.BarrierManager;
     private Material _material;
     private ParticleSystem _healingParticles;
     private ParticleSystem _damageParticles;
@@ -13,15 +13,18 @@ public class Barrier : OrbitingObject, IDamageable
     private int _health;
     private int _remainingCollapsedTurns;
 
+    // public float offsetCounter;
+    // private float _yOffset;
+
     public int Health
     {
         get => _health;
         set
         {
-            _health = Mathf.Clamp(value, 0, _bm.maxBarrierHealth);
+            _health = Mathf.Clamp(value, 0, Bm.maxBarrierHealth);
             if (_health > 0)
             {
-                _material.color = _bm.healthColours[Health-1];
+                _material.color = Bm.healthColours[Health-1];
             }
             else
             {
@@ -50,7 +53,7 @@ public class Barrier : OrbitingObject, IDamageable
     {
         if (doCollapse)
         {
-            RemainingCollapsedTurns = _bm.collapsedTurnCount;
+            RemainingCollapsedTurns = Bm.collapsedTurnCount;
             targetPos = new Vector3(transform.position.x, -0.8f, transform.position.z);
         }
         else
@@ -75,21 +78,28 @@ public class Barrier : OrbitingObject, IDamageable
     protected override void Start()
     {
         base.Start();
-        Health = _bm.initBarrierHealth;
+        Health = Bm.initBarrierHealth;
     }
 
-    protected override void Update()
-    {
-        base.Update();
-        if (transform.position != targetPos)
-        {
-            transform.position = Vector3.Lerp(transform.position, targetPos, 0.25f);
-        }
-    }
+    // protected override void Update()
+    // {
+    //     base.Update();
+    //     // if (transform.position != targetPos)
+    //     // {
+    //     //     transform.position = Vector3.Lerp(transform.position, targetPos, 0.25f);
+    //     // }
+    //     // offsetCounter += 0.0625f;
+    //     // _yOffset = 0.01f + (0.01f * Mathf.Sin(offsetCounter + ((Mathf.PI * 2 / _bm.amountOfBarriers) * (CurrentPosIndex % 2))));
+    //     // transform.position += new Vector3(0, _yOffset, 0);
+    // }
 
     public void TakeDamage(int amount)
     {
         Health -= amount;
+        transform.position = new Vector3(
+            (distanceFromCenter + 0.35f) * Mathf.Cos((Mathf.PI * 2 / Gm.BarrierManager.amountOfBarriers) * CurrentPosIndex),
+                transform.position.y,
+            (distanceFromCenter + 0.35f) * Mathf.Sin((Mathf.PI * 2 / Gm.BarrierManager.amountOfBarriers) * CurrentPosIndex));
         _damageParticles.Play();
     }
 

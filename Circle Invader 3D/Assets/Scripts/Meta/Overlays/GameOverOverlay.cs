@@ -4,20 +4,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameOverOverlay : Overlay
+public class GameOverOverlay : MenuOverlay
 {
-    private Text _gameOverLabel, _scoreLabel, _newRecordLabel, _pressRToLabel;
+    private Text _scoreLabel, _newRecordLabel, _pressRToLabel;
+    private Button _submitScoreButton, _toMainMenuButton;
 
     protected override void Awake()
     {
         base.Awake();
         
-        _gameOverLabel = GetComponentsInChildren<Text>()[1];
         _scoreLabel = GetComponentsInChildren<Text>()[2];
-        _pressRToLabel = GetComponentsInChildren<Text>()[3];
-        _newRecordLabel = GetComponentsInChildren<Text>()[4];
         
-        _newRecordLabel.gameObject.SetActive(false);
+        _submitScoreButton = GetComponentsInChildren<Button>()[0];
+        _toMainMenuButton = GetComponentsInChildren<Button>()[1];
     }
     
     public override void OnHide()
@@ -27,17 +26,29 @@ public class GameOverOverlay : Overlay
 
     public override void OnShow()
     {
+        base.OnShow();
+        
         _scoreLabel.text = "You scored " + Gm.PlayerScore + " points!";
 
         if (Gm.HighscoreManager.IsEligibleForHighscore(Gm.PlayerScore))
         {
-            _newRecordLabel.gameObject.SetActive(true);
-            _pressRToLabel.text = "Press R to register your score,\nor ESC to return to the main menu";
-            _pressRToLabel.text = "Current state = " + Gm.CurrentState;
+            _scoreLabel.text += "\nNew highscore!";
+            
+            _submitScoreButton.gameObject.SetActive(true);
+            _submitScoreButton.animator.Play("button-draw-attention");
+            
+            _toMainMenuButton.interactable = false;
+            StartCoroutine(MakeMainMenuButtonInteractable(2));
         }
         else
-        {
-            _pressRToLabel.text = "Press R to return to the main menu";
+        {   
+            _submitScoreButton.gameObject.SetActive(false);
         }
+    }
+
+    private IEnumerator MakeMainMenuButtonInteractable(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        _toMainMenuButton.interactable = true;
     }
 }

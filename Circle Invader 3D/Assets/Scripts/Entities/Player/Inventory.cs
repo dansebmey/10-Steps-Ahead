@@ -74,8 +74,8 @@ public class Inventory : GmAwareObject
         return true;
     }
 
-    public int GetIndexOf(Powerup powerup)
+    public void Flush()
     {
-        throw new NotImplementedException();
+        carriedPowerups = new List<Powerup>();
     }
 }
