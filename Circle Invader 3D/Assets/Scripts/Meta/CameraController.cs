@@ -13,12 +13,15 @@ public class CameraController : GmAwareObject
     [SerializeField] private Vector3 defaultRotEulers = new Vector3(90, 0, 0);
     
     public AudioLowPassFilter LowPassFilter { get; private set; }
+    public Camera Camera { get; private set; }
 
     private float _transitionSpeed = 0.05f;
 
     protected override void Awake()
     {
         base.Awake();
+        
+        Camera = GetComponent<Camera>();
         LowPassFilter = GetComponent<AudioLowPassFilter>();
     }
 

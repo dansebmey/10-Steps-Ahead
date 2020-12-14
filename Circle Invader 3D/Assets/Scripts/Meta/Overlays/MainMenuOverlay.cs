@@ -23,6 +23,5 @@ public class MainMenuOverlay : MenuOverlay
     {
         base.OnShow();
         Gm.CameraController.FocusOn(Gm.CameraController.DefaultFocalPoint, new Vector3(0, 1, -10), new Vector3(-15, 0, 0));
-        _highscoresButton.interactable = Gm.HighscoreManager.HighscoresExist();
     }
 }

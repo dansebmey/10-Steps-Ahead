@@ -11,7 +11,7 @@ public class RegistryState : State
 
     public override void OnEnter()
     {
-        _registryOverlay = Gm.OverlayManager.GetOverlay(OverlayManager.OverlayEnum.REGISTRY) as RegistryOverlay;
+        _registryOverlay = Gm.OverlayManager.GetOverlay(OverlayManager.OverlayEnum.Registry) as RegistryOverlay;
 
         _actionMapping = new Dictionary<KeyCode, Action>
         {

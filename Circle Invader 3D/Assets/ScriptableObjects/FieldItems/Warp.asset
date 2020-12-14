@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Warp
   m_EditorClassIdentifier: 
   powerupName: Warp
-  inventoryIcon: {fileID: 21300000, guid: 472192f2aeacd09438e1f657ba498339, type: 3}
+  inventoryIcon: {fileID: 21300000, guid: bbe4f73229db7b244a3afa07eb9311b2, type: 3}

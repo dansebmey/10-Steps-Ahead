@@ -9,6 +9,7 @@
         <e p="Scripts" t="Include">
           <e p="Entities" t="Include">
             <e p="Barrier.cs" t="Include" />
+            <e p="BigHammerFieldItem.cs" t="Include" />
             <e p="Enemy" t="Include">
               <e p="EnemyAction.cs" t="Include" />
               <e p="MechaTotem.cs" t="Include" />
@@ -78,6 +79,10 @@
                 <e p="BigHammerInterface.cs" t="Include" />
                 <e p="HudOverlay.cs" t="Include" />
                 <e p="InventoryInterface.cs" t="Include" />
+              </e>
+              <e p="InstructionOverlay" t="Include">
+                <e p="Instruction.cs" t="Include" />
+                <e p="PermaOverlay.cs" t="Include" />
               </e>
               <e p="MainMenuOverlay.cs" t="Include" />
               <e p="MenuOverlay.cs" t="Include" />

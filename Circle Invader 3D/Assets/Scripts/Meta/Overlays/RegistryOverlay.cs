@@ -67,6 +67,6 @@
         }
         
         Gm.HighscoreManager.RegisterHighscore(result, Gm.PlayerScore);
-        Gm.OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.HIGHSCORE);
+        Gm.OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.Highscore);
     }
 }

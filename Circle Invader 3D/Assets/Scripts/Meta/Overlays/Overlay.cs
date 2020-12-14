@@ -2,6 +2,13 @@
 
 public abstract class Overlay : GmAwareObject
 {
-    public abstract void OnHide();
-    public abstract void OnShow();
+    public virtual void OnHide()
+    {
+        
+    }
+
+    public virtual void OnShow()
+    {
+        
+    }
 }

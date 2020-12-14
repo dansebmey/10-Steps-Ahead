@@ -8,7 +8,7 @@ public abstract class State : MonoBehaviour
     protected GameManager Gm;
     protected FiniteStateMachine Fsm;
     
-    public void Init(GameManager gm, FiniteStateMachine fsm)
+    public virtual void Init(GameManager gm, FiniteStateMachine fsm)
     {
         Gm = gm;
         Fsm = fsm;

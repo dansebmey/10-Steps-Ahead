@@ -25,10 +25,21 @@ public class Inventory : GmAwareObject
 
     public bool AddPowerup(Powerup powerup)
     {
+        Gm.OverlayManager.PermaOverlay.ShowInstruction(
+            PermaOverlay.InstructionEnum.ItemUsing,
+            KeyCode.Space);
+        
         if (carriedPowerups.Count < maxCapacity)
         {
             carriedPowerups.Add(powerup);
             _invInterface.UpdateItemSlots();
+        
+            if (carriedPowerups.Count >= 2 && !Gm.BarrierManager.IsBarrierCollapsed(Gm.CurrentPosIndex) && Gm.OverlayManager.PermaOverlay.IsNoOtherInstructionShown())
+            {
+                Gm.OverlayManager.PermaOverlay.ShowInstruction(
+                    PermaOverlay.InstructionEnum.ItemSwapping,
+                    KeyCode.W, KeyCode.S);
+            }
             return true;
         }
 
@@ -77,5 +88,6 @@ public class Inventory : GmAwareObject
     public void Flush()
     {
         carriedPowerups = new List<Powerup>();
+        _invInterface.UpdateItemSlots();
     }
 }

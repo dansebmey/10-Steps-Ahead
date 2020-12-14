@@ -54,7 +54,7 @@ public class MechaTotem : MovableObject, IPlayerCommandListener, IResetOnGameSta
         QueueNewAction(ACTION_IDLE);
         QueueNewAction(ACTION_ATTACK);
         QueueNewAction(ACTION_IDLE);
-        QueueNewAction(ACTION_ATTACK);
+        QueueNewAction(ACTION_SPLIT_ATTACK);
         for (var i = 0; i < amtOfVisibleActions - 10; i++)
         {
             QueueNewAction(ACTION_IDLE);
@@ -196,7 +196,7 @@ public class MechaTotem : MovableObject, IPlayerCommandListener, IResetOnGameSta
         return result;
     }
 
-    public void OnPlayerCommandPerformed()
+    public void OnPlayerCommandPerformed(KeyCode keyCode)
     {
         foreach (Missile proj in MissilesInField)
         {

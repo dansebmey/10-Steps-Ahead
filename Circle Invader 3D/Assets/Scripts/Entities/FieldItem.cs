@@ -46,7 +46,7 @@ public class FieldItem : OrbitingObject
         // TODO: Replace this with an Animator
     }
 
-    public void OnPickup()
+    public virtual void OnPickup()
     {
         if (!(item is Powerup powerup) || !Gm.player.AddToInventory(powerup))
         {
@@ -55,10 +55,8 @@ public class FieldItem : OrbitingObject
         Destroy();
     }
 
-    private void Destroy()
+    protected virtual void Destroy()
     {
-        OnDespawn?.Invoke();
-        
         Gm.FieldItemManager.DeleteItem(this);
         Destroy(gameObject);
     }
@@ -67,6 +65,4 @@ public class FieldItem : OrbitingObject
     {
         RemainingDuration--;
     }
-
-    public UnityEvent OnDespawn;
 }

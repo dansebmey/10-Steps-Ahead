@@ -4879,7 +4879,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7545906396338027187}
-  - component: {fileID: 8012687269195291974}
+  - component: {fileID: 4476671560827790769}
   m_Layer: 0
   m_Name: Powerup_BigHammer
   m_TagString: Untagged
@@ -4904,7 +4904,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8012687269195291974
+--- !u!114 &4476671560827790769
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4913,7 +4913,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7202277592666415113}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67719d154c884f18af8c2f629242dec0, type: 3}
+  m_Script: {fileID: 11500000, guid: 6ed650bbb61e4a4b89b4090b8894e9e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   targetPos: {x: 0, y: 0, z: 0}
@@ -4921,24 +4921,8 @@ MonoBehaviour:
   item: {fileID: 11400000, guid: ad54a8aa47d6caf42b2ff681274fba1b, type: 2}
   scoreReq: 0
   consumeOnPickup: 0
-  colour: {r: 0.63720775, g: 1, b: 0, a: 1}
-  upgradedColour: {r: 1, g: 0.808019, b: 0.3433962, a: 1}
-  OnDespawn:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7220955650458854295, guid: f9d94416008c9b548848b464d9ac3ec0,
-          type: 3}
-        m_TargetAssemblyTypeName: BigHammerInterface, Assembly-CSharp
-        m_MethodName: UpdateMeter
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  colour: {r: 0.63529414, g: 1, b: 0, a: 1}
+  upgradedColour: {r: 1, g: 0.8078432, b: 0.34509805, a: 1}
 --- !u!1001 &7472130910514923936
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public CameraController CameraController { get; private set; }
     public OverlayManager OverlayManager { get; private set; }
     public HighscoreManager HighscoreManager { get; private set; }
+    private PermaOverlay _permaOverlay;
     
     public AudioManager AudioManager => AudioManager.GetInstance();
     private LowPassFilterManager _lowPassFilterManager;
@@ -32,7 +33,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.HUD);
+        OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.Hud);
         SwitchState(typeof(WaitingForPlayerAction));
         
         CameraController.FocusOn(player.transform, new Vector3(0, 5, -5), new Vector3(25, 0, 0));
@@ -45,11 +46,15 @@ public class GameManager : MonoBehaviour
                 resetter.OnGameReset();
             }
         }
+        
+        OverlayManager.PermaOverlay.ShowInstruction(
+            PermaOverlay.InstructionEnum.Movement,
+            KeyCode.A, KeyCode.D);
     }
 
     public void ShowHighscores()
     {
-        OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.HIGHSCORE);
+        OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.Highscore);
     }
 
     public void SwitchState(Type newStateType)
@@ -85,14 +90,18 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        
         BarrierManager = GetComponentInChildren<BarrierManager>();
         FieldItemManager = GetComponentInChildren<FieldItemManager>();
-        OverlayManager = FindObjectOfType<OverlayManager>();
-        _fsm = new FiniteStateMachine(this, typeof(MenuState), statePrefabs);
-        _lowPassFilterManager = FindObjectOfType<CameraController>().GetComponent<LowPassFilterManager>();
         _dataManager = GetComponent<DataManager>();
-        CameraController = FindObjectOfType<CameraController>();
         HighscoreManager = GetComponent<HighscoreManager>();
+        
+        CameraController = FindObjectOfType<CameraController>();
+        OverlayManager = CameraController.GetComponentInChildren<OverlayManager>();
+        _lowPassFilterManager = CameraController.GetComponent<LowPassFilterManager>();
+        _permaOverlay = CameraController.GetComponentInChildren<PermaOverlay>();
+        
+        _fsm = new FiniteStateMachine(this, typeof(MenuState), statePrefabs);
     }
 
     private void Start()
@@ -100,10 +109,10 @@ public class GameManager : MonoBehaviour
         damageables = new List<IDamageable>();
 
         _playerCommandListeners = new ConcurrentStack<IPlayerCommandListener>();
-        _playerCommandListeners.Push(BarrierManager);
         _playerCommandListeners.Push(FieldItemManager);
         _playerCommandListeners.Push(_lowPassFilterManager);
         _playerCommandListeners.Push(enemy);
+        _playerCommandListeners.Push(_permaOverlay);
         
         _onGameStartResetters = new List<IResetOnGameStart>();
         _onGameStartResetters.Add(player);
@@ -128,10 +137,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void OnPlayerCommandPerformed()
+    public void OnPlayerCommandPerformed(KeyCode keyCode)
     {
-        if(!(CurrentState is GameOverState))
-        {
+        // if(!(CurrentState is GameOverState))
+        // {
             AudioManager.Play("Slide", 0.1f);
             
             PlayerScore++;
@@ -139,11 +148,11 @@ public class GameManager : MonoBehaviour
 
             foreach (IPlayerCommandListener pcl in _playerCommandListeners)
             {
-                pcl.OnPlayerCommandPerformed();
+                pcl.OnPlayerCommandPerformed(keyCode);
             }
 
             SwitchState(typeof(InvokeEnemyAction));
-        }
+        // }
     }
 
     public void ApplyDamage(int damageDealt, int rawPosIndex = -99)
@@ -173,7 +182,7 @@ public class GameManager : MonoBehaviour
 
     private void EndGame()
     {
-        OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.GAME_OVER);
+        OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.GameOver);
     }
 
     public void RestartApplication()
@@ -183,16 +192,16 @@ public class GameManager : MonoBehaviour
 
     public void ToMainMenuPressed()
     {
-        OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.MAIN_MENU);
+        OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.MainMenu);
     }
 
     public void RegisterScorePressed()
     {
-        OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.REGISTRY);
+        OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.Registry);
     }
 
     public void ShowCreditOverlay()
     {
-        OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.CREDITS);
+        OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.Credits);
     }
 }

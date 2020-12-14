@@ -50,8 +50,8 @@ MonoBehaviour:
   - {fileID: 62550880154124805, guid: 8d0cdd7b81c4f7d47a624e726ca029e4, type: 3}
   minStepsUntilSpawn: 8
   maxStepsUntilSpawn: 16
-  coinsForBigHammer: 4
-  bigHammerPrefab: {fileID: 8012687269195291974, guid: cf57807ecf523404c8d2aea3eeadfc81,
+  coinsForBigHammer: 3
+  bigHammerPrefab: {fileID: 4476671560827790769, guid: cf57807ecf523404c8d2aea3eeadfc81,
     type: 3}
 --- !u!1 &2740902529028869549
 GameObject:

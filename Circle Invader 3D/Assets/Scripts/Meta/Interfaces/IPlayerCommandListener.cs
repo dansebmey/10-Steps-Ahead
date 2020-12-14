@@ -1,4 +1,6 @@
-﻿public interface IPlayerCommandListener
+﻿using UnityEngine;
+
+public interface IPlayerCommandListener
 {
-    void OnPlayerCommandPerformed();
+    void OnPlayerCommandPerformed(KeyCode keyCode);
 }

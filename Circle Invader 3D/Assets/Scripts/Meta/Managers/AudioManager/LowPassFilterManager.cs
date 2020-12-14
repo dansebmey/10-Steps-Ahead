@@ -19,7 +19,7 @@ public class LowPassFilterManager : GmAwareObject, IPlayerCommandListener
         _totalBarrierHealth = Gm.BarrierManager.amountOfBarriers * Gm.BarrierManager.initBarrierHealth;
     }
 
-    public void OnPlayerCommandPerformed()
+    public void OnPlayerCommandPerformed(KeyCode keyCode)
     {
         int newFreq = (maxFreq / _totalBarrierHealth) * Gm.BarrierManager.DetermineRemainingBarrierHealth();
         _lowPassFilter.cutoffFrequency = Mathf.Clamp(newFreq, minFreq, maxFreq);

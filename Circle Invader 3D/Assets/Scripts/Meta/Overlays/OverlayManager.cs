@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class OverlayManager : GmAwareObject
 {
     public HudOverlay Hud { get; private set; }
+    public PermaOverlay PermaOverlay { get; private set; }
     
     private Dictionary<OverlayEnum, Overlay> _overlays;
     private Overlay _activeOverlay;
-    public enum OverlayEnum { MAIN_MENU, HUD, GAME_OVER, REGISTRY, HIGHSCORE, CREDITS }
+    public enum OverlayEnum { MainMenu, Hud, GameOver, Registry, Highscore, Credits, Permanent }
     public void SetActiveOverlay(OverlayEnum overlayEnumEnum)
     {
         _activeOverlay?.OnHide();
@@ -30,12 +32,13 @@ public class OverlayManager : GmAwareObject
 
         _overlays = new Dictionary<OverlayEnum, Overlay>
         {
-            {OverlayEnum.MAIN_MENU, GetComponentInChildren<MainMenuOverlay>(true)},
-            {OverlayEnum.HUD, Hud = GetComponentInChildren<HudOverlay>(true)},
-            {OverlayEnum.GAME_OVER, GetComponentInChildren<GameOverOverlay>(true)},
-            {OverlayEnum.REGISTRY, GetComponentInChildren<RegistryOverlay>(true)},
-            {OverlayEnum.HIGHSCORE, GetComponentInChildren<HighscoreOverlay>(true)},
-            {OverlayEnum.CREDITS, GetComponentInChildren<CreditsOverlay>(true)}
+            {OverlayEnum.MainMenu, GetComponentInChildren<MainMenuOverlay>(true)},
+            {OverlayEnum.Hud, Hud = GetComponentInChildren<HudOverlay>(true)},
+            {OverlayEnum.GameOver, GetComponentInChildren<GameOverOverlay>(true)},
+            {OverlayEnum.Registry, GetComponentInChildren<RegistryOverlay>(true)},
+            {OverlayEnum.Highscore, GetComponentInChildren<HighscoreOverlay>(true)},
+            {OverlayEnum.Credits, GetComponentInChildren<CreditsOverlay>(true)},
+            {OverlayEnum.Permanent, PermaOverlay = GetComponentInChildren<PermaOverlay>(true)}
         };
     }
 
@@ -45,7 +48,8 @@ public class OverlayManager : GmAwareObject
         {
             overlay.gameObject.SetActive(false);
         }
-        _overlays[OverlayEnum.MAIN_MENU].gameObject.SetActive(true);
-        SetActiveOverlay(OverlayEnum.MAIN_MENU);
+        _overlays[OverlayEnum.Permanent].gameObject.SetActive(true);
+        _overlays[OverlayEnum.MainMenu].gameObject.SetActive(true);
+        SetActiveOverlay(OverlayEnum.MainMenu);
     }
 }

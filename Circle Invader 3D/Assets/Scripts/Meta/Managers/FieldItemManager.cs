@@ -23,8 +23,8 @@ public class FieldItemManager : GmAwareObject, IPlayerCommandListener, IResetOnG
 
     public int CoinsForBigHammer => coinsForBigHammer;
     [SerializeField] private FieldItem bigHammerPrefab;
+    
     private int _coinsCollected;
-
     public int CoinsCollected
     {
         get => _coinsCollected;
@@ -58,7 +58,7 @@ public class FieldItemManager : GmAwareObject, IPlayerCommandListener, IResetOnG
         StepsSinceLastItemSpawn = 0;
     }
 
-    public void OnPlayerCommandPerformed()
+    public void OnPlayerCommandPerformed(KeyCode keyCode)
     {
         StepsSinceLastItemSpawn++;
         DeterminePowerupSpawn();

@@ -1,7 +1,75 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class WaitingForPlayerAction : State
 {
+    private Dictionary<KeyCode, Func<bool>> _inputMap;
+
+    public override void Init(GameManager gm, FiniteStateMachine fsm)
+    {
+        base.Init(gm, fsm);
+        _inputMap = new Dictionary<KeyCode, Func<bool>>
+        {
+            {KeyCode.A, MovePlayerLeft},
+            {KeyCode.D, MovePlayerRight},
+            {KeyCode.Space, ConsumeSelectedItem},
+            {KeyCode.W, SelectNextItem},
+            {KeyCode.S, SelectPreviousItem},
+        };
+    }
+
+    private void Start()
+    {
+        // _inputMap = new Dictionary<KeyCode, Func<bool>>
+        // {
+        //     {KeyCode.A, MovePlayerLeft},
+        //     {KeyCode.D, MovePlayerRight},
+        //     {KeyCode.Space, ConsumeSelectedItem},
+        //     {KeyCode.W, SelectNextItem},
+        //     {KeyCode.S, SelectPreviousItem},
+        // };
+    }
+
+    private bool MovePlayerLeft()
+    {
+        Gm.CurrentPosIndex--;
+        return true;
+    }
+
+    private bool MovePlayerRight()
+    {
+        Gm.CurrentPosIndex++;
+        return true;
+    }
+
+    private bool ConsumeSelectedItem()
+    {
+        return Gm.player.Inventory.ConsumeSelectedItem();
+    }
+
+    private bool SelectNextItem()
+    {
+        if (Gm.player.Inventory.carriedPowerups.Count >= 2)
+        {
+            Gm.player.Inventory.SelectNextPowerup();
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool SelectPreviousItem()
+    {
+        if (Gm.player.Inventory.carriedPowerups.Count >= 2)
+        {
+            Gm.player.Inventory.SelectPreviousPowerup();
+            return true;
+        }
+        
+        return false;
+    }
+
     public override void OnEnter()
     {
         
@@ -9,34 +77,14 @@ public class WaitingForPlayerAction : State
 
     public override void OnUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        foreach (KeyValuePair<KeyCode, Func<bool>> entry in _inputMap)
         {
-            Gm.CurrentPosIndex--;
-            Gm.OnPlayerCommandPerformed();
-        }
-        else if (Input.GetKeyDown(KeyCode.D))
-        {
-            Gm.CurrentPosIndex++;
-            Gm.OnPlayerCommandPerformed();
-        }
-        else if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (Gm.player.Inventory.ConsumeSelectedItem())
+            if (Input.GetKeyDown(entry.Key))
             {
-                Gm.OnPlayerCommandPerformed();
-            }
-        }
-        else if (Gm.player.Inventory.carriedPowerups.Count >= 2)
-        {
-            if (Input.GetKeyDown(KeyCode.W))
-            {
-                Gm.player.Inventory.SelectNextPowerup();
-                Gm.OnPlayerCommandPerformed();
-            }
-            else if (Input.GetKeyDown(KeyCode.S))
-            {
-                Gm.player.Inventory.SelectPreviousPowerup();
-                Gm.OnPlayerCommandPerformed();
+                if (entry.Value.Invoke())
+                {
+                    Gm.OnPlayerCommandPerformed(entry.Key);
+                }
             }
         }
     }
