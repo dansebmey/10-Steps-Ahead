@@ -146,9 +146,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void ApplyDamage(int damageDealt, int rawPosIndex = -1)
+    public void ApplyDamage(int damageDealt, int rawPosIndex = -99)
     {
-        int posIndex = rawPosIndex == -1 ? CurrentPosIndex : WrapPosIndex(rawPosIndex);
+        int posIndex = rawPosIndex == -99 ? CurrentPosIndex : WrapPosIndex(rawPosIndex);
 
         if (BarrierManager.IsBarrierCollapsed(posIndex) && player.CurrentPosIndex == posIndex)
         {
