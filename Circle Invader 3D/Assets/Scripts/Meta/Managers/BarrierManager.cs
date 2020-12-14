@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class BarrierManager : MonoBehaviour, IPlayerCommandListener, IResetOnGameStart
+public class BarrierManager : MonoBehaviour, IResetOnGameStart
 {
     [Range(2,32)] public int amountOfBarriers;
     public float barrierDistanceFromCenter = 2.5f;
@@ -125,14 +125,6 @@ public class BarrierManager : MonoBehaviour, IPlayerCommandListener, IResetOnGam
         return false;
     }
 
-    public void OnPlayerCommandPerformed()
-    {
-        // foreach (Barrier bar in _barriers)
-        // {
-        //     bar.RemainingCollapsedTurns--;
-        // }
-    }
-
     public void RepairBarriers(int range, int healValue)
     {
         for (int i = _gm.CurrentPosIndex - range; i <= _gm.CurrentPosIndex + range; i++)
@@ -147,13 +139,7 @@ public class BarrierManager : MonoBehaviour, IPlayerCommandListener, IResetOnGam
 
     public void RepairAllBarriers(int healValue)
     {
-        _gm.OverlayManager.Hud.UpdateBigHammerInterface();
         StartCoroutine(_RepairAllBarriers(healValue));
-        // foreach (Barrier bar in Barriers)
-        // {
-        //     bar.RestoreHealth(healValue);
-        //     bar.RemainingCollapsedTurns = 0;
-        // }
     }
 
     private IEnumerator _RepairAllBarriers(int healValue)
@@ -169,7 +155,7 @@ public class BarrierManager : MonoBehaviour, IPlayerCommandListener, IResetOnGam
             left.RestoreHealth(healValue);
             if (left != right)
             {
-                left.RemainingCollapsedTurns = 0;
+                right.RemainingCollapsedTurns = 0;
                 right.RestoreHealth(healValue);
             }
             else if (range > 0)
