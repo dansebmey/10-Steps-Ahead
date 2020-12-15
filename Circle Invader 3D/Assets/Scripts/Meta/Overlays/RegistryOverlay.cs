@@ -1,15 +1,28 @@
-﻿public class RegistryOverlay : Overlay
+﻿using System;
+using System.Collections.Generic;
+
+public class RegistryOverlay : Overlay
 {
     private CustomTextField[] _customTextFields;
     public CustomTextField HighlightedField { get; private set; }
 
     private int _highlightedFieldIndex = 0;
 
+    private Dictionary<string, string> _profanityFilterMap;
+
     protected override void Awake()
     {
         base.Awake();
 
         _customTextFields = GetComponentsInChildren<CustomTextField>();
+    }
+
+    private void Start()
+    {
+        _profanityFilterMap = new Dictionary<string, string>()
+        {
+            {"PENIS","8===D"}
+        };
     }
 
     public override void OnHide()
@@ -64,6 +77,10 @@
         foreach (CustomTextField ctf in _customTextFields)
         {
             result += ctf.GetCharacter();
+        }
+        if (_profanityFilterMap.ContainsKey(result))
+        {
+            result = _profanityFilterMap[result];
         }
         
         Gm.HighscoreManager.RegisterHighscore(result, Gm.PlayerScore);

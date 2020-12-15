@@ -52,11 +52,11 @@ public class Barrier : OrbitingObject, IDamageable
         if (doCollapse)
         {
             RemainingCollapsedTurns = Bm.collapsedTurnCount;
-            targetPos = new Vector3(transform.position.x, -0.8f, transform.position.z);
+            targetPos = new Vector3(targetPos.x, -0.8f, targetPos.z);
         }
         else
         {
-            targetPos = new Vector3(transform.position.x, 0, transform.position.z);
+            targetPos = new Vector3(targetPos.x, 0, targetPos.z);
         }
     }
 
