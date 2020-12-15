@@ -13,9 +13,6 @@ public class Barrier : OrbitingObject, IDamageable
     private int _health;
     private int _remainingCollapsedTurns;
 
-    // public float offsetCounter;
-    // private float _yOffset;
-
     public int Health
     {
         get => _health;
@@ -33,6 +30,7 @@ public class Barrier : OrbitingObject, IDamageable
                     ToggleCollapsedState(true);
                 }
             }
+            Gm.LowPassFilterManager.UpdateLPFilter();
         }
     }
 

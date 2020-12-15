@@ -102,7 +102,7 @@ public class BarrierManager : MonoBehaviour, IResetOnGameStart
 
     public void DamageBarrier(int damageDealt, int posIndex)
     {
-        foreach (var bar in Barriers)
+        foreach (Barrier bar in Barriers)
         {
             if (bar.CurrentPosIndex % amountOfBarriers == posIndex)
             {
@@ -113,7 +113,7 @@ public class BarrierManager : MonoBehaviour, IResetOnGameStart
 
     public bool IsBarrierCollapsed(int posIndex)
     {
-        foreach (var bar in Barriers)
+        foreach (Barrier bar in Barriers)
         {
             if (bar.CurrentPosIndex % amountOfBarriers == posIndex)
             {

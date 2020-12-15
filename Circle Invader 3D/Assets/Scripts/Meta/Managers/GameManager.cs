@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     private PermaOverlay _permaOverlay;
     
     public AudioManager AudioManager => AudioManager.GetInstance();
-    private LowPassFilterManager _lowPassFilterManager;
+    public LowPassFilterManager LowPassFilterManager { get; private set; }
 
     [SerializeField] private State[] statePrefabs;
 
@@ -98,7 +98,7 @@ public class GameManager : MonoBehaviour
         
         CameraController = FindObjectOfType<CameraController>();
         OverlayManager = CameraController.GetComponentInChildren<OverlayManager>();
-        _lowPassFilterManager = CameraController.GetComponent<LowPassFilterManager>();
+        LowPassFilterManager = CameraController.GetComponent<LowPassFilterManager>();
         _permaOverlay = CameraController.GetComponentInChildren<PermaOverlay>();
         
         _fsm = new FiniteStateMachine(this, typeof(MenuState), statePrefabs);
@@ -110,7 +110,6 @@ public class GameManager : MonoBehaviour
 
         _playerCommandListeners = new ConcurrentStack<IPlayerCommandListener>();
         _playerCommandListeners.Push(FieldItemManager);
-        _playerCommandListeners.Push(_lowPassFilterManager);
         _playerCommandListeners.Push(enemy);
         _playerCommandListeners.Push(_permaOverlay);
         
@@ -139,20 +138,17 @@ public class GameManager : MonoBehaviour
 
     public void OnPlayerCommandPerformed(KeyCode keyCode)
     {
-        // if(!(CurrentState is GameOverState))
-        // {
-            AudioManager.Play("Slide", 0.1f);
-            
-            PlayerScore++;
-            FieldItemManager.HandlePowerupCheck();
+        AudioManager.Play("Slide", 0.1f);
+        
+        PlayerScore++;
+        FieldItemManager.HandlePowerupCheck();
 
-            foreach (IPlayerCommandListener pcl in _playerCommandListeners)
-            {
-                pcl.OnPlayerCommandPerformed(keyCode);
-            }
+        foreach (IPlayerCommandListener pcl in _playerCommandListeners)
+        {
+            pcl.OnPlayerCommandPerformed(keyCode);
+        }
 
-            SwitchState(typeof(InvokeEnemyAction));
-        // }
+        SwitchState(typeof(InvokeEnemyAction));
     }
 
     public void ApplyDamage(int damageDealt, int rawPosIndex = -99)

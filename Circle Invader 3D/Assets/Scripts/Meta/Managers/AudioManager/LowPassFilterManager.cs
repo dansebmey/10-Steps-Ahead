@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class LowPassFilterManager : GmAwareObject, IPlayerCommandListener
+public class LowPassFilterManager : GmAwareObject
 {
     private AudioLowPassFilter _lowPassFilter;
     private int _totalBarrierHealth;
@@ -19,7 +19,7 @@ public class LowPassFilterManager : GmAwareObject, IPlayerCommandListener
         _totalBarrierHealth = Gm.BarrierManager.amountOfBarriers * Gm.BarrierManager.initBarrierHealth;
     }
 
-    public void OnPlayerCommandPerformed(KeyCode keyCode)
+    public void UpdateLPFilter()
     {
         int newFreq = (maxFreq / _totalBarrierHealth) * Gm.BarrierManager.DetermineRemainingBarrierHealth();
         _lowPassFilter.cutoffFrequency = Mathf.Clamp(newFreq, minFreq, maxFreq);
