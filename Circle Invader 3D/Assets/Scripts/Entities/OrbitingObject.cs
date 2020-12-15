@@ -3,7 +3,13 @@
 public abstract class OrbitingObject : MovableObject
 {
     private int _currentPosIndex;
-    public float distanceFromCenter;
+    [HideInInspector] public float distanceFromCenter;
+
+    protected override void Start()
+    {
+        base.Start();
+        distanceFromCenter = Gm.BarrierManager.barrierDistanceFromCenter + 0.75f;
+    }
 
     public int CurrentPosIndex
     {

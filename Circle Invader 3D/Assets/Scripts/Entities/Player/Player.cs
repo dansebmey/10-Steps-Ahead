@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Player : OrbitingObject, IResetOnGameStart
 {
-    private float _distanceFromCenter = 4;
-    
     [HideInInspector] public bool isDefeated;
 
     public Inventory Inventory { get; private set; }
@@ -21,10 +19,12 @@ public class Player : OrbitingObject, IResetOnGameStart
         base.Start();
         Gm.player = this;
         
+        distanceFromCenter = Gm.BarrierManager.barrierDistanceFromCenter + 0.75f;
+        
         targetPos = new Vector3(
-            _distanceFromCenter * Mathf.Cos((Mathf.PI * 2 / Gm.BarrierManager.amountOfBarriers) * Gm.CurrentPosIndex),
+            distanceFromCenter * Mathf.Cos((Mathf.PI * 2 / Gm.BarrierManager.amountOfBarriers) * Gm.CurrentPosIndex),
             0,
-            _distanceFromCenter * Mathf.Sin((Mathf.PI * 2 / Gm.BarrierManager.amountOfBarriers) * Gm.CurrentPosIndex));
+            distanceFromCenter * Mathf.Sin((Mathf.PI * 2 / Gm.BarrierManager.amountOfBarriers) * Gm.CurrentPosIndex));
         transform.position = targetPos;
         transform.LookAt(Vector3.zero);
 
@@ -34,9 +34,9 @@ public class Player : OrbitingObject, IResetOnGameStart
     public void SetTargetPos()
     {
         targetPos = new Vector3(
-            _distanceFromCenter * Mathf.Cos((Mathf.PI * 2 / Gm.BarrierManager.amountOfBarriers) * Gm.CurrentPosIndex),
+            distanceFromCenter * Mathf.Cos((Mathf.PI * 2 / Gm.BarrierManager.amountOfBarriers) * Gm.CurrentPosIndex),
             0,
-            _distanceFromCenter * Mathf.Sin((Mathf.PI * 2 / Gm.BarrierManager.amountOfBarriers) * Gm.CurrentPosIndex));
+            distanceFromCenter * Mathf.Sin((Mathf.PI * 2 / Gm.BarrierManager.amountOfBarriers) * Gm.CurrentPosIndex));
         
         Gm.SwitchState(typeof(InvokeEnemyAction));
     }

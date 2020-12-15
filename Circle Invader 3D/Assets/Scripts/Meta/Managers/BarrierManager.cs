@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 public class BarrierManager : MonoBehaviour, IResetOnGameStart
 {
     [Range(2,32)] public int amountOfBarriers;
-    public float barrierDistanceFromCenter = 2.5f;
+    [HideInInspector] public float barrierDistanceFromCenter;
     
     [Header("Barrier variables")]
     [SerializeField] private Barrier barrierPrefab;
@@ -60,6 +60,8 @@ public class BarrierManager : MonoBehaviour, IResetOnGameStart
     private void InitialiseBarriers()
     {
         Barriers = new Barrier[amountOfBarriers];
+
+        barrierDistanceFromCenter = 2 + 0.0625f * amountOfBarriers;
         for (int i = 0; i < amountOfBarriers; i++)
         {
             Vector3 pos = new Vector3(

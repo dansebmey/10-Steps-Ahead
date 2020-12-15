@@ -13,7 +13,7 @@ public class Missile : OrbitingObject
     public bool MoveForward()
     {
         StepsTaken++;
-        distanceFromCenter = 0.5f + StepsTaken * 0.8f;
+        distanceFromCenter = 0.5f + StepsTaken * (Gm.player.distanceFromCenter * 0.2f);
         if (StepsTaken == 4)
         {
             Gm.AudioManager.Play("BasicAttack", 0.05f);
