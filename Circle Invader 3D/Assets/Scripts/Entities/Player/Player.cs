@@ -5,6 +5,8 @@ using UnityEngine;
 public class Player : OrbitingObject, IResetOnGameStart
 {
     private float _distanceFromCenter = 4;
+    
+    [HideInInspector] public bool isDefeated;
 
     public Inventory Inventory { get; private set; }
 
@@ -25,6 +27,8 @@ public class Player : OrbitingObject, IResetOnGameStart
             _distanceFromCenter * Mathf.Sin((Mathf.PI * 2 / Gm.BarrierManager.amountOfBarriers) * Gm.CurrentPosIndex));
         transform.position = targetPos;
         transform.LookAt(Vector3.zero);
+
+        isDefeated = false;
     }
 
     public void SetTargetPos()
@@ -50,5 +54,6 @@ public class Player : OrbitingObject, IResetOnGameStart
     public void OnGameReset()
     {
         Inventory.Flush();
+        isDefeated = false;
     }
 }

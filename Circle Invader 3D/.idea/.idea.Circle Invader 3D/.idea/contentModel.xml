@@ -89,6 +89,7 @@
               <e p="Overlay.cs" t="Include" />
               <e p="OverlayManager.cs" t="Include" />
               <e p="RegistryOverlay.cs" t="Include" />
+              <e p="SettingsOverlay.cs" t="Include" />
               <e p="UIElements" t="Include">
                 <e p="CustomTextField.cs" t="Include" />
                 <e p="FlashyButtonController.cs" t="Include" />

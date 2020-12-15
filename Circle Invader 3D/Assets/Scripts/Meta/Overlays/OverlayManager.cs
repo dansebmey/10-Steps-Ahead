@@ -9,7 +9,7 @@ public class OverlayManager : GmAwareObject
     
     private Dictionary<OverlayEnum, Overlay> _overlays;
     private Overlay _activeOverlay;
-    public enum OverlayEnum { MainMenu, Hud, GameOver, Registry, Highscore, Credits, Permanent }
+    public enum OverlayEnum { MainMenu, Hud, GameOver, Registry, Highscore, Credits, Permanent, Settings }
     public void SetActiveOverlay(OverlayEnum overlayEnumEnum)
     {
         _activeOverlay?.OnHide();
@@ -34,6 +34,7 @@ public class OverlayManager : GmAwareObject
         {
             {OverlayEnum.MainMenu, GetComponentInChildren<MainMenuOverlay>(true)},
             {OverlayEnum.Hud, Hud = GetComponentInChildren<HudOverlay>(true)},
+            {OverlayEnum.Settings, GetComponentInChildren<SettingsOverlay>(true)},
             {OverlayEnum.GameOver, GetComponentInChildren<GameOverOverlay>(true)},
             {OverlayEnum.Registry, GetComponentInChildren<RegistryOverlay>(true)},
             {OverlayEnum.Highscore, GetComponentInChildren<HighscoreOverlay>(true)},

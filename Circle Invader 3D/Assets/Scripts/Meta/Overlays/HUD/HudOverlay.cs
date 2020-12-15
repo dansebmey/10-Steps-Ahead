@@ -45,6 +45,7 @@ public class HudOverlay : Overlay
 
     public override void OnShow()
     {
-        
+        Gm.CameraController.FocusOn(Gm.player.transform, new Vector3(0, 5, -5), new Vector3(25, 0, 0));
+        Gm.SwitchState(typeof(WaitingForPlayerAction));
     }
 }

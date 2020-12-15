@@ -34,9 +34,6 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.Hud);
-        SwitchState(typeof(WaitingForPlayerAction));
-        
-        CameraController.FocusOn(player.transform, new Vector3(0, 5, -5), new Vector3(25, 0, 0));
 
         if (PlayerScore > 0)
         {
@@ -178,6 +175,7 @@ public class GameManager : MonoBehaviour
 
     private void EndGame()
     {
+        player.isDefeated = true;
         OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.GameOver);
     }
 
@@ -196,13 +194,28 @@ public class GameManager : MonoBehaviour
         OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.Registry);
     }
 
-    public void ShowCreditOverlay()
+    public void ShowCreditsOverlay()
     {
         OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.Credits);
+    }
+
+    public void ShowSettingsOverlay()
+    {
+        OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.Settings);
     }
 
     public void QuitApplication()
     {
         Application.Quit();
+    }
+
+    public void ResumeGame()
+    {
+        OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.Hud);
+    }
+
+    public void ShowControlsOverlay()
+    {
+        
     }
 }

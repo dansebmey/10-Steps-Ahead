@@ -16,6 +16,7 @@ public class WaitingForPlayerAction : State
             {KeyCode.Space, ConsumeSelectedItem},
             {KeyCode.W, SelectNextItem},
             {KeyCode.S, SelectPreviousItem},
+            {KeyCode.Escape, ShowSettingsOverlay}
         };
     }
 
@@ -67,6 +68,12 @@ public class WaitingForPlayerAction : State
             return true;
         }
         
+        return false;
+    }
+
+    public bool ShowSettingsOverlay()
+    {
+        Gm.OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.Settings);
         return false;
     }
 
