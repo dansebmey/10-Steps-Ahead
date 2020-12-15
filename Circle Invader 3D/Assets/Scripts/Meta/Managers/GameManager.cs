@@ -200,4 +200,9 @@ public class GameManager : MonoBehaviour
     {
         OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.Credits);
     }
+
+    public void QuitApplication()
+    {
+        Application.Quit();
+    }
 }
