@@ -12,7 +12,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/CameraController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7A84DC90-1F21-458F-98A1-2E112D4BA2AB/1b/a0483969/JsonUtility.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/Managers/DataManager/EnemyData.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/Managers/AestheticManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/Managers/AestheticsManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/FiniteStateMachine/State.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Powerups/Item.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9577AC7A-62EF-4317-9789-031239BA8798/f5/d607e961/Array.cs" root0="SKIP_HIGHLIGHTING" />
@@ -89,8 +89,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Overlays/CreditsOverlay.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Overlays/HUD/InventoryInterface.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Interfaces/IPlayerCommandListener.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/CameraController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Overlays/PermaOverlay.cs" />
@@ -113,7 +111,6 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Entities/Missile.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Managers/HighscoreManager/HighscoreManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Overlays/Overlay.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Overlays/HighscoreOverlay.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Overlays/HUD/HudOverlay.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Overlays/RegistryOverlay.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Overlays/OverlayManager.cs" />
@@ -131,15 +128,18 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Managers/AudioManager/Sound.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Overlays/SettingsOverlay.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Managers/DataManager/GameData.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Managers/DataManager/SettingsData.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Managers/DataManager/DataManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Managers/AudioManager/AudioManager.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Overlays/UIElements/CustomTextField.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Managers/FontManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Overlays/UIElements/CustomTextObject.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Overlays/UIElements/HeaderText.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Managers/GameManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Managers/AestheticManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Overlays/HighscoreOverlay.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Overlays/UIElements/CustomTextField.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Managers/HighscoreManager/HighscoreEntryController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Managers/AestheticsManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Managers/DataManager/SettingsData.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Managers/GameManager.cs" />
       </list>
     </option>
   </component>
@@ -195,7 +195,7 @@
       <workItem from="1607940147888" duration="5081000" />
       <workItem from="1607994161275" duration="7025000" />
       <workItem from="1608047768285" duration="9933000" />
-      <workItem from="1608111437335" duration="10129000" />
+      <workItem from="1608111437335" duration="11699000" />
     </task>
     <servers />
   </component>

@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     
     public AudioManager AudioManager => AudioManager.GetInstance();
     public LowPassFilterManager LowPassFilterManager { get; private set; }
-    private AestheticManager _aestheticManager;
+    public AestheticsManager AestheticsManager { get; private set; }
 
     [SerializeField] private State[] statePrefabs;
 
@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
         FieldItemManager = GetComponentInChildren<FieldItemManager>();
         _dataManager = GetComponent<DataManager>();
         HighscoreManager = GetComponent<HighscoreManager>();
-        _aestheticManager = GetComponent<AestheticManager>();
+        AestheticsManager = GetComponent<AestheticsManager>();
         
         CameraController = FindObjectOfType<CameraController>();
         OverlayManager = CameraController.GetComponentInChildren<OverlayManager>();
@@ -118,11 +118,11 @@ public class GameManager : MonoBehaviour
         _onGameStartResetters.Add(BarrierManager);
         _onGameStartResetters.Add(FieldItemManager);
         
-        HandleGameLoading();
+        LoadSavedData();
         AudioManager.PlayMusic();
     }
 
-    private void HandleGameLoading()
+    private void LoadSavedData()
     {
         GameData gameData = _dataManager.LoadSavedGame();
         if (gameData != null)
@@ -145,6 +145,8 @@ public class GameManager : MonoBehaviour
             OverlayManager.SettingsOverlay.SetMusicVolumeSliderValue(settingsData.musicVolume);
             AudioManager.SfxVolume = settingsData.sfxVolume;
             OverlayManager.SettingsOverlay.SetSfxVolumeSliderValue(settingsData.sfxVolume);
+            
+            AestheticsManager.IsDyslexicFontShown = settingsData.isDyslexicFontShown;
             
             ((RegistryOverlay) OverlayManager.GetOverlay(OverlayManager.OverlayEnum.Registry)).SetHighscoreName(
                 settingsData.lastEnteredHighscoreName);
@@ -248,11 +250,6 @@ public class GameManager : MonoBehaviour
     public void ShowControlsOverlay()
     {
         
-    }
-
-    public void ToggleFont()
-    {
-        _aestheticManager.ToggleFont();
     }
 
     private void OnApplicationQuit()

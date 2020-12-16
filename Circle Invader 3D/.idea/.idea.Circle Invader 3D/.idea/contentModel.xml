@@ -48,7 +48,7 @@
               <e p="IResetOnGameStart.cs" t="Include" />
             </e>
             <e p="Managers" t="Include">
-              <e p="AestheticManager.cs" t="Include" />
+              <e p="AestheticsManager.cs" t="Include" />
               <e p="AudioManager" t="Include">
                 <e p="AudioManager.cs" t="Include" />
                 <e p="LowPassFilterManager.cs" t="Include" />

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PosMarker
   - HeaderText
+  - FixedFontText
   layers:
   - Default
   - TransparentFX
