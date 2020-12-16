@@ -90,4 +90,17 @@ public class Inventory : GmAwareObject
         carriedPowerups = new List<Powerup>();
         _invInterface.UpdateItemSlots();
     }
+
+    public void LoadFromSaveData(PlayerData playerData)
+    {
+        foreach (string powerupName in playerData.inventory.carriedPowerupNames)
+        {
+            Powerup powerup = Gm.FieldItemManager.FindPowerupByName(powerupName);
+        
+            carriedPowerups.Add(powerup);
+            _invInterface.UpdateItemSlots();
+        }
+
+        HighlightedItemIndex = playerData.inventory.highlightedItemIndex;
+    }
 }

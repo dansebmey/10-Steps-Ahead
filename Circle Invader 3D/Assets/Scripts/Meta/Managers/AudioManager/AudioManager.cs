@@ -1,13 +1,46 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class AudioManager : MonoBehaviour
 {
     static AudioManager _instance;
-    public Sound[] sounds;
+    
+    public Sound music;
+    public Sound[] sfx;
 
-    private float _masterVolume;
+    private float _musicVolume = -1;
+    public float MusicVolume
+    {
+        get => _musicVolume;
+        set 
+        {
+            _musicVolume = value;
+            music.targetVolume = sfx[0].initVolume * _musicVolume;
+        }
+    }
+
+    public void SetMusicVolume(float value)
+    {
+        MusicVolume = value;
+        music.source.volume = music.targetVolume;
+    }
+    
+    private float _sfxVolume = -1;
+    public float SfxVolume
+    {
+        get => _sfxVolume;
+        set 
+        {
+            _sfxVolume = value;
+            foreach (Sound s in sfx)
+            {
+                s.targetVolume = s.initVolume * _sfxVolume;
+                s.source.volume = s.targetVolume;
+            }
+        }
+    }
 
     private void Awake()
     {
@@ -18,10 +51,19 @@ public class AudioManager : MonoBehaviour
         }
 
         _instance = this;
-
-        foreach (Sound s in sounds)
+        
+        music.source = gameObject.AddComponent<AudioSource>();
+        music.targetVolume = MusicVolume >= 0 ? MusicVolume : music.initVolume;
+        music.source.clip = music.clip;
+        music.source.volume = 0;
+        music.source.pitch = music.initPitch;
+        music.source.loop = music.loop;
+        
+        foreach (Sound s in sfx)
         {
             s.source = gameObject.AddComponent<AudioSource>();
+            s.targetVolume = s.initVolume;
+            
             s.source.clip = s.clip;
             s.source.volume = s.initVolume;
             s.source.pitch = s.initPitch;
@@ -29,38 +71,32 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public void PlayMusic()
+    {
+        music.source.Play();
+        FadeMusicVolume(0, music.targetVolume, 2);
+    }
+
     public void Play(string soundName)
     {
         Sound s = FindSound(soundName);
+        s.source.pitch = s.initPitch + UnityEngine.Random.Range(-s.pitchVar, s.pitchVar);
         s.source.Play();
     }
 
     public void Play(string soundName, float pitchVar)
     {
         Sound s = FindSound(soundName);
-        s.source.pitch = s.initPitch + UnityEngine.Random.Range(-pitchVar, pitchVar);
+        s.source.pitch = s.initPitch + UnityEngine.Random.Range(pitchVar, pitchVar);
         s.source.Play();
     }
 
-    public void FadeVolume(string soundName, float targetValue)
+    private void FadeMusicVolume(float startValue, float targetValue, float fadeDuration)
     {
-        Sound s = FindSound(soundName);
-        StartCoroutine(AdjustVolume(s, s.initVolume, targetValue, 1.5f));
+        StartCoroutine(AdjustVolume(startValue, targetValue, fadeDuration));
     }
 
-    public void FadeVolume(string soundName, float startValue, float targetValue)
-    {
-        Sound s = FindSound(soundName);
-        StartCoroutine(AdjustVolume(s, startValue, targetValue, 1.5f));
-    }
-
-    public void FadeVolume(string soundName, float startValue, float targetValue, float fadeDuration)
-    {
-        Sound s = FindSound(soundName);
-        StartCoroutine(AdjustVolume(s, startValue, targetValue, fadeDuration));
-    }
-
-    private IEnumerator AdjustVolume(Sound s, float startValue, float targetValue, float fadeDuration, Action onCompleteAction = null)
+    private IEnumerator AdjustVolume(float startValue, float targetValue, float fadeDuration, Action onCompleteAction = null)
     {
         float delta = targetValue - startValue;
         float volume = startValue;
@@ -68,7 +104,7 @@ public class AudioManager : MonoBehaviour
         while(Mathf.Abs(volume - targetValue) > 0.02f)
         {
             volume += (0.01f / fadeDuration) * delta;
-            s.source.volume = volume;
+            music.source.volume = volume;
             
             yield return new WaitForSeconds(0.01f);
         }
@@ -105,7 +141,7 @@ public class AudioManager : MonoBehaviour
 
     public Sound FindSound(string soundName)
     {
-        Sound foundSound = Array.Find(sounds, sound => sound.name == soundName);
+        Sound foundSound = Array.Find(sfx, sound => sound.name == soundName);
         if (foundSound == null)
         {
             Debug.LogError("Sound ["+soundName+"] was not found");
@@ -116,18 +152,9 @@ public class AudioManager : MonoBehaviour
     public void TogglePause(string soundName, bool doPause)
     {
         Sound s = FindSound(soundName);
-        s.source.volume = _masterVolume * (doPause ? 0.1f : s.initVolume);
+        s.source.volume = _sfxVolume * (doPause ? 0.1f : s.targetVolume);
         // StartCoroutine(doPause
         //     ? AdjustVolume(s, s.source.volume, 0.1f, 0.5f, s.source.Pause)
         //     : AdjustVolume(s, 0.1f, s.initVolume, 0.5f, s.source.UnPause));
-    }
-
-    public void SetMasterVolume(float value)
-    {
-        _masterVolume = value;
-        foreach (Sound s in sounds)
-        {
-            s.source.volume = s.initVolume * _masterVolume;
-        }
     }
 }

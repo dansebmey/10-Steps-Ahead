@@ -61,33 +61,21 @@ public class MechaTotem : MovableObject, IPlayerCommandListener, IResetOnGameSta
         }
     }
 
-    public void OnGameReset()
-    {
-        foreach (Missile missile in MissilesInField)
-        {
-            Destroy(missile.gameObject);
-        }
-        MissilesInField = new ConcurrentQueue<Missile>();
-
-        foreach (TotemLayer layer in _totemLayers)
-        {
-            Destroy(layer.gameObject);
-        }
-        InitActionQueue();
-    }
-
     private void QueueNewAction(int actionIndex)
     {
-        EnemyAction action = actionPrefabs[actionIndex];
-        
+        QueueNewAction(actionPrefabs[actionIndex]);
+    }
+
+    private void QueueNewAction(EnemyAction enemyAction)
+    {
         TotemLayer layer = Instantiate(
-            action.layerPrefab,
+            enemyAction.layerPrefab,
             new Vector3(0, (layerHeight + 0.025f) * (queuedActions.Count + 2), 0),
             transform.rotation);
         layer.transform.parent = transform;
         
         _totemLayers.AddLast(layer);
-        queuedActions.AddLast(action);
+        queuedActions.AddLast(enemyAction);
         MoveTotemLayersDown();
     }
 
@@ -207,6 +195,63 @@ public class MechaTotem : MovableObject, IPlayerCommandListener, IResetOnGameSta
             }
         }
     }
+    
+    public void OnNewGameStart()
+    {
+        foreach (Missile missile in MissilesInField)
+        {
+            Destroy(missile.gameObject);
+        }
+        MissilesInField = new ConcurrentQueue<Missile>();
+
+        foreach (TotemLayer layer in _totemLayers)
+        {
+            Destroy(layer.gameObject);
+        }
+        InitActionQueue();
+    }
+    
+    #region OnGameLoad
+    
+    public void OnGameLoad(GameData gameData)
+    {
+        EnemyData enemyData = gameData.enemyData;
+
+        foreach (TotemLayer layer in _totemLayers)
+        {
+            Destroy(layer.gameObject);
+        }
+        _totemLayers = new LinkedList<TotemLayer>();
+        
+        queuedActions = new LinkedList<EnemyAction>();
+        foreach (string enemyActionName in enemyData.actionQueue)
+        {
+            QueueNewAction(FindEnemyActionByName(enemyActionName));
+        }
+
+        foreach (EnemyData.MissileData missileData in enemyData.missiles)
+        {
+            Missile missile = Instantiate(delayedProjPrefab, transform);
+            missile.CurrentPosIndex = missileData.posIndex;
+            missile.SetStepsTaken(missileData.stepsTaken);
+            MissilesInField.Enqueue(missile);
+        }
+    }
+
+    private EnemyAction FindEnemyActionByName(string enemyActionName)
+    {
+        foreach (EnemyAction actionPrefab in actionPrefabs)
+        {
+            if (actionPrefab.actionName == enemyActionName)
+            {
+                return actionPrefab;
+            }
+        }
+
+        return null;
+    }
+    
+    #endregion
 }
 
 class ActionSorter : IComparer<EnemyAction> 
@@ -219,4 +264,4 @@ class ActionSorter : IComparer<EnemyAction>
         }
         return b.chance > a.chance ? 1 : 0;
     }
-} 
+}

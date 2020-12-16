@@ -11,7 +11,19 @@ public class Barrier : OrbitingObject, IDamageable
     private ParticleSystem _damageParticles;
 
     private int _health;
-    private int _remainingCollapsedTurns;
+
+    private bool _isCollapsed;
+    public bool IsCollapsed
+    {
+        get => _isCollapsed;
+        set
+        {
+            _isCollapsed = value;
+            targetPos = _isCollapsed ?
+                new Vector3(targetPos.x, -0.8f, targetPos.z)
+                : new Vector3(targetPos.x, 0, targetPos.z);
+        }
+    }
 
     public int Health
     {
@@ -25,44 +37,10 @@ public class Barrier : OrbitingObject, IDamageable
             }
             else
             {
-                if (RemainingCollapsedTurns <= 0)
-                {
-                    ToggleCollapsedState(true);
-                }
-            }
-            Gm.LowPassFilterManager.UpdateLPFilter();
-        }
-    }
-
-    public int RemainingCollapsedTurns
-    {
-        get => _remainingCollapsedTurns;
-        set
-        {
-            _remainingCollapsedTurns = value;
-            if (value <= 0)
-            {
-                ToggleCollapsedState(false);
+                _material.color = Bm.healthColours[0];
+                IsCollapsed = true;
             }
         }
-    }
-
-    private void ToggleCollapsedState(bool doCollapse)
-    {
-        if (doCollapse)
-        {
-            RemainingCollapsedTurns = Bm.collapsedTurnCount;
-            targetPos = new Vector3(targetPos.x, -0.8f, targetPos.z);
-        }
-        else
-        {
-            targetPos = new Vector3(targetPos.x, 0, targetPos.z);
-        }
-    }
-
-    public bool IsCollapsed()
-    {
-        return RemainingCollapsedTurns > 0;
     }
 
     protected override void Awake()
@@ -71,17 +49,15 @@ public class Barrier : OrbitingObject, IDamageable
         _material = GetComponentInChildren<MeshRenderer>().material;
         _healingParticles = GetComponentsInChildren<ParticleSystem>()[0];
         _damageParticles = GetComponentsInChildren<ParticleSystem>()[1];
-    }
-
-    protected override void Start()
-    {
-        base.Start();
+        
         Health = Bm.initBarrierHealth;
     }
 
     public void TakeDamage(int amount)
     {
         Health -= amount;
+        Gm.LowPassFilterManager.UpdateLPFilter();
+        
         transform.position = new Vector3(
             (distanceFromCenter + 0.15f) * Mathf.Cos((Mathf.PI * 2 / Gm.BarrierManager.amountOfBarriers) * CurrentPosIndex),
                 transform.position.y,
@@ -92,6 +68,8 @@ public class Barrier : OrbitingObject, IDamageable
     public void RestoreHealth(int amount)
     {
         Health += amount;
+        Gm.LowPassFilterManager.UpdateLPFilter();
+        
         _healingParticles.Play();
     }
 }

@@ -51,9 +51,20 @@ public class Player : OrbitingObject, IResetOnGameStart
         return Inventory.AddPowerup(powerup);
     }
 
-    public void OnGameReset()
+    public void OnNewGameStart()
     {
         Inventory.Flush();
         isDefeated = false;
     }
+    
+    #region OnGameLoad
+
+    public void OnGameLoad(GameData gameData)
+    {
+        PlayerData playerData = gameData.playerData;
+        CurrentPosIndex = playerData.posIndex;
+        Inventory.LoadFromSaveData(playerData);
+    }
+    
+    #endregion
 }

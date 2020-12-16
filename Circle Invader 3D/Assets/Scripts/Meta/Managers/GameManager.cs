@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector] public List<IDamageable> damageables;
 
-    public void StartGame()
+    public void StartNewGame()
     {
         OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.Hud);
 
@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
             PlayerScore = 0;
             foreach (IResetOnGameStart resetter in _onGameStartResetters)
             {
-                resetter.OnGameReset();
+                resetter.OnNewGameStart();
             }
         }
         
@@ -115,9 +115,38 @@ public class GameManager : MonoBehaviour
         _onGameStartResetters.Add(enemy);
         _onGameStartResetters.Add(BarrierManager);
         _onGameStartResetters.Add(FieldItemManager);
+        
+        HandleGameLoading();
+        AudioManager.PlayMusic();
+    }
 
-        AudioManager.FadeVolume("Soundtrack", 0, AudioManager.FindSound("Soundtrack").initVolume, 2);
-        AudioManager.Play("Soundtrack");
+    private void HandleGameLoading()
+    {
+        GameData gameData = _dataManager.LoadSavedGame();
+        if (gameData != null)
+        {
+            PlayerScore = gameData.playerScore;
+            CurrentPosIndex = gameData.playerData.posIndex;
+            
+            foreach (IResetOnGameStart resetter in _onGameStartResetters)
+            {
+                resetter.OnGameLoad(gameData);
+            }
+
+            OverlayManager.MainMenuOverlay.EnableContinueButton();
+        }
+
+        SettingsData settingsData = _dataManager.LoadSettings();
+        if (settingsData != null)
+        {
+            AudioManager.MusicVolume = settingsData.musicVolume;
+            OverlayManager.SettingsOverlay.SetMusicVolumeSliderValue(settingsData.musicVolume);
+            AudioManager.SfxVolume = settingsData.sfxVolume;
+            OverlayManager.SettingsOverlay.SetSfxVolumeSliderValue(settingsData.sfxVolume);
+            
+            ((RegistryOverlay) OverlayManager.GetOverlay(OverlayManager.OverlayEnum.Registry)).SetHighscoreName(
+                settingsData.lastEnteredHighscoreName);
+        }
     }
 
     private void Update()
@@ -217,5 +246,10 @@ public class GameManager : MonoBehaviour
     public void ShowControlsOverlay()
     {
         
+    }
+
+    private void OnApplicationQuit()
+    {
+        _dataManager.Save(this);
     }
 }

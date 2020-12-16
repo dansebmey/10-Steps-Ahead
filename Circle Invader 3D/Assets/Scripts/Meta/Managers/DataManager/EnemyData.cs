@@ -12,7 +12,7 @@ public class EnemyData
         actionQueue = new string[enemy.queuedActions.Count];
         for (int i = 0; i < enemy.queuedActions.Count; i++)
         {
-            actionQueue[i] = enemy.queuedActions.ToArray()[i].name;
+            actionQueue[i] = enemy.queuedActions.ToArray()[i].actionName;
         }
 
         missiles = new MissileData[enemy.MissilesInField.Count];

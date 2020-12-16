@@ -19,11 +19,13 @@ public class BarrierManagerData
     {
         public int posIndex;
         public int health;
+        public bool isCollapsed;
 
         public BarrierData(Barrier barrier)
         {
             posIndex = barrier.CurrentPosIndex;
             health = barrier.Health;
+            isCollapsed = barrier.IsCollapsed;
         }
     }
 }

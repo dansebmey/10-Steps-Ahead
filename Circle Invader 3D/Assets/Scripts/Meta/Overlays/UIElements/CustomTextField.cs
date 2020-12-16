@@ -1,13 +1,14 @@
 ﻿using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class CustomTextField : MonoBehaviour
 {
     private Text _text, _textShadow, _arrows;
-    private int charIndex = 0;
+    private int _charIndex = 0;
 
-    private char[] chars;
+    private char[] _chars;
 
     private void Awake()
     {
@@ -18,7 +19,7 @@ public class CustomTextField : MonoBehaviour
 
     private void Start()
     {
-        chars = new[]
+        _chars = new[]
         {
             'A', 'B', 'C', 'D', 'E', 'F', 'G',
             'H', 'I', 'J', 'K', 'L', 'M', 'N',
@@ -28,26 +29,26 @@ public class CustomTextField : MonoBehaviour
             '9', ' '
         };
         
-        _text.text = chars[charIndex].ToString();
-        _textShadow.text = chars[charIndex].ToString();
+        _text.text = _chars[_charIndex].ToString();
+        _textShadow.text = _chars[_charIndex].ToString();
     }
 
     public void PreviousCharacter()
     {
-        int newIndex = (chars.Length + charIndex - 1) % chars.Length;
-        charIndex = newIndex;
+        int newIndex = (_chars.Length + _charIndex - 1) % _chars.Length;
+        _charIndex = newIndex;
         
-        _text.text = chars[charIndex].ToString();
-        _textShadow.text = chars[charIndex].ToString();
+        _text.text = _chars[_charIndex].ToString();
+        _textShadow.text = _chars[_charIndex].ToString();
     }
 
     public void NextCharacter()
     {
-        int newIndex = (chars.Length + charIndex + 1) % chars.Length;
-        charIndex = newIndex;
+        int newIndex = (_chars.Length + _charIndex + 1) % _chars.Length;
+        _charIndex = newIndex;
         
-        _text.text = chars[charIndex].ToString();
-        _textShadow.text = chars[charIndex].ToString();
+        _text.text = _chars[_charIndex].ToString();
+        _textShadow.text = _chars[_charIndex].ToString();
     }
 
     public void ShowArrows(bool doShow)
@@ -57,6 +58,14 @@ public class CustomTextField : MonoBehaviour
 
     public string GetCharacter()
     {
-        return chars[charIndex].ToString();
+        return _chars[_charIndex].ToString();
+    }
+
+    public void SetCharacter(char c)
+    {
+        _charIndex = Array.IndexOf(_chars, c);
+        
+        _text.text = _chars[_charIndex].ToString();
+        _textShadow.text = _chars[_charIndex].ToString();
     }
 }

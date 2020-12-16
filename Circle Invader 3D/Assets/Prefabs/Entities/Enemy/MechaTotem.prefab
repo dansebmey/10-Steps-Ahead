@@ -46,22 +46,22 @@ MonoBehaviour:
   targetPos: {x: 0, y: 0, z: 0}
   amtOfVisibleActions: 10
   actionPrefabs:
-  - name: Idle
+  - actionName: Idle
     scoreReq: 0
     layerPrefab: {fileID: 519660893281381382, guid: 46bd88b0e37a88f449853bb4c016460a,
       type: 3}
     chance: 100
-  - name: BasicAttack
+  - actionName: BasicAttack
     scoreReq: 0
     layerPrefab: {fileID: -5037835261173758856, guid: de086547df964c9479b5716ede0b9393,
       type: 3}
     chance: 30
-  - name: SplitAttack
+  - actionName: SplitAttack
     scoreReq: 50
     layerPrefab: {fileID: 9385513819884428, guid: f112fbb95465bb64294aae0de9afea0c,
       type: 3}
     chance: 10
-  - name: DelayedAttack
+  - actionName: DelayedAttack
     scoreReq: 100
     layerPrefab: {fileID: 5980321227106648739, guid: ec4357a557fb0244ebfe9303cf581aaf,
       type: 3}

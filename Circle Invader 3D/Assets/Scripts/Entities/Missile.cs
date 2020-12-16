@@ -13,7 +13,7 @@ public class Missile : OrbitingObject
     public bool MoveForward()
     {
         StepsTaken++;
-        distanceFromCenter = 0.5f + StepsTaken * (Gm.player.distanceFromCenter * 0.2f);
+        SetStepsTaken(StepsTaken);
         if (StepsTaken == 4)
         {
             Gm.AudioManager.Play("BasicAttack", 0.05f);
@@ -22,7 +22,6 @@ public class Missile : OrbitingObject
             return false;
         }
         
-        targetPos = DetermineTargetPos();
         return true;
     }
 
@@ -32,5 +31,13 @@ public class Missile : OrbitingObject
             distanceFromCenter * Mathf.Cos((Mathf.PI * 2 / Gm.BarrierManager.amountOfBarriers) * CurrentPosIndex),
             0.5f,
             distanceFromCenter * Mathf.Sin((Mathf.PI * 2 / Gm.BarrierManager.amountOfBarriers) * CurrentPosIndex));
+    }
+
+    public void SetStepsTaken(int stepsTaken)
+    {
+        StepsTaken = stepsTaken;
+        
+        distanceFromCenter = 0.5f + stepsTaken * (Gm.player.distanceFromCenter * 0.2f);
+        targetPos = DetermineTargetPos();
     }
 }

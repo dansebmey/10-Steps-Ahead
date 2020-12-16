@@ -43,6 +43,7 @@
             <e p="GmAwareObject.cs" t="Include" />
             <e p="Interfaces" t="Include">
               <e p="IDamageable.cs" t="Include" />
+              <e p="IOnSaveListener.cs" t="Include" />
               <e p="IPlayerCommandListener.cs" t="Include" />
               <e p="IResetOnGameStart.cs" t="Include" />
             </e>
@@ -61,7 +62,7 @@
                 <e p="GameData.cs" t="Include" />
                 <e p="MiscData.cs" t="Include" />
                 <e p="PlayerDAta.cs" t="Include" />
-                <e p="SaveAndLoadSystem.cs" t="Include" />
+                <e p="SettingsData.cs" t="Include" />
               </e>
               <e p="FieldItemManager.cs" t="Include" />
               <e p="GameManager.cs" t="Include" />

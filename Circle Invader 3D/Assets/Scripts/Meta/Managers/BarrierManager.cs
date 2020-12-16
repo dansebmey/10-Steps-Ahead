@@ -48,11 +48,11 @@ public class BarrierManager : MonoBehaviour, IResetOnGameStart
         InitialiseBarriers();
     }
 
-    public void OnGameReset()
+    public void OnNewGameStart()
     {
         foreach (Barrier bar in Barriers)
         {
-            bar.RemainingCollapsedTurns = 0;
+            bar.IsCollapsed = false;
             bar.Health = initBarrierHealth;
         }
     }
@@ -119,7 +119,7 @@ public class BarrierManager : MonoBehaviour, IResetOnGameStart
         {
             if (bar.CurrentPosIndex % amountOfBarriers == posIndex)
             {
-                return bar.IsCollapsed();
+                return bar.IsCollapsed;
             }
         }
         
@@ -132,7 +132,7 @@ public class BarrierManager : MonoBehaviour, IResetOnGameStart
         for (int i = _gm.CurrentPosIndex - range; i <= _gm.CurrentPosIndex + range; i++)
         {
             Barrier bar = Barriers[(Barriers.Length+i) % Barriers.Length];
-            if (!bar.IsCollapsed())
+            if (!bar.IsCollapsed)
             {
                 bar.RestoreHealth(healValue);
             }
@@ -153,11 +153,11 @@ public class BarrierManager : MonoBehaviour, IResetOnGameStart
             Barrier left = Barriers[(amountOfBarriers + _gm.CurrentPosIndex-range) % amountOfBarriers];
             Barrier right = Barriers[(amountOfBarriers + _gm.CurrentPosIndex + range) % amountOfBarriers];
 
-            left.RemainingCollapsedTurns = 0;
+            left.IsCollapsed = false;
             left.RestoreHealth(healValue);
             if (left != right)
             {
-                right.RemainingCollapsedTurns = 0;
+                right.IsCollapsed = false;
                 right.RestoreHealth(healValue);
             }
             else if (range > 0)
@@ -174,4 +174,24 @@ public class BarrierManager : MonoBehaviour, IResetOnGameStart
     {
         return Barriers.Sum(bar => bar.Health);
     }
+    
+    #region OnGameLoad
+
+    public void OnGameLoad(GameData gameData)
+    {
+        BarrierManagerData bmData = gameData.bmData;
+        foreach (BarrierManagerData.BarrierData barrierData in bmData.barriers)
+        {
+            Barrier bar = Barriers[barrierData.posIndex];
+            bar.Health = barrierData.health;
+            
+            bar.IsCollapsed = barrierData.isCollapsed;
+            if (bar.IsCollapsed)
+            {
+                bar.transform.position = new Vector3(bar.transform.position.x, -0.8f, bar.transform.position.z);
+            }
+        }
+    }
+    
+    #endregion
 }

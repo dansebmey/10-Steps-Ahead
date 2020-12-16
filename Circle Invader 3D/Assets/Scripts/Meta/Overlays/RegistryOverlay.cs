@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class RegistryOverlay : Overlay
 {
@@ -85,5 +86,34 @@ public class RegistryOverlay : Overlay
         
         Gm.HighscoreManager.RegisterHighscore(result, Gm.PlayerScore);
         Gm.OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.Highscore);
+    }
+
+    public string LastEnteredName
+    {
+        get
+        {
+            string result = "";
+            foreach (CustomTextField ctf in _customTextFields)
+            {
+                result += ctf.GetCharacter();
+            }
+
+            return result;
+        }
+    }
+
+    public void SetHighscoreName(string savedName)
+    {
+        if (savedName.Length != _customTextFields.Length)
+        {
+            Debug.LogWarning(
+                "Saved highscore name differs in length from allowed length; default name reset");
+            return;
+        }
+
+        for (int i = 0; i < _customTextFields.Length; i++)
+        {
+            _customTextFields[i].SetCharacter(savedName.ToCharArray()[i]);
+        }
     }
 }

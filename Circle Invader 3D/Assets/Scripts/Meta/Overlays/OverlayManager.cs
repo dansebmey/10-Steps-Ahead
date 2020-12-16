@@ -5,7 +5,9 @@ using UnityEngine;
 public class OverlayManager : GmAwareObject
 {
     public HudOverlay Hud { get; private set; }
+    public SettingsOverlay SettingsOverlay { get; private set; }
     public PermaOverlay PermaOverlay { get; private set; }
+    public MainMenuOverlay MainMenuOverlay { get; private set; }
     
     private Dictionary<OverlayEnum, Overlay> _overlays;
     private Overlay _activeOverlay;
@@ -32,9 +34,9 @@ public class OverlayManager : GmAwareObject
 
         _overlays = new Dictionary<OverlayEnum, Overlay>
         {
-            {OverlayEnum.MainMenu, GetComponentInChildren<MainMenuOverlay>(true)},
+            {OverlayEnum.MainMenu, MainMenuOverlay = GetComponentInChildren<MainMenuOverlay>(true)},
             {OverlayEnum.Hud, Hud = GetComponentInChildren<HudOverlay>(true)},
-            {OverlayEnum.Settings, GetComponentInChildren<SettingsOverlay>(true)},
+            {OverlayEnum.Settings, SettingsOverlay = GetComponentInChildren<SettingsOverlay>(true)},
             {OverlayEnum.GameOver, GetComponentInChildren<GameOverOverlay>(true)},
             {OverlayEnum.Registry, GetComponentInChildren<RegistryOverlay>(true)},
             {OverlayEnum.Highscore, GetComponentInChildren<HighscoreOverlay>(true)},

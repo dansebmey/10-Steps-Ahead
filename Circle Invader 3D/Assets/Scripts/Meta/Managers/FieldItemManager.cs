@@ -47,7 +47,7 @@ public class FieldItemManager : GmAwareObject, IPlayerCommandListener, IResetOnG
         ItemsInField = new ConcurrentQueue<FieldItem>();
     }
 
-    public void OnGameReset()
+    public void OnNewGameStart()
     {
         foreach (FieldItem item in ItemsInField)
         {
@@ -122,7 +122,6 @@ public class FieldItemManager : GmAwareObject, IPlayerCommandListener, IResetOnG
         {
             if (item.CurrentPosIndex % Gm.BarrierManager.amountOfBarriers == Gm.CurrentPosIndex)
             {
-                Gm.AudioManager.Play("Collect", 0.05f);
                 item.OnPickup();
             }
         }
@@ -136,8 +135,59 @@ public class FieldItemManager : GmAwareObject, IPlayerCommandListener, IResetOnG
     public void DeleteItem(FieldItem item)
     {
         ItemsInField.TryDequeue(out item);
-        // TODO: This bit of code (and the fact that I'm using a ConcurrentBag) hinders multiple items from being
-        // TODO: in the game simultaneously
         StepsSinceLastItemSpawn = 0;
+    }
+    
+    #region OnGameLoad
+
+    public void OnGameLoad(GameData gameData)
+    {
+        FieldItemManagerData fimData = gameData.fimData;
+        CoinsCollected = fimData.coinsCollected;
+        foreach (FieldItemManagerData.FieldItemData itemData in fimData.fieldItems)
+        {
+            LoadItemFromSaveData(itemData);
+        }
+    }
+
+    private void LoadItemFromSaveData(FieldItemManagerData.FieldItemData itemData)
+    {
+        FieldItem item = FindItemPrefabByName(itemData.itemName);
+        int posIndex = itemData.posIndex;
+        int remainingDuration = itemData.remainingDuration;
+        
+        FieldItem fieldItem = Instantiate(item, Vector3.zero, Quaternion.identity);
+        fieldItem.CurrentPosIndex = posIndex;
+        fieldItem.transform.position = fieldItem.targetPos;
+        fieldItem.RemainingDuration = remainingDuration;
+    }
+
+    private FieldItem FindItemPrefabByName(string itemName)
+    {
+        foreach (FieldItem itemPrefab in itemPrefabs)
+        {
+            if (itemPrefab.item.GetType().ToString() == itemName)
+            {
+                return itemPrefab;
+            }
+        }
+
+        Debug.LogError("No item found with name ["+itemName+"]");
+        return null;
+    }
+    
+    #endregion
+
+    public Powerup FindPowerupByName(string powerupName)
+    {
+        foreach (FieldItem itemPrefab in itemPrefabs)
+        {
+            if (itemPrefab.item.GetType().ToString() == powerupName)
+            {
+                return itemPrefab.item as Powerup;
+            }
+        }
+
+        return null;
     }
 }

@@ -1,59 +1,87 @@
 ﻿using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
-public class DataManager : GmAwareObject
+public class DataManager : MonoBehaviour
 {
-    private string file = "savedGame.json";
+    private string savedGameFilename = "savedGame.tsa";
+    private string settingsFilename = "settings.tsa";
     
-    public void Save()
+    public void Save(GameManager gm)
     {
-        string json = JsonUtility.ToJson(Gm);
-        WriteToFile(file, json);
-        
-        Debug.Log("Game saved with JSON ["+json+"]");
+        BinaryFormatter formatter = new BinaryFormatter();
+        SaveGame(gm, formatter);
+        SaveSettings(gm, formatter);
     }
 
-    public void Load()
+    private void SaveGame(GameManager gm, BinaryFormatter formatter)
     {
-        string json = ReadFromFile(file);
-        if (json != "")
-        {
-            JsonUtility.FromJsonOverwrite(json, Gm);   
-        }
-        Debug.Log("Game loaded with JSON ["+json+"]");
+        string path = Application.persistentDataPath + "/" + savedGameFilename;
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+        GameData gameData = new GameData(gm);
+        formatter.Serialize(stream, gameData);
+        stream.Close();
     }
 
-    private void WriteToFile(string filename, string json)
+    private void SaveSettings(GameManager gm, BinaryFormatter formatter)
     {
-        string path = GetFilePath(filename);
-        FileStream fileStream = new FileStream(path, FileMode.Create);
+        string path = Application.persistentDataPath + "/" + settingsFilename;
+        FileStream stream = new FileStream(path, FileMode.Create);
 
-        using (StreamWriter writer = new StreamWriter(fileStream))
-        {
-            writer.Write(json);
-        }
-        Debug.Log("Game saved to path ["+path+"]");
+        SettingsData settingsData = new SettingsData(gm);
+        formatter.Serialize(stream, settingsData);
+        stream.Close();
     }
 
-    private string ReadFromFile(string filename)
+    public GameData LoadSavedGame()
     {
-        string path = GetFilePath(filename);
+        string path = Application.persistentDataPath + "/" + savedGameFilename;
         if (File.Exists(path))
         {
-            using (StreamReader streamReader = new StreamReader(path))
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+            if (stream.Length == 0)
             {
-                return streamReader.ReadToEnd();
+                Debug.LogWarning("Stream was empty; loading saved game failed");
+                return null;
             }
+
+            GameData gameData = formatter.Deserialize(stream) as GameData;
+            stream.Close();
+
+            if (gameData != null && gameData.isPlayerDefeated)
+            {
+                return null;
+            }
+            
+            return gameData;
         }
-        else
-        {
-            Debug.LogWarning("File [" + path + "] not found!");
-            return "";
-        }
+        
+        Debug.LogWarning("Save file not found in [" + path + "]");
+        return null;
     }
 
-    private string GetFilePath(string filename)
+    public SettingsData LoadSettings()
     {
-        return Application.persistentDataPath + "/" + filename;
+        string path = Application.persistentDataPath + "/" + settingsFilename;
+        if (File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+            if (stream.Length == 0)
+            {
+                Debug.LogWarning("Stream was empty; loading settings failed");
+                return null;
+            }
+
+            SettingsData settingsData = formatter.Deserialize(stream) as SettingsData;
+            stream.Close();
+            
+            return settingsData;
+        }
+        
+        Debug.LogWarning("Settings file not found in [" + path + "]");
+        return null;
     }
 }

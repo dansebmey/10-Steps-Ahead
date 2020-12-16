@@ -15,7 +15,7 @@ public class FieldItem : OrbitingObject
     public int RemainingDuration
     {
         get => _remainingDuration;
-        private set
+        set
         {
             _remainingDuration = value;
             if (value <= 3)
@@ -35,7 +35,11 @@ public class FieldItem : OrbitingObject
     {
         base.Start();
         Gm.FieldItemManager.RegisterPowerup(this);
-        RemainingDuration = Gm.FieldItemManager.itemLifespanInSteps;
+        
+        if (RemainingDuration == 0) // returns false if the item was loaded from save data
+        {
+            RemainingDuration = Gm.FieldItemManager.itemLifespanInSteps;
+        }
     }
 
     protected override void Update()

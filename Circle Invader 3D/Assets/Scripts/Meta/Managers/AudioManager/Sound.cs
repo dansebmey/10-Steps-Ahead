@@ -8,7 +8,9 @@ public class Sound
     public AudioClip clip;
 
     [Range(0f, 1f)] public float initVolume = 0.75f;
-    [Range(0.5f, 1.5f)] public float initPitch = 1f;
+    [HideInInspector] public float targetVolume;
+    [Range(0.5f, 1.5f)] public float initPitch = 1;
+    [Range(0, 0.1f)] public float pitchVar = 0.05f;
 
     public bool loop = false;
 

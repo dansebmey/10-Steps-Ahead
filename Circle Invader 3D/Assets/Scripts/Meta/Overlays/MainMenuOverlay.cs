@@ -24,4 +24,9 @@ public class MainMenuOverlay : MenuOverlay
         
         _continueButton.gameObject.SetActive(Gm.PlayerScore > 0 && !Gm.player.isDefeated);
     }
+
+    public void EnableContinueButton()
+    {
+        _continueButton.gameObject.SetActive(true);
+    }
 }

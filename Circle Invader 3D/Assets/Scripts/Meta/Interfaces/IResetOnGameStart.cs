@@ -1,4 +1,5 @@
 ﻿public interface IResetOnGameStart
 {
-    void OnGameReset();
+    void OnNewGameStart();
+    void OnGameLoad(GameData gameData);
 }
