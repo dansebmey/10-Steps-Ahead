@@ -12,6 +12,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/CameraController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7A84DC90-1F21-458F-98A1-2E112D4BA2AB/1b/a0483969/JsonUtility.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/Managers/DataManager/EnemyData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/Managers/AestheticManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/FiniteStateMachine/State.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Powerups/Item.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9577AC7A-62EF-4317-9789-031239BA8798/f5/d607e961/Array.cs" root0="SKIP_HIGHLIGHTING" />
@@ -23,6 +24,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/Managers/DataManager/PlayerData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/Overlays/InstructionOverlay/Instruction.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/Missile.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/Overlays/UIElements/HeaderText.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/Player/Inventory.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/Managers/HighscoreManager/HighscoreData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/Overlays/MainMenuOverlay.cs" root0="FORCE_HIGHLIGHTING" />
@@ -35,6 +37,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/Managers/BarrierManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/Barrier.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/Overlays/HUD/HudOverlay.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://C:/Program Files/Unity/Hub/Editor/2020.1.14f1/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventTrigger.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/MovableObject.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/FE84F4A7-54DA-4A6B-B64F-CA409D40938A/33/fe202cd4/SetupCoroutine.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/Player/Player.cs" root0="FORCE_HIGHLIGHTING" />
@@ -86,10 +89,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Overlays/HUD/BigHammerInterface.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Overlays/CreditOverlay.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Overlays/MenuOverlay.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/FiniteStateMachine/FiniteStateMachine.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Overlays/CreditsOverlay.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Overlays/HUD/InventoryInterface.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Interfaces/IPlayerCommandListener.cs" />
@@ -133,10 +132,14 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Overlays/SettingsOverlay.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Managers/DataManager/GameData.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Managers/DataManager/SettingsData.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Managers/GameManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Managers/DataManager/DataManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Managers/AudioManager/AudioManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Overlays/UIElements/CustomTextField.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Managers/FontManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Overlays/UIElements/CustomTextObject.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Overlays/UIElements/HeaderText.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Managers/GameManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Managers/AestheticManager.cs" />
       </list>
     </option>
   </component>
@@ -192,7 +195,7 @@
       <workItem from="1607940147888" duration="5081000" />
       <workItem from="1607994161275" duration="7025000" />
       <workItem from="1608047768285" duration="9933000" />
-      <workItem from="1608111437335" duration="6581000" />
+      <workItem from="1608111437335" duration="10129000" />
     </task>
     <servers />
   </component>

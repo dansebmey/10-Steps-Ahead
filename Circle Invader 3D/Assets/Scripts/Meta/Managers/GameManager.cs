@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     
     public AudioManager AudioManager => AudioManager.GetInstance();
     public LowPassFilterManager LowPassFilterManager { get; private set; }
+    private AestheticManager _aestheticManager;
 
     [SerializeField] private State[] statePrefabs;
 
@@ -92,6 +93,7 @@ public class GameManager : MonoBehaviour
         FieldItemManager = GetComponentInChildren<FieldItemManager>();
         _dataManager = GetComponent<DataManager>();
         HighscoreManager = GetComponent<HighscoreManager>();
+        _aestheticManager = GetComponent<AestheticManager>();
         
         CameraController = FindObjectOfType<CameraController>();
         OverlayManager = CameraController.GetComponentInChildren<OverlayManager>();
@@ -246,6 +248,11 @@ public class GameManager : MonoBehaviour
     public void ShowControlsOverlay()
     {
         
+    }
+
+    public void ToggleFont()
+    {
+        _aestheticManager.ToggleFont();
     }
 
     private void OnApplicationQuit()

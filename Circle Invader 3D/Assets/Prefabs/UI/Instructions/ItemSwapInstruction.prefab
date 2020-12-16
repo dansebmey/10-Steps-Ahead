@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 626868993739659445}
   m_Layer: 5
   m_Name: Label (arrows)
-  m_TagString: Untagged
+  m_TagString: HeaderText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -113,7 +113,7 @@ GameObject:
   - component: {fileID: 3089285696082834958}
   m_Layer: 5
   m_Name: Label (letters)
-  m_TagString: Untagged
+  m_TagString: HeaderText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -267,7 +267,7 @@ GameObject:
   - component: {fileID: 1403619682219646139}
   m_Layer: 5
   m_Name: Label (letters, shadow)
-  m_TagString: Untagged
+  m_TagString: HeaderText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -349,7 +349,7 @@ GameObject:
   - component: {fileID: 2211989429607152664}
   m_Layer: 5
   m_Name: Label (arrows, shadow)
-  m_TagString: Untagged
+  m_TagString: HeaderText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
