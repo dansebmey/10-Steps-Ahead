@@ -24,11 +24,6 @@ public class RegistryState : State
         };
     }
 
-    private void RegisterHighscore()
-    {
-        _registryOverlay.RegisterHighscore();
-    }
-
     public override void OnUpdate()
     {
         foreach (KeyValuePair<KeyCode, Action> entry in _actionMapping)

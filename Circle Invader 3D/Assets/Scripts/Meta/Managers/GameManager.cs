@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     public CameraController CameraController { get; private set; }
     public OverlayManager OverlayManager { get; private set; }
     public HighscoreManager HighscoreManager { get; private set; }
-    private PermaOverlay _permaOverlay;
+    public OnlineHighscoreManager OnlineHighscoreManager { get; private set; }
     
     public AudioManager AudioManager => AudioManager.GetInstance();
     public LowPassFilterManager LowPassFilterManager { get; private set; }
@@ -93,12 +93,12 @@ public class GameManager : MonoBehaviour
         FieldItemManager = GetComponentInChildren<FieldItemManager>();
         _dataManager = GetComponent<DataManager>();
         HighscoreManager = GetComponent<HighscoreManager>();
+        OnlineHighscoreManager = GetComponent<OnlineHighscoreManager>();
         AestheticsManager = GetComponent<AestheticsManager>();
         
         CameraController = FindObjectOfType<CameraController>();
         OverlayManager = CameraController.GetComponentInChildren<OverlayManager>();
         LowPassFilterManager = CameraController.GetComponent<LowPassFilterManager>();
-        _permaOverlay = CameraController.GetComponentInChildren<PermaOverlay>();
         
         _fsm = new FiniteStateMachine(this, typeof(MenuState), statePrefabs);
     }
@@ -110,7 +110,7 @@ public class GameManager : MonoBehaviour
         _playerCommandListeners = new ConcurrentStack<IPlayerCommandListener>();
         _playerCommandListeners.Push(FieldItemManager);
         _playerCommandListeners.Push(enemy);
-        _playerCommandListeners.Push(_permaOverlay);
+        _playerCommandListeners.Push(OverlayManager.PermaOverlay);
         
         _onGameStartResetters = new List<IResetOnGameStart>();
         _onGameStartResetters.Add(player);
@@ -138,18 +138,18 @@ public class GameManager : MonoBehaviour
             OverlayManager.MainMenuOverlay.EnableContinueButton();
         }
 
-        SettingsData settingsData = _dataManager.LoadSettings();
-        if (settingsData != null)
+        PersistentData persistentData = _dataManager.LoadSettings();
+        if (persistentData != null)
         {
-            AudioManager.MusicVolume = settingsData.musicVolume;
-            OverlayManager.SettingsOverlay.SetMusicVolumeSliderValue(settingsData.musicVolume);
-            AudioManager.SfxVolume = settingsData.sfxVolume;
-            OverlayManager.SettingsOverlay.SetSfxVolumeSliderValue(settingsData.sfxVolume);
+            AudioManager.MusicVolume = persistentData.musicVolume;
+            OverlayManager.SettingsOverlay.SetMusicVolumeSliderValue(persistentData.musicVolume);
+            AudioManager.SfxVolume = persistentData.sfxVolume;
+            OverlayManager.SettingsOverlay.SetSfxVolumeSliderValue(persistentData.sfxVolume);
             
-            AestheticsManager.IsDyslexicFontShown = settingsData.isDyslexicFontShown;
+            AestheticsManager.IsDyslexicFontShown = persistentData.isDyslexicFontShown;
             
             ((RegistryOverlay) OverlayManager.GetOverlay(OverlayManager.OverlayEnum.Registry)).SetHighscoreName(
-                settingsData.lastEnteredHighscoreName);
+                persistentData.lastEnteredHighscoreName);
         }
     }
 
@@ -250,6 +250,11 @@ public class GameManager : MonoBehaviour
     public void ShowControlsOverlay()
     {
         
+    }
+
+    public void ShowGlobalHighscoreOverlay()
+    {
+        OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.OnlineHighscore);
     }
 
     private void OnApplicationQuit()

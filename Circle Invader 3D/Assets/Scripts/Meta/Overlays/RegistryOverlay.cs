@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RegistryOverlay : Overlay
 {
@@ -9,6 +11,12 @@ public class RegistryOverlay : Overlay
 
     private int _highlightedFieldIndex = 0;
 
+    private Button _submitButton;
+    private Text _submitButtonText;
+    private string[] LoadingTextVars => OnlineHighscoreManager.LoadingTextVars;
+
+    [SerializeField] private Text notificationText;
+
     private Dictionary<string, string> _profanityFilterMap;
 
     protected override void Awake()
@@ -16,6 +24,8 @@ public class RegistryOverlay : Overlay
         base.Awake();
 
         _customTextFields = GetComponentsInChildren<CustomTextField>();
+        _submitButton = GetComponentInChildren<Button>();
+        _submitButtonText = _submitButton.GetComponentInChildren<Text>();
     }
 
     private void Start()
@@ -74,6 +84,13 @@ public class RegistryOverlay : Overlay
 
     public void RegisterHighscore()
     {
+        Gm.HighscoreManager.RegisterHighscore(DetermineUsername(), Gm.PlayerScore);
+        Gm.OnlineHighscoreManager.UploadNewHighscore(DetermineUsername(), Gm.PlayerScore);
+        _submitButton.interactable = false;
+    }
+
+    private string DetermineUsername()
+    {
         string result = "";
         foreach (CustomTextField ctf in _customTextFields)
         {
@@ -83,9 +100,8 @@ public class RegistryOverlay : Overlay
         {
             result = _profanityFilterMap[result];
         }
-        
-        Gm.HighscoreManager.RegisterHighscore(result, Gm.PlayerScore);
-        Gm.OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.Highscore);
+
+        return result;
     }
 
     public string LastEnteredName
@@ -107,7 +123,7 @@ public class RegistryOverlay : Overlay
         if (savedName.Length != _customTextFields.Length)
         {
             Debug.LogWarning(
-                "Saved highscore name differs in length from allowed length; default name reset");
+                "Saved highscore name differs in length from required length; default name reset");
             return;
         }
 
@@ -115,5 +131,33 @@ public class RegistryOverlay : Overlay
         {
             _customTextFields[i].SetCharacter(savedName.ToCharArray()[i]);
         }
+    }
+
+    public void ShowUploadResult(OnlineHighscoreManager ohsm)
+    {
+        StartCoroutine(_ShowUploadResult(ohsm));
+    }
+
+    private IEnumerator _ShowUploadResult(OnlineHighscoreManager ohsManager)
+    {
+        while (ohsManager.uploadProgressCode == OnlineHighscoreManager.IN_PROGRESS)
+        {
+            yield return new WaitForSeconds(0.25f);
+        }
+
+        switch (ohsManager.uploadProgressCode)
+        {
+            case OnlineHighscoreManager.SUCCEEDED:
+                Gm.OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.Highscore);
+                break;
+            case OnlineHighscoreManager.FAILED:
+                _submitButton.interactable = true;
+                notificationText.text = "Upload to global highscores failed :(";
+                notificationText.color = Gm.AestheticsManager.veryBadColor;
+                _submitButtonText.text = "Retry";
+                break;
+        }
+
+        ohsManager.uploadProgressCode = OnlineHighscoreManager.NOT_UPLOADING;
     }
 }

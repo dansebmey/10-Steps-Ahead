@@ -8,10 +8,12 @@ public class OverlayManager : GmAwareObject
     public SettingsOverlay SettingsOverlay { get; private set; }
     public PermaOverlay PermaOverlay { get; private set; }
     public MainMenuOverlay MainMenuOverlay { get; private set; }
+    public OnlineHighscoreOverlay OnlineHighscoreOverlay { get; private set; }
+    public RegistryOverlay RegistryOverlay { get; private set; }
     
     private Dictionary<OverlayEnum, Overlay> _overlays;
     private Overlay _activeOverlay;
-    public enum OverlayEnum { MainMenu, Hud, GameOver, Registry, Highscore, Credits, Permanent, Settings }
+    public enum OverlayEnum { MainMenu, Hud, GameOver, Registry, Highscore, Credits, Permanent, Settings, OnlineHighscore }
     public void SetActiveOverlay(OverlayEnum overlayEnumEnum)
     {
         _activeOverlay?.OnHide();
@@ -38,10 +40,11 @@ public class OverlayManager : GmAwareObject
             {OverlayEnum.Hud, Hud = GetComponentInChildren<HudOverlay>(true)},
             {OverlayEnum.Settings, SettingsOverlay = GetComponentInChildren<SettingsOverlay>(true)},
             {OverlayEnum.GameOver, GetComponentInChildren<GameOverOverlay>(true)},
-            {OverlayEnum.Registry, GetComponentInChildren<RegistryOverlay>(true)},
+            {OverlayEnum.Registry, RegistryOverlay = GetComponentInChildren<RegistryOverlay>(true)},
             {OverlayEnum.Highscore, GetComponentInChildren<HighscoreOverlay>(true)},
             {OverlayEnum.Credits, GetComponentInChildren<CreditsOverlay>(true)},
-            {OverlayEnum.Permanent, PermaOverlay = GetComponentInChildren<PermaOverlay>(true)}
+            {OverlayEnum.Permanent, PermaOverlay = GetComponentInChildren<PermaOverlay>(true)},
+            {OverlayEnum.OnlineHighscore, OnlineHighscoreOverlay = GetComponentInChildren<OnlineHighscoreOverlay>(true)}
         };
     }
 

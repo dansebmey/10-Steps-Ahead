@@ -3,22 +3,25 @@
 [Serializable]
 public class HighscoreData
 {
-    public HighscoreEntry[] entries;
+    public HighscoreEntryData[] entries;
+    public HighscoreEntryData[] pendingUploadEntries;
 
-    public HighscoreData(HighscoreEntry[] entries)
+    public HighscoreData(GameManager gm, HighscoreEntryData[] entries)
     {
         this.entries = entries;
+        
+        pendingUploadEntries = gm.OnlineHighscoreManager.pendingUploadEntries.ToArray();
     }
 
     [Serializable]
-    public struct HighscoreEntry
+    public struct HighscoreEntryData
     {
-        public string name;
+        public string username;
         public int score;
 
-        public HighscoreEntry(string name, int score)
+        public HighscoreEntryData(string username, int score)
         {
-            this.name = name;
+            this.username = username;
             this.score = score;
         }
     }

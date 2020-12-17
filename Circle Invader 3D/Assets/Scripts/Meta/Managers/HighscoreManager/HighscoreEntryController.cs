@@ -31,11 +31,18 @@ public class HighscoreEntryController : GmAwareObject
         }
     }
 
-    public void SetValues(int index, HighscoreData.HighscoreEntry entry)
+    public void SetValues(int index, HighscoreData.HighscoreEntryData entryData)
     {
         _rankText.text = index + ".";
-        _nameText.text = entry.name;
-        _scoreText.text = entry.score.ToString();
+        _nameText.text = entryData.username;
+        _scoreText.text = entryData.score.ToString();
+    }
+
+    public void SetValues(int index, string username, int score)
+    {
+        _rankText.text = index + ".";
+        _nameText.text = username;
+        _scoreText.text = score.ToString();
     }
 
     public void SetColor(Color colour)

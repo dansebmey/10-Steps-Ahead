@@ -8,12 +8,12 @@ public class HighscoreManager : GmAwareObject
 {
     private const string FILENAME = "highscores.tsa";
 
-    private HighscoreData _highscoreData;
+    protected HighscoreData HighscoreData { get; private set; }
     public int maxAmtOfEntries;
 
-    private void Start()
+    protected virtual void Start()
     {
-        _highscoreData = Load() ?? new HighscoreData(new HighscoreData.HighscoreEntry[maxAmtOfEntries]);
+        HighscoreData = Load() ?? new HighscoreData(Gm, new HighscoreData.HighscoreEntryData[maxAmtOfEntries]);
     }
 
     #region Save and load functionality
@@ -29,9 +29,9 @@ public class HighscoreManager : GmAwareObject
 
     public HighscoreData Load()
     {
-        if (_highscoreData != null)
+        if (HighscoreData != null)
         {
-            return _highscoreData;
+            return HighscoreData;
         }
         
         string path = Application.persistentDataPath + "/" + FILENAME;
@@ -54,23 +54,23 @@ public class HighscoreManager : GmAwareObject
 
     public bool IsEligibleForHighscore(int score)
     {
-        return _highscoreData.entries[maxAmtOfEntries-1].score < score;
+        return HighscoreData.entries[maxAmtOfEntries-1].score < score;
     }
 
-    public void RegisterHighscore(string playerName, int score)
+    public void RegisterHighscore(string username, int score)
     {
-        List<HighscoreData.HighscoreEntry> entries = new List<HighscoreData.HighscoreEntry>(_highscoreData.entries);       
-        entries[maxAmtOfEntries-1] = new HighscoreData.HighscoreEntry(playerName, score);
+        List<HighscoreData.HighscoreEntryData> entries = new List<HighscoreData.HighscoreEntryData>(HighscoreData.entries);       
+        entries[maxAmtOfEntries-1] = new HighscoreData.HighscoreEntryData(username, score);
         
         entries.Sort(new HighscoreSorter());
-        _highscoreData = new HighscoreData(entries.ToArray());
+        HighscoreData = new HighscoreData(Gm, entries.ToArray());
         
-        Save(_highscoreData);
+        Save(HighscoreData);
     }
     
-    private class HighscoreSorter : IComparer<HighscoreData.HighscoreEntry> 
+    private class HighscoreSorter : IComparer<HighscoreData.HighscoreEntryData> 
     {
-        public int Compare(HighscoreData.HighscoreEntry a, HighscoreData.HighscoreEntry b)
+        public int Compare(HighscoreData.HighscoreEntryData a, HighscoreData.HighscoreEntryData b)
         {
             if (a.score > b.score)
             {
@@ -82,6 +82,6 @@ public class HighscoreManager : GmAwareObject
 
     public bool HighscoresExist()
     {
-        return _highscoreData != null;
+        return HighscoreData != null;
     }
 }

@@ -62,8 +62,8 @@
                 <e p="FieldItemManagerData.cs" t="Include" />
                 <e p="GameData.cs" t="Include" />
                 <e p="MiscData.cs" t="Include" />
+                <e p="PersistentData.cs" t="Include" />
                 <e p="PlayerDAta.cs" t="Include" />
-                <e p="SettingsData.cs" t="Include" />
               </e>
               <e p="FieldItemManager.cs" t="Include" />
               <e p="GameManager.cs" t="Include" />
@@ -71,6 +71,7 @@
                 <e p="HighscoreData.cs" t="Include" />
                 <e p="HighscoreEntryController.cs" t="Include" />
                 <e p="HighscoreManager.cs" t="Include" />
+                <e p="OnlineHighscoreManager.cs" t="Include" />
               </e>
             </e>
             <e p="Overlays" t="Include">
@@ -88,6 +89,7 @@
               </e>
               <e p="MainMenuOverlay.cs" t="Include" />
               <e p="MenuOverlay.cs" t="Include" />
+              <e p="OnlineHighscoreOverlay.cs" t="Include" />
               <e p="Overlay.cs" t="Include" />
               <e p="OverlayManager.cs" t="Include" />
               <e p="RegistryOverlay.cs" t="Include" />

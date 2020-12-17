@@ -5,7 +5,7 @@ using UnityEngine;
 public class DataManager : MonoBehaviour
 {
     private string savedGameFilename = "savedGame.tsa";
-    private string settingsFilename = "settings.tsa";
+    private string settingsFilename = "persistentData.tsa";
     
     public void Save(GameManager gm)
     {
@@ -29,8 +29,8 @@ public class DataManager : MonoBehaviour
         string path = Application.persistentDataPath + "/" + settingsFilename;
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        SettingsData settingsData = new SettingsData(gm);
-        formatter.Serialize(stream, settingsData);
+        PersistentData persistentData = new PersistentData(gm);
+        formatter.Serialize(stream, persistentData);
         stream.Close();
     }
 
@@ -62,8 +62,10 @@ public class DataManager : MonoBehaviour
         return null;
     }
 
-    public SettingsData LoadSettings()
+    public PersistentData LoadSettings()
     {
+        Debug.Log(Application.persistentDataPath + "/");
+        
         string path = Application.persistentDataPath + "/" + settingsFilename;
         if (File.Exists(path))
         {
@@ -75,10 +77,10 @@ public class DataManager : MonoBehaviour
                 return null;
             }
 
-            SettingsData settingsData = formatter.Deserialize(stream) as SettingsData;
+            PersistentData persistentData = formatter.Deserialize(stream) as PersistentData;
             stream.Close();
             
-            return settingsData;
+            return persistentData;
         }
         
         Debug.LogWarning("Settings file not found in [" + path + "]");

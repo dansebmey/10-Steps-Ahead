@@ -1,14 +1,14 @@
 ﻿using System;
 
 [Serializable]
-public class SettingsData
+public class PersistentData
 {
     public string lastEnteredHighscoreName;
     public float musicVolume;
     public float sfxVolume;
     public bool isDyslexicFontShown;
     
-    public SettingsData(GameManager gm)
+    public PersistentData(GameManager gm)
     {
         lastEnteredHighscoreName = ((RegistryOverlay)gm.OverlayManager.GetOverlay(OverlayManager.OverlayEnum.Registry)).LastEnteredName;
         musicVolume = gm.AudioManager.MusicVolume;
