@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -13,12 +15,6 @@ public class OnlineHighscoreManager : HighscoreManager
     private const string publicCode = "5fda77aceb36c70af8369f2f";
     private const string webUrl = "http://dreamlo.com/lb/";
 
-    public const int NOT_UPLOADING = -1;
-    public const int IN_PROGRESS = 0;
-    public const int FAILED = 1;
-    public const int SUCCEEDED = 2;
-    public int uploadProgressCode = NOT_UPLOADING;
-
     [HideInInspector] public HighscoreData.HighscoreEntryData[] cachedOnlineEntries;
     [HideInInspector] public List<HighscoreData.HighscoreEntryData> pendingUploadEntries;
 
@@ -30,14 +26,13 @@ public class OnlineHighscoreManager : HighscoreManager
 
         _ohsOverlay = FindObjectOfType<OnlineHighscoreOverlay>(true);
         _registryOverlay = FindObjectOfType<RegistryOverlay>(true);
-        
-        pendingUploadEntries = new List<HighscoreData.HighscoreEntryData>();
-        // this is overwritten if a list exists in saved highscore data
     }
 
     protected override void Start()
     {
         base.Start();
+        pendingUploadEntries = new List<HighscoreData.HighscoreEntryData>(
+            new List<HighscoreData.HighscoreEntryData>(HighscoreData.pendingUploadEntries));
 
         LoadingTextVars = new[]
         {
@@ -52,8 +47,7 @@ public class OnlineHighscoreManager : HighscoreManager
 
     public void UploadNewHighscore(string username, int score)
     {
-        uploadProgressCode = IN_PROGRESS;
-        StartCoroutine(_UploadNewHighscore(username, score));
+        StartCoroutine(_UploadNewHighscore(new HighscoreData.HighscoreEntryData(username, score)));
     }
 
     public void RefreshOnlineHighscores()
@@ -66,17 +60,22 @@ public class OnlineHighscoreManager : HighscoreManager
         StartCoroutine(_DownloadHighscores());
     }
     
-    private IEnumerator _UploadNewHighscore(string username, int score)
+    private IEnumerator _UploadNewHighscore(HighscoreData.HighscoreEntryData entry)
     {
         UnityWebRequest req = new UnityWebRequest
-            (webUrl + privateCode + "/add/" + UnityWebRequest.EscapeURL(username) + "/" + score);
+            (webUrl + privateCode + "/add/" + UnityWebRequest.EscapeURL(entry.username) + "/" + entry.score);
         yield return req.SendWebRequest();
 
-        if (!string.IsNullOrEmpty(req.error))
+        if (!string.IsNullOrEmpty(req.error) && !pendingUploadEntries.Contains(entry))
         {
-            pendingUploadEntries.Add(new HighscoreData.HighscoreEntryData(username, score));
+            AddPendingUploadEntry(entry);
         }
-        Gm.OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.Highscore);
+        else if (string.IsNullOrEmpty(req.error) && pendingUploadEntries.Contains(entry))
+        {
+            RemovePendingUploadEntry(entry);
+        }
+
+        _registryOverlay.OnUploadAttemptComplete();
     }
     
     public void RetryUploadCachedOfflineEntries()
@@ -86,7 +85,6 @@ public class OnlineHighscoreManager : HighscoreManager
             foreach (HighscoreData.HighscoreEntryData entry in pendingUploadEntries)
             {
                 UploadNewHighscore(entry.username, entry.score);
-                pendingUploadEntries.Remove(entry);
             }
         }
     }
@@ -103,7 +101,7 @@ public class OnlineHighscoreManager : HighscoreManager
         {
             yield return req.downloadHandler.text;
             cachedOnlineEntries = ConvertTextToGlobalHighscoreEntries(req.downloadHandler.text);
-            _ohsOverlay.OnDownloadComplete();
+            _ohsOverlay.OnDataTransferComplete();
         }
         else
         {
@@ -124,5 +122,19 @@ public class OnlineHighscoreManager : HighscoreManager
         }
         
         return result;
+    }
+
+    public void AddPendingUploadEntry(HighscoreData.HighscoreEntryData entry)
+    {
+        pendingUploadEntries.Add(entry);
+        HighscoreData.pendingUploadEntries = pendingUploadEntries.ToArray();
+        Save(HighscoreData);
+    }
+
+    private void RemovePendingUploadEntry(HighscoreData.HighscoreEntryData entry)
+    {
+        pendingUploadEntries.Remove(entry);
+        HighscoreData.pendingUploadEntries = pendingUploadEntries.ToArray();
+        Save(HighscoreData);
     }
 }

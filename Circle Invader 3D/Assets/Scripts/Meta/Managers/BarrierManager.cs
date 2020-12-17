@@ -15,7 +15,6 @@ public class BarrierManager : MonoBehaviour, IResetOnGameStart
     [Range(1,10)][SerializeField] public int initBarrierHealth = 3;
     [Range(1,10)][SerializeField] public int maxBarrierHealth = 4;
     [SerializeField] public Color[] healthColours;
-    [Range(10, 100)] public int collapsedTurnCount = 30;
     
     [SerializeField] private int initiallyDestroyedBarriers = 0;
 
@@ -79,7 +78,7 @@ public class BarrierManager : MonoBehaviour, IResetOnGameStart
 
         if (initiallyDestroyedBarriers > 0)
         {
-            // CollapseBarriers(initiallyDestroyedBarriers);
+            CollapseBarriers(initiallyDestroyedBarriers);
         }
     }
 

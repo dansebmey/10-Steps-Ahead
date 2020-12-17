@@ -17,7 +17,7 @@ public class HighscoreManager : GmAwareObject
     }
 
     #region Save and load functionality
-    private void Save(HighscoreData highscoreData)
+    protected void Save(HighscoreData highscoreData)
     {
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/" + FILENAME;

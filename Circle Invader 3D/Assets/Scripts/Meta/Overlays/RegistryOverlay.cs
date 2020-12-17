@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 
 public class RegistryOverlay : Overlay
@@ -11,9 +12,14 @@ public class RegistryOverlay : Overlay
 
     private int _highlightedFieldIndex = 0;
 
+    private bool _internetConnectionTestPassed = true;
+    
     private Button _submitButton;
     private Text _submitButtonText;
     private string[] LoadingTextVars => OnlineHighscoreManager.LoadingTextVars;
+
+    private bool _uploadInProgress;
+    private int _downloadWaitIterations;
 
     [SerializeField] private Text notificationText;
 
@@ -38,13 +44,24 @@ public class RegistryOverlay : Overlay
 
     public override void OnHide()
     {
-        
+        _submitButton.interactable = true;
+        _submitButtonText.text = "Submit";
     }
 
     public override void OnShow()
     {
         Gm.SwitchState(typeof(RegistryState));
         HighlightSelectedField();
+
+        StartCoroutine(CheckInternetConnection());
+    }
+
+    private IEnumerator CheckInternetConnection()
+    {
+        UnityWebRequest req = new UnityWebRequest("http://stuffbydaniel.com");
+        yield return req.SendWebRequest();
+        
+        _internetConnectionTestPassed = req.error == null;
     }
 
     private void HighlightSelectedField()
@@ -85,8 +102,45 @@ public class RegistryOverlay : Overlay
     public void RegisterHighscore()
     {
         Gm.HighscoreManager.RegisterHighscore(DetermineUsername(), Gm.PlayerScore);
-        Gm.OnlineHighscoreManager.UploadNewHighscore(DetermineUsername(), Gm.PlayerScore);
+        if (_internetConnectionTestPassed)
+        {
+            StartCoroutine(SubmitToGlobalLeaderboard());
+        }
+        else
+        {
+            Gm.OnlineHighscoreManager.AddPendingUploadEntry(new HighscoreData.HighscoreEntryData(DetermineUsername(), Gm.PlayerScore));
+            Gm.OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.Highscore);
+        }
+    }
+
+    private IEnumerator SubmitToGlobalLeaderboard()
+    {
         _submitButton.interactable = false;
+        Gm.OnlineHighscoreManager.UploadNewHighscore(DetermineUsername(), Gm.PlayerScore);
+        
+        _uploadInProgress = true;
+        while (_uploadInProgress)
+        {
+            if (!HandleLoadingText("Submitting")) break;
+            yield return new WaitForSeconds(0.25f);
+        }
+        if (!_uploadInProgress)
+        {
+            Gm.OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.Highscore);
+        }
+    }
+
+    private bool HandleLoadingText(string baseText)
+    // This method is copied and pasted in multiple classes now. Might be better suited as a static Util method?
+    {
+        _downloadWaitIterations++;
+        if (_downloadWaitIterations >= 40)
+        {
+            return false;
+        }
+        
+        _submitButtonText.text = baseText + OnlineHighscoreManager.LoadingTextVars[_downloadWaitIterations % LoadingTextVars.Length];
+        return true;
     }
 
     private string DetermineUsername()
@@ -133,31 +187,8 @@ public class RegistryOverlay : Overlay
         }
     }
 
-    public void ShowUploadResult(OnlineHighscoreManager ohsm)
+    public void OnUploadAttemptComplete()
     {
-        StartCoroutine(_ShowUploadResult(ohsm));
-    }
-
-    private IEnumerator _ShowUploadResult(OnlineHighscoreManager ohsManager)
-    {
-        while (ohsManager.uploadProgressCode == OnlineHighscoreManager.IN_PROGRESS)
-        {
-            yield return new WaitForSeconds(0.25f);
-        }
-
-        switch (ohsManager.uploadProgressCode)
-        {
-            case OnlineHighscoreManager.SUCCEEDED:
-                Gm.OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.Highscore);
-                break;
-            case OnlineHighscoreManager.FAILED:
-                _submitButton.interactable = true;
-                notificationText.text = "Upload to global highscores failed :(";
-                notificationText.color = Gm.AestheticsManager.veryBadColor;
-                _submitButtonText.text = "Retry";
-                break;
-        }
-
-        ohsManager.uploadProgressCode = OnlineHighscoreManager.NOT_UPLOADING;
+        _uploadInProgress = false;
     }
 }

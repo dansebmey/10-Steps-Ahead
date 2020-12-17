@@ -13,16 +13,22 @@ public class OnlineHighscoreOverlay : MenuOverlay
     private List<HighscoreEntryController> _controllers;
 
     private Button _refreshButton;
+    private Button _viewLocalButton;
+    private Button _toMainMenuButton;
     private Text _loadingText;
     private string[] LoadingTextVars => OnlineHighscoreManager.LoadingTextVars;
     private int _downloadWaitIterations;
+
+    private HighscoreData.HighscoreEntryData[] tempEntryCache;
 
     protected override void Awake()
     {
         base.Awake();
 
         _onlineHighscoreManager = FindObjectOfType<OnlineHighscoreManager>();
-        _refreshButton = GetComponentInChildren<Button>();
+        _refreshButton = GetComponentsInChildren<Button>()[0];
+        _viewLocalButton = GetComponentsInChildren<Button>()[1];
+        _toMainMenuButton = GetComponentsInChildren<Button>()[2];
         _loadingText = GetComponentInChildren<Text>();
 
         _controllers = new List<HighscoreEntryController>();
@@ -57,13 +63,15 @@ public class OnlineHighscoreOverlay : MenuOverlay
         
         Gm.CameraController.FocusOn(Gm.CameraController.DefaultFocalPoint, new Vector3(0, 7.8f, 0), new Vector3(90, 0, 0));
 
-        HandleHighscoreSyncing(true);
+        HandleHighscoreSyncing(tempEntryCache == null);
     }
 
     public void RefreshOnlineHighscores()
     {
         HandleHighscoreSyncing(true);
         _refreshButton.interactable = false;
+        _viewLocalButton.interactable = false;
+        _toMainMenuButton.interactable = false;
     }
     
     private void HandleHighscoreSyncing(bool startNewDownload)
@@ -104,6 +112,7 @@ public class OnlineHighscoreOverlay : MenuOverlay
 
             if (_onlineHighscoreManager.cachedOnlineEntries != null)
             {
+                tempEntryCache = _onlineHighscoreManager.cachedOnlineEntries;
                 _loadingText.gameObject.SetActive(false);
     
                 if (_onlineHighscoreManager.cachedOnlineEntries != null)
@@ -125,10 +134,10 @@ public class OnlineHighscoreOverlay : MenuOverlay
     private bool HandleLoadingText(string baseText)
     {
         _downloadWaitIterations++;
-        if (_downloadWaitIterations == 40)
+        if (_downloadWaitIterations >= 40)
         {
             _loadingText.text = "Could not retrieve global highscore data :(";
-            OnDownloadComplete();
+            OnDataTransferComplete();
             return false;
         }
         
@@ -136,8 +145,16 @@ public class OnlineHighscoreOverlay : MenuOverlay
         return true;
     }
 
-    public void OnDownloadComplete()
+    public void OnDataTransferComplete()
     {
+        StartCoroutine(EnableButtons(0.5f));
+    }
+
+    private IEnumerator EnableButtons(float delay)
+    {
+        yield return new WaitForSeconds(delay);
         _refreshButton.interactable = true;
+        _viewLocalButton.interactable = true;
+        _toMainMenuButton.interactable = true;
     }
 }
