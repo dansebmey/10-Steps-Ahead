@@ -5,14 +5,21 @@ using UnityEngine;
 public class OverlayManager : GmAwareObject
 {
     public HudOverlay Hud { get; private set; }
-    public SettingsOverlay SettingsOverlay { get; private set; }
     public MainMenuOverlay MainMenuOverlay { get; private set; }
     public OnlineHighscoreOverlay OnlineHighscoreOverlay { get; private set; }
     public RegistryOverlay RegistryOverlay { get; private set; }
-    
-    private Dictionary<OverlayEnum, Overlay> _overlays;
+
+    private SettingsOverlay _settingsOverlayInGame;
+    private SettingsOverlay _settingsOverlayFromMenu;
+
+    public enum OverlayEnum 
+    {
+        MainMenu, Hud, GameOver, Registry, Highscore, Credits, 
+        SettingsInGame, SettingsFromMenu, OnlineHighscore
+    }
     private Overlay _activeOverlay;
-    public enum OverlayEnum { MainMenu, Hud, GameOver, Registry, Highscore, Credits, Permanent, Settings, OnlineHighscore }
+    private Dictionary<OverlayEnum, Overlay> _overlays;
+
     public void SetActiveOverlay(OverlayEnum overlayEnumEnum)
     {
         _activeOverlay?.OnHide();
@@ -37,7 +44,8 @@ public class OverlayManager : GmAwareObject
         {
             {OverlayEnum.MainMenu, MainMenuOverlay = GetComponentInChildren<MainMenuOverlay>(true)},
             {OverlayEnum.Hud, Hud = GetComponentInChildren<HudOverlay>(true)},
-            {OverlayEnum.Settings, SettingsOverlay = GetComponentInChildren<SettingsOverlay>(true)},
+            {OverlayEnum.SettingsInGame, _settingsOverlayInGame = GetComponentsInChildren<SettingsOverlay>(true)[0]},
+            {OverlayEnum.SettingsFromMenu, _settingsOverlayFromMenu = GetComponentsInChildren<SettingsOverlay>(true)[1]},
             {OverlayEnum.GameOver, GetComponentInChildren<GameOverOverlay>(true)},
             {OverlayEnum.Registry, RegistryOverlay = GetComponentInChildren<RegistryOverlay>(true)},
             {OverlayEnum.Highscore, GetComponentInChildren<HighscoreOverlay>(true)},
@@ -54,5 +62,14 @@ public class OverlayManager : GmAwareObject
         }
         _overlays[OverlayEnum.MainMenu].gameObject.SetActive(true);
         SetActiveOverlay(OverlayEnum.MainMenu);
+    }
+
+    public void UpdateVolumeSliders(float musicVolume, float sfxVolume)
+    {
+        _settingsOverlayInGame.SetMusicVolumeSliderValue(musicVolume);
+        _settingsOverlayFromMenu.SetMusicVolumeSliderValue(musicVolume);
+        
+        _settingsOverlayInGame.SetSfxVolumeSliderValue(sfxVolume);
+        _settingsOverlayFromMenu.SetSfxVolumeSliderValue(sfxVolume);
     }
 }

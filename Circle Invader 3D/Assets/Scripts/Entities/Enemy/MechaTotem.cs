@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class MechaTotem : MovableObject, IPlayerCommandListener, IResetOnGameStart
@@ -13,8 +14,6 @@ public class MechaTotem : MovableObject, IPlayerCommandListener, IResetOnGameSta
     
     public LinkedList<EnemyAction> queuedActions;
     private LinkedList<TotemLayer> _totemLayers;
-
-    public int amtOfVisibleActions = 10;
 
     [Header("Prefabs")]
     [SerializeField] private List<EnemyAction> actionPrefabs;
@@ -55,10 +54,8 @@ public class MechaTotem : MovableObject, IPlayerCommandListener, IResetOnGameSta
         QueueNewAction(ACTION_ATTACK);
         QueueNewAction(ACTION_IDLE);
         QueueNewAction(ACTION_ATTACK);
-        for (var i = 0; i < amtOfVisibleActions - 10; i++)
-        {
-            QueueNewAction(ACTION_IDLE);
-        }
+        
+        MoveTotemLayersDown();
     }
 
     private void QueueNewAction(int actionIndex)
@@ -70,12 +67,13 @@ public class MechaTotem : MovableObject, IPlayerCommandListener, IResetOnGameSta
     {
         TotemLayer layer = Instantiate(
             enemyAction.layerPrefab,
-            new Vector3(0, (layerHeight + 0.025f) * (queuedActions.Count + 2), 0),
+            new Vector3(0, 0.25f + (layerHeight + 0.025f) * queuedActions.Count, 0),
             transform.rotation);
         layer.transform.parent = transform;
         
         _totemLayers.AddLast(layer);
         queuedActions.AddLast(enemyAction);
+
         MoveTotemLayersDown();
     }
 
@@ -86,13 +84,13 @@ public class MechaTotem : MovableObject, IPlayerCommandListener, IResetOnGameSta
 
     private void BasicAttack()
     {
-        Gm.AudioManager.Play("BasicAttack", 0.05f);
+        Gm.AudioManager.Play("BasicAttack");
         Gm.ApplyDamage(1);
     }
 
     private void SplitAttack()
     {
-        Gm.AudioManager.Play("SplitAttack", 0.05f);
+        Gm.AudioManager.Play("SplitAttack");
         Gm.ApplyDamage(1, Gm.CurrentPosIndex-1);
         Gm.ApplyDamage(1, Gm.CurrentPosIndex+1);
     }
@@ -103,7 +101,7 @@ public class MechaTotem : MovableObject, IPlayerCommandListener, IResetOnGameSta
         proj.CurrentPosIndex = Gm.CurrentPosIndex;
         MissilesInField.Enqueue(proj);
 
-        Gm.AudioManager.Play("DelayedAttackFired", 0.05f);
+        Gm.AudioManager.Play("DelayedAttackFired");
         Gm.SwitchState(typeof(WaitingForPlayerAction));
         // TODO: State switching should be done somewhere more central
     }
@@ -122,16 +120,15 @@ public class MechaTotem : MovableObject, IPlayerCommandListener, IResetOnGameSta
     private void MoveTotemLayersDown()
     {
         List<TotemLayer> layers = new List<TotemLayer>(_totemLayers);
+        Debug.Log("Last totem = " + layers.Last().name);
         for (int i = 0; i < layers.Count; i++)
         { 
-            layers[i].targetPos = new Vector3(0, (layerHeight + 0.025f) * i, 0);
-            if (i >= 0)
-            {
-                Quaternion targetRot = Quaternion.LookRotation(Gm.player.targetPos - transform.position);
-                targetRot.x = 0;
-                targetRot.z = 0;
-                layers[i].targetRot = targetRot;
-            }
+            layers[i].targetPos = new Vector3(0, 0.25f + (layerHeight + 0.025f) * i, 0);
+            
+            Quaternion targetRot = Quaternion.LookRotation(Gm.player.targetPos - transform.position);
+            targetRot.x = 0;
+            targetRot.z = 0;
+            layers[i].targetRot = targetRot;
         }
     }
 

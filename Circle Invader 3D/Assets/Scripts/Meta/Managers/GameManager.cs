@@ -138,9 +138,8 @@ public class GameManager : MonoBehaviour
         if (persistentData != null)
         {
             AudioManager.MusicVolume = persistentData.musicVolume;
-            OverlayManager.SettingsOverlay.SetMusicVolumeSliderValue(persistentData.musicVolume);
             AudioManager.SfxVolume = persistentData.sfxVolume;
-            OverlayManager.SettingsOverlay.SetSfxVolumeSliderValue(persistentData.sfxVolume);
+            OverlayManager.UpdateVolumeSliders(persistentData.musicVolume, persistentData.sfxVolume);
             
             AestheticsManager.IsDyslexicFontShown = persistentData.isDyslexicFontShown;
             
@@ -164,7 +163,7 @@ public class GameManager : MonoBehaviour
 
     public void OnPlayerCommandPerformed(KeyCode keyCode)
     {
-        AudioManager.Play("Slide", 0.1f);
+        AudioManager.Play("Slide");
         
         PlayerScore++;
         FieldItemManager.HandlePowerupCheck();
@@ -229,9 +228,14 @@ public class GameManager : MonoBehaviour
         OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.Credits);
     }
 
-    public void ShowSettingsOverlay()
+    public void ShowSettingsInGame()
     {
-        OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.Settings);
+        OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.SettingsInGame);
+    }
+
+    public void ShowSettingsFromMenu()
+    {
+        OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.SettingsFromMenu);
     }
 
     public void QuitApplication()

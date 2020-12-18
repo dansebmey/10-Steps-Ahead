@@ -7,6 +7,6 @@ public class Coin : Item
     {
         GameManager gm = FindObjectOfType<GameManager>();
         gm.FieldItemManager.CoinsCollected++;
-        gm.AudioManager.Play("CoinCollected", 0.05f);
+        gm.AudioManager.Play("CoinCollected");
     }
 }

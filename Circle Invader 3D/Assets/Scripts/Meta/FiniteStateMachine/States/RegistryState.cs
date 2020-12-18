@@ -30,7 +30,7 @@ public class RegistryState : State
         {
             if (Input.GetKeyUp(entry.Key))
             {
-                Gm.AudioManager.Play("ButtonHover", 0.05f);
+                Gm.AudioManager.Play("ButtonHover");
                 entry.Value.Invoke();
                 // StartCoroutine(RepeatKeyPress(entry));
             }

@@ -73,7 +73,7 @@ public class WaitingForPlayerAction : State
 
     public bool ShowSettingsOverlay()
     {
-        Gm.OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.Settings);
+        Gm.OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.SettingsInGame);
         return false;
     }
 

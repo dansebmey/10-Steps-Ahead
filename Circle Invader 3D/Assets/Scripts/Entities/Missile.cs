@@ -16,7 +16,7 @@ public class Missile : OrbitingObject
         SetStepsTaken(StepsTaken);
         if (StepsTaken == 4)
         {
-            Gm.AudioManager.Play("BasicAttack", 0.05f);
+            Gm.AudioManager.Play("BasicAttack");
             Gm.ApplyDamage(1, CurrentPosIndex);
             Destroy(gameObject);
             return false;

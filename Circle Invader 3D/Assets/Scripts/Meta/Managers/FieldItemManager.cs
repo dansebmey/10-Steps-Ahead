@@ -92,7 +92,7 @@ public class FieldItemManager : GmAwareObject, IPlayerCommandListener, IResetOnG
         fieldItem.CurrentPosIndex = Random.Range(0, Gm.BarrierManager.amountOfBarriers-1);
         fieldItem.transform.position = fieldItem.targetPos;
         
-        Gm.AudioManager.Play("ItemSpawn", 0.05f);
+        Gm.AudioManager.Play("ItemSpawn");
     }
 
     private bool EligibleForPowerupSpawn()

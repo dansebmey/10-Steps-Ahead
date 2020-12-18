@@ -19,7 +19,7 @@ public class OnlineHighscoreOverlay : MenuOverlay
     private string[] LoadingTextVars => OnlineHighscoreManager.LoadingTextVars;
     private int _downloadWaitIterations;
 
-    private HighscoreData.HighscoreEntryData[] tempEntryCache;
+    private HighscoreData.HighscoreEntryData[] _tempEntryCache;
 
     protected override void Awake()
     {
@@ -63,7 +63,7 @@ public class OnlineHighscoreOverlay : MenuOverlay
         
         Gm.CameraController.FocusOn(Gm.CameraController.DefaultFocalPoint, new Vector3(0, 7.8f, 0), new Vector3(90, 0, 0));
 
-        HandleHighscoreSyncing(tempEntryCache == null);
+        HandleHighscoreSyncing(_tempEntryCache == null);
     }
 
     public void RefreshOnlineHighscores()
@@ -112,7 +112,7 @@ public class OnlineHighscoreOverlay : MenuOverlay
 
             if (_onlineHighscoreManager.cachedOnlineEntries != null)
             {
-                tempEntryCache = _onlineHighscoreManager.cachedOnlineEntries;
+                _tempEntryCache = _onlineHighscoreManager.cachedOnlineEntries;
                 _loadingText.gameObject.SetActive(false);
     
                 if (_onlineHighscoreManager.cachedOnlineEntries != null)
