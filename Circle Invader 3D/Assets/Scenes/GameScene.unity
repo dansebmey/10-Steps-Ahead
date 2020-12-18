@@ -587,6 +587,29 @@ PrefabInstance:
       propertyPath: defaultFocalPoint
       value: 
       objectReference: {fileID: 1870009638}
+    - target: {fileID: 901605022114490341, guid: 7363315cd384f13459f16dae3edc775c,
+        type: 3}
+      propertyPath: instructionPrefabs.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 901605022114490341, guid: 7363315cd384f13459f16dae3edc775c,
+        type: 3}
+      propertyPath: instructionPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 5687935623730546640, guid: 74a6722b3af2f364aa145a8f14fef4dc,
+        type: 3}
+    - target: {fileID: 901605022114490341, guid: 7363315cd384f13459f16dae3edc775c,
+        type: 3}
+      propertyPath: instructionPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 1176781762939852814, guid: e917ef26fd52e6d49bcae02324712b51,
+        type: 3}
+    - target: {fileID: 901605022114490341, guid: 7363315cd384f13459f16dae3edc775c,
+        type: 3}
+      propertyPath: instructionPrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 5921432610205454121, guid: 73ce045f67bd36048946aad3c14e9322,
+        type: 3}
     - target: {fileID: 901605023626422970, guid: 7363315cd384f13459f16dae3edc775c,
         type: 3}
       propertyPath: m_RootOrder
@@ -1350,6 +1373,18 @@ MonoBehaviour:
   veryBadColor: {r: 0, g: 0, b: 0, a: 0}
   buttonFontSizeSmall: 48
   buttonFontSizeBig: 60
+--- !u!114 &1986736987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1986736981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08f45a10b1c2441eb2c048be4467226d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2740902528956263238
 PrefabInstance:
   m_ObjectHideFlags: 0

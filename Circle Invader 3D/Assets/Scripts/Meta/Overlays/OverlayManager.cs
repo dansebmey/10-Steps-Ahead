@@ -6,7 +6,6 @@ public class OverlayManager : GmAwareObject
 {
     public HudOverlay Hud { get; private set; }
     public SettingsOverlay SettingsOverlay { get; private set; }
-    public PermaOverlay PermaOverlay { get; private set; }
     public MainMenuOverlay MainMenuOverlay { get; private set; }
     public OnlineHighscoreOverlay OnlineHighscoreOverlay { get; private set; }
     public RegistryOverlay RegistryOverlay { get; private set; }
@@ -43,7 +42,6 @@ public class OverlayManager : GmAwareObject
             {OverlayEnum.Registry, RegistryOverlay = GetComponentInChildren<RegistryOverlay>(true)},
             {OverlayEnum.Highscore, GetComponentInChildren<HighscoreOverlay>(true)},
             {OverlayEnum.Credits, GetComponentInChildren<CreditsOverlay>(true)},
-            {OverlayEnum.Permanent, PermaOverlay = GetComponentInChildren<PermaOverlay>(true)},
             {OverlayEnum.OnlineHighscore, OnlineHighscoreOverlay = GetComponentInChildren<OnlineHighscoreOverlay>(true)}
         };
     }
@@ -54,7 +52,6 @@ public class OverlayManager : GmAwareObject
         {
             overlay.gameObject.SetActive(false);
         }
-        _overlays[OverlayEnum.Permanent].gameObject.SetActive(true);
         _overlays[OverlayEnum.MainMenu].gameObject.SetActive(true);
         SetActiveOverlay(OverlayEnum.MainMenu);
     }

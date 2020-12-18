@@ -25,8 +25,8 @@ public class Inventory : GmAwareObject
 
     public bool AddPowerup(Powerup powerup)
     {
-        Gm.OverlayManager.PermaOverlay.ShowInstruction(
-            PermaOverlay.InstructionEnum.ItemUsing,
+        Gm.TutorialManager.ShowInstruction(
+            TutorialManager.InstructionEnum.ItemUsing,
             KeyCode.Space);
         
         if (carriedPowerups.Count < maxCapacity)
@@ -34,10 +34,11 @@ public class Inventory : GmAwareObject
             carriedPowerups.Add(powerup);
             _invInterface.UpdateItemSlots();
         
-            if (carriedPowerups.Count >= 2 && !Gm.BarrierManager.IsBarrierCollapsed(Gm.CurrentPosIndex) && Gm.OverlayManager.PermaOverlay.IsNoOtherInstructionShown())
+            if (carriedPowerups.Count >= 2 && !Gm.BarrierManager.IsBarrierCollapsed(Gm.CurrentPosIndex)
+                                           && Gm.OverlayManager.Hud.IsNoOtherInstructionShown())
             {
-                Gm.OverlayManager.PermaOverlay.ShowInstruction(
-                    PermaOverlay.InstructionEnum.ItemSwapping,
+                Gm.TutorialManager.ShowInstruction(
+                    TutorialManager.InstructionEnum.ItemSwapping,
                     KeyCode.W, KeyCode.S);
             }
             return true;

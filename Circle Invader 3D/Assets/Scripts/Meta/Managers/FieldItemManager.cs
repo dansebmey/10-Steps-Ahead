@@ -78,7 +78,6 @@ public class FieldItemManager : GmAwareObject, IPlayerCommandListener, IResetOnG
         FieldItem item = itemPrefabs[rn];
         if (Gm.IsScoreHigherThan(item.scoreReq))
         {
-            Debug.Log("Spawning item ["+item+"] with score req ["+item.scoreReq+"]");
             return item;
         }
 

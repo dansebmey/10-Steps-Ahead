@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public OverlayManager OverlayManager { get; private set; }
     public HighscoreManager HighscoreManager { get; private set; }
     public OnlineHighscoreManager OnlineHighscoreManager { get; private set; }
+    public TutorialManager TutorialManager { get; private set; }
     
     public AudioManager AudioManager => AudioManager.GetInstance();
     public LowPassFilterManager LowPassFilterManager { get; private set; }
@@ -45,9 +46,7 @@ public class GameManager : MonoBehaviour
             }
         }
         
-        OverlayManager.PermaOverlay.ShowInstruction(
-            PermaOverlay.InstructionEnum.Movement,
-            KeyCode.A, KeyCode.D);
+        TutorialManager.ShowInstruction(TutorialManager.InstructionEnum.Movement, KeyCode.A, KeyCode.D);
     }
 
     public void ShowHighscores()
@@ -95,6 +94,7 @@ public class GameManager : MonoBehaviour
         HighscoreManager = GetComponent<HighscoreManager>();
         OnlineHighscoreManager = GetComponent<OnlineHighscoreManager>();
         AestheticsManager = GetComponent<AestheticsManager>();
+        TutorialManager = GetComponent<TutorialManager>();
         
         CameraController = FindObjectOfType<CameraController>();
         OverlayManager = CameraController.GetComponentInChildren<OverlayManager>();
@@ -110,14 +110,10 @@ public class GameManager : MonoBehaviour
         _playerCommandListeners = new ConcurrentStack<IPlayerCommandListener>();
         _playerCommandListeners.Push(FieldItemManager);
         _playerCommandListeners.Push(enemy);
-        _playerCommandListeners.Push(OverlayManager.PermaOverlay);
-        
-        _onGameStartResetters = new List<IResetOnGameStart>();
-        _onGameStartResetters.Add(player);
-        _onGameStartResetters.Add(enemy);
-        _onGameStartResetters.Add(BarrierManager);
-        _onGameStartResetters.Add(FieldItemManager);
-        
+        _playerCommandListeners.Push(TutorialManager);
+
+        _onGameStartResetters = new List<IResetOnGameStart> {player, enemy, BarrierManager, FieldItemManager};
+
         LoadSavedData();
         AudioManager.PlayMusic();
     }

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class AestheticsManager : MonoBehaviour
@@ -18,6 +20,25 @@ public class AestheticsManager : MonoBehaviour
     public int buttonFontSizeSmall;
     public int buttonFontSizeBig;
 
+    private Text[] _allTextObjects;
+    private List<Text> _buttonTexts;
+
+    private void Awake()
+    {
+        _allTextObjects = FindObjectsOfType<Text>(true);
+        
+        _buttonTexts = new List<Text>();
+        Button[] buttons = FindObjectsOfType<Button>(true);
+        foreach (Button b in buttons)
+        {
+            Text buttonText = b.GetComponentInChildren<Text>(true);
+            if (buttonText != null)
+            {
+                _buttonTexts.Add(buttonText);   
+            }
+        }
+    }
+
     private bool _isDyslexicFontShown;
     public bool IsDyslexicFontShown
     {
@@ -25,34 +46,33 @@ public class AestheticsManager : MonoBehaviour
         set
         {
             _isDyslexicFontShown = value;
-            Text[] allTextObjects = FindObjectsOfType<Text>(true);
-        
+            
             if (_isDyslexicFontShown)
             {
-                foreach (Text text in allTextObjects)
+                foreach (Text text in _allTextObjects)
                 {
                     if (!text.CompareTag("FixedFontText"))
                     {
                         text.font = text.CompareTag("HeaderText") ? dyslexicHeaderFont : dyslexicTextFont;
-                        if (text.GetComponentInParent<Button>() != null)
-                        {
-                            text.fontSize = buttonFontSizeSmall;
-                        }
                     }
+                }
+                foreach (Text text in _buttonTexts)
+                {
+                    text.fontSize = buttonFontSizeSmall;
                 }
             }
             else
             {
-                foreach (Text text in allTextObjects)
+                foreach (Text text in _allTextObjects)
                 {
                     if (!text.CompareTag("FixedFontText"))
                     {
                         text.font = text.CompareTag("HeaderText") ? headerFont : textFont;
-                        if (text.GetComponentInParent<Button>() != null)
-                        {
-                            text.fontSize = buttonFontSizeBig;
-                        }
                     }
+                }
+                foreach (Text text in _buttonTexts)
+                {
+                    text.fontSize = buttonFontSizeBig;
                 }
             }
         }

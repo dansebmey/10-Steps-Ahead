@@ -2,5 +2,5 @@
 
 public class Instruction : MonoBehaviour
 {
-    public PermaOverlay.InstructionEnum instructionEnum;
+    public TutorialManager.InstructionEnum instructionEnum;
 }

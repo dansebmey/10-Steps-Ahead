@@ -86,7 +86,6 @@
               </e>
               <e p="InstructionOverlay" t="Include">
                 <e p="Instruction.cs" t="Include" />
-                <e p="PermaOverlay.cs" t="Include" />
               </e>
               <e p="MainMenuOverlay.cs" t="Include" />
               <e p="MenuOverlay.cs" t="Include" />
