@@ -12,7 +12,7 @@ public class HudOverlay : Overlay
     public ConcurrentDictionary<KeyCode[], Instruction> InstructionsCurrentlyShown { get; private set; }
     public List<Instruction> instructionPrefabs;
     
-    private Text _scoreShadowLabel, _scoreLabel, _labelForTesting;
+    private Text _scoreShadowLabel, _scoreLabel;
 
     private BigHammerInterface _bigHammerInterface;
 
@@ -20,16 +20,11 @@ public class HudOverlay : Overlay
     {
         base.Awake();
         
-        _scoreShadowLabel = GetComponentsInChildren<Text>()[0];
-        _scoreLabel = GetComponentsInChildren<Text>()[1];
-        _labelForTesting = GetComponentsInChildren<Text>()[2];
-        _labelForTesting.gameObject.SetActive(false);
+        _scoreShadowLabel = GetComponentsInChildren<Text>(true)[0];
+        _scoreLabel = GetComponentsInChildren<Text>(true)[1];
 
         _bigHammerInterface = GetComponentInChildren<BigHammerInterface>();
-    }
-
-    private void Start()
-    {
+        
         InstructionsCurrentlyShown = new ConcurrentDictionary<KeyCode[], Instruction>();
     }
 
@@ -42,11 +37,6 @@ public class HudOverlay : Overlay
     public void UpdateBigHammerInterface()
     {
         _bigHammerInterface.UpdateMeter();
-    }
-
-    private void Update()
-    {
-        // _labelForTesting.text = _gmForTesting.CurrentState.ToString();
     }
 
     public override void OnHide()

@@ -8,8 +8,15 @@ public class SettingsOverlay : MenuOverlay
     protected override void Awake()
     {
         base.Awake();
-        _musicVolumeSlider = GetComponentsInChildren<Slider>()[0];
-        _sfxVolumeSlider = GetComponentsInChildren<Slider>()[1];
+        _musicVolumeSlider = GetComponentsInChildren<Slider>(true)[0];
+        _sfxVolumeSlider = GetComponentsInChildren<Slider>(true)[1];
+    }
+
+    public override void OnHide()
+    {
+        base.OnHide();
+        
+        Gm.OverlayManager.UpdateVolumeSliders(_musicVolumeSlider.value, _sfxVolumeSlider.value);
     }
 
     public override void OnShow()

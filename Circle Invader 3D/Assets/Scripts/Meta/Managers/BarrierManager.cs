@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class BarrierManager : MonoBehaviour, IResetOnGameStart
+public class BarrierManager : GmAwareObject, IResetOnGameStart
 {
     [Range(2,32)] public int amountOfBarriers;
     [HideInInspector] public float barrierDistanceFromCenter;
@@ -33,13 +33,6 @@ public class BarrierManager : MonoBehaviour, IResetOnGameStart
 
             return total;
         } 
-    }
-
-    private GameManager _gm;
-
-    private void Awake()
-    {
-        _gm = GetComponentInParent<GameManager>();
     }
 
     protected void Start()
@@ -128,7 +121,7 @@ public class BarrierManager : MonoBehaviour, IResetOnGameStart
 
     public void RepairBarriers(int range, int healValue)
     {
-        for (int i = _gm.CurrentPosIndex - range; i <= _gm.CurrentPosIndex + range; i++)
+        for (int i = Gm.CurrentPosIndex - range; i <= Gm.CurrentPosIndex + range; i++)
         {
             Barrier bar = Barriers[(Barriers.Length+i) % Barriers.Length];
             if (!bar.IsCollapsed)
@@ -148,9 +141,9 @@ public class BarrierManager : MonoBehaviour, IResetOnGameStart
         int range = 0;
         while (true)
         {
-            _gm.AudioManager.PlayPitched("HammerFix", 1 + range * 0.1f, 0.05f);
-            Barrier left = Barriers[(amountOfBarriers + _gm.CurrentPosIndex-range) % amountOfBarriers];
-            Barrier right = Barriers[(amountOfBarriers + _gm.CurrentPosIndex + range) % amountOfBarriers];
+            Gm.AudioManager.PlayPitched("HammerFix", 1 + range * 0.1f, 0.05f);
+            Barrier left = Barriers[(amountOfBarriers + Gm.CurrentPosIndex-range) % amountOfBarriers];
+            Barrier right = Barriers[(amountOfBarriers + Gm.CurrentPosIndex + range) % amountOfBarriers];
 
             left.IsCollapsed = false;
             left.RestoreHealth(healValue);

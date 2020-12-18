@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -30,8 +31,6 @@ public class GameManager : MonoBehaviour
 
     public Player player;
     public MechaTotem enemy;
-
-    [HideInInspector] public List<IDamageable> damageables;
 
     public void StartNewGame()
     {
@@ -87,7 +86,6 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        
         BarrierManager = GetComponentInChildren<BarrierManager>();
         FieldItemManager = GetComponentInChildren<FieldItemManager>();
         _dataManager = GetComponent<DataManager>();
@@ -101,19 +99,17 @@ public class GameManager : MonoBehaviour
         LowPassFilterManager = CameraController.GetComponent<LowPassFilterManager>();
         
         _fsm = new FiniteStateMachine(this, typeof(MenuState), statePrefabs);
-    }
-
-    private void Start()
-    {
-        damageables = new List<IDamageable>();
-
+        
         _playerCommandListeners = new ConcurrentStack<IPlayerCommandListener>();
         _playerCommandListeners.Push(FieldItemManager);
         _playerCommandListeners.Push(enemy);
         _playerCommandListeners.Push(TutorialManager);
 
         _onGameStartResetters = new List<IResetOnGameStart> {player, enemy, BarrierManager, FieldItemManager};
+    }
 
+    private void Start()
+    {
         LoadSavedData();
         AudioManager.PlayMusic();
     }
@@ -151,14 +147,6 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         CurrentState.OnUpdate();
-    }
-
-    public void RegisterObject(MovableObject obj)
-    {
-        if (obj is IDamageable dam)
-        {
-            damageables.Add(dam);
-        }
     }
 
     public void OnPlayerCommandPerformed(KeyCode keyCode)

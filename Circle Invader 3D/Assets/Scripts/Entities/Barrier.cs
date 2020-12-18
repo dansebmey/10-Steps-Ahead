@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Barrier : OrbitingObject, IDamageable
+public class Barrier : OrbitingObject
 {
     private BarrierManager Bm => Gm.BarrierManager;
     private Material _material;

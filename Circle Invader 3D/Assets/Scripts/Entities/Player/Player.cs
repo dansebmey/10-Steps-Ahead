@@ -27,8 +27,6 @@ public class Player : OrbitingObject, IResetOnGameStart
             distanceFromCenter * Mathf.Sin((Mathf.PI * 2 / Gm.BarrierManager.amountOfBarriers) * Gm.CurrentPosIndex));
         transform.position = targetPos;
         transform.LookAt(Vector3.zero);
-
-        isDefeated = false;
     }
 
     public void SetTargetPos()

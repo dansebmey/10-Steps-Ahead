@@ -15,11 +15,8 @@ public class Inventory : GmAwareObject
     protected override void Awake()
     {
         base.Awake();
+        
         _invInterface = FindObjectOfType<InventoryInterface>(true);
-    }
-
-    private void Start()
-    {
         carriedPowerups = new List<Powerup>();
     }
 

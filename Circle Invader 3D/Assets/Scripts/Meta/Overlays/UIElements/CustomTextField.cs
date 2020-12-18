@@ -25,10 +25,7 @@ public class CustomTextField : MonoBehaviour
             // '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
             ' '
         };
-    }
-
-    private void Start()
-    {
+        
         _text.text = _chars[_charIndex].ToString();
         _textShadow.text = _chars[_charIndex].ToString();
     }

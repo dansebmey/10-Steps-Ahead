@@ -17,7 +17,7 @@ public class AudioManager : MonoBehaviour
         set 
         {
             _musicVolume = value;
-            music.targetVolume = sfx[0].initVolume * _musicVolume;
+            music.targetVolume = music.initVolume * _musicVolume;
         }
     }
 

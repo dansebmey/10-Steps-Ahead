@@ -27,8 +27,10 @@ public class CameraController : GmAwareObject
 
     private void Start()
     {
-        FocusOn(defaultFocalPoint, new Vector3(0, 1, -10), new Vector3(-15, 0, 0), 0.005f);
-        // FocusOn(defaultFocalPoint, defaultPos, defaultRotEulers, 0.005f);
+        FocusOn(defaultFocalPoint, 
+            new Vector3(0, 1, -10), 
+            new Vector3(-15, 0, 0),
+            0.005f);
     }
 
     public void FocusOn(Transform targetObject, Vector3 targetLocalPos, Vector3 targetLocalRotEulers, float transitionSpeed = 0.05f)

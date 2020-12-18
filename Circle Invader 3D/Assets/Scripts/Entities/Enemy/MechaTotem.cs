@@ -22,11 +22,12 @@ public class MechaTotem : MovableObject, IPlayerCommandListener, IResetOnGameSta
     
     public float layerHeight = 0.5f;
 
-    // Start is called before the first frame update
-    protected override void Start()
+    protected override void Awake()
     {
+        base.Awake();
+        
         Gm.enemy = this;
-
+        
         actionPrefabs[0].action = Idle;
         actionPrefabs[1].action = BasicAttack;
         actionPrefabs[2].action = SplitAttack;
@@ -118,7 +119,6 @@ public class MechaTotem : MovableObject, IPlayerCommandListener, IResetOnGameSta
     private void MoveTotemLayersDown()
     {
         List<TotemLayer> layers = new List<TotemLayer>(_totemLayers);
-        Debug.Log("Last totem = " + layers.Last().name);
         for (int i = 0; i < layers.Count; i++)
         { 
             layers[i].targetPos = new Vector3(0, 0.25f + (layerHeight + 0.025f) * i, 0);
@@ -181,12 +181,16 @@ public class MechaTotem : MovableObject, IPlayerCommandListener, IResetOnGameSta
 
     public void OnPlayerCommandPerformed(KeyCode keyCode)
     {
-        foreach (Missile proj in MissilesInField)
+        if (MissilesInField != null)
+            // dirty fix for bug where totem doesn't respond to player action (in build)
         {
-            Missile thisProj = proj;
-            if (!thisProj.MoveForward())
+            foreach (Missile proj in MissilesInField)
             {
-                MissilesInField.TryDequeue(out thisProj);
+                Missile thisProj = proj;
+                if (!thisProj.MoveForward())
+                {
+                    MissilesInField.TryDequeue(out thisProj);
+                }
             }
         }
     }

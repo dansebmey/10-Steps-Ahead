@@ -20,18 +20,6 @@ public class WaitingForPlayerAction : State
         };
     }
 
-    private void Start()
-    {
-        // _inputMap = new Dictionary<KeyCode, Func<bool>>
-        // {
-        //     {KeyCode.A, MovePlayerLeft},
-        //     {KeyCode.D, MovePlayerRight},
-        //     {KeyCode.Space, ConsumeSelectedItem},
-        //     {KeyCode.W, SelectNextItem},
-        //     {KeyCode.S, SelectPreviousItem},
-        // };
-    }
-
     private bool MovePlayerLeft()
     {
         Gm.CurrentPosIndex--;

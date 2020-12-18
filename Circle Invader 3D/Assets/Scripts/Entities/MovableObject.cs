@@ -7,7 +7,6 @@ public abstract class MovableObject : GmAwareObject
 
     protected virtual void Start()
     {
-        Gm.RegisterObject(this);
         targetPos = transform.position;
     }
 

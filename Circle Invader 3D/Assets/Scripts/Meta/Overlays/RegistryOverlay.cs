@@ -23,8 +23,6 @@ public class RegistryOverlay : Overlay
 
     [SerializeField] private Text notificationText;
 
-    private Dictionary<string, string> _profanityFilterMap;
-
     protected override void Awake()
     {
         base.Awake();
@@ -32,14 +30,6 @@ public class RegistryOverlay : Overlay
         _customTextFields = GetComponentsInChildren<CustomTextField>();
         _submitButton = GetComponentInChildren<Button>();
         _submitButtonText = _submitButton.GetComponentInChildren<Text>();
-    }
-
-    private void Start()
-    {
-        _profanityFilterMap = new Dictionary<string, string>()
-        {
-            {"PENIS","8===D"}
-        };
     }
 
     public override void OnHide()
@@ -124,10 +114,7 @@ public class RegistryOverlay : Overlay
             if (!HandleLoadingText("Submitting")) break;
             yield return new WaitForSeconds(0.25f);
         }
-        if (!_uploadInProgress)
-        {
-            Gm.OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.Highscore);
-        }
+        Gm.OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.Highscore);
     }
 
     private bool HandleLoadingText(string baseText)
@@ -149,10 +136,6 @@ public class RegistryOverlay : Overlay
         foreach (CustomTextField ctf in _customTextFields)
         {
             result += ctf.GetCharacter();
-        }
-        if (_profanityFilterMap.ContainsKey(result))
-        {
-            result = _profanityFilterMap[result];
         }
 
         return result;

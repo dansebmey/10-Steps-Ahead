@@ -11,9 +11,9 @@ public class OnlineHighscoreManager : HighscoreManager
     private OnlineHighscoreOverlay _ohsOverlay;
     private RegistryOverlay _registryOverlay;
     
-    private const string privateCode = "yvIHXBo13k-G6t3dmcjRHQjkLmW2idX0qETqYsFTx1Vg";
-    private const string publicCode = "5fda77aceb36c70af8369f2f";
-    private const string webUrl = "http://dreamlo.com/lb/";
+    private const string PRIVATE_CODE = "yvIHXBo13k-G6t3dmcjRHQjkLmW2idX0qETqYsFTx1Vg";
+    private const string PUBLIC_CODE = "5fda77aceb36c70af8369f2f";
+    private const string WEB_URL = "http://dreamlo.com/lb/";
 
     [HideInInspector] public HighscoreData.HighscoreEntryData[] cachedOnlineEntries;
     [HideInInspector] public List<HighscoreData.HighscoreEntryData> pendingUploadEntries;
@@ -26,13 +26,6 @@ public class OnlineHighscoreManager : HighscoreManager
 
         _ohsOverlay = FindObjectOfType<OnlineHighscoreOverlay>(true);
         _registryOverlay = FindObjectOfType<RegistryOverlay>(true);
-    }
-
-    protected override void Start()
-    {
-        base.Start();
-        pendingUploadEntries = new List<HighscoreData.HighscoreEntryData>(
-            new List<HighscoreData.HighscoreEntryData>(HighscoreData.pendingUploadEntries));
 
         LoadingTextVars = new[]
         {
@@ -43,6 +36,14 @@ public class OnlineHighscoreManager : HighscoreManager
             "    .",
             "     "
         };
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+        
+        pendingUploadEntries = new List<HighscoreData.HighscoreEntryData>(
+            new List<HighscoreData.HighscoreEntryData>(HighscoreData.pendingUploadEntries));
     }
 
     public void UploadNewHighscore(string username, int score)
@@ -63,7 +64,7 @@ public class OnlineHighscoreManager : HighscoreManager
     private IEnumerator _UploadNewHighscore(HighscoreData.HighscoreEntryData entry)
     {
         UnityWebRequest req = new UnityWebRequest
-            (webUrl + privateCode + "/add/" + UnityWebRequest.EscapeURL(entry.username) + "/" + entry.score);
+            (WEB_URL + PRIVATE_CODE + "/add/" + UnityWebRequest.EscapeURL(entry.username) + "/" + entry.score);
         yield return req.SendWebRequest();
 
         if (!string.IsNullOrEmpty(req.error) && !pendingUploadEntries.Contains(entry))
@@ -91,7 +92,7 @@ public class OnlineHighscoreManager : HighscoreManager
     
     private IEnumerator _DownloadHighscores()
     {
-        UnityWebRequest req = new UnityWebRequest(webUrl + publicCode + "/quote/" + maxAmtOfEntries);
+        UnityWebRequest req = new UnityWebRequest(WEB_URL + PUBLIC_CODE + "/quote/" + maxAmtOfEntries);
         DownloadHandlerBuffer dhb = new DownloadHandlerBuffer();
         req.downloadHandler = dhb;
         
