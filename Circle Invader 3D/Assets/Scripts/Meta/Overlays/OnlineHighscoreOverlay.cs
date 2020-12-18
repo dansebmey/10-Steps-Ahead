@@ -136,7 +136,7 @@ public class OnlineHighscoreOverlay : MenuOverlay
         _downloadWaitIterations++;
         if (_downloadWaitIterations >= 40)
         {
-            _loadingText.text = "Could not retrieve global highscore data :(";
+            _loadingText.text = "Could not retrieve global highscores :(";
             OnDataTransferComplete();
             return false;
         }

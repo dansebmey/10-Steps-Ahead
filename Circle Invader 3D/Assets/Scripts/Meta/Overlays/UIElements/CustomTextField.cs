@@ -15,10 +15,7 @@ public class CustomTextField : MonoBehaviour
         _text = GetComponentsInChildren<Text>()[0];
         _textShadow = GetComponentsInChildren<Text>()[1];
         _arrows = GetComponentsInChildren<Text>()[2];
-    }
-
-    private void Start()
-    {
+        
         _chars = new[]
         {
             'A', 'B', 'C', 'D', 'E', 'F', 'G',
@@ -28,7 +25,10 @@ public class CustomTextField : MonoBehaviour
             // '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
             ' '
         };
-        
+    }
+
+    private void Start()
+    {
         _text.text = _chars[_charIndex].ToString();
         _textShadow.text = _chars[_charIndex].ToString();
     }
