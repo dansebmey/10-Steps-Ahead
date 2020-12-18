@@ -209,6 +209,7 @@ public class GameManager : MonoBehaviour
     private void EndGame()
     {
         player.isDefeated = true;
+        AudioManager.Play("GameOver");
         OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.GameOver);
     }
 

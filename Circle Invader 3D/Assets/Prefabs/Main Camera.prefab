@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &146693641
 RectTransform:
   m_ObjectHideFlags: 0
@@ -835,12 +835,12 @@ PrefabInstance:
     - target: {fileID: 5826746504765784487, guid: 22374b8e13b4aba43bdceed57f13d9a3,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 640
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 5826746504765784487, guid: 22374b8e13b4aba43bdceed57f13d9a3,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 120
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5826746504765784487, guid: 22374b8e13b4aba43bdceed57f13d9a3,
         type: 3}
@@ -895,7 +895,7 @@ PrefabInstance:
     - target: {fileID: 5826746504765784487, guid: 22374b8e13b4aba43bdceed57f13d9a3,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -344
+      value: -224
       objectReference: {fileID: 0}
     - target: {fileID: 5826746504765784487, guid: 22374b8e13b4aba43bdceed57f13d9a3,
         type: 3}
@@ -1824,6 +1824,11 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8735968043730863061, guid: 502e74981682f0246b503512f3a62be6,
+        type: 3}
+      propertyPath: m_Name
+      value: Button (To Main Menu)
+      objectReference: {fileID: 0}
     - target: {fileID: 8735968043730863062, guid: 502e74981682f0246b503512f3a62be6,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -1903,6 +1908,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8735968043755855465, guid: 502e74981682f0246b503512f3a62be6,
+        type: 3}
+      propertyPath: m_Text
+      value: To Main Menu
       objectReference: {fileID: 0}
     - target: {fileID: 8735968043755855465, guid: 502e74981682f0246b503512f3a62be6,
         type: 3}
@@ -2454,6 +2464,21 @@ PrefabInstance:
       propertyPath: m_FontData.m_HorizontalOverflow
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3216888622812924116, guid: 7ea842d3bdc9fc74bad8138bbb796157,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -480
+      objectReference: {fileID: 0}
+    - target: {fileID: 3713489542015115912, guid: 7ea842d3bdc9fc74bad8138bbb796157,
+        type: 3}
+      propertyPath: m_Text
+      value: Thanks to DREAMLO.COM by Carmine T. Guida
+      objectReference: {fileID: 0}
+    - target: {fileID: 4748330446279685237, guid: 7ea842d3bdc9fc74bad8138bbb796157,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -744
+      objectReference: {fileID: 0}
     - target: {fileID: 7382849972591196512, guid: 7ea842d3bdc9fc74bad8138bbb796157,
         type: 3}
       propertyPath: m_Name
@@ -2462,7 +2487,17 @@ PrefabInstance:
     - target: {fileID: 7382849972591196512, guid: 7ea842d3bdc9fc74bad8138bbb796157,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7818557423727499698, guid: 7ea842d3bdc9fc74bad8138bbb796157,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -540
+      objectReference: {fileID: 0}
+    - target: {fileID: 8353454308969996755, guid: 7ea842d3bdc9fc74bad8138bbb796157,
+        type: 3}
+      propertyPath: m_Text
+      value: Easy Global Highscore Storage
       objectReference: {fileID: 0}
     - target: {fileID: 8484878604081123774, guid: 7ea842d3bdc9fc74bad8138bbb796157,
         type: 3}
@@ -2569,6 +2604,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8857721213704603199, guid: 7ea842d3bdc9fc74bad8138bbb796157,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -684
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ea842d3bdc9fc74bad8138bbb796157, type: 3}
 --- !u!224 &2794601691562387590 stripped
@@ -2584,6 +2624,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 901605022073536180}
     m_Modifications:
+    - target: {fileID: 194045358548923889, guid: 0184e792d8f090c4583f2d869fc8f906,
+        type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 194045358548923889, guid: 0184e792d8f090c4583f2d869fc8f906,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -2704,6 +2749,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: OnlineHighscoreOverlay
       objectReference: {fileID: 0}
+    - target: {fileID: 2188160150961309455, guid: 0184e792d8f090c4583f2d869fc8f906,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7130454439808006146, guid: 0184e792d8f090c4583f2d869fc8f906,
         type: 3}
       propertyPath: m_Text
@@ -2718,6 +2768,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_FontData.m_HorizontalOverflow
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7130454440235607484, guid: 0184e792d8f090c4583f2d869fc8f906,
+        type: 3}
+      propertyPath: m_Interactable
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7130454440235607484, guid: 0184e792d8f090c4583f2d869fc8f906,
         type: 3}
@@ -2736,6 +2791,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8193980502801353633, guid: 0184e792d8f090c4583f2d869fc8f906,
         type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8193980502801353633, guid: 0184e792d8f090c4583f2d869fc8f906,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: RefreshOnlineHighscores
       objectReference: {fileID: 0}
@@ -2743,6 +2803,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: OnlineHighscoreManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8193980502893843999, guid: 0184e792d8f090c4583f2d869fc8f906,
+        type: 3}
+      propertyPath: m_FontData.m_VerticalOverflow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8193980502893843999, guid: 0184e792d8f090c4583f2d869fc8f906,
+        type: 3}
+      propertyPath: m_FontData.m_HorizontalOverflow
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0184e792d8f090c4583f2d869fc8f906, type: 3}
@@ -2937,7 +3007,7 @@ PrefabInstance:
     - target: {fileID: 3556484502507235928, guid: 7be084bbaa8d2384a84c8f5d0ed3df68,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3652495970126925169, guid: 7be084bbaa8d2384a84c8f5d0ed3df68,
         type: 3}

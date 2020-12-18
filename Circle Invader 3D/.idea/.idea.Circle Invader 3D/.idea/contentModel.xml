@@ -73,6 +73,7 @@
                 <e p="HighscoreManager.cs" t="Include" />
                 <e p="OnlineHighscoreManager.cs" t="Include" />
               </e>
+              <e p="TutorialManager.cs" t="Include" />
             </e>
             <e p="Overlays" t="Include">
               <e p="CreditsOverlay.cs" t="Include" />

@@ -16,7 +16,7 @@ public class PermaOverlay : Overlay, IPlayerCommandListener
     public List<Instruction> instructionPrefabs;
     private List<InstructionEnum> _instructionsAlreadyShown;
 
-    private const string FILENAME = "instructions.tsa"; 
+    private const string FILENAME = "instructions.tsa";
 
     private void Start()
     {

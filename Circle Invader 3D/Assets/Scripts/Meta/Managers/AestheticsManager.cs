@@ -3,6 +3,21 @@ using UnityEngine.UI;
 
 public class AestheticsManager : MonoBehaviour
 {
+    public Font headerFont;
+    public Font textFont;
+    
+    public Font dyslexicHeaderFont;
+    public Font dyslexicTextFont;
+
+    public Color specialColor;
+    public Color goodColor;
+    public Color neutralColor;
+    public Color badColor;
+    public Color veryBadColor;
+
+    public int buttonFontSizeSmall;
+    public int buttonFontSizeBig;
+
     private bool _isDyslexicFontShown;
     public bool IsDyslexicFontShown
     {
@@ -19,6 +34,10 @@ public class AestheticsManager : MonoBehaviour
                     if (!text.CompareTag("FixedFontText"))
                     {
                         text.font = text.CompareTag("HeaderText") ? dyslexicHeaderFont : dyslexicTextFont;
+                        if (text.GetComponentInParent<Button>() != null)
+                        {
+                            text.fontSize = buttonFontSizeSmall;
+                        }
                     }
                 }
             }
@@ -29,24 +48,16 @@ public class AestheticsManager : MonoBehaviour
                     if (!text.CompareTag("FixedFontText"))
                     {
                         text.font = text.CompareTag("HeaderText") ? headerFont : textFont;
+                        if (text.GetComponentInParent<Button>() != null)
+                        {
+                            text.fontSize = buttonFontSizeBig;
+                        }
                     }
                 }
             }
         }
     }
     
-    public Font headerFont;
-    public Font textFont;
-    
-    public Font dyslexicHeaderFont;
-    public Font dyslexicTextFont;
-
-    public Color specialColor;
-    public Color goodColor;
-    public Color neutralColor;
-    public Color badColor;
-    public Color veryBadColor;
-
     public void ToggleFont()
     {
         IsDyslexicFontShown = !IsDyslexicFontShown;
