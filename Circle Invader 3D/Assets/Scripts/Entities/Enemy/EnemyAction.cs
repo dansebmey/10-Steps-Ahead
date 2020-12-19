@@ -8,7 +8,7 @@ public class EnemyAction
 {
     public string actionName;
     public int scoreReq;
-    public TotemLayer layerPrefab;
+    public EnemyLayer layerPrefab;
     public Action action;
     
     [Range(-1, 100)] public int chance = 100;

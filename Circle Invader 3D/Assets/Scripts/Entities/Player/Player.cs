@@ -36,7 +36,7 @@ public class Player : OrbitingObject, IResetOnGameStart
             0,
             distanceFromCenter * Mathf.Sin((Mathf.PI * 2 / Gm.BarrierManager.amountOfBarriers) * Gm.CurrentPosIndex));
         
-        Gm.SwitchState(typeof(InvokeEnemyAction));
+        Gm.SwitchState(typeof(InvokeEnemyActionState));
     }
 
     protected override void AngleTowardsSomething()
