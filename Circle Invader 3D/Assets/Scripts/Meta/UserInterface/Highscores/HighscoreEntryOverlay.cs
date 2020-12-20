@@ -114,7 +114,10 @@ public class HighscoreEntryOverlay : Overlay
             if (!HandleLoadingText("Submitting")) break;
             yield return new WaitForSeconds(0.25f);
         }
-        Gm.OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.Highscore);
+
+        Gm.OverlayManager.SetActiveOverlay(Gm.IOEnabled
+            ? OverlayManager.OverlayEnum.Highscore
+            : OverlayManager.OverlayEnum.OnlineHighscore);
     }
 
     private bool HandleLoadingText(string baseText)

@@ -5,10 +5,8 @@ public class FieldItem : OrbitingObject
 {
     public Item item;
     public int scoreReq;
+    [Range(0,100)] public int spawnWeight;
     public bool consumeOnPickup;
-    
-    public Color colour;
-    public Color upgradedColour;
 
     private int _remainingDuration;
 

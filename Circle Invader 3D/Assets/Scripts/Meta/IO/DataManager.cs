@@ -9,6 +9,8 @@ public class DataManager : MonoBehaviour
     
     public void Save(GameManager gm)
     {
+        if (!gm.IOEnabled) return;
+        
         BinaryFormatter formatter = new BinaryFormatter();
         SaveGame(gm, formatter);
         SaveSettings(gm, formatter);

@@ -49,9 +49,8 @@ MonoBehaviour:
   distanceFromCenter: 4
   item: {fileID: 11400000, guid: 4f83346a8484cee4788720eae8be1697, type: 2}
   scoreReq: 0
+  spawnWeight: 65
   consumeOnPickup: 0
-  colour: {r: 0.63720775, g: 1, b: 0, a: 1}
-  upgradedColour: {r: 1, g: 0.808019, b: 0.3433962, a: 1}
 --- !u!1 &6435229655131818654
 GameObject:
   m_ObjectHideFlags: 0

@@ -21,12 +21,15 @@
               <e p="BigHammerFieldItem.cs" t="Include" />
               <e p="FieldItem.cs" t="Include" />
               <e p="FieldItemManager.cs" t="Include" />
-              <e p="Powerups" t="Include">
+              <e p="FirewallField.cs" t="Include" />
+              <e p="ItemEffects" t="Include">
+                <e p="AntiHammer.cs" t="Include" />
                 <e p="BigHammer.cs" t="Include" />
                 <e p="Coin.cs" t="Include" />
                 <e p="Hammer.cs" t="Include" />
                 <e p="Item.cs" t="Include" />
                 <e p="Powerup.cs" t="Include" />
+                <e p="Silence.cs" t="Include" />
                 <e p="Warp.cs" t="Include" />
               </e>
             </e>

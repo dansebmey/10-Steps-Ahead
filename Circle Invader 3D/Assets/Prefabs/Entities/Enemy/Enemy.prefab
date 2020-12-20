@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7892750245613857348}
   - component: {fileID: 7892750245613857349}
   m_Layer: 0
-  m_Name: MechaTotem
+  m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,7 +44,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPos: {x: 0, y: 0, z: 0}
-  amtOfVisibleActions: 10
   actionPrefabs:
   - actionName: Idle
     scoreReq: 0
@@ -66,6 +65,13 @@ MonoBehaviour:
     layerPrefab: {fileID: 5980321227106648739, guid: ec4357a557fb0244ebfe9303cf581aaf,
       type: 3}
     chance: 10
+  - actionName: FireAttack
+    scoreReq: 250
+    layerPrefab: {fileID: 1035985851408491737, guid: 97bf566ddafc08243bd8148e96858ed4,
+      type: 3}
+    chance: 4
   delayedProjPrefab: {fileID: 1774929410537623454, guid: 448ebb43eadf1b44e8a509033605b8f5,
+    type: 3}
+  firewallPrefab: {fileID: 920177860894263616, guid: cc5b72c313606d24d89bee23871341d3,
     type: 3}
   layerHeight: 0.5

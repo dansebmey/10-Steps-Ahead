@@ -69,19 +69,54 @@ public class FieldItemManager : GmAwareObject, IPlayerCommandListener, IResetOnG
     {
         if (ItemsInField.Count == 0 && EligibleForPowerupSpawn())
         {
-            SpawnItem(SelectRandomItemToSpawn(Random.Range(0, itemPrefabs.Count)));
+            SpawnItem(SelectRandomItemToSpawn());
         }
     }
 
-    private FieldItem SelectRandomItemToSpawn(int rn)
+    private FieldItem SelectRandomItemToSpawn()
     {
-        FieldItem item = itemPrefabs[rn];
-        if (Gm.IsScoreHigherThan(item.scoreReq))
+        List<FieldItem> fieldItems = DetermineAvailableItems();
+        fieldItems.Sort(new ItemSorter());
+        
+        int totalWeight = CalculateTotalWeight(fieldItems);
+        int cumulativeWeight = 0;
+        
+        int rn = Random.Range(0, totalWeight);
+        foreach (FieldItem fieldItem in fieldItems)
         {
-            return item;
+            cumulativeWeight += fieldItem.spawnWeight;
+            if (rn <= cumulativeWeight)
+            {
+                return fieldItem;
+            }
         }
 
-        return SelectRandomItemToSpawn((rn + 1) % (itemPrefabs.Count - 1));
+        return null;
+    }
+
+    private int CalculateTotalWeight(List<FieldItem> fieldItems)
+    {
+        int total = 0;
+        foreach (FieldItem fieldItem in fieldItems)
+        {
+            total += fieldItem.spawnWeight;
+        }
+
+        return total;
+    }
+
+    private List<FieldItem> DetermineAvailableItems()
+    {
+        List<FieldItem> result = new List<FieldItem>();
+        foreach (FieldItem fieldItem in itemPrefabs)
+        {
+            if (fieldItem.spawnWeight > 0 && Gm.IsScoreHigherThan(fieldItem.scoreReq))
+            {
+                result.Add(fieldItem);
+            }
+        }
+
+        return result;
     }
 
     private void SpawnItem(FieldItem itemPrefab)
@@ -188,5 +223,17 @@ public class FieldItemManager : GmAwareObject, IPlayerCommandListener, IResetOnG
         }
 
         return null;
+    }
+    
+    class ItemSorter : IComparer<FieldItem> 
+    {
+        public int Compare(FieldItem a, FieldItem b)
+        {
+            if (a.spawnWeight < b.spawnWeight)
+            {
+                return -1;
+            }
+            return b.spawnWeight > a.spawnWeight ? 1 : 0;
+        }
     }
 }

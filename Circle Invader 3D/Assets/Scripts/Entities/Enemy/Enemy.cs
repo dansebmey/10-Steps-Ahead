@@ -15,9 +15,8 @@ public class Enemy : MovableObject, IPlayerCommandListener, IResetOnGameStart
 
     [Header("Prefabs")]
     [SerializeField] private List<EnemyAction> actionPrefabs;
-    
-    [Header("Delayed projectiles")]
     [SerializeField] public Missile delayedProjPrefab;
+    [SerializeField] public FieldItem firewallPrefab;
     public ConcurrentQueue<Missile> MissilesInField { get; private set; }
     
     public float layerHeight = 0.5f;
@@ -32,6 +31,7 @@ public class Enemy : MovableObject, IPlayerCommandListener, IResetOnGameStart
         actionPrefabs[1].action = BasicAttack;
         actionPrefabs[2].action = SplitAttack;
         actionPrefabs[3].action = DelayedAttack;
+        actionPrefabs[4].action = FlameAttack;
         
         InitActionQueue();
         
@@ -57,12 +57,12 @@ public class Enemy : MovableObject, IPlayerCommandListener, IResetOnGameStart
         MoveTotemLayersDown();
     }
 
-    private void QueueNewAction(int actionIndex)
+    private void QueueNewAction(int actionIndex, bool addFirst = false)
     {
         QueueNewAction(actionPrefabs[actionIndex]);
     }
 
-    private void QueueNewAction(EnemyAction enemyAction)
+    private void QueueNewAction(EnemyAction enemyAction, bool addFirst = false)
     {
         EnemyLayer layer = Instantiate(
             enemyAction.layerPrefab,
@@ -70,8 +70,18 @@ public class Enemy : MovableObject, IPlayerCommandListener, IResetOnGameStart
             transform.rotation);
         layer.transform.parent = transform;
         
-        _totemLayers.AddLast(layer);
-        queuedActions.AddLast(enemyAction);
+        enemyAction.remainingCooldown = enemyAction.cooldownInTurns;
+        
+        if (!addFirst)
+        {
+            _totemLayers.AddLast(layer);
+            queuedActions.AddLast(enemyAction);
+        }
+        else
+        {
+            _totemLayers.AddFirst(layer);
+            queuedActions.AddFirst(enemyAction);
+        }
 
         MoveTotemLayersDown();
     }
@@ -103,6 +113,21 @@ public class Enemy : MovableObject, IPlayerCommandListener, IResetOnGameStart
         Gm.AudioManager.Play("DelayedAttackFired");
         Gm.SwitchState(typeof(WaitingForPlayerActionState));
         // TODO: State switching should be done somewhere more central
+    }
+
+    private void FlameAttack()
+    {
+        FieldItem fieldItem = Instantiate(firewallPrefab, Vector3.zero, Quaternion.identity);
+        fieldItem.distanceFromCenter = Gm.BarrierManager.barrierDistanceFromCenter + 0.75f;
+        fieldItem.CurrentPosIndex = Gm.CurrentPosIndex - (Gm.BarrierManager.amountOfBarriers / 4);
+        fieldItem.transform.position = fieldItem.targetPos;
+        
+        fieldItem = Instantiate(firewallPrefab, Vector3.zero, Quaternion.identity);
+        fieldItem.distanceFromCenter = Gm.BarrierManager.barrierDistanceFromCenter + 0.75f;
+        fieldItem.CurrentPosIndex = Gm.CurrentPosIndex + (Gm.BarrierManager.amountOfBarriers / 4);
+        fieldItem.transform.position = fieldItem.targetPos;
+        
+        Gm.SwitchState(typeof(WaitingForPlayerActionState));
     }
 
     public void InvokeNextAction()
@@ -139,7 +164,7 @@ public class Enemy : MovableObject, IPlayerCommandListener, IResetOnGameStart
         int cumulativeWeight = 0;
         int newActionIndex = -1;
         
-        int rn = UnityEngine.Random.Range(0, totalWeight);
+        int rn = Random.Range(0, totalWeight);
         foreach (EnemyAction action in actions)
         {
             cumulativeWeight += action.chance;
@@ -170,7 +195,7 @@ public class Enemy : MovableObject, IPlayerCommandListener, IResetOnGameStart
         List<EnemyAction> result = new List<EnemyAction>();
         foreach (EnemyAction action in actionPrefabs)
         {
-            if (Gm.IsScoreHigherThan(action.scoreReq))
+            if (Gm.IsScoreHigherThan(action.scoreReq) && action.remainingCooldown <= 0)
             {
                 result.Add(action);
             }
@@ -181,6 +206,11 @@ public class Enemy : MovableObject, IPlayerCommandListener, IResetOnGameStart
 
     public void OnPlayerCommandPerformed(KeyCode keyCode)
     {
+        foreach (EnemyAction action in actionPrefabs)
+        {
+            action.remainingCooldown--;
+        }
+        
         if (MissilesInField != null)
             // dirty fix for bug where totem doesn't respond to player action (in build)
         {
@@ -194,22 +224,40 @@ public class Enemy : MovableObject, IPlayerCommandListener, IResetOnGameStart
             }
         }
     }
+    public void SilenceLayers(int amount)
+    {
+        ClearMissilesInField();
+        
+        for (int i = 0; i < amount; i++)
+        {
+            Destroy(_totemLayers.First.Value.gameObject);
+            _totemLayers.RemoveFirst();
+
+            queuedActions.RemoveFirst();
+            QueueNewAction(ACTION_IDLE, true);
+        }
+    }
     
     public void OnNewGameStart()
     {
-        foreach (Missile missile in MissilesInField)
-        {
-            Destroy(missile.gameObject);
-        }
-        MissilesInField = new ConcurrentQueue<Missile>();
-
+        ClearMissilesInField();
+        
         foreach (EnemyLayer layer in _totemLayers)
         {
             Destroy(layer.gameObject);
         }
         InitActionQueue();
     }
-    
+
+    private void ClearMissilesInField()
+    {
+        foreach (Missile missile in MissilesInField)
+        {
+            Destroy(missile.gameObject);
+        }
+        MissilesInField = new ConcurrentQueue<Missile>();
+    }
+
     #region OnGameLoad
     
     public void OnGameLoad(GameData gameData)

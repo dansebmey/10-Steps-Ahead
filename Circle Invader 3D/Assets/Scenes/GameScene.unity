@@ -956,7 +956,7 @@ PrefabInstance:
     - target: {fileID: 2170144441269449967, guid: 7363315cd384f13459f16dae3edc775c,
         type: 3}
       propertyPath: m_Text
-      value: Build 20.12.18.22.32
+      value: Build 20.12.20.13.50
       objectReference: {fileID: 0}
     - target: {fileID: 2375131985428006763, guid: 7363315cd384f13459f16dae3edc775c,
         type: 3}
@@ -1869,6 +1869,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 693667431, guid: 5b6afb87446206c4287e6f471f2bf083, type: 3}
+      propertyPath: coinsForBigHammer
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 693667431, guid: 5b6afb87446206c4287e6f471f2bf083, type: 3}
+      propertyPath: itemPrefabs.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 693667431, guid: 5b6afb87446206c4287e6f471f2bf083, type: 3}
+      propertyPath: itemPrefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: 4476671560827790769, guid: cf57807ecf523404c8d2aea3eeadfc81,
+        type: 3}
+    - target: {fileID: 693667431, guid: 5b6afb87446206c4287e6f471f2bf083, type: 3}
+      propertyPath: itemPrefabs.Array.data[4]
+      value: 
+      objectReference: {fileID: 2161818573770268134, guid: 517ed202ad266894b80d351acb97d9e1,
+        type: 3}
+    - target: {fileID: 693667431, guid: 5b6afb87446206c4287e6f471f2bf083, type: 3}
+      propertyPath: itemPrefabs.Array.data[5]
+      value: 
+      objectReference: {fileID: 1911951309029396527, guid: cc5b72c313606d24d89bee23871341d3,
+        type: 3}
     - target: {fileID: 1634043940, guid: 5b6afb87446206c4287e6f471f2bf083, type: 3}
       propertyPath: music.clip
       value: 
@@ -2168,6 +2191,11 @@ PrefabInstance:
       objectReference: {fileID: 1148744935}
     - target: {fileID: 2740902529028869547, guid: 5b6afb87446206c4287e6f471f2bf083,
         type: 3}
+      propertyPath: IOEnabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2740902529028869547, guid: 5b6afb87446206c4287e6f471f2bf083,
+        type: 3}
       propertyPath: statePrefabs.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -2278,6 +2306,27 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7892750245613857349, guid: 71a85d7d60526de4bba317a9180f042c,
+        type: 3}
+      propertyPath: firewallPrefab
+      value: 
+      objectReference: {fileID: 1911951309029396527, guid: cc5b72c313606d24d89bee23871341d3,
+        type: 3}
+    - target: {fileID: 7892750245613857349, guid: 71a85d7d60526de4bba317a9180f042c,
+        type: 3}
+      propertyPath: actionPrefabs.Array.data[4].chance
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7892750245613857349, guid: 71a85d7d60526de4bba317a9180f042c,
+        type: 3}
+      propertyPath: actionPrefabs.Array.data[4].scoreReq
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 7892750245613857349, guid: 71a85d7d60526de4bba317a9180f042c,
+        type: 3}
+      propertyPath: actionPrefabs.Array.data[4].cooldownInTurns
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7892750245613857355, guid: 71a85d7d60526de4bba317a9180f042c,
         type: 3}

@@ -8,6 +8,8 @@ public class EnemyAction
 {
     public string actionName;
     public int scoreReq;
+    [Range(0, 50)] public int cooldownInTurns;
+    [HideInInspector] public int remainingCooldown;
     public EnemyLayer layerPrefab;
     public Action action;
     

@@ -31,6 +31,8 @@ public class OnlineHighscoreOverlay : MenuOverlay
         _toMainMenuButton = GetComponentsInChildren<Button>()[2];
         _loadingText = GetComponentInChildren<Text>();
 
+        _viewLocalButton.interactable = Gm.IOEnabled;
+        
         _controllers = new List<HighscoreEntryController>();
         for (int i = 0; i < _onlineHighscoreManager.maxAmtOfEntries; i++)
         {
@@ -154,7 +156,7 @@ public class OnlineHighscoreOverlay : MenuOverlay
     {
         yield return new WaitForSeconds(delay);
         _refreshButton.interactable = true;
-        _viewLocalButton.interactable = true;
+        _viewLocalButton.interactable = Gm.IOEnabled;
         _toMainMenuButton.interactable = true;
     }
 }

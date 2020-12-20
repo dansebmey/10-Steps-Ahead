@@ -9,6 +9,13 @@ using Debug = UnityEngine.Debug;
 
 public class GameManager : MonoBehaviour
 {
+    public bool IOEnabled = true;
+    
+    public Player player;
+    public Enemy enemy;
+    
+    [SerializeField] private State[] statePrefabs;
+    
     public BarrierManager BarrierManager { get; private set; }
     public FieldItemManager FieldItemManager { get; private set; }
 
@@ -26,11 +33,6 @@ public class GameManager : MonoBehaviour
     public AudioManager AudioManager => AudioManager.GetInstance();
     public LowPassFilterManager LowPassFilterManager { get; private set; }
     public AestheticsManager AestheticsManager { get; private set; }
-
-    [SerializeField] private State[] statePrefabs;
-
-    public Player player;
-    public Enemy enemy;
 
     public void StartNewGame()
     {
@@ -50,7 +52,9 @@ public class GameManager : MonoBehaviour
 
     public void ShowHighscores()
     {
-        OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.Highscore);
+        OverlayManager.SetActiveOverlay(IOEnabled
+            ? OverlayManager.OverlayEnum.Highscore
+            : OverlayManager.OverlayEnum.OnlineHighscore);
     }
 
     public void SwitchState(Type newStateType)
@@ -110,7 +114,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        LoadSavedData();
+        if (IOEnabled) LoadSavedData();
         AudioManager.PlayMusic();
     }
 
@@ -189,7 +193,7 @@ public class GameManager : MonoBehaviour
         return (BarrierManager.amountOfBarriers + posIndex) % BarrierManager.amountOfBarriers;
     }
 
-    private void EndGame()
+    public void EndGame()
     {
         player.isDefeated = true;
         AudioManager.Play("GameOver");
