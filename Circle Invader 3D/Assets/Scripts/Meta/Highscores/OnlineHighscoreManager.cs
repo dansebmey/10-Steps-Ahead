@@ -13,7 +13,7 @@ public class OnlineHighscoreManager : HighscoreManager
     
     private const string PRIVATE_CODE = "yvIHXBo13k-G6t3dmcjRHQjkLmW2idX0qETqYsFTx1Vg";
     private const string PUBLIC_CODE = "5fda77aceb36c70af8369f2f";
-    private const string WEB_URL = "http://dreamlo.com/lb/";
+    private const string WEB_URL = "https://www.dreamlo.com/lb/";
 
     [HideInInspector] public HighscoreData.HighscoreEntryData[] cachedOnlineEntries;
     [HideInInspector] public List<HighscoreData.HighscoreEntryData> pendingUploadEntries;
