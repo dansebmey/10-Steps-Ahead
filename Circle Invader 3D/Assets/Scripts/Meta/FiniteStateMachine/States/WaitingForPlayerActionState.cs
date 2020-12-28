@@ -6,9 +6,9 @@ public class WaitingForPlayerActionState : State
 {
     private Dictionary<KeyCode, Func<bool>> _inputMap;
 
-    public override void Init(GameManager gm, FiniteStateMachine fsm)
+    public override void Init(GameManager gm)
     {
-        base.Init(gm, fsm);
+        base.Init(gm);
         _inputMap = new Dictionary<KeyCode, Func<bool>>
         {
             {KeyCode.A, MovePlayerLeft},

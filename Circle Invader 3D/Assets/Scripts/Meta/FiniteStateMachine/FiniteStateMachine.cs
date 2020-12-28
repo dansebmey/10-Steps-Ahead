@@ -17,7 +17,7 @@ public class FiniteStateMachine
         
         foreach (State state in states)
         {
-            state.Init(gm, this);
+            state.Init(gm);
             _stateDictionary.Add(state.GetType(), state);
         }
         SwitchState(startState);
