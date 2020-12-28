@@ -14,8 +14,6 @@ public class GameManager : MonoBehaviour
     public Player player;
     public Enemy enemy;
     
-    [SerializeField] private State[] statePrefabs;
-    
     public BarrierManager BarrierManager { get; private set; }
     public FieldItemManager FieldItemManager { get; private set; }
 
@@ -102,7 +100,7 @@ public class GameManager : MonoBehaviour
         OverlayManager = CameraController.GetComponentInChildren<OverlayManager>();
         LowPassFilterManager = CameraController.GetComponent<LowPassFilterManager>();
         
-        _fsm = new FiniteStateMachine(this, typeof(MenuState), statePrefabs);
+        _fsm = new FiniteStateMachine(this, typeof(MenuState));
         
         _playerCommandListeners = new ConcurrentStack<IPlayerCommandListener>();
         _playerCommandListeners.Push(FieldItemManager);

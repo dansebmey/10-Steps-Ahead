@@ -6,8 +6,15 @@ public class FiniteStateMachine
     private readonly Dictionary<Type, State> _stateDictionary = new Dictionary<Type,State>();
     public State CurrentState;
 
-    public FiniteStateMachine(GameManager gm, Type startState, State[] states)
+    public FiniteStateMachine(GameManager gm, Type startState)
     {
+        State[] states = {
+            new MenuState(),
+            new WaitingForPlayerActionState(),
+            new InvokeEnemyActionState(),
+            new HighscoreEntryState()
+        };
+        
         foreach (State state in states)
         {
             state.Init(gm, this);

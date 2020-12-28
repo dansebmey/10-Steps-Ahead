@@ -3,7 +3,7 @@ using System.Diagnostics;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
-public abstract class State : MonoBehaviour
+public abstract class State
 {
     protected GameManager Gm;
     protected FiniteStateMachine Fsm;
