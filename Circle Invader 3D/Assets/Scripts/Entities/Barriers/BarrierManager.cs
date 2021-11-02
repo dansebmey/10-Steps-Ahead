@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class BarrierManager : GmAwareObject, IResetOnGameStart
@@ -17,6 +18,14 @@ public class BarrierManager : GmAwareObject, IResetOnGameStart
     [SerializeField] public Color[] healthColours;
     
     [SerializeField] private int initiallyDestroyedBarriers = 0;
+
+    [Header("Barrier health indicators")]
+    private int _initTotalBarrierHealth;
+    [SerializeField] private Image barrierHealthIcon;
+    private Animator barrierHealthAnimator;
+    [HideInInspector] public int remainingBarrierHealth;
+    [SerializeField] private Text remainingBarrierHealthText;
+    [SerializeField] public DamageIndicator damageIndicator;
 
     public Barrier[] Barriers { get; private set; }
     public int InitBarrierHealth => amountOfBarriers * initBarrierHealth;
@@ -33,6 +42,12 @@ public class BarrierManager : GmAwareObject, IResetOnGameStart
 
             return total;
         } 
+    }
+
+    protected override void Awake()
+    {
+        base.Awake();
+        barrierHealthAnimator = barrierHealthIcon.GetComponent<Animator>();
     }
 
     protected void Start()
@@ -73,6 +88,9 @@ public class BarrierManager : GmAwareObject, IResetOnGameStart
         {
             CollapseBarriers(initiallyDestroyedBarriers);
         }
+
+        UpdateRemainingBarrierHealth(true);
+        _initTotalBarrierHealth = remainingBarrierHealth;
     }
 
     private void CollapseBarriers(int amount)
@@ -101,6 +119,11 @@ public class BarrierManager : GmAwareObject, IResetOnGameStart
             if (bar.CurrentPosIndex % amountOfBarriers == posIndex)
             {
                 bar.TakeDamage(damageDealt);
+
+                if (remainingBarrierHealth == 0)
+                {
+                    RepairAllBarriers(4);
+                }
             }
         }
     }
@@ -162,9 +185,39 @@ public class BarrierManager : GmAwareObject, IResetOnGameStart
         }
     }
 
-    public int DetermineRemainingBarrierHealth()
+    public void UpdateRemainingBarrierHealth(bool healthIncreased)
     {
-        return Barriers.Sum(bar => bar.Health);
+        remainingBarrierHealth = Barriers.Sum(bar => bar.Health);
+        remainingBarrierHealthText.text = remainingBarrierHealth.ToString();
+
+        if (remainingBarrierHealth < 0.333f * _initTotalBarrierHealth)
+        {
+            barrierHealthIcon.color = healthColours[0];
+        }
+        else if (remainingBarrierHealth < 0.667f * _initTotalBarrierHealth)
+        {
+            barrierHealthIcon.color = healthColours[1];
+        }
+        else if (remainingBarrierHealth < 1 * _initTotalBarrierHealth)
+        {
+            barrierHealthIcon.color = healthColours[2];
+        }
+        else
+        {
+            barrierHealthIcon.color = healthColours[3];
+        }
+
+        Color c = barrierHealthIcon.color;
+        barrierHealthIcon.color = new Color(c.r, c.g, c.b, 0.5f);
+
+        if (healthIncreased)
+        {
+            barrierHealthAnimator.Play("barrier-health-icon-plus");
+        }
+        else
+        {
+            barrierHealthAnimator.Play("barrier-health-icon-minus");
+        }
     }
     
     #region OnGameLoad

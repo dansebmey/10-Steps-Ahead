@@ -63,4 +63,16 @@ public class CameraController : GmAwareObject
             transform.localRotation = _targetRot;
         }
     }
+
+    public void EnableAerialView(bool enable)
+    {
+        if (enable)
+        {
+            FocusOn(Gm.player.transform, new Vector3(0, 10, 4), new Vector3(90, 0, 0));
+        }
+        else
+        {
+            FocusOn(Gm.player.transform, new Vector3(0, 5, -5), new Vector3(25, 0, 0));
+        }
+    }
 }

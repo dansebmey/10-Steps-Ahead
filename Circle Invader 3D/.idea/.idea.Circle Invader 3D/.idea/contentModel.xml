@@ -23,11 +23,11 @@
               <e p="FieldItemManager.cs" t="Include" />
               <e p="FirewallField.cs" t="Include" />
               <e p="ItemEffects" t="Include">
-                <e p="AntiHammer.cs" t="Include" />
                 <e p="BigHammer.cs" t="Include" />
                 <e p="Coin.cs" t="Include" />
                 <e p="Hammer.cs" t="Include" />
                 <e p="Item.cs" t="Include" />
+                <e p="Mine.cs" t="Include" />
                 <e p="Powerup.cs" t="Include" />
                 <e p="Silence.cs" t="Include" />
                 <e p="Warp.cs" t="Include" />
@@ -84,6 +84,7 @@
               <e p="AestheticsManager.cs" t="Include" />
               <e p="CameraController.cs" t="Include" />
               <e p="CreditsOverlay.cs" t="Include" />
+              <e p="DamageIndicator.cs" t="Include" />
               <e p="GameOverOverlay.cs" t="Include" />
               <e p="Highscores" t="Include">
                 <e p="CustomTextField.cs" t="Include" />
@@ -105,6 +106,7 @@
               <e p="Overlay.cs" t="Include" />
               <e p="OverlayManager.cs" t="Include" />
               <e p="SettingsOverlay.cs" t="Include" />
+              <e p="Text3D.cs" t="Include" />
             </e>
           </e>
         </e>

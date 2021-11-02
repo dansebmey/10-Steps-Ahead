@@ -22,102 +22,92 @@
     <select />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/Interfaces/IResetOnGameStart.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/CameraController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7A84DC90-1F21-458F-98A1-2E112D4BA2AB/1b/a0483969/JsonUtility.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/IO/SerializableData/EnemyData.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/AestheticsManager.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/ItemEffects/Item.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/FiniteStateMachine/States/State.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9577AC7A-62EF-4317-9789-031239BA8798/f5/d607e961/Array.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/OverlayManager.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/Highscores/HighscoreEntryOverlay.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/ItemEffects/AntiHammer.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/Audio/Sound.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/FE84F4A7-54DA-4A6B-B64F-CA409D40938A/b2/899b312e/Object.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/Audio/AudioManager.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/IO/SerializableData/PlayerData.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/HUD/Tutorial/Instruction.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/Highscores/OnlineHighscoreManager.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/Missile.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/Player/Inventory.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/Highscores/HighscoreData.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9577AC7A-62EF-4317-9789-031239BA8798/ac/befe152b/ConcurrentQueue`1.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/MainMenuOverlay.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/Overlay.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/Highscores/HighscoreManager.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/FieldItem.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/Highscores/HighscoreOverlay.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/FirewallField.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/GameManager.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/Barriers/BarrierManager.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/Barriers/Barrier.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/HUD/HudOverlay.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9577AC7A-62EF-4317-9789-031239BA8798/06/16762a9c/List`1.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://C:/Program Files/Unity/Hub/Editor/2020.1.14f1/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventTrigger.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/FE84F4A7-54DA-4A6B-B64F-CA409D40938A/33/fe202cd4/SetupCoroutine.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/MovableObject.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/FiniteStateMachine/States/MenuState.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/Player/Player.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/GameOverOverlay.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/ItemEffects/Silence.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/Enemy/EnemyAction.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/Enemy/Enemy.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/GmAwareObject.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/FE84F4A7-54DA-4A6B-B64F-CA409D40938A/39/1823ba61/Vector3.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/ItemEffects/BigHammer.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/589BBFB2-CCB6-46A8-A413-7313B10DBC48/a3/e7ae053f/DownloadHandler.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/FE84F4A7-54DA-4A6B-B64F-CA409D40938A/85/9da310a5/Transform.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/IO/DataManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/HUD/InventoryInterface.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/HUD/BigHammerInterface.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/HUD/Tutorial/Instruction.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/HUD/Tutorial/TutorialManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/Highscores/CustomTextField.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/Highscores/HighscoreEntryOverlay.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/Highscores/OnlineHighscoreOverlay.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/589BBFB2-CCB6-46A8-A413-7313B10DBC48/6a/151a8734/UnityWebRequest.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/ItemEffects/Warp.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/62FFEEB7-EC02-4BEA-B61E-5FBF8D44AC5B/e7/9670550e/Void.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/FiniteStateMachine/FiniteStateMachine.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/FiniteStateMachine/States/State.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/FiniteStateMachine/States/HighscoreEntryState.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/GmAwareObject.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/FiniteStateMachine/States/InvokeEnemyActionState.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/FiniteStateMachine/States/WaitingForPlayerActionState.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/GameManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/FiniteStateMachine/States/MenuState.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/IO/DataManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/OrbitingObject.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/MovableObject.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7A84DC90-1F21-458F-98A1-2E112D4BA2AB/1b/a0483969/JsonUtility.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/Missile.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9577AC7A-62EF-4317-9789-031239BA8798/f5/d607e961/Array.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/Highscores/HighscoreEntryController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/IO/SerializableData/BarrierManagerData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/FE84F4A7-54DA-4A6B-B64F-CA409D40938A/b2/899b312e/Object.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/IO/SerializableData/FieldItemManagerData.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/MenuOverlay.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/IO/SerializableData/EnemyData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9577AC7A-62EF-4317-9789-031239BA8798/ac/befe152b/ConcurrentQueue`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/IO/SerializableData/GameData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9577AC7A-62EF-4317-9789-031239BA8798/06/16762a9c/List`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/Enemy/EnemyAction.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/IO/SerializableData/PersistentData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/IO/SerializableData/PlayerData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/Enemy/EnemyLayer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/Enemy/Enemy.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/Audio/AudioManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F2625FD8-44AA-4DD5-B6A3-882F24F14D79/cc/96b9feb4/ConcurrentQueue`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/Player/Player.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/Audio/Sound.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/Player/Inventory.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/Audio/LowPassFilterManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/Barriers/Barrier.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/Highscores/HighscoreManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/Barriers/BarrierManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/Highscores/HighscoreData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/FieldItem.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/Highscores/OnlineHighscoreManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/FirewallField.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://C:/Program Files/Unity/Hub/Editor/2020.1.14f1/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventTrigger.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/DamageIndicator.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/FieldItemManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/Highscores/HighscoreOverlay.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/FE84F4A7-54DA-4A6B-B64F-CA409D40938A/33/fe202cd4/SetupCoroutine.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/FE84F4A7-54DA-4A6B-B64F-CA409D40938A/39/1823ba61/Vector3.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/Text3D.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/BigHammerFieldItem.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/FE84F4A7-54DA-4A6B-B64F-CA409D40938A/e2/0e89fde7/MonoBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/589BBFB2-CCB6-46A8-A413-7313B10DBC48/a3/e7ae053f/DownloadHandler.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/Interfaces/IResetOnGameStart.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/FE84F4A7-54DA-4A6B-B64F-CA409D40938A/85/9da310a5/Transform.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/ItemEffects/Coin.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/589BBFB2-CCB6-46A8-A413-7313B10DBC48/6a/151a8734/UnityWebRequest.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/Interfaces/IPlayerCommandListener.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/ItemEffects/Hammer.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/SettingsOverlay.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/IO/SerializableData/BarrierManagerData.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/FiniteStateMachine/States/InvokeEnemyActionState.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/HUD/Tutorial/TutorialManager.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/FE84F4A7-54DA-4A6B-B64F-CA409D40938A/8a/b5ab3931/UnitySynchronizationContext.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/FiniteStateMachine/States/HighscoreEntryState.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/ItemEffects/Powerup.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/Highscores/CustomTextField.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/ItemEffects/Coin.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/HUD/BigHammerInterface.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/IO/SerializableData/GameData.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/Audio/LowPassFilterManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/CreditsOverlay.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/FiniteStateMachine/States/WaitingForPlayerActionState.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/OrbitingObject.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/Enemy/EnemyLayer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/ItemEffects/Mine.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/AestheticsManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/FE84F4A7-54DA-4A6B-B64F-CA409D40938A/e2/0e89fde7/MonoBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/MainMenuOverlay.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/ItemEffects/Silence.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/FE84F4A7-54DA-4A6B-B64F-CA409D40938A/8a/b5ab3931/UnitySynchronizationContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/ItemEffects/Powerup.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/ItemEffects/Item.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/ItemEffects/Warp.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/FE84F4A7-54DA-4A6B-B64F-CA409D40938A/0f/5089906d/ScriptableObject.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/HUD/InventoryInterface.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/FiniteStateMachine/FiniteStateMachine.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/FieldItemManager.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/IO/SerializableData/PersistentData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/OverlayManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/ItemEffects/BigHammer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/GameOverOverlay.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/MenuOverlay.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/CameraController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/SettingsOverlay.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/Overlay.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Overlays/InstructionOverlay/PermaOverlay.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Managers/TutorialManager.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Managers/AestheticsManager.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Entities/Enemy/TotemLayer.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Entities/Missile.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/FiniteStateMachine/States/RegistryState.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Managers/FieldItemManager.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Powerups/Hammer.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Powerups/Coin.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Overlays/OnlineHighscoreOverlay.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Entities/Player/Inventory.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/FiniteStateMachine/States/WaitingForPlayerAction.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Managers/HighscoreManager/OnlineHighscoreManager.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Overlays/UIElements/CustomTextField.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Overlays/OverlayManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/CameraController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Managers/AudioManager/AudioManager.cs" />
@@ -133,28 +123,42 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Managers/GameManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Entities/Enemy/MechaTotem.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Overlays/HighscoreOverlay.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/FiniteStateMachine/States/WaitingForPlayerActionState.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/FiniteStateMachine/States/InvokeEnemyAction.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/FiniteStateMachine/States/InvokeEnemyActionState.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/FiniteStateMachine/States/HighscoreEntryState.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/AestheticsManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/FirePit.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/ItemEffects/FirePit.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/ItemEffects/Firewall.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Entities/OrbitingObject.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/FirewallField.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/FieldItem.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/FieldItemManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/ItemEffects/Silence.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Entities/Enemy/EnemyLayer.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Entities/Enemy/EnemyAction.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/ItemEffects/AntiHammer.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Entities/Enemy/Enemy.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Highscores/HighscoreManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/IO/DataManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/Highscores/HighscoreEntryOverlay.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/Highscores/OnlineHighscoreOverlay.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Highscores/OnlineHighscoreManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/ItemEffects/Hammer.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/FiniteStateMachine/FiniteStateMachine.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/FiniteStateMachine/States/State.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/3DText.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/AestheticsManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/GameManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Entities/Enemy/Enemy.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/ItemEffects/AntiHammer.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/Text3D.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/CameraController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/FiniteStateMachine/States/WaitingForPlayerActionState.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/ItemEffects/Warp.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Audio/LowPassFilterManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/DamageIndicator.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/ItemEffects/Mine.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/FieldItem.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/BigHammerFieldItem.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Entities/Barriers/Barrier.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Entities/Barriers/BarrierManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/FieldItemManager.cs" />
       </list>
     </option>
   </component>
@@ -217,6 +221,13 @@
       <workItem from="1608386672391" duration="2783000" />
       <workItem from="1608416319633" duration="11140000" />
       <workItem from="1608467769320" duration="1378000" />
+      <workItem from="1608821341902" duration="638000" />
+      <workItem from="1608852850316" duration="1588000" />
+      <workItem from="1609148268473" duration="1172000" />
+      <workItem from="1610972109112" duration="788000" />
+      <workItem from="1611758046663" duration="904000" />
+      <workItem from="1631020278174" duration="62000" />
+      <workItem from="1635852896671" duration="14549000" />
     </task>
     <servers />
   </component>
@@ -226,158 +237,10 @@
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
   <component name="WindowStateProjectService">
-    <state x="97" y="40" width="814" height="771" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1608153094112">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="638" y="252" width="729" height="536" key="find.popup" timestamp="1635871592844">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="97" y="40" width="814" height="771" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.0.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1608153094112" />
-    <state x="2771" y="273" key="#xdebugger.XInspectDialog" timestamp="1606827687463">
-      <screen x="1920" y="0" width="1920" height="1030" />
-    </state>
-    <state x="2771" y="273" key="#xdebugger.XInspectDialog/1920.0.1920.1030/0.0.1536.824@1920.0.1920.1030" timestamp="1606827687463" />
-    <state x="644" y="231" key="#xdebugger.evaluate" timestamp="1608329764921">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="282" y="231" key="#xdebugger.evaluate/0.0.1536.824@0.0.1536.824" timestamp="1607444984639" />
-    <state x="644" y="231" key="#xdebugger.evaluate/1920.0.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1608329764921" />
-    <state x="2725" y="289" key="#xdebugger.evaluate/1920.0.1920.1030/0.0.1536.824@1920.0.1920.1030" timestamp="1607943980740" />
-    <state width="693" height="446" key="DebuggerActiveHint" timestamp="1608420369452">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="694" height="447" key="DebuggerActiveHint/0.0.1536.824@0.0.1536.824" timestamp="1607003430341" />
-    <state width="693" height="446" key="DebuggerActiveHint/1920.0.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1608420369452" />
-    <state width="867" height="558" key="DebuggerActiveHint/1920.0.1920.1030/0.0.1536.824@1920.0.1920.1030" timestamp="1607943846837" />
-    <state width="1493" height="201" key="GridCell.Tab.0.bottom" timestamp="1608431833881">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="140" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1607467374977" />
-    <state width="1493" height="201" key="GridCell.Tab.0.bottom/1920.0.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1608431833881" />
-    <state width="1877" height="201" key="GridCell.Tab.0.bottom/1920.0.1920.1030/0.0.1536.824@1920.0.1920.1030" timestamp="1608201438448" />
-    <state width="1493" height="201" key="GridCell.Tab.0.center" timestamp="1608431833880">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="140" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1607467374977" />
-    <state width="1493" height="201" key="GridCell.Tab.0.center/1920.0.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1608431833880" />
-    <state width="1877" height="201" key="GridCell.Tab.0.center/1920.0.1920.1030/0.0.1536.824@1920.0.1920.1030" timestamp="1608201438447" />
-    <state width="1493" height="201" key="GridCell.Tab.0.left" timestamp="1608431833880">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="140" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1607467374976" />
-    <state width="1493" height="201" key="GridCell.Tab.0.left/1920.0.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1608431833880" />
-    <state width="1877" height="201" key="GridCell.Tab.0.left/1920.0.1920.1030/0.0.1536.824@1920.0.1920.1030" timestamp="1608201438447" />
-    <state width="1493" height="201" key="GridCell.Tab.0.right" timestamp="1608431833880">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="140" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1607467374977" />
-    <state width="1493" height="201" key="GridCell.Tab.0.right/1920.0.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1608431833880" />
-    <state width="1877" height="201" key="GridCell.Tab.0.right/1920.0.1920.1030/0.0.1536.824@1920.0.1920.1030" timestamp="1608201438447" />
-    <state width="1493" height="201" key="GridCell.Tab.1.bottom" timestamp="1608431833881">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="140" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1607467374977" />
-    <state width="1493" height="201" key="GridCell.Tab.1.bottom/1920.0.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1608431833881" />
-    <state width="1877" height="201" key="GridCell.Tab.1.bottom/1920.0.1920.1030/0.0.1536.824@1920.0.1920.1030" timestamp="1608201461020" />
-    <state width="1493" height="201" key="GridCell.Tab.1.center" timestamp="1608431833881">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="140" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1607467374977" />
-    <state width="1493" height="201" key="GridCell.Tab.1.center/1920.0.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1608431833881" />
-    <state width="1877" height="201" key="GridCell.Tab.1.center/1920.0.1920.1030/0.0.1536.824@1920.0.1920.1030" timestamp="1608201461020" />
-    <state width="1493" height="201" key="GridCell.Tab.1.left" timestamp="1608431833881">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="140" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1607467374977" />
-    <state width="1493" height="201" key="GridCell.Tab.1.left/1920.0.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1608431833881" />
-    <state width="1877" height="201" key="GridCell.Tab.1.left/1920.0.1920.1030/0.0.1536.824@1920.0.1920.1030" timestamp="1608201461020" />
-    <state width="1493" height="201" key="GridCell.Tab.1.right" timestamp="1608431833881">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="140" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1607467374977" />
-    <state width="1493" height="201" key="GridCell.Tab.1.right/1920.0.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1608431833881" />
-    <state width="1877" height="201" key="GridCell.Tab.1.right/1920.0.1920.1030/0.0.1536.824@1920.0.1920.1030" timestamp="1608201461020" />
-    <state width="1493" height="201" key="GridCell.Tab.2.bottom" timestamp="1608431833881">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="140" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1607467374977" />
-    <state width="1493" height="201" key="GridCell.Tab.2.bottom/1920.0.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1608431833881" />
-    <state width="1877" height="201" key="GridCell.Tab.2.bottom/1920.0.1920.1030/0.0.1536.824@1920.0.1920.1030" timestamp="1608201438326" />
-    <state width="1493" height="201" key="GridCell.Tab.2.center" timestamp="1608431833881">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="140" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1607467374977" />
-    <state width="1493" height="201" key="GridCell.Tab.2.center/1920.0.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1608431833881" />
-    <state width="1877" height="201" key="GridCell.Tab.2.center/1920.0.1920.1030/0.0.1536.824@1920.0.1920.1030" timestamp="1608201438326" />
-    <state width="1493" height="201" key="GridCell.Tab.2.left" timestamp="1608431833881">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="140" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1607467374977" />
-    <state width="1493" height="201" key="GridCell.Tab.2.left/1920.0.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1608431833881" />
-    <state width="1877" height="201" key="GridCell.Tab.2.left/1920.0.1920.1030/0.0.1536.824@1920.0.1920.1030" timestamp="1608201438326" />
-    <state width="1493" height="201" key="GridCell.Tab.2.right" timestamp="1608431833881">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="140" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1607467374977" />
-    <state width="1493" height="201" key="GridCell.Tab.2.right/1920.0.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1608431833881" />
-    <state width="1877" height="201" key="GridCell.Tab.2.right/1920.0.1920.1030/0.0.1536.824@1920.0.1920.1030" timestamp="1608201438326" />
-    <state width="1493" height="201" key="GridCell.Tab.3.bottom" timestamp="1608431833881">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="140" key="GridCell.Tab.3.bottom/0.0.1536.824@0.0.1536.824" timestamp="1607467374978" />
-    <state width="1493" height="201" key="GridCell.Tab.3.bottom/1920.0.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1608431833881" />
-    <state width="1877" height="201" key="GridCell.Tab.3.bottom/1920.0.1920.1030/0.0.1536.824@1920.0.1920.1030" timestamp="1608201438326" />
-    <state width="1493" height="201" key="GridCell.Tab.3.center" timestamp="1608431833881">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="140" key="GridCell.Tab.3.center/0.0.1536.824@0.0.1536.824" timestamp="1607467374977" />
-    <state width="1493" height="201" key="GridCell.Tab.3.center/1920.0.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1608431833881" />
-    <state width="1877" height="201" key="GridCell.Tab.3.center/1920.0.1920.1030/0.0.1536.824@1920.0.1920.1030" timestamp="1608201438326" />
-    <state width="1493" height="201" key="GridCell.Tab.3.left" timestamp="1608431833881">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="140" key="GridCell.Tab.3.left/0.0.1536.824@0.0.1536.824" timestamp="1607467374977" />
-    <state width="1493" height="201" key="GridCell.Tab.3.left/1920.0.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1608431833881" />
-    <state width="1877" height="201" key="GridCell.Tab.3.left/1920.0.1920.1030/0.0.1536.824@1920.0.1920.1030" timestamp="1608201438326" />
-    <state width="1493" height="201" key="GridCell.Tab.3.right" timestamp="1608431833881">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="140" key="GridCell.Tab.3.right/0.0.1536.824@0.0.1536.824" timestamp="1607467374977" />
-    <state width="1493" height="201" key="GridCell.Tab.3.right/1920.0.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1608431833881" />
-    <state width="1877" height="201" key="GridCell.Tab.3.right/1920.0.1920.1030/0.0.1536.824@1920.0.1920.1030" timestamp="1608201438326" />
-    <state x="601" y="128" key="RiderGenerateDialog" timestamp="1608210295077">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="601" y="128" key="RiderGenerateDialog/1920.0.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1608210295077" />
-    <state x="2671" y="160" key="RiderGenerateDialog/1920.0.1920.1030/0.0.1536.824@1920.0.1920.1030" timestamp="1607655722508" />
-    <state width="775" height="419" key="XDebugger.FullValuePopup" timestamp="1608319298400">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="776" height="420" key="XDebugger.FullValuePopup/0.0.1536.824@0.0.1536.824" timestamp="1607003286145" />
-    <state width="775" height="419" key="XDebugger.FullValuePopup/1920.0.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1608319298400" />
-    <state width="969" height="524" key="XDebugger.FullValuePopup/1920.0.1920.1030/0.0.1536.824@1920.0.1920.1030" timestamp="1606827678821" />
-    <state x="406" y="27" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1608298983948">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="406" y="27" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1536.824@0.0.1536.824" timestamp="1607444008271" />
-    <state x="406" y="27" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/1920.0.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1608298983948" />
-    <state x="93" y="93" width="1350" height="638" key="dock-window-1" timestamp="1608422225268">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="93" y="93" width="1350" height="638" key="dock-window-1/1920.0.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1608422225268" />
-    <state x="450" y="144" width="738" height="606" key="find.popup" timestamp="1608468511315">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="450" y="144" width="738" height="606" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1608468511315" />
-    <state x="499" y="125" width="732" height="536" key="find.popup/1920.0.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1608418902133" />
-    <state x="2483" y="180" width="795" height="670" key="find.popup/1920.0.1920.1030/0.0.1536.824@1920.0.1920.1030" timestamp="1608047787489" />
-    <state x="493" y="192" width="538" height="542" key="run.anything.popup" timestamp="1608308574598">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="493" y="192" width="538" height="542" key="run.anything.popup/1920.0.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1608308574598" />
-    <state x="2536" y="240" width="672" height="677" key="run.anything.popup/1920.0.1920.1030/0.0.1536.824@1920.0.1920.1030" timestamp="1606911077344" />
-    <state x="498" y="180" width="672" height="543" key="search.everywhere.popup" timestamp="1608052834194">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="498" y="180" width="672" height="543" key="search.everywhere.popup/1920.0.1920.1030/0.0.1536.824@0.0.1536.824" timestamp="1608052834194" />
-    <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup/1920.0.1920.1030/0.0.1536.824@1920.0.1920.1030" timestamp="1606820675583" />
+    <state x="638" y="252" width="729" height="536" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1635871592844" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

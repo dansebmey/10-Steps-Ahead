@@ -59,7 +59,19 @@ public class WaitingForPlayerActionState : State
         return false;
     }
 
-    public bool ShowSettingsOverlay()
+    private bool EnableAerialView()
+    {
+        Gm.CameraController.EnableAerialView(true);
+        return true;
+    }
+
+    private bool DisableAerialView()
+    {
+        Gm.CameraController.EnableAerialView(false);
+        return true;
+    }
+
+    private bool ShowSettingsOverlay()
     {
         Gm.OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.SettingsInGame);
         return false;
@@ -81,6 +93,15 @@ public class WaitingForPlayerActionState : State
                     Gm.OnPlayerCommandPerformed(entry.Key);
                 }
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            EnableAerialView();
+        }
+        else if (Input.GetKeyUp(KeyCode.V))
+        {
+            DisableAerialView();
         }
     }
 

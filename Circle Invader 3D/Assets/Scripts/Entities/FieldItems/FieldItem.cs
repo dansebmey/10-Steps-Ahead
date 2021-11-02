@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UnityEditor.UIElements;
+using UnityEngine;
 using UnityEngine.Events;
 
 public class FieldItem : OrbitingObject
@@ -8,6 +9,8 @@ public class FieldItem : OrbitingObject
     [Range(0,100)] public int spawnWeight;
     public bool consumeOnPickup;
 
+    private Text3D durationText;
+
     private int _remainingDuration;
 
     public int RemainingDuration
@@ -16,19 +19,30 @@ public class FieldItem : OrbitingObject
         set
         {
             _remainingDuration = value;
-            if (value <= 3)
+            durationText.Text = value.ToString();
+            switch (value)
             {
-                // TODO: make it clear that the object is about to disappear
-            }
-            if (value <= 0)
-            {
-                Destroy();
+                case 6:
+                    durationText.EnableWarningColour1();
+                    break;
+                case 3:
+                    durationText.EnableWarningColour2();
+                    break;
+                case 0:
+                    Destroy();
+                    break;
             }
         }
     }
 
     private float _offset;
-    
+
+    protected override void Awake()
+    {
+        base.Awake();
+        durationText = GetComponentInChildren<Text3D>();
+    }
+
     protected override void Start()
     {
         base.Start();
@@ -57,7 +71,7 @@ public class FieldItem : OrbitingObject
         Destroy();
     }
 
-    protected virtual void Destroy()
+    public virtual void Destroy()
     {
         Gm.FieldItemManager.DeleteItem(this);
         Destroy(gameObject);

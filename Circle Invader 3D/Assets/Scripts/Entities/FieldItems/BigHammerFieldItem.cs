@@ -6,7 +6,7 @@
         Gm.OverlayManager.Hud.UpdateBigHammerInterface();
     }
 
-    protected override void Destroy()
+    public override void Destroy()
     {
         base.Destroy();
         Gm.OverlayManager.Hud.UpdateBigHammerInterface();

@@ -51,7 +51,7 @@ public class FieldItemManager : GmAwareObject, IPlayerCommandListener, IResetOnG
     {
         foreach (FieldItem item in ItemsInField)
         {
-            Destroy(item.gameObject);
+            item.Destroy();
         }
         ItemsInField = new ConcurrentQueue<FieldItem>();
         CoinsCollected = 0;

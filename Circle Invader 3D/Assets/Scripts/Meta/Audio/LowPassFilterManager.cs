@@ -21,7 +21,7 @@ public class LowPassFilterManager : GmAwareObject
 
     public void UpdateLPFilter()
     {
-        int newFreq = (maxFreq / _totalBarrierHealth) * Gm.BarrierManager.DetermineRemainingBarrierHealth();
+        int newFreq = (maxFreq / _totalBarrierHealth) * Gm.BarrierManager.remainingBarrierHealth;
         _lowPassFilter.cutoffFrequency = Mathf.Clamp(newFreq, minFreq, maxFreq);
     }
 }

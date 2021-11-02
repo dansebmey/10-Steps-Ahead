@@ -47,31 +47,48 @@ MonoBehaviour:
   actionPrefabs:
   - actionName: Idle
     scoreReq: 0
+    cooldownInTurns: 0
+    remainingCooldown: 0
     layerPrefab: {fileID: 519660893281381382, guid: 46bd88b0e37a88f449853bb4c016460a,
       type: 3}
     chance: 100
   - actionName: BasicAttack
     scoreReq: 0
+    cooldownInTurns: 0
+    remainingCooldown: 0
     layerPrefab: {fileID: -5037835261173758856, guid: de086547df964c9479b5716ede0b9393,
       type: 3}
     chance: 30
   - actionName: SplitAttack
     scoreReq: 50
+    cooldownInTurns: 0
+    remainingCooldown: 0
     layerPrefab: {fileID: 9385513819884428, guid: f112fbb95465bb64294aae0de9afea0c,
       type: 3}
     chance: 10
   - actionName: DelayedAttack
     scoreReq: 100
+    cooldownInTurns: 0
+    remainingCooldown: 0
     layerPrefab: {fileID: 5980321227106648739, guid: ec4357a557fb0244ebfe9303cf581aaf,
       type: 3}
     chance: 10
-  - actionName: FireAttack
-    scoreReq: 250
+  - actionName: TwinAttack
+    scoreReq: 200
+    cooldownInTurns: 10
+    remainingCooldown: 0
+    layerPrefab: {fileID: 2408330221027008379, guid: 818a8b8a69b861b459167763b23c5320,
+      type: 3}
+    chance: 10
+  - actionName: MineAttack
+    scoreReq: 300
+    cooldownInTurns: 50
+    remainingCooldown: 0
     layerPrefab: {fileID: 1035985851408491737, guid: 97bf566ddafc08243bd8148e96858ed4,
       type: 3}
-    chance: 4
+    chance: 5
   delayedProjPrefab: {fileID: 1774929410537623454, guid: 448ebb43eadf1b44e8a509033605b8f5,
     type: 3}
-  firewallPrefab: {fileID: 920177860894263616, guid: cc5b72c313606d24d89bee23871341d3,
+  firewallPrefab: {fileID: 1911951309029396527, guid: cc5b72c313606d24d89bee23871341d3,
     type: 3}
   layerHeight: 0.5

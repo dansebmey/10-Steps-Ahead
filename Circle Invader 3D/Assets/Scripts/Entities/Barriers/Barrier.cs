@@ -55,7 +55,9 @@ public class Barrier : OrbitingObject
 
     public void TakeDamage(int amount)
     {
+        int cachedHealth = Health;
         Health -= amount;
+        
         Gm.LowPassFilterManager.UpdateLPFilter();
         
         transform.position = new Vector3(
@@ -63,13 +65,20 @@ public class Barrier : OrbitingObject
                 transform.position.y,
             (distanceFromCenter + 0.15f) * Mathf.Sin((Mathf.PI * 2 / Gm.BarrierManager.amountOfBarriers) * CurrentPosIndex));
         _damageParticles.Play();
+        
+        Gm.BarrierManager.UpdateRemainingBarrierHealth(false);
+        Gm.BarrierManager.damageIndicator.Trigger(Health - cachedHealth);
     }
 
     public void RestoreHealth(int amount)
     {
+        int cachedHealth = Health;
         Health += amount;
-        Gm.LowPassFilterManager.UpdateLPFilter();
         
         _healingParticles.Play();
+            
+        Gm.LowPassFilterManager.UpdateLPFilter();
+        Gm.BarrierManager.UpdateRemainingBarrierHealth(true);
+        Gm.BarrierManager.damageIndicator.Trigger(Health - cachedHealth);
     }
 }

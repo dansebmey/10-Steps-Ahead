@@ -31,7 +31,8 @@ public class Enemy : MovableObject, IPlayerCommandListener, IResetOnGameStart
         actionPrefabs[1].action = BasicAttack;
         actionPrefabs[2].action = SplitAttack;
         actionPrefabs[3].action = DelayedAttack;
-        actionPrefabs[4].action = FlameAttack;
+        actionPrefabs[4].action = TwinAttack;
+        actionPrefabs[5].action = FlameAttack;
         
         InitActionQueue();
         
@@ -96,7 +97,13 @@ public class Enemy : MovableObject, IPlayerCommandListener, IResetOnGameStart
         Gm.AudioManager.Play("BasicAttack");
         Gm.ApplyDamage(1);
     }
-
+    
+    private void TwinAttack()
+    {
+        Gm.AudioManager.Play("BasicAttack");
+        Gm.ApplyDamage(2);
+    }
+    
     private void SplitAttack()
     {
         Gm.AudioManager.Play("SplitAttack");
@@ -127,6 +134,7 @@ public class Enemy : MovableObject, IPlayerCommandListener, IResetOnGameStart
         fieldItem.CurrentPosIndex = Gm.CurrentPosIndex + (Gm.BarrierManager.amountOfBarriers / 4);
         fieldItem.transform.position = fieldItem.targetPos;
         
+        Gm.AudioManager.Play("MinePlaced");
         Gm.SwitchState(typeof(WaitingForPlayerActionState));
     }
 

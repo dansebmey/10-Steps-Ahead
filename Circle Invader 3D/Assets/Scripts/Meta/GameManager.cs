@@ -193,6 +193,8 @@ public class GameManager : MonoBehaviour
 
     public void EndGame()
     {
+        // TODO: why doesn't this method disable player input?
+        
         player.isDefeated = true;
         AudioManager.Play("GameOver");
         OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.GameOver);
