@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
 
 public class GameManager : MonoBehaviour
@@ -19,6 +20,9 @@ public class GameManager : MonoBehaviour
 
     private ConcurrentStack<IPlayerCommandListener> _playerCommandListeners;
     private List<IResetOnGameStart> _onGameStartResetters;
+    
+    [SerializeField] private Text averageHealthText;
+    private int cumulativeHealthCounter;
     
     private FiniteStateMachine _fsm;
     private DataManager _dataManager;
@@ -146,6 +150,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void UpdateAverageBarrierHealth()
+    {
+        cumulativeHealthCounter += BarrierManager.remainingBarrierHealth;
+        averageHealthText.text = "Avg: " + (cumulativeHealthCounter / PlayerScore);
+    }
+
     private void Update()
     {
         CurrentState.OnUpdate();
@@ -154,8 +164,6 @@ public class GameManager : MonoBehaviour
     public void OnPlayerCommandPerformed(KeyCode keyCode)
     {
         AudioManager.Play("Slide");
-        
-        PlayerScore++;
         FieldItemManager.HandlePowerupCheck();
 
         foreach (IPlayerCommandListener pcl in _playerCommandListeners)
@@ -163,6 +171,9 @@ public class GameManager : MonoBehaviour
             pcl.OnPlayerCommandPerformed(keyCode);
         }
 
+        PlayerScore++;
+        UpdateAverageBarrierHealth();
+        
         SwitchState(typeof(InvokeEnemyActionState));
     }
 

@@ -124,6 +124,85 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &39151674
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 39151675}
+  - component: {fileID: 39151677}
+  - component: {fileID: 39151676}
+  m_Layer: 5
+  m_Name: Label (Avg HP)
+  m_TagString: HeaderText
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &39151675
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 39151674}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.00044598937}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1659157995}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -100}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &39151676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 39151674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.8862745, g: 0.8862745, b: 0.8862745, a: 0.5019608}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 71c0ea5f0bded94408840e5e47698c6c, type: 3}
+    m_FontSize: 48
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 4
+    m_MaxSize: 96
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: 'Avg: 60'
+--- !u!222 &39151677
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 39151674}
+  m_CullTransparentMesh: 0
 --- !u!1001 &308555319
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -977,6 +1056,12 @@ PrefabInstance:
       objectReference: {fileID: 1136744960}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7363315cd384f13459f16dae3edc775c, type: 3}
+--- !u!224 &1659157995 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 907566842, guid: 7363315cd384f13459f16dae3edc775c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1659157994}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1774454323 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1939167487927615820, guid: 2973229c82c90ce4aa2c744f08d4999e,
@@ -1504,6 +1589,11 @@ PrefabInstance:
       propertyPath: IOEnabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2740902529028869547, guid: 5b6afb87446206c4287e6f471f2bf083,
+        type: 3}
+      propertyPath: averageHealthText
+      value: 
+      objectReference: {fileID: 39151676}
     - target: {fileID: 2740902529028869547, guid: 5b6afb87446206c4287e6f471f2bf083,
         type: 3}
       propertyPath: statePrefabs.Array.size
