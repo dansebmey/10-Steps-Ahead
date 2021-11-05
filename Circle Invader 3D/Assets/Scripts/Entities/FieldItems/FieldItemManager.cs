@@ -13,7 +13,7 @@ public class FieldItemManager : GmAwareObject, IPlayerCommandListener, IResetOnG
     public int itemLifespanInSteps = 10;
     [SerializeField] private List<FieldItem> itemPrefabs;
     
-    public ConcurrentQueue<FieldItem> ItemsInField { get; private set; }
+    public List<FieldItem> ItemsInField { get; private set; }
 
     [SerializeField] private int minStepsUntilSpawn = 8;
     [SerializeField] private int maxStepsUntilSpawn = 16;
@@ -45,7 +45,7 @@ public class FieldItemManager : GmAwareObject, IPlayerCommandListener, IResetOnG
     {
         base.Awake();
 
-        ItemsInField = new ConcurrentQueue<FieldItem>();
+        ItemsInField = new List<FieldItem>();
     }
 
     public void OnNewGameStart()
@@ -53,8 +53,9 @@ public class FieldItemManager : GmAwareObject, IPlayerCommandListener, IResetOnG
         foreach (FieldItem item in ItemsInField)
         {
             item.Destroy();
+            ItemsInField.Remove(item);
         }
-        ItemsInField = new ConcurrentQueue<FieldItem>();
+        ItemsInField = new List<FieldItem>();
         CoinsCollected = 0;
         StepsSinceLastItemSpawn = 0;
     }
@@ -139,7 +140,7 @@ public class FieldItemManager : GmAwareObject, IPlayerCommandListener, IResetOnG
         Gm.AudioManager.Play("ItemSpawn");
     }
 
-    private bool IsBarrierOccupied(int barrierPosIndex)
+    public bool IsBarrierOccupied(int barrierPosIndex)
     {
         return barrierPosIndex == Gm.player.CurrentPosIndex || ItemsInField.Any(i => i.CurrentPosIndex == barrierPosIndex);
     }
@@ -174,12 +175,14 @@ public class FieldItemManager : GmAwareObject, IPlayerCommandListener, IResetOnG
 
     public void RegisterPowerup(FieldItem item)
     {
-        ItemsInField.Enqueue(item);
+        ItemsInField.Add(item);
     }
 
-    public void DeleteItem(FieldItem item)
+    public void DeleteItem(FieldItem itemToRemove)
     {
-        ItemsInField.TryDequeue(out item);
+        List<FieldItem> newList = ItemsInField.Where(i => i != itemToRemove).ToList();
+        ItemsInField = newList;
+        
         StepsSinceLastItemSpawn = 0;
     }
     
