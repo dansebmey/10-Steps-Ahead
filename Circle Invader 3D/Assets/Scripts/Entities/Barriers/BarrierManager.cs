@@ -119,11 +119,6 @@ public class BarrierManager : GmAwareObject, IResetOnGameStart
             if (bar.CurrentPosIndex % amountOfBarriers == posIndex)
             {
                 bar.TakeDamage(damageDealt);
-
-                if (remainingBarrierHealth == 0)
-                {
-                    RepairAllBarriers(4);
-                }
             }
         }
     }
