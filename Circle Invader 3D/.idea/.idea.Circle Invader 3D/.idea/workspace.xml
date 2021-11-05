@@ -156,9 +156,9 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/FieldItem.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/BigHammerFieldItem.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Entities/Barriers/Barrier.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/FieldItemManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Entities/Barriers/BarrierManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/GameManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/FieldItemManager.cs" />
       </list>
     </option>
   </component>
@@ -228,7 +228,8 @@
       <workItem from="1611758046663" duration="904000" />
       <workItem from="1631020278174" duration="62000" />
       <workItem from="1635852896671" duration="14549000" />
-      <workItem from="1635899830277" duration="246000" />
+      <workItem from="1635899830277" duration="515000" />
+      <workItem from="1636083579440" duration="838000" />
     </task>
     <servers />
   </component>

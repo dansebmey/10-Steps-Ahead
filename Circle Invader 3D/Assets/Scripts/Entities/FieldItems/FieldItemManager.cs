@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
@@ -124,7 +125,10 @@ public class FieldItemManager : GmAwareObject, IPlayerCommandListener, IResetOnG
         StepsSinceLastItemSpawn = 0;
         
         FieldItem fieldItem = Instantiate(itemPrefab, Vector3.zero, Quaternion.identity);
-        fieldItem.CurrentPosIndex = Random.Range(0, Gm.BarrierManager.amountOfBarriers-1);
+
+        List<Barrier> eligibleBarriers = Gm.BarrierManager.Barriers.Where(b => !b.IsCollapsed && b.CurrentPosIndex != Gm.player.CurrentPosIndex).ToList();
+        fieldItem.CurrentPosIndex = eligibleBarriers[Random.Range(0, eligibleBarriers.Count)].CurrentPosIndex;
+        
         fieldItem.transform.position = fieldItem.targetPos;
         
         Gm.AudioManager.Play("ItemSpawn");
