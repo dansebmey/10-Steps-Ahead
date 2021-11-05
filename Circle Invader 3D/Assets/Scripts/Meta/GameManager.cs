@@ -172,9 +172,11 @@ public class GameManager : MonoBehaviour
         }
 
         PlayerScore++;
-        UpdateAverageBarrierHealth();
-        
-        SwitchState(typeof(InvokeEnemyActionState));
+
+        if (!player.isDefeated)
+        {
+            SwitchState(typeof(InvokeEnemyActionState));
+        }
     }
 
     public void ApplyDamage(int damageDealt, int rawPosIndex = -99)
