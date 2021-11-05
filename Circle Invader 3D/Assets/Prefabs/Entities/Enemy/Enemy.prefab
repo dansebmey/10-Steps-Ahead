@@ -56,7 +56,7 @@ MonoBehaviour:
     scoreReq: 0
     cooldownInTurns: 0
     remainingCooldown: 0
-    layerPrefab: {fileID: -5037835261173758856, guid: de086547df964c9479b5716ede0b9393,
+    layerPrefab: {fileID: 2542760422709707682, guid: de086547df964c9479b5716ede0b9393,
       type: 3}
     chance: 30
   - actionName: SplitAttack
@@ -89,6 +89,6 @@ MonoBehaviour:
     chance: 5
   delayedProjPrefab: {fileID: 1774929410537623454, guid: 448ebb43eadf1b44e8a509033605b8f5,
     type: 3}
-  firewallPrefab: {fileID: 1911951309029396527, guid: cc5b72c313606d24d89bee23871341d3,
+  minePrefab: {fileID: 1911951309029396527, guid: cc5b72c313606d24d89bee23871341d3,
     type: 3}
   layerHeight: 0.5

@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 39151677}
   - component: {fileID: 39151676}
   m_Layer: 5
-  m_Name: Label (Avg HP)
+  m_Name: Label (Mitigated damage)
   m_TagString: HeaderText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -901,7 +901,12 @@ PrefabInstance:
     - target: {fileID: 2170144441269449967, guid: 7363315cd384f13459f16dae3edc775c,
         type: 3}
       propertyPath: m_Text
-      value: Build 21.11.05.05.45
+      value: Build 21.11.05.06.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 2370403185149188331, guid: 7363315cd384f13459f16dae3edc775c,
+        type: 3}
+      propertyPath: m_Text
+      value: Global Highscores
       objectReference: {fileID: 0}
     - target: {fileID: 2375131985428006763, guid: 7363315cd384f13459f16dae3edc775c,
         type: 3}
@@ -1083,6 +1088,11 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1136744960}
+    - target: {fileID: 6953773725823605680, guid: 7363315cd384f13459f16dae3edc775c,
+        type: 3}
+      propertyPath: m_Text
+      value: DREAMLO.COM by Carmine T. Guida
+      objectReference: {fileID: 0}
     - target: {fileID: 7068179353380884008, guid: 7363315cd384f13459f16dae3edc775c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1777,6 +1787,11 @@ PrefabInstance:
       propertyPath: statePrefabs.Array.size
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 2740902529028869547, guid: 5b6afb87446206c4287e6f471f2bf083,
+        type: 3}
+      propertyPath: mitigatedDamageCounterText
+      value: 
+      objectReference: {fileID: 39151676}
     - target: {fileID: 2740902529028869547, guid: 5b6afb87446206c4287e6f471f2bf083,
         type: 3}
       propertyPath: statePrefabs.Array.data[0]

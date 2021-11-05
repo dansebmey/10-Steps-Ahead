@@ -59,16 +59,9 @@ public class WaitingForPlayerActionState : State
         return false;
     }
 
-    private bool EnableAerialView()
+    private void ToggleAerialView(bool enable)
     {
-        Gm.CameraController.EnableAerialView(true);
-        return true;
-    }
-
-    private bool DisableAerialView()
-    {
-        Gm.CameraController.EnableAerialView(false);
-        return true;
+        Gm.CameraController.EnableAerialView(enable);
     }
 
     private bool ShowSettingsOverlay()
@@ -97,11 +90,11 @@ public class WaitingForPlayerActionState : State
 
         if (Input.GetKeyDown(KeyCode.V))
         {
-            EnableAerialView();
+            ToggleAerialView(true);
         }
         else if (Input.GetKeyUp(KeyCode.V))
         {
-            DisableAerialView();
+            ToggleAerialView(false);
         }
     }
 

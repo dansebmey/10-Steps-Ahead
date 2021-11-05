@@ -1,4 +1,5 @@
-﻿using UnityEditor.UIElements;
+﻿using System.Linq;
+using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -46,20 +47,12 @@ public class FieldItem : OrbitingObject
     protected override void Start()
     {
         base.Start();
+
         Gm.FieldItemManager.RegisterPowerup(this);
-        
         if (RemainingDuration == 0) // returns false if the item was loaded from save data
         {
             RemainingDuration = Gm.FieldItemManager.itemLifespanInSteps;
         }
-    }
-
-    protected override void Update()
-    {
-        base.Update();
-
-        transform.Rotate(new Vector3(0, 0.5f, 0));
-        // TODO: Replace this with an Animator
     }
 
     public virtual void OnPickup()
@@ -68,6 +61,7 @@ public class FieldItem : OrbitingObject
         {
             item.OnConsume();
         }
+        
         Destroy();
     }
 

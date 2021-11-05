@@ -22,6 +22,7 @@
     <select />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/351E49E2-A5BF-4FD6-BEAB-B458CE2255F3/b2/cbfbcdca/Enumerable.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/HUD/HudOverlay.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/HUD/InventoryInterface.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/HUD/BigHammerInterface.cs" root0="FORCE_HIGHLIGHTING" />
@@ -61,6 +62,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/Audio/AudioManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F2625FD8-44AA-4DD5-B6A3-882F24F14D79/cc/96b9feb4/ConcurrentQueue`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/Player/Player.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/Enemy/PostAnimParentDestroyer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/Audio/Sound.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/Player/Inventory.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Meta/Audio/LowPassFilterManager.cs" root0="FORCE_HIGHLIGHTING" />
@@ -108,10 +110,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Overlays/OverlayManager.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/CameraController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Managers/AudioManager/AudioManager.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Overlays/SettingsOverlay.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Managers/HighscoreManager/HighscoreManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Interfaces/IDamageable.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Entities/Barrier.cs" />
@@ -132,7 +130,6 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Entities/OrbitingObject.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/FirewallField.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/ItemEffects/Silence.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Entities/Enemy/EnemyLayer.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Entities/Enemy/EnemyAction.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Highscores/HighscoreManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/IO/DataManager.cs" />
@@ -140,25 +137,30 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/Highscores/OnlineHighscoreOverlay.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Highscores/OnlineHighscoreManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/ItemEffects/Hammer.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/FiniteStateMachine/FiniteStateMachine.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/FiniteStateMachine/States/State.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/3DText.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/AestheticsManager.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Entities/Enemy/Enemy.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/ItemEffects/AntiHammer.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/Text3D.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/CameraController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/FiniteStateMachine/States/WaitingForPlayerActionState.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/ItemEffects/Warp.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/Audio/LowPassFilterManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Meta/UserInterface/DamageIndicator.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/ItemEffects/Mine.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/FieldItem.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/BigHammerFieldItem.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Entities/Barriers/Barrier.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/GameManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/FiniteStateMachine/States/WaitingForPlayerActionState.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/ItemEffects/Mine.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/FiniteStateMachine/FiniteStateMachine.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Entities/Enemy/DestroyAfterAnimScript.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Entities/Enemy/DestroyParentPostAnim.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Entities/Enemy/EnemyLayer.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Entities/Enemy/PostAnimParentDestroyer.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Entities/Enemy/Enemy.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Entities/Missile.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Entities/Barriers/BarrierManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Entities/Barriers/Barrier.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/FieldItem.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Entities/FieldItems/FieldItemManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Meta/GameManager.cs" />
       </list>
     </option>
   </component>
@@ -182,10 +184,10 @@
       <option name="pid" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="12248">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="12248" />
       <method v="2" />
     </configuration>
   </component>
@@ -229,7 +231,7 @@
       <workItem from="1631020278174" duration="62000" />
       <workItem from="1635852896671" duration="14549000" />
       <workItem from="1635899830277" duration="515000" />
-      <workItem from="1636083579440" duration="3172000" />
+      <workItem from="1636083579440" duration="19373000" />
     </task>
     <servers />
   </component>
@@ -239,10 +241,78 @@
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
   <component name="WindowStateProjectService">
-    <state x="638" y="252" width="729" height="536" key="find.popup" timestamp="1636087453828">
+    <state width="413" height="466" key="DebuggerActiveHint" timestamp="1636116511291">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="638" y="252" width="729" height="536" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1636087453828" />
+    <state width="413" height="466" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1636116511291" />
+    <state width="1877" height="269" key="GridCell.Tab.0.bottom" timestamp="1636129603156">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="269" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1636129603156" />
+    <state width="1877" height="269" key="GridCell.Tab.0.center" timestamp="1636129603156">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="269" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1636129603156" />
+    <state width="1877" height="269" key="GridCell.Tab.0.left" timestamp="1636129603155">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="269" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1636129603155" />
+    <state width="1877" height="269" key="GridCell.Tab.0.right" timestamp="1636129603156">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="269" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1636129603156" />
+    <state width="1877" height="269" key="GridCell.Tab.1.bottom" timestamp="1636129603156">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="269" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1636129603156" />
+    <state width="1877" height="269" key="GridCell.Tab.1.center" timestamp="1636129603156">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="269" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1636129603156" />
+    <state width="1877" height="269" key="GridCell.Tab.1.left" timestamp="1636129603156">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="269" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1636129603156" />
+    <state width="1877" height="269" key="GridCell.Tab.1.right" timestamp="1636129603156">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="269" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1636129603156" />
+    <state width="1877" height="269" key="GridCell.Tab.2.bottom" timestamp="1636129603157">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="269" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1636129603157" />
+    <state width="1877" height="269" key="GridCell.Tab.2.center" timestamp="1636129603156">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="269" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1636129603156" />
+    <state width="1877" height="269" key="GridCell.Tab.2.left" timestamp="1636129603156">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="269" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1636129603156" />
+    <state width="1877" height="269" key="GridCell.Tab.2.right" timestamp="1636129603156">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="269" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1636129603156" />
+    <state width="1877" height="269" key="GridCell.Tab.3.bottom" timestamp="1636129603157">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="269" key="GridCell.Tab.3.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1636129603157" />
+    <state width="1877" height="269" key="GridCell.Tab.3.center" timestamp="1636129603157">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="269" key="GridCell.Tab.3.center/0.0.1920.1040@0.0.1920.1040" timestamp="1636129603157" />
+    <state width="1877" height="269" key="GridCell.Tab.3.left" timestamp="1636129603157">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="269" key="GridCell.Tab.3.left/0.0.1920.1040@0.0.1920.1040" timestamp="1636129603157" />
+    <state width="1877" height="269" key="GridCell.Tab.3.right" timestamp="1636129603157">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="269" key="GridCell.Tab.3.right/0.0.1920.1040@0.0.1920.1040" timestamp="1636129603157" />
+    <state x="638" y="252" width="729" height="536" key="find.popup" timestamp="1636129603031">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="638" y="252" width="729" height="536" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1636129603031" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

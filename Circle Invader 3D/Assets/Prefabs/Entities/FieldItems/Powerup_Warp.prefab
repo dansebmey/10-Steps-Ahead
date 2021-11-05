@@ -47,9 +47,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.5, z: 4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 229072375311100603}
   - {fileID: 5935649942931535010}
   - {fileID: 5024894607962123585}
+  - {fileID: 6505218296770723933}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -101,7 +101,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 528188673481827824}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &7601447942383021154
 ParticleSystem:
@@ -4941,12 +4941,63 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!1 &6232295505576892909
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6505218296770723933}
+  - component: {fileID: 7808940487644736076}
+  m_Layer: 0
+  m_Name: Model
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6505218296770723933
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6232295505576892909}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 229072375311100603}
+  m_Father: {fileID: 528188673481827824}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &7808940487644736076
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6232295505576892909}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9c0e700e8dc51b8489abfd942cf693db, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &335356964550249808
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 528188673481827824}
+    m_TransformParent: {fileID: 6505218296770723933}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 6f272156b988d1846a3530a5fff56816,
         type: 3}
@@ -4971,12 +5022,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 6f272156b988d1846a3530a5fff56816,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.175
+      value: 0.023320124
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6f272156b988d1846a3530a5fff56816,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.425
+      value: 0.01004374
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6f272156b988d1846a3530a5fff56816,
         type: 3}
@@ -4991,7 +5042,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 6f272156b988d1846a3530a5fff56816,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6f272156b988d1846a3530a5fff56816,
         type: 3}
@@ -5021,7 +5072,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 6f272156b988d1846a3530a5fff56816,
         type: 3}
       propertyPath: m_Name
-      value: Model
+      value: Arrow
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f272156b988d1846a3530a5fff56816, type: 3}
@@ -5047,7 +5098,7 @@ PrefabInstance:
     - target: {fileID: 4394782909603414769, guid: ef78d77977a160f47a7d482ccfc33eeb,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4394782909603414769, guid: ef78d77977a160f47a7d482ccfc33eeb,
         type: 3}

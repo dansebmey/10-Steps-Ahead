@@ -3,6 +3,13 @@
 public class EnemyLayer : MovableObject
 {
     [HideInInspector] public Quaternion targetRot;
+    [HideInInspector] public Animator animator;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        animator = GetComponentInChildren<Animator>();
+    }
 
     protected override void Update()
     {

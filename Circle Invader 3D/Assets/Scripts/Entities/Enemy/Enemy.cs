@@ -67,7 +67,7 @@ public class Enemy : MovableObject, IPlayerCommandListener, IResetOnGameStart
     {
         EnemyLayer layer = Instantiate(
             enemyAction.layerPrefab,
-            new Vector3(0, 0.25f + (layerHeight + 0.025f) * queuedActions.Count, 0),
+            new Vector3(0, (layerHeight + 0.025f) * queuedActions.Count, 0),
             transform.rotation);
         layer.transform.parent = transform;
         
@@ -154,8 +154,9 @@ public class Enemy : MovableObject, IPlayerCommandListener, IResetOnGameStart
     public void InvokeNextAction()
     {
         queuedActions.First.Value.action.Invoke();
-        
-        Destroy(_totemLayers.First.Value.gameObject);
+
+        _totemLayers.First.Value.animator.Play("layer-despawn");
+        // Destroy(_totemLayers.First.Value.gameObject);
         _totemLayers.RemoveFirst();
 
         queuedActions.RemoveFirst();
@@ -167,7 +168,7 @@ public class Enemy : MovableObject, IPlayerCommandListener, IResetOnGameStart
         List<EnemyLayer> layers = new List<EnemyLayer>(_totemLayers);
         for (int i = 0; i < layers.Count; i++)
         { 
-            layers[i].targetPos = new Vector3(0, 0.25f + (layerHeight + 0.025f) * i, 0);
+            layers[i].targetPos = new Vector3(0, (layerHeight + 0.025f) * i, 0);
             
             Quaternion targetRot = Quaternion.LookRotation(Gm.player.targetPos - transform.position);
             targetRot.x = 0;
@@ -251,12 +252,15 @@ public class Enemy : MovableObject, IPlayerCommandListener, IResetOnGameStart
         
         for (int i = 0; i < amount; i++)
         {
+            // TODO: Replace all layers with idle layers
+            
             Destroy(_totemLayers.First.Value.gameObject);
             _totemLayers.RemoveFirst();
 
             queuedActions.RemoveFirst();
             QueueNewAction(ACTION_IDLE, true);
         }
+        MoveTotemLayersDown();
     }
     
     public void OnNewGameStart()

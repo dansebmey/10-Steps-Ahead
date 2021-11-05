@@ -16,6 +16,7 @@
               <e p="Enemy.cs" t="Include" />
               <e p="EnemyAction.cs" t="Include" />
               <e p="EnemyLayer.cs" t="Include" />
+              <e p="PostAnimParentDestroyer.cs" t="Include" />
             </e>
             <e p="FieldItems" t="Include">
               <e p="BigHammerFieldItem.cs" t="Include" />
