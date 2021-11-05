@@ -112,15 +112,17 @@ public class BarrierManager : GmAwareObject, IResetOnGameStart
         return rns.Contains(rn) ? GenerateRandomUniqueInt(rns) : rn;
     }
 
-    public void DamageBarrier(int damageDealt, int posIndex)
+    public int DamageBarrier(int damageDealt, int posIndex)
     {
         foreach (Barrier bar in Barriers)
         {
             if (bar.CurrentPosIndex % amountOfBarriers == posIndex)
             {
-                bar.TakeDamage(damageDealt);
+                return bar.TakeDamage(damageDealt);
             }
         }
+
+        return 0;
     }
 
     public bool IsBarrierCollapsed(int posIndex)

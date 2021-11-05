@@ -53,7 +53,7 @@ public class Barrier : OrbitingObject
         Health = Bm.initBarrierHealth;
     }
 
-    public void TakeDamage(int amount)
+    public int TakeDamage(int amount)
     {
         int cachedHealth = Health;
         Health -= amount;
@@ -67,7 +67,11 @@ public class Barrier : OrbitingObject
         _damageParticles.Play();
         
         Gm.BarrierManager.UpdateRemainingBarrierHealth(false);
-        Gm.BarrierManager.damageIndicator.Trigger(Health - cachedHealth);
+
+        int lostHP = cachedHealth - Health;
+        Gm.BarrierManager.damageIndicator.Trigger(-lostHP);
+        
+        return lostHP;
     }
 
     public void RestoreHealth(int amount)
@@ -79,6 +83,9 @@ public class Barrier : OrbitingObject
             
         Gm.LowPassFilterManager.UpdateLPFilter();
         Gm.BarrierManager.UpdateRemainingBarrierHealth(true);
-        Gm.BarrierManager.damageIndicator.Trigger(Health - cachedHealth);
+        
+        int restoredHP = Health - cachedHealth;
+        Gm.DamageMitigated += restoredHP;
+        Gm.BarrierManager.damageIndicator.Trigger(restoredHP);
     }
 }

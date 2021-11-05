@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -21,8 +22,7 @@ public class GameManager : MonoBehaviour
     private ConcurrentStack<IPlayerCommandListener> _playerCommandListeners;
     private List<IResetOnGameStart> _onGameStartResetters;
     
-    [SerializeField] private Text averageHealthText;
-    private int cumulativeHealthCounter;
+    [SerializeField] private Text mitigatedDamageCounterText;
     
     private FiniteStateMachine _fsm;
     private DataManager _dataManager;
@@ -80,6 +80,30 @@ public class GameManager : MonoBehaviour
     }
 
     private int _playerScore;
+    
+    private int _damageTaken;
+    public int DamageTaken
+    {
+        get => _damageTaken;
+        set
+        {
+            _damageTaken = value;
+            UpdateDamageMitigatedToLostRatio();
+        }
+    }
+
+    private int _damageMitigated;
+    public int DamageMitigated
+    {
+        get => _damageMitigated;
+        set
+        {
+            _damageMitigated = value;
+            UpdateDamageMitigatedToLostRatio();
+        }
+    }
+
+
     public int PlayerScore
     {
         get => _playerScore;
@@ -150,10 +174,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void UpdateAverageBarrierHealth()
+    private void UpdateDamageMitigatedToLostRatio()
     {
-        cumulativeHealthCounter += BarrierManager.remainingBarrierHealth;
-        averageHealthText.text = "Avg: " + (cumulativeHealthCounter / PlayerScore);
+        string ratioString = ((DamageMitigated / DamageTaken) * 100).ToString();
+        mitigatedDamageCounterText.text = ratioString.Substring(0, Math.Min(ratioString.Length, 3));
     }
 
     private void Update()
@@ -189,7 +213,14 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            BarrierManager.DamageBarrier(damageDealt, posIndex);
+            int hpLost = BarrierManager.DamageBarrier(damageDealt, posIndex);
+            DamageTaken += hpLost;
+            if (hpLost < damageDealt)
+            {
+                DamageMitigated += Math.Abs(damageDealt - hpLost);
+                UpdateDamageMitigatedToLostRatio();
+            }
+            
             SwitchState(typeof(WaitingForPlayerActionState));
         }
     }
@@ -199,15 +230,13 @@ public class GameManager : MonoBehaviour
         return PlayerScore >= req;
     }
 
-    private int WrapPosIndex(int posIndex)
+    public int WrapPosIndex(int posIndex)
     {
         return (BarrierManager.amountOfBarriers + posIndex) % BarrierManager.amountOfBarriers;
     }
 
     public void EndGame()
     {
-        // TODO: why doesn't this method disable player input?
-        
         player.isDefeated = true;
         AudioManager.Play("GameOver");
         OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.GameOver);
