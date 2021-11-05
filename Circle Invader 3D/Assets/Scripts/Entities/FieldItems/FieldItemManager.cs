@@ -68,10 +68,14 @@ public class FieldItemManager : GmAwareObject, IPlayerCommandListener, IResetOnG
 
     private void DeterminePowerupSpawn()
     {
-        // if (ItemsInField.Where(i => !(i.item is Mine)).ToList().Count == 0 && EligibleForPowerupSpawn())
-        if (ItemsInField.Count == 0 && EligibleForPowerupSpawn())
+        // TODO: Warp animation?
+        
+        if (ItemsInField.Where(i => !(i.item is Mine)).ToList().Count == 0
+            && EligibleForPowerupSpawn()
+            && Gm.BarrierManager.Barriers.Where(b => !b.IsCollapsed).ToList().Count > 1)
         {
-            SpawnItem(SelectRandomItemToSpawn());
+            FieldItem item = SelectRandomItemToSpawn();
+            SpawnItem(item);
         }
     }
 
