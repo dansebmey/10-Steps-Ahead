@@ -68,7 +68,7 @@ public class FieldItemManager : GmAwareObject, IPlayerCommandListener, IResetOnG
 
     private void DeterminePowerupSpawn()
     {
-        if (ItemsInField.Count == 0 && EligibleForPowerupSpawn())
+        if (ItemsInField.Where(i => !(i.item is Mine)).ToList().Count == 0 && EligibleForPowerupSpawn())
         {
             SpawnItem(SelectRandomItemToSpawn());
         }
@@ -126,7 +126,7 @@ public class FieldItemManager : GmAwareObject, IPlayerCommandListener, IResetOnG
         
         FieldItem fieldItem = Instantiate(itemPrefab, Vector3.zero, Quaternion.identity);
 
-        List<Barrier> eligibleBarriers = Gm.BarrierManager.Barriers.Where(b => !b.IsCollapsed && b.CurrentPosIndex != Gm.player.CurrentPosIndex).ToList();
+        List<Barrier> eligibleBarriers = Gm.BarrierManager.Barriers.Where(b => !b.IsCollapsed && !IsBarrierOccupied(b.CurrentPosIndex)).ToList();
         fieldItem.CurrentPosIndex = eligibleBarriers[Random.Range(0, eligibleBarriers.Count)].CurrentPosIndex;
         
         fieldItem.transform.position = fieldItem.targetPos;
@@ -134,13 +134,15 @@ public class FieldItemManager : GmAwareObject, IPlayerCommandListener, IResetOnG
         Gm.AudioManager.Play("ItemSpawn");
     }
 
+    private bool IsBarrierOccupied(int barrierPosIndex)
+    {
+        return barrierPosIndex == Gm.player.CurrentPosIndex || ItemsInField.Any(i => i.CurrentPosIndex == barrierPosIndex);
+    }
+
     private bool EligibleForPowerupSpawn()
     {
-        float healthMissingPercentage = 
-            1 - (1.0f / Gm.BarrierManager.InitBarrierHealth) * Gm.BarrierManager.CurrentBarrierHealth;
-
         float chance = Mathf.Clamp(1 -((1.0f / minStepsUntilSpawn) * (minStepsUntilSpawn))
-                       + ((1.0f / (maxStepsUntilSpawn - minStepsUntilSpawn)) * (StepsSinceLastItemSpawn - minStepsUntilSpawn) * (1.0f + (healthMissingPercentage * 0.5f))), 0, 1);
+                                   + ((1.0f / (maxStepsUntilSpawn - minStepsUntilSpawn)) * (StepsSinceLastItemSpawn - minStepsUntilSpawn)), 0, 1);
 
         float rn = Random.Range(0.0f, 1.0f);
         return rn <= chance;
