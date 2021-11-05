@@ -68,7 +68,8 @@ public class FieldItemManager : GmAwareObject, IPlayerCommandListener, IResetOnG
 
     private void DeterminePowerupSpawn()
     {
-        if (ItemsInField.Where(i => !(i.item is Mine)).ToList().Count == 0 && EligibleForPowerupSpawn())
+        // if (ItemsInField.Where(i => !(i.item is Mine)).ToList().Count == 0 && EligibleForPowerupSpawn())
+        if (ItemsInField.Count == 0 && EligibleForPowerupSpawn())
         {
             SpawnItem(SelectRandomItemToSpawn());
         }
