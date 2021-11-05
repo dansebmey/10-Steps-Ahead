@@ -16,7 +16,7 @@ public class Enemy : MovableObject, IPlayerCommandListener, IResetOnGameStart
     [Header("Prefabs")]
     [SerializeField] private List<EnemyAction> actionPrefabs;
     [SerializeField] public Missile delayedProjPrefab;
-    [SerializeField] public FieldItem firewallPrefab;
+    [SerializeField] public FieldItem minePrefab;
     public ConcurrentQueue<Missile> MissilesInField { get; private set; }
     
     public float layerHeight = 0.5f;
@@ -32,7 +32,7 @@ public class Enemy : MovableObject, IPlayerCommandListener, IResetOnGameStart
         actionPrefabs[2].action = SplitAttack;
         actionPrefabs[3].action = DelayedAttack;
         actionPrefabs[4].action = TwinAttack;
-        actionPrefabs[5].action = FlameAttack;
+        actionPrefabs[5].action = MineAttack;
         
         InitActionQueue();
         
@@ -122,17 +122,30 @@ public class Enemy : MovableObject, IPlayerCommandListener, IResetOnGameStart
         // TODO: State switching should be done somewhere more central
     }
 
-    private void FlameAttack()
+    private void MineAttack()
     {
-        FieldItem fieldItem = Instantiate(firewallPrefab, Vector3.zero, Quaternion.identity);
-        fieldItem.distanceFromCenter = Gm.BarrierManager.barrierDistanceFromCenter + 0.75f;
-        fieldItem.CurrentPosIndex = Gm.CurrentPosIndex - (Gm.BarrierManager.amountOfBarriers / 4);
-        fieldItem.transform.position = fieldItem.targetPos;
+        FieldItemManager fim = Gm.FieldItemManager;
+        FieldItem mine;
         
-        fieldItem = Instantiate(firewallPrefab, Vector3.zero, Quaternion.identity);
-        fieldItem.distanceFromCenter = Gm.BarrierManager.barrierDistanceFromCenter + 0.75f;
-        fieldItem.CurrentPosIndex = Gm.CurrentPosIndex + (Gm.BarrierManager.amountOfBarriers / 4);
-        fieldItem.transform.position = fieldItem.targetPos;
+        // Spawn mine on the left side
+        int targetPosIndex = Gm.WrapPosIndex(Gm.CurrentPosIndex - (Gm.BarrierManager.amountOfBarriers / 4));
+        if (!fim.IsBarrierOccupied(targetPosIndex))
+        {
+            mine = Instantiate(minePrefab, Vector3.zero, Quaternion.identity);
+            mine.distanceFromCenter = Gm.BarrierManager.barrierDistanceFromCenter + 0.75f;
+            mine.CurrentPosIndex = targetPosIndex;
+            mine.transform.position = mine.targetPos;
+        }
+        
+        // Spawn mine on the right side
+        targetPosIndex = Gm.WrapPosIndex(Gm.CurrentPosIndex + (Gm.BarrierManager.amountOfBarriers / 4));
+        if (!fim.IsBarrierOccupied(targetPosIndex))
+        {
+            mine = Instantiate(minePrefab, Vector3.zero, Quaternion.identity);
+            mine.distanceFromCenter = Gm.BarrierManager.barrierDistanceFromCenter + 0.75f;
+            mine.CurrentPosIndex = targetPosIndex;
+            mine.transform.position = mine.targetPos;
+        }
         
         Gm.AudioManager.Play("MinePlaced");
         Gm.SwitchState(typeof(WaitingForPlayerActionState));
