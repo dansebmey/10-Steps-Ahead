@@ -10,7 +10,7 @@ public class PostAnimParentDestroyer : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Could not destroy layer: DestroyAfterAnimScript must be a direct child of EnemyLayer.");
+            Debug.LogError("Could not destroy layer: PostAnimParentDestroyer must be a direct child of EnemyLayer.");
         }
     }
 }

@@ -41,6 +41,8 @@ public class Barrier : OrbitingObject
                 IsCollapsed = true;
                 EventManager<AchievementManager.AchievementType, int>.Invoke(EventType.ResetAchievementProgress, 
                     AchievementManager.AchievementType.PointsWithoutCollapse, 0);
+                EventManager<AchievementManager.AchievementType, int>.Invoke(EventType.EnableStepCounter, 
+                    AchievementManager.AchievementType.PointsWithoutCollapse, 0);
             }
         }
     }

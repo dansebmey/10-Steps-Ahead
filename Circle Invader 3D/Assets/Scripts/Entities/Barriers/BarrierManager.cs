@@ -236,10 +236,10 @@ public class BarrierManager : GmAwareObject, IResetOnGameStart
         }
 
         EventManager<AchievementManager.AchievementType, int>.Invoke(EventType.SetAchievementProgress,
-            AchievementManager.AchievementType.BarrierHPAbove, remainingBarrierHealth);
+            AchievementManager.AchievementType.BarrierHPAbove, remainingBarrierHealth - 60);
         
         EventManager<AchievementManager.AchievementType, int>.Invoke(EventType.SetAchievementProgress,
-            AchievementManager.AchievementType.BarrierHPLost, (maxBarrierHealth * amountOfBarriers) - remainingBarrierHealth);
+            AchievementManager.AchievementType.BarrierHPLost, (maxBarrierHealth * amountOfBarriers) - remainingBarrierHealth - 20);
     }
     
     #region OnGameLoad

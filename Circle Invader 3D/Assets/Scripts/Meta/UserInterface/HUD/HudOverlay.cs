@@ -15,6 +15,7 @@ public class HudOverlay : Overlay
     private Text _scoreShadowLabel, _scoreLabel;
 
     private BigHammerInterface _bigHammerInterface;
+    [HideInInspector] public AchievementProgressPanel AchievementProgressPanel;
     
     public Text clockTextObject;
 
@@ -26,6 +27,7 @@ public class HudOverlay : Overlay
         _scoreLabel = GetComponentsInChildren<Text>(true)[1];
 
         _bigHammerInterface = GetComponentInChildren<BigHammerInterface>();
+        AchievementProgressPanel = GetComponentInChildren<AchievementProgressPanel>();
         
         InstructionsCurrentlyShown = new ConcurrentDictionary<KeyCode[], Instruction>();
     }
@@ -50,6 +52,8 @@ public class HudOverlay : Overlay
     {
         Gm.CameraController.FocusOn(Gm.player.transform, new Vector3(0, 5, -5), new Vector3(25, 0, 0));
         Gm.SwitchState(typeof(WaitingForPlayerActionState));
+
+        AchievementProgressPanel.Appear();
     }
     public bool IsNoOtherInstructionShown()
     {

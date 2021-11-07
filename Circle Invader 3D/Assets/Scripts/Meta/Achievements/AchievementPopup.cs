@@ -31,14 +31,12 @@ public class AchievementPopup : MonoBehaviour
 
     public void ShowNextQueuedAchievement()
     {
+        isShowing = false;
+        
         Achievement nextAchievement = achievementManager.GetNextQueuedAchievement();
-        if (nextAchievement == null)
+        if (nextAchievement != null)
         {
-            isShowing = false;
-        }
-        else
-        {
-            ShowCompletedAchievement(nextAchievement);
+            ShowCompletedAchievement(nextAchievement);   
         }
     }
 }

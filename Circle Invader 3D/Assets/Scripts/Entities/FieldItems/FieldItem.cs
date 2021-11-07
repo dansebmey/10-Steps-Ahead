@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.Events;
@@ -33,6 +34,11 @@ public class FieldItem : OrbitingObject
                     Destroy();
                     break;
             }
+
+            if (durationText.trackPlayerDistance)
+            {
+                durationText.ToggleOpacity(Math.Abs(Gm.WrapPosIndex(Gm.player.CurrentPosIndex) - Gm.WrapPosIndex(CurrentPosIndex)) <= _remainingDuration);
+            }
         }
     }
 
@@ -63,12 +69,18 @@ public class FieldItem : OrbitingObject
         }
         
         Destroy();
+        PostDestroy();
     }
 
     public virtual void Destroy()
     {
         Gm.FieldItemManager.DeleteItem(this);
         Destroy(gameObject);
+    }
+
+    protected virtual void PostDestroy()
+    {
+        
     }
 
     public void ReduceTimer()

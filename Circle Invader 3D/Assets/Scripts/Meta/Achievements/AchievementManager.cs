@@ -25,7 +25,7 @@ public class AchievementManager : MonoBehaviour, IResetOnGameStart
         AchievementType.OptimalRebootUse, AchievementType.AvoidDelayedDamage, AchievementType.ReduceDoubleDamage,
         AchievementType.AvoidSplitDamage
     };
-
+    
     private void Awake()
     {
         EventManager<AchievementType, int>.AddListener(EventType.IncrementAchievementProgress, IncrementAchievementProgress);
@@ -37,6 +37,7 @@ public class AchievementManager : MonoBehaviour, IResetOnGameStart
     private void Start()
     {
         _achievementsToShow = new Queue<Achievement>();
+        StartCountingSteps(AchievementType.ScoreMilestone, 0);
         StartCountingSteps(AchievementType.PointsWithoutCollapse, 0);
         StartCountingSteps(AchievementType.Speedrun, 0);
         StartCountingSteps(AchievementType.PerfectEverything, 0);
@@ -92,7 +93,7 @@ public class AchievementManager : MonoBehaviour, IResetOnGameStart
             if (a.countSteps && a.isStepCounterEnabled && !a.isCompleted)
             {
                 a.Progression++;
-                
+
                 if (a.isCompleted)
                 {
                     QueueAchievementToShow(a);

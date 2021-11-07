@@ -17,9 +17,9 @@
               <e p="EnemyAction.cs" t="Include" />
               <e p="EnemyLayer.cs" t="Include" />
               <e p="PostAnimParentDestroyer.cs" t="Include" />
+              <e p="PostAnimParentDisabler.cs" t="Include" />
             </e>
             <e p="FieldItems" t="Include">
-              <e p="BigHammerFieldItem.cs" t="Include" />
               <e p="FieldItem.cs" t="Include" />
               <e p="FieldItemManager.cs" t="Include" />
               <e p="FirewallField.cs" t="Include" />
@@ -33,6 +33,7 @@
                 <e p="Reboot.cs" t="Include" />
                 <e p="Warp.cs" t="Include" />
               </e>
+              <e p="MultiHammerFieldItem.cs" t="Include" />
             </e>
             <e p="Missile.cs" t="Include" />
             <e p="MovableObject.cs" t="Include" />
@@ -46,8 +47,10 @@
             <e p="Achievements" t="Include">
               <e p="Achievement.cs" t="Include" />
               <e p="AchievementEntry.cs" t="Include" />
+              <e p="AchievementEntryPinned.cs" t="Include" />
               <e p="AchievementManager.cs" t="Include" />
               <e p="AchievementPopup.cs" t="Include" />
+              <e p="AchievementProgressPanel.cs" t="Include" />
               <e p="EventManager.cs" t="Include" />
             </e>
             <e p="Audio" t="Include">

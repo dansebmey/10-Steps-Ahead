@@ -11,14 +11,17 @@ public class AchievementOverlay : Overlay
 
     private List<AchievementEntry> _entries;
 
+    [SerializeField] private Text completedCounterTextObject;
+    public Color allCompletedTextColour;
+
     protected override void Awake()
     {
         base.Awake();
         
         _entries = new List<AchievementEntry>();
         CreateAchievementEntries();
-        
-        // this fixes a buggo where only one AchievementOverlay would be filled with achievements.
+
+        // this fixes a Buggo where only one AchievementOverlay would be filled with achievements.
         // however, doesn't feel very safe to call on external components on Awake()...
     }
 
@@ -99,10 +102,30 @@ public class AchievementOverlay : Overlay
         base.OnShow();
         
         Gm.CameraController.FocusOn(Gm.CameraController.DefaultFocalPoint, new Vector3(0, 15, 0), new Vector3(90, 180, 0));
-
+        
+        UpdateCompletedCounter();
         foreach (AchievementEntry entry in _entries)
         {
+            entry.UpdatePinButton();
             entry.UpdateProgress();
+        }
+    }
+
+    private void UpdateCompletedCounter()
+    {
+        int completedCounter = 0;
+        foreach (AchievementEntry entry in _entries)
+        {
+            if (entry.achievement.isCompleted)
+            {
+                completedCounter++;
+            }
+        }
+        completedCounterTextObject.text = completedCounter + "/" + _entries.Count + " completed";
+
+        if (completedCounter == _entries.Count)
+        {
+            completedCounterTextObject.color = allCompletedTextColour;
         }
     }
 }

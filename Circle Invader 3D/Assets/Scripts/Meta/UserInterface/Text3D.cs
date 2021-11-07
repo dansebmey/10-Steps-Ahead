@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Text3D : MonoBehaviour
@@ -10,6 +11,8 @@ public class Text3D : MonoBehaviour
 
     [SerializeField] private Color warningColour1;
     [SerializeField] private Color warningColour2;
+
+    public bool trackPlayerDistance;
 
     private void Awake()
     {
@@ -46,6 +49,15 @@ public class Text3D : MonoBehaviour
         if (_textMesh)
         {
             _textMesh.color = warningColour2;
+        }
+    }
+
+    public void ToggleOpacity(bool opaque)
+    {
+        if (_textMesh)
+        {
+            Color c = _textMesh.color;
+            _textMesh.color = new Color(c.r, c.g, c.b, opaque ? 1 : 0.1f);
         }
     }
 }

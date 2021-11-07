@@ -7,7 +7,8 @@ public enum EventType
     IncrementAchievementProgress = 0,
     SetAchievementProgress = 1,
     ResetAchievementProgress = 2,
-    EnableStepCounter = 3
+    EnableStepCounter = 3,
+    TogglePinButtons = 4
 }
 
 public static class EventManager<T, U>
@@ -16,7 +17,6 @@ public static class EventManager<T, U>
 
     public static void AddListener(EventType type, Action<T, U> action)
     {
-        Debug.Log("Listener registered for event ["+type+"]");
         if (!EventDictionary.ContainsKey(type))
         {
             EventDictionary.Add(type, null);

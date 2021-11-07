@@ -112,11 +112,6 @@ public class GameManager : MonoBehaviour
         {
             _playerScore = value;
             OverlayManager.Hud.UpdateScore(value);
-
-            if (_playerScore % 50 == 0)
-            {
-                EventManager<AchievementManager.AchievementType, int>.Invoke(EventType.SetAchievementProgress, AchievementManager.AchievementType.ScoreMilestone, _playerScore);
-            }
         }
     }
 
@@ -137,18 +132,26 @@ public class GameManager : MonoBehaviour
         LowPassFilterManager = CameraController.GetComponent<LowPassFilterManager>();
         
         _fsm = new FiniteStateMachine(this, typeof(MenuState));
-        
-        _playerCommandListeners = new ConcurrentStack<IPlayerCommandListener>();
-        _playerCommandListeners.Push(FieldItemManager);
-        _playerCommandListeners.Push(enemy);
-        _playerCommandListeners.Push(TutorialManager);
-
-        _onGameStartResetters = new List<IResetOnGameStart>
-            { player, enemy, BarrierManager, FieldItemManager, AchievementManager };
     }
 
     private void Start()
     {
+        _playerCommandListeners = new ConcurrentStack<IPlayerCommandListener>();
+        _playerCommandListeners.Push(FieldItemManager);
+        _playerCommandListeners.Push(enemy);
+        _playerCommandListeners.Push(TutorialManager);
+        _playerCommandListeners.Push(OverlayManager.Hud.AchievementProgressPanel);
+
+        _onGameStartResetters = new List<IResetOnGameStart>
+        {
+            player,
+            enemy, 
+            BarrierManager,
+            FieldItemManager,
+            AchievementManager,
+            OverlayManager.Hud.AchievementProgressPanel
+        };
+        
         if (IOEnabled) LoadSavedData();
         AudioManager.PlayMusic();
     }
@@ -211,18 +214,18 @@ public class GameManager : MonoBehaviour
         FieldItemManager.HandlePowerupCheck();
         AchievementManager.IncrementStepCounter();
         BarrierManager.HandleEqualBarrierHPCheck();
-
+        
+        if (!player.isDefeated)
+        {
+            SwitchState(typeof(InvokeEnemyActionState));
+        }
+        
         foreach (IPlayerCommandListener pcl in _playerCommandListeners)
         {
             pcl.OnPlayerCommandPerformed(keyCode);
         }
 
         PlayerScore++;
-
-        if (!player.isDefeated)
-        {
-            SwitchState(typeof(InvokeEnemyActionState));
-        }
     }
 
     private IEnumerator StartClock()

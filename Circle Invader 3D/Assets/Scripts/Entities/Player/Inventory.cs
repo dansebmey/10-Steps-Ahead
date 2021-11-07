@@ -102,9 +102,9 @@ public class Inventory : GmAwareObject
 
         HighlightedItemIndex = playerData.inventory.highlightedItemIndex;
     }
-
-    public bool Contains(string powerupName)
+    
+    public int CountAmountOfItem(string powerupName)
     {
-        return carriedPowerups.Any(powerup => powerup.powerupName == powerupName);
+        return carriedPowerups.Count(p => p.powerupName == powerupName);
     }
 }

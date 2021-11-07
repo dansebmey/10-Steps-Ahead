@@ -16,6 +16,8 @@ public class Achievement
     private int _progression;
     [HideInInspector] public bool isCompleted;
 
+    [HideInInspector] public bool isPinned;
+
     public int Progression
     {
         get => _progression;

@@ -4933,7 +4933,7 @@ GameObject:
   - component: {fileID: 7545906396338027187}
   - component: {fileID: 4476671560827790769}
   m_Layer: 0
-  m_Name: Powerup_BigHammer
+  m_Name: Powerup_MultiHammer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5035,6 +5035,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394782909603414770, guid: ef78d77977a160f47a7d482ccfc33eeb,
+        type: 3}
+      propertyPath: trackPlayerDistance
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4394782909603414774, guid: ef78d77977a160f47a7d482ccfc33eeb,
         type: 3}

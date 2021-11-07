@@ -124,26 +124,28 @@ public class Enemy : MovableObject, IPlayerCommandListener, IResetOnGameStart
         totalHPLost += Gm.ApplyDamage(1, Gm.CurrentPosIndex-1);
         totalHPLost += Gm.ApplyDamage(1, Gm.CurrentPosIndex+1);
 
-        if (totalHPLost == 1)
+        switch (totalHPLost)
         {
-            Gm.AudioManager.Play("GoodPerf");
-            EventManager<AchievementManager.AchievementType, int>
-                .Invoke(EventType.IncrementAchievementProgress, AchievementManager.AchievementType.ReduceSplitDamage, 1);
-        }
-        else if (totalHPLost == 0)
-        {
-            Gm.AudioManager.Play("PerfectPerf");
-            EventManager<AchievementManager.AchievementType, int>
-                .Invoke(EventType.IncrementAchievementProgress, AchievementManager.AchievementType.ReduceSplitDamage, 1);
-            EventManager<AchievementManager.AchievementType, int>
-                .Invoke(EventType.IncrementAchievementProgress, AchievementManager.AchievementType.AvoidSplitDamage, 1);
-        }
-        else
-        {
-            EventManager<AchievementManager.AchievementType, int>
-                .Invoke(EventType.ResetAchievementProgress, AchievementManager.AchievementType.ReduceSplitDamage, 0);
-            EventManager<AchievementManager.AchievementType, int>
-                .Invoke(EventType.ResetAchievementProgress, AchievementManager.AchievementType.AvoidSplitDamage, 0);
+            case 1:
+                Gm.AudioManager.Play("GoodPerf");
+                EventManager<AchievementManager.AchievementType, int>
+                    .Invoke(EventType.IncrementAchievementProgress, AchievementManager.AchievementType.ReduceSplitDamage, 1);
+                EventManager<AchievementManager.AchievementType, int>
+                    .Invoke(EventType.ResetAchievementProgress, AchievementManager.AchievementType.ReduceSplitDamage, 0);
+                break;
+            case 0:
+                Gm.AudioManager.Play("PerfectPerf");
+                EventManager<AchievementManager.AchievementType, int>
+                    .Invoke(EventType.IncrementAchievementProgress, AchievementManager.AchievementType.ReduceSplitDamage, 1);
+                EventManager<AchievementManager.AchievementType, int>
+                    .Invoke(EventType.IncrementAchievementProgress, AchievementManager.AchievementType.AvoidSplitDamage, 1);
+                break;
+            default:
+                EventManager<AchievementManager.AchievementType, int>
+                    .Invoke(EventType.ResetAchievementProgress, AchievementManager.AchievementType.ReduceSplitDamage, 0);
+                EventManager<AchievementManager.AchievementType, int>
+                    .Invoke(EventType.ResetAchievementProgress, AchievementManager.AchievementType.AvoidSplitDamage, 0);
+                break;
         }
     }
 
