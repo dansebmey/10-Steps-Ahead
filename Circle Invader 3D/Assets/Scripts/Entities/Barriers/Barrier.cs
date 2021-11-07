@@ -39,6 +39,8 @@ public class Barrier : OrbitingObject
             {
                 _material.color = Bm.healthColours[0];
                 IsCollapsed = true;
+                EventManager<AchievementManager.AchievementType, int>.Invoke(EventType.ResetAchievementProgress, 
+                    AchievementManager.AchievementType.PointsWithoutCollapse, 0);
             }
         }
     }
@@ -74,7 +76,7 @@ public class Barrier : OrbitingObject
         return lostHP;
     }
 
-    public void RestoreHealth(int amount)
+    public int RestoreHealth(int amount)
     {
         int cachedHealth = Health;
         Health += amount;
@@ -87,5 +89,7 @@ public class Barrier : OrbitingObject
         int restoredHP = Health - cachedHealth;
         Gm.DamageMitigated += restoredHP;
         Gm.BarrierManager.damageIndicator.Trigger(restoredHP);
+
+        return restoredHP;
     }
 }

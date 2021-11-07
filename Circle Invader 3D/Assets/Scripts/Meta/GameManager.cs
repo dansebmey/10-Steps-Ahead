@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     
     public BarrierManager BarrierManager { get; private set; }
     public FieldItemManager FieldItemManager { get; private set; }
+    public AchievementManager AchievementManager { get; private set; }
 
     private ConcurrentStack<IPlayerCommandListener> _playerCommandListeners;
     private List<IResetOnGameStart> _onGameStartResetters;
@@ -111,6 +112,11 @@ public class GameManager : MonoBehaviour
         {
             _playerScore = value;
             OverlayManager.Hud.UpdateScore(value);
+
+            if (_playerScore % 50 == 0)
+            {
+                EventManager<AchievementManager.AchievementType, int>.Invoke(EventType.SetAchievementProgress, AchievementManager.AchievementType.ScoreMilestone, _playerScore);
+            }
         }
     }
 
@@ -118,6 +124,8 @@ public class GameManager : MonoBehaviour
     {
         BarrierManager = GetComponentInChildren<BarrierManager>();
         FieldItemManager = GetComponentInChildren<FieldItemManager>();
+        AchievementManager = GetComponentInChildren<AchievementManager>();
+        
         _dataManager = GetComponent<DataManager>();
         HighscoreManager = GetComponent<HighscoreManager>();
         OnlineHighscoreManager = GetComponent<OnlineHighscoreManager>();
@@ -135,7 +143,8 @@ public class GameManager : MonoBehaviour
         _playerCommandListeners.Push(enemy);
         _playerCommandListeners.Push(TutorialManager);
 
-        _onGameStartResetters = new List<IResetOnGameStart> {player, enemy, BarrierManager, FieldItemManager};
+        _onGameStartResetters = new List<IResetOnGameStart>
+            { player, enemy, BarrierManager, FieldItemManager, AchievementManager };
     }
 
     private void Start()
@@ -180,15 +189,28 @@ public class GameManager : MonoBehaviour
         mitigatedDamageCounterText.text = ratioString.Substring(0, Math.Min(ratioString.Length, 3));
     }
 
+    [HideInInspector] public float timePassed;
     private void Update()
     {
         CurrentState.OnUpdate();
+        
+        if (!(CurrentState is MenuState))
+        {
+            timePassed += Time.deltaTime;
+        }
     }
 
     public void OnPlayerCommandPerformed(KeyCode keyCode)
     {
+        if (_playerScore == 1)
+        {
+            StartCoroutine(StartClock());
+        }
+        
         AudioManager.Play("Slide");
         FieldItemManager.HandlePowerupCheck();
+        AchievementManager.IncrementStepCounter();
+        BarrierManager.HandleEqualBarrierHPCheck();
 
         foreach (IPlayerCommandListener pcl in _playerCommandListeners)
         {
@@ -203,26 +225,62 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void ApplyDamage(int damageDealt, int rawPosIndex = -99)
+    private IEnumerator StartClock()
+    {
+        bool speedrunMarkPassed = false;
+        
+        while (!player.isDefeated)
+        {
+            OverlayManager.Hud.UpdateClock((int)timePassed);
+
+            if (!speedrunMarkPassed && timePassed >= 60)
+            {
+                speedrunMarkPassed = true;
+                
+                EventManager<AchievementManager.AchievementType, int>.Invoke(EventType.ResetAchievementProgress,
+                    AchievementManager.AchievementType.Speedrun, _playerScore);
+                // EventManager<AchievementManager.AchievementType, int>.Invoke(EventType.SetAchievementProgress,
+                //     AchievementManager.AchievementType.Speedrun, _playerScore);
+
+                if (_playerScore >= 120)
+                {
+                    AchievementManager.QueueAchievementToShow(new Achievement
+                    {
+                        achievementName = "Speedrun Result",
+                        achievementDescription = "You reached a score of " + _playerScore + " within the first minute!"
+                    });
+                }
+            }
+            
+            yield return new WaitForSeconds(1);
+        }
+    }
+
+    public void ToggleClock()
+    {
+        OverlayManager.Hud.ToggleClock();
+    }
+
+    public int ApplyDamage(int damageDealt, int rawPosIndex = -99)
     {
         int posIndex = rawPosIndex == -99 ? CurrentPosIndex : WrapPosIndex(rawPosIndex);
 
         if (BarrierManager.IsBarrierCollapsed(posIndex) && player.CurrentPosIndex == posIndex)
         {
             EndGame();
+            return damageDealt;
         }
-        else
+        
+        int hpLost = BarrierManager.DamageBarrier(damageDealt, posIndex);
+        DamageTaken += hpLost;
+        if (hpLost < damageDealt)
         {
-            int hpLost = BarrierManager.DamageBarrier(damageDealt, posIndex);
-            DamageTaken += hpLost;
-            if (hpLost < damageDealt)
-            {
-                DamageMitigated += Math.Abs(damageDealt - hpLost);
-                UpdateDamageMitigatedToLostRatio();
-            }
-            
-            SwitchState(typeof(WaitingForPlayerActionState));
+            DamageMitigated += Math.Abs(damageDealt - hpLost);
+            UpdateDamageMitigatedToLostRatio();
         }
+        
+        SwitchState(typeof(WaitingForPlayerActionState));
+        return hpLost;
     }
 
     public bool IsScoreHigherThan(int req)
@@ -267,6 +325,16 @@ public class GameManager : MonoBehaviour
         OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.SettingsInGame);
     }
 
+    public void ShowAchievementsInGame()
+    {
+        OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.AchievementsInGame);
+    }
+    
+    public void ShowAchievementsFromMenu()
+    {
+        OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.AchievementsFromMenu);
+    }
+    
     public void ShowSettingsFromMenu()
     {
         OverlayManager.SetActiveOverlay(OverlayManager.OverlayEnum.SettingsFromMenu);

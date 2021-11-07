@@ -335,6 +335,7 @@ MonoBehaviour:
   targetPos: {x: 0, y: 0, z: 0}
   targetRot: {x: 0, y: 0, z: 0, w: 0}
   animator: {fileID: 0}
+  dangerLevel: 2
 --- !u!1 &3901854678568517443
 GameObject:
   m_ObjectHideFlags: 0

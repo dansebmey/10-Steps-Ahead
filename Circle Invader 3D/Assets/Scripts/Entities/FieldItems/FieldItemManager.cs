@@ -250,4 +250,20 @@ public class FieldItemManager : GmAwareObject, IPlayerCommandListener, IResetOnG
             return b.spawnWeight > a.spawnWeight ? 1 : 0;
         }
     }
+
+    public int ClearMines()
+    {
+        int damagePrevented = 0;
+
+        foreach (FieldItem item in ItemsInField)
+        {
+            if (item.item is Mine)
+            {
+                item.Destroy();
+                damagePrevented++;
+            }
+        }
+
+        return damagePrevented;
+    }
 }

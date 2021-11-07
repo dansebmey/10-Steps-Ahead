@@ -139,7 +139,7 @@ public class AudioManager : MonoBehaviour
         return _instance;
     }
 
-    public Sound FindSound(string soundName)
+    private Sound FindSound(string soundName)
     {
         Sound foundSound = Array.Find(sfx, sound => sound.name == soundName);
         if (foundSound == null)

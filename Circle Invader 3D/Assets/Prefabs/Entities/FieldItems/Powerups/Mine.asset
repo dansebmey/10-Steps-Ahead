@@ -9,8 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c6241ff749440a4a35ae5fa5c2d22f6, type: 3}
-  m_Name: Silence
+  m_Script: {fileID: 11500000, guid: 27e9a50da34c4c78a91bc284d34ff37b, type: 3}
+  m_Name: Mine
   m_EditorClassIdentifier: 
-  powerupName: Silence
-  inventoryIcon: {fileID: 21300000, guid: a3fc75d522c4b8843b839aed06d41595, type: 3}

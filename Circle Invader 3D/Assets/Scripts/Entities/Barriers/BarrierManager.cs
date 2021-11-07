@@ -62,6 +62,8 @@ public class BarrierManager : GmAwareObject, IResetOnGameStart
             bar.IsCollapsed = false;
             bar.Health = initBarrierHealth;
         }
+        
+        UpdateRemainingBarrierHealth(true);
     }
 
     private void InitialiseBarriers()
@@ -139,16 +141,19 @@ public class BarrierManager : GmAwareObject, IResetOnGameStart
         return false;
     }
 
-    public void RepairBarriers(int range, int healValue)
+    public int RepairBarriers(int range, int healValue)
     {
+        int totalHPRestored = 0;
         for (int i = Gm.CurrentPosIndex - range; i <= Gm.CurrentPosIndex + range; i++)
         {
             Barrier bar = Barriers[(Barriers.Length+i) % Barriers.Length];
             if (!bar.IsCollapsed)
             {
-                bar.RestoreHealth(healValue);
+                totalHPRestored += bar.RestoreHealth(healValue);
             }
         }
+
+        return totalHPRestored;
     }
 
     public void RepairAllBarriers(int healValue)
@@ -159,6 +164,8 @@ public class BarrierManager : GmAwareObject, IResetOnGameStart
     private IEnumerator _RepairAllBarriers(int healValue)
     {
         int range = 0;
+        int totalHPRestored = 0;
+        
         while (true)
         {
             Gm.AudioManager.PlayPitched("HammerFix", 1 + range * 0.1f, 0.05f);
@@ -166,11 +173,11 @@ public class BarrierManager : GmAwareObject, IResetOnGameStart
             Barrier right = Barriers[(amountOfBarriers + Gm.CurrentPosIndex + range) % amountOfBarriers];
 
             left.IsCollapsed = false;
-            left.RestoreHealth(healValue);
+            totalHPRestored += left.RestoreHealth(healValue);
             if (left != right)
             {
                 right.IsCollapsed = false;
-                right.RestoreHealth(healValue);
+                totalHPRestored += right.RestoreHealth(healValue);
             }
             else if (range > 0)
             {
@@ -179,6 +186,18 @@ public class BarrierManager : GmAwareObject, IResetOnGameStart
 
             range++;
             yield return new WaitForSeconds(0.075f);
+        }
+        
+        if (totalHPRestored == 20)
+        {
+            Gm.AudioManager.Play("PerfectPerf");
+            EventManager<AchievementManager.AchievementType, int>
+                .Invoke(EventType.IncrementAchievementProgress, AchievementManager.AchievementType.OptimalMultiHammerUse, 1);
+        }
+        else
+        {
+            EventManager<AchievementManager.AchievementType, int>
+                .Invoke(EventType.ResetAchievementProgress, AchievementManager.AchievementType.OptimalMultiHammerUse, 0);
         }
     }
 
@@ -215,6 +234,12 @@ public class BarrierManager : GmAwareObject, IResetOnGameStart
         {
             barrierHealthAnimator.Play("barrier-health-icon-minus");
         }
+
+        EventManager<AchievementManager.AchievementType, int>.Invoke(EventType.SetAchievementProgress,
+            AchievementManager.AchievementType.BarrierHPAbove, remainingBarrierHealth);
+        
+        EventManager<AchievementManager.AchievementType, int>.Invoke(EventType.SetAchievementProgress,
+            AchievementManager.AchievementType.BarrierHPLost, (maxBarrierHealth * amountOfBarriers) - remainingBarrierHealth);
     }
     
     #region OnGameLoad
@@ -236,4 +261,18 @@ public class BarrierManager : GmAwareObject, IResetOnGameStart
     }
     
     #endregion
+
+    public void HandleEqualBarrierHPCheck()
+    {
+        foreach (Barrier b in Barriers)
+        {
+            if (b.Health != 1)
+            {
+                return;
+            }
+        }
+        
+        EventManager<AchievementManager.AchievementType, int>.Invoke(EventType.SetAchievementProgress,
+            AchievementManager.AchievementType.AllBarriersSameHP, 1);
+    }
 }

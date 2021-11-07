@@ -101,14 +101,50 @@ public class Enemy : MovableObject, IPlayerCommandListener, IResetOnGameStart
     private void TwinAttack()
     {
         Gm.AudioManager.Play("BasicAttack");
-        Gm.ApplyDamage(2);
+        
+        int hpLost = Gm.ApplyDamage(2);
+        if (hpLost == 1)
+        {
+            Gm.AudioManager.Play("PerfectPerf");
+            EventManager<AchievementManager.AchievementType, int>
+                .Invoke(EventType.IncrementAchievementProgress, AchievementManager.AchievementType.ReduceDoubleDamage, 1);
+        }
+        else
+        {
+            EventManager<AchievementManager.AchievementType, int>
+                .Invoke(EventType.ResetAchievementProgress, AchievementManager.AchievementType.ReduceDoubleDamage, 0);
+        }
     }
     
     private void SplitAttack()
     {
         Gm.AudioManager.Play("SplitAttack");
-        Gm.ApplyDamage(1, Gm.CurrentPosIndex-1);
-        Gm.ApplyDamage(1, Gm.CurrentPosIndex+1);
+        
+        int totalHPLost = 0;
+        totalHPLost += Gm.ApplyDamage(1, Gm.CurrentPosIndex-1);
+        totalHPLost += Gm.ApplyDamage(1, Gm.CurrentPosIndex+1);
+
+        if (totalHPLost == 1)
+        {
+            Gm.AudioManager.Play("GoodPerf");
+            EventManager<AchievementManager.AchievementType, int>
+                .Invoke(EventType.IncrementAchievementProgress, AchievementManager.AchievementType.ReduceSplitDamage, 1);
+        }
+        else if (totalHPLost == 0)
+        {
+            Gm.AudioManager.Play("PerfectPerf");
+            EventManager<AchievementManager.AchievementType, int>
+                .Invoke(EventType.IncrementAchievementProgress, AchievementManager.AchievementType.ReduceSplitDamage, 1);
+            EventManager<AchievementManager.AchievementType, int>
+                .Invoke(EventType.IncrementAchievementProgress, AchievementManager.AchievementType.AvoidSplitDamage, 1);
+        }
+        else
+        {
+            EventManager<AchievementManager.AchievementType, int>
+                .Invoke(EventType.ResetAchievementProgress, AchievementManager.AchievementType.ReduceSplitDamage, 0);
+            EventManager<AchievementManager.AchievementType, int>
+                .Invoke(EventType.ResetAchievementProgress, AchievementManager.AchievementType.AvoidSplitDamage, 0);
+        }
     }
 
     private void DelayedAttack()
@@ -126,6 +162,7 @@ public class Enemy : MovableObject, IPlayerCommandListener, IResetOnGameStart
     {
         FieldItemManager fim = Gm.FieldItemManager;
         FieldItem mine;
+        bool perfectPerfAudioPlayed = false;
         
         // Spawn mine on the left side
         int targetPosIndex = Gm.WrapPosIndex(Gm.CurrentPosIndex - (Gm.BarrierManager.amountOfBarriers / 4));
@@ -136,6 +173,13 @@ public class Enemy : MovableObject, IPlayerCommandListener, IResetOnGameStart
             mine.CurrentPosIndex = targetPosIndex;
             mine.transform.position = mine.targetPos;
         }
+        else
+        {
+            perfectPerfAudioPlayed = true;
+            Gm.AudioManager.Play("PerfectPerf");
+            EventManager<AchievementManager.AchievementType, int>
+                .Invoke(EventType.SetAchievementProgress, AchievementManager.AchievementType.PreventMineSpawning, 1);
+        }
         
         // Spawn mine on the right side
         targetPosIndex = Gm.WrapPosIndex(Gm.CurrentPosIndex + (Gm.BarrierManager.amountOfBarriers / 4));
@@ -145,6 +189,12 @@ public class Enemy : MovableObject, IPlayerCommandListener, IResetOnGameStart
             mine.distanceFromCenter = Gm.BarrierManager.barrierDistanceFromCenter + 0.75f;
             mine.CurrentPosIndex = targetPosIndex;
             mine.transform.position = mine.targetPos;
+        }
+        else if (!perfectPerfAudioPlayed)
+        {
+            Gm.AudioManager.Play("PerfectPerf");
+            EventManager<AchievementManager.AchievementType, int>
+                .Invoke(EventType.SetAchievementProgress, AchievementManager.AchievementType.PreventMineSpawning, 1);
         }
         
         Gm.AudioManager.Play("MinePlaced");
@@ -248,11 +298,15 @@ public class Enemy : MovableObject, IPlayerCommandListener, IResetOnGameStart
     }
     public void SilenceLayers(int amount)
     {
-        ClearMissilesInField();
+        int damagePrevented = 0;
+        damagePrevented += ClearMissilesInField();
+        damagePrevented += Gm.FieldItemManager.ClearMines();
         
         for (int i = 0; i < amount; i++)
         {
-            // TODO: Replace all layers with idle layers
+            // TODO: Replace all layers with idle layers for a better animation
+            
+            damagePrevented += _totemLayers.First.Value.dangerLevel;
             
             Destroy(_totemLayers.First.Value.gameObject);
             _totemLayers.RemoveFirst();
@@ -261,12 +315,24 @@ public class Enemy : MovableObject, IPlayerCommandListener, IResetOnGameStart
             QueueNewAction(ACTION_IDLE, true);
         }
         MoveTotemLayersDown();
+
+        if (damagePrevented >= 8)
+        {
+            Gm.AudioManager.Play("PerfectPerf");
+            EventManager<AchievementManager.AchievementType, int>.Invoke(EventType.IncrementAchievementProgress, 
+                AchievementManager.AchievementType.OptimalRebootUse, 1);
+        }
+        else
+        {
+            EventManager<AchievementManager.AchievementType, int>.Invoke(EventType.ResetAchievementProgress, 
+                AchievementManager.AchievementType.OptimalRebootUse, 0);
+        }
     }
     
     public void OnNewGameStart()
     {
         ClearMissilesInField();
-        
+
         foreach (EnemyLayer layer in _totemLayers)
         {
             Destroy(layer.gameObject);
@@ -274,13 +340,18 @@ public class Enemy : MovableObject, IPlayerCommandListener, IResetOnGameStart
         InitActionQueue();
     }
 
-    private void ClearMissilesInField()
+    private int ClearMissilesInField()
     {
+        int damagePrevented = 0;
+        
         foreach (Missile missile in MissilesInField)
         {
             Destroy(missile.gameObject);
+            damagePrevented++;
         }
         MissilesInField = new ConcurrentQueue<Missile>();
+
+        return damagePrevented;
     }
 
     #region OnGameLoad

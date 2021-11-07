@@ -4,6 +4,7 @@ public class EnemyLayer : MovableObject
 {
     [HideInInspector] public Quaternion targetRot;
     [HideInInspector] public Animator animator;
+    [Range(0, 2)] public int dangerLevel;
 
     protected override void Awake()
     {

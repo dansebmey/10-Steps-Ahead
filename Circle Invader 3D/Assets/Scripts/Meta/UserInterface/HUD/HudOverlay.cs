@@ -15,6 +15,8 @@ public class HudOverlay : Overlay
     private Text _scoreShadowLabel, _scoreLabel;
 
     private BigHammerInterface _bigHammerInterface;
+    
+    public Text clockTextObject;
 
     protected override void Awake()
     {
@@ -71,5 +73,18 @@ public class HudOverlay : Overlay
     {
         Destroy(entry.Value.gameObject);
         InstructionsCurrentlyShown.TryRemove(entry.Key, out Instruction instruction);
+    }
+
+    public void ToggleClock()
+    {
+        clockTextObject.gameObject.SetActive(!clockTextObject.gameObject.activeSelf);
+    }
+
+    public void UpdateClock(int secondsPassed)
+    {
+        int min = secondsPassed / 60;
+        int sec = secondsPassed % 60;
+
+        clockTextObject.text = min + ":" + (sec < 10 ? "0" : "") + sec;
     }
 }

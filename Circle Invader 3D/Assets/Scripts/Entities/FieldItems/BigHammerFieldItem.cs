@@ -2,6 +2,11 @@
 {
     public override void OnPickup()
     {
+        if (Gm.player.Inventory.Contains("MultiHammer"))
+        {
+            EventManager<AchievementManager.AchievementType, int>.Invoke(EventType.SetAchievementProgress,
+                AchievementManager.AchievementType.CarryTwoMultiHammers, 2);
+        }
         base.OnPickup();
         Gm.OverlayManager.Hud.UpdateBigHammerInterface();
     }

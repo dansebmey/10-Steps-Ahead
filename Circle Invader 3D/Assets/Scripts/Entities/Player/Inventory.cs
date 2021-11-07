@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Inventory : GmAwareObject
@@ -100,5 +101,10 @@ public class Inventory : GmAwareObject
         }
 
         HighlightedItemIndex = playerData.inventory.highlightedItemIndex;
+    }
+
+    public bool Contains(string powerupName)
+    {
+        return carriedPowerups.Any(powerup => powerup.powerupName == powerupName);
     }
 }

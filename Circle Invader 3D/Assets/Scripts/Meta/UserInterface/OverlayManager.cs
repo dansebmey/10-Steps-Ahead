@@ -11,11 +11,14 @@ public class OverlayManager : GmAwareObject
 
     private SettingsOverlay _settingsOverlayInGame;
     private SettingsOverlay _settingsOverlayFromMenu;
+    private AchievementOverlay _achievementOverlayInGame;
+    private AchievementOverlay _achievementOverlayFromMenu;
 
     public enum OverlayEnum 
     {
         MainMenu, Hud, GameOver, Registry, Highscore, Credits, 
-        SettingsInGame, SettingsFromMenu, OnlineHighscore
+        SettingsInGame, SettingsFromMenu, OnlineHighscore,
+        AchievementsInGame, AchievementsFromMenu
     }
     private Overlay _activeOverlay;
     private Dictionary<OverlayEnum, Overlay> _overlays;
@@ -50,7 +53,9 @@ public class OverlayManager : GmAwareObject
             {OverlayEnum.Registry, HighscoreEntryOverlay = GetComponentInChildren<HighscoreEntryOverlay>(true)},
             {OverlayEnum.Highscore, GetComponentInChildren<HighscoreOverlay>(true)},
             {OverlayEnum.Credits, GetComponentInChildren<CreditsOverlay>(true)},
-            {OverlayEnum.OnlineHighscore, OnlineHighscoreOverlay = GetComponentInChildren<OnlineHighscoreOverlay>(true)}
+            {OverlayEnum.OnlineHighscore, OnlineHighscoreOverlay = GetComponentInChildren<OnlineHighscoreOverlay>(true)},
+            {OverlayEnum.AchievementsInGame, _achievementOverlayInGame = GetComponentsInChildren<AchievementOverlay>(true)[0]},
+            {OverlayEnum.AchievementsFromMenu, _achievementOverlayFromMenu = GetComponentsInChildren<AchievementOverlay>(true)[1]}
         };
     }
 

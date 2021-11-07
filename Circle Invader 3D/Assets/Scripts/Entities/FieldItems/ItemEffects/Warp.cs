@@ -13,6 +13,15 @@ public class Warp : Powerup
          if (b.Health < 1)
          {
              b.RestoreHealth(1);
+             FindObjectOfType<AudioManager>().Play("PerfectPerf");
+             
+             EventManager<AchievementManager.AchievementType, int>
+                 .Invoke(EventType.IncrementAchievementProgress, AchievementManager.AchievementType.OptimalWarpUse, 1);
+         }
+         else
+         {
+             EventManager<AchievementManager.AchievementType, int>
+                 .Invoke(EventType.ResetAchievementProgress, AchievementManager.AchievementType.OptimalWarpUse, 0);
          }
      }
  }

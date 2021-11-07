@@ -24,13 +24,13 @@
               <e p="FieldItemManager.cs" t="Include" />
               <e p="FirewallField.cs" t="Include" />
               <e p="ItemEffects" t="Include">
-                <e p="BigHammer.cs" t="Include" />
                 <e p="Coin.cs" t="Include" />
                 <e p="Hammer.cs" t="Include" />
                 <e p="Item.cs" t="Include" />
                 <e p="Mine.cs" t="Include" />
+                <e p="MultiHammer.cs" t="Include" />
                 <e p="Powerup.cs" t="Include" />
-                <e p="Silence.cs" t="Include" />
+                <e p="Reboot.cs" t="Include" />
                 <e p="Warp.cs" t="Include" />
               </e>
             </e>
@@ -43,6 +43,13 @@
             </e>
           </e>
           <e p="Meta" t="Include">
+            <e p="Achievements" t="Include">
+              <e p="Achievement.cs" t="Include" />
+              <e p="AchievementEntry.cs" t="Include" />
+              <e p="AchievementManager.cs" t="Include" />
+              <e p="AchievementPopup.cs" t="Include" />
+              <e p="EventManager.cs" t="Include" />
+            </e>
             <e p="Audio" t="Include">
               <e p="AudioManager.cs" t="Include" />
               <e p="LowPassFilterManager.cs" t="Include" />
@@ -82,6 +89,7 @@
               </e>
             </e>
             <e p="UserInterface" t="Include">
+              <e p="AchievementOverlay.cs" t="Include" />
               <e p="AestheticsManager.cs" t="Include" />
               <e p="CameraController.cs" t="Include" />
               <e p="CreditsOverlay.cs" t="Include" />

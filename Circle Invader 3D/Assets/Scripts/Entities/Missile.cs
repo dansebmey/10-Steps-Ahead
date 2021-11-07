@@ -28,7 +28,19 @@ public class Missile : OrbitingObject
         if (StepsTaken == 4)
         {
             Gm.AudioManager.Play("BasicAttack");
-            Gm.ApplyDamage(1, CurrentPosIndex);
+            
+            int hpLost = Gm.ApplyDamage(1, CurrentPosIndex);
+            if (hpLost == 0)
+            {
+                Gm.AudioManager.Play("PerfectPerf");
+                EventManager<AchievementManager.AchievementType, int>
+                    .Invoke(EventType.IncrementAchievementProgress, AchievementManager.AchievementType.AvoidDelayedDamage, 1);
+            }
+            else
+            {
+                EventManager<AchievementManager.AchievementType, int>
+                    .Invoke(EventType.ResetAchievementProgress, AchievementManager.AchievementType.AvoidDelayedDamage, 0);
+            }
             Destroy(gameObject);
             return false;
         }
