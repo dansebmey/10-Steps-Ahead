@@ -57,7 +57,7 @@ public class Text3D : MonoBehaviour
         if (_textMesh)
         {
             Color c = _textMesh.color;
-            _textMesh.color = new Color(c.r, c.g, c.b, opaque ? 1 : 0.1f);
+            _textMesh.color = new Color(c.r, c.g, c.b, opaque ? 1 : 0.2f);
         }
     }
 }

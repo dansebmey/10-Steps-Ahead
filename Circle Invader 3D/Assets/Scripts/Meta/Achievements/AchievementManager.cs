@@ -37,6 +37,11 @@ public class AchievementManager : MonoBehaviour, IResetOnGameStart
     private void Start()
     {
         _achievementsToShow = new Queue<Achievement>();
+        StartCountingSteps();
+    }
+
+    private void StartCountingSteps()
+    {
         StartCountingSteps(AchievementType.ScoreMilestone, 0);
         StartCountingSteps(AchievementType.PointsWithoutCollapse, 0);
         StartCountingSteps(AchievementType.Speedrun, 0);
@@ -130,6 +135,7 @@ public class AchievementManager : MonoBehaviour, IResetOnGameStart
         if (perfectionAchievements.Contains(type))
         {
             ResetAchievementProgress(AchievementType.PerfectEverything, 0);
+            StartCountingSteps(AchievementType.PerfectEverything, 0);
         }
     }
 
@@ -150,6 +156,8 @@ public class AchievementManager : MonoBehaviour, IResetOnGameStart
                 a.isStepCounterEnabled = false;
             }
         }
+        
+        StartCountingSteps();
     }
 
     public void OnGameLoad(GameData gameData)

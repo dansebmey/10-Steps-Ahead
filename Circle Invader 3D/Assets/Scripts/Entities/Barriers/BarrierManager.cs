@@ -264,15 +264,16 @@ public class BarrierManager : GmAwareObject, IResetOnGameStart
 
     public void HandleEqualBarrierHPCheck()
     {
+        int barriersWith1HP = 0;
         foreach (Barrier b in Barriers)
         {
-            if (b.Health != 1)
+            if (b.Health == 1)
             {
-                return;
+                barriersWith1HP++;
             }
         }
         
         EventManager<AchievementManager.AchievementType, int>.Invoke(EventType.SetAchievementProgress,
-            AchievementManager.AchievementType.AllBarriersSameHP, 1);
+            AchievementManager.AchievementType.AllBarriersSameHP, barriersWith1HP);
     }
 }

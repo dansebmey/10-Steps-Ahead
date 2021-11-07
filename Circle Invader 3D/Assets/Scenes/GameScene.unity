@@ -927,7 +927,7 @@ PrefabInstance:
     - target: {fileID: 2170144441269449967, guid: 7363315cd384f13459f16dae3edc775c,
         type: 3}
       propertyPath: m_Text
-      value: Build 21.11.07.19.34
+      value: Build 21.11.07.23.37
       objectReference: {fileID: 0}
     - target: {fileID: 2188003825569121392, guid: 7363315cd384f13459f16dae3edc775c,
         type: 3}
@@ -1884,7 +1884,7 @@ MonoBehaviour:
     achievementDescription: Make all barriers have exactly 1 HP.
     type: 5
     tier: 2
-    argument: 1
+    argument: 20
     countSteps: 0
     isStepCounterEnabled: 0
     isCompleted: 0
